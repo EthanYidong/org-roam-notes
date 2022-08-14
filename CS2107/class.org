@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       3B2DB3CE-7EDA-4289-B06B-8882D7749848
+:END:
+#+TITLE:CS2107
+#+filetags: :CS2107:
+
+* Class Information
+
+- Learn tools:
+  - Wireshark
+  - OpenSSL
+  - Linux
+
+** Grading
+- Assignments (30%)
+  - 2 Assignments
+- Quizzes (10%)
+  - 3 Quizzes, take the top 2 scores
+- Group Presentation (5%)
+- Tutorial Attendance (5%)
+  
+** CS2107 Exams
+:PROPERTIES:
+:ID:       AF7FD862-BF11-4C9A-BBB9-C55902919546
+:END:

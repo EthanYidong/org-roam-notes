@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       539C8BDD-D2EA-4131-8F31-F2C3F0BC3799
+:END:
+#+TITLE:CS2106
+#+filetags: :CS2106:
+  
+* Class Information
+- Operating Systems
+  - OS Structure and Architecture
+  - Process Management
+  - Memory Management
+  - File Management
+  - OS Protection Mechanism
+- Learning outcomes
+  - Understand how the OS manages resources, and what this means for app developers
+  - Appreciate the abstractions and interfaces provided by the OS
+  - Be comfortable in writing multi-process/threaded programs while avoiding deadlocks, starvation, and race conditions (just use rust lmao)
+  - Be comfortable in writing system programs using POSIX syscalls
+  - Be able to self-learn advanced OS
+
+** C
+- Course taught in C
+- Primer on LumiNUS
+- Taught parallel to labs
+
+** Grading
+- Tutorial Attendance (5%)
+- After Lecture Pop Quizzes (5%)
+  - After every lecture, opened in LumiNUS
+  - Deadline midnight on Thursdays
+  - Word document naming: <Name within LumiNUS>-PQ-<Lecture #>.{doc, docx}
+- Lab Assignments (30%)
+  - 4 Assignments, 3 weeks each
+- Midterm (20%)
+- Exam (40%)
+
+** CS2106 Exam
+:PROPERTIES:
+:ID:       15F9BA90-8952-47DC-A1E9-951A8D12D158
+:END:
+- Midterm
+  - Face-to-face
+- Final Exam
+  - Face-to-face

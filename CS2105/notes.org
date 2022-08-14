@@ -1,0 +1,80 @@
+:PROPERTIES:
+:ID:       D1F12114-39AC-40DC-98D0-7B6F67DEC041
+:END:
+
+#+title: CS2105 Notes
+#+filetags: :CS2105:
+
+* Internet
+:PROPERTIES:
+:ID:       3E696C35-46F4-4C10-98C9-584A8D60616C
+:END:
+
+- Internet is made up of routers
+  - Data packets are sent through the network from source to destination
+
+** Data Transmission
+:PROPERTIES:
+:ID:       A6B358C8-8DF4-4D6D-84C3-E91031768743
+:END:
+- Packet switching
+  - Users under the same router share its resources
+  - Resources are not reserved, used on demand
+    - A result of this is that packets may take different paths
+    - Congestion is possible
+  - Bits sent over a link which represent packets
+    - Timing is a product of maximum bandwidth and propagation delay
+  - Routers implement store and forward
+    - Entire packet must reach the router before it will forward to the next stop in the network
+    - This adds additional delay to the transmission
+    - This is for the purpose for:
+      - Integrity Checks
+
+** Network Conditions
+:PROPERTIES:
+:ID:       EC0E367A-1B1E-4ED4-B493-B1AF845FF108
+:END:
+
+- links :: [[id:1F24CF84-A241-4317-AC6D-C4C4683F34DF][CS2105 Exams]]
+*** Packet Loss
+:PROPERTIES:
+:ID:       1D1E365F-4870-4C9D-ADE5-054FF94FA514
+:END:
+- Packet loss may occur when the router's buffer is full
+- Connectivity issues may occur (both wired and wireless)
+- Signal noise may result in corrupted packets
+
+*** Packet Delay
+:PROPERTIES:
+:ID:       86A82389-CC39-4780-8D82-E05918A03EFF
+:END:
+
+**** Processing Delay
+:PROPERTIES:
+:ID:       83010D99-9421-44DC-B1B7-9350ED7945B6
+:END:
+- Generally ignored
+- How long it takes to process the packet (check for integrity, determine what to do with the packet)
+
+**** Queueing Delay
+:PROPERTIES:
+:ID:       8AA81F32-434F-47F8-BE09-B6162306640D
+:END:
+- Generally ignored
+- Time taken waiting for the router to finish processing packets that arrived before
+
+**** Transmission Delay
+:PROPERTIES:
+:ID:       8C08E406-EC45-4D89-BF95-FE4A5A5505FE
+:END:
+- Limited by bandwidth of the connection
+- "How long do I have to wait before can I send the next bit?"
+- $\frac{\text{bits per time}}{\text{number of bits}}$
+
+**** Propagation Delay
+:PROPERTIES:
+:ID:       5AA300BB-EFBE-4AAF-BBD3-1550EA76D34B
+:END:
+- Limited by the speed of the signal along the connection.
+- "How long does it take for the data to go from point A to point B"?
+- $\frac{\text{length of connection}}{\text{speed of data through connection}}$

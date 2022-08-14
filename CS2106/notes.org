@@ -1,0 +1,168 @@
+:PROPERTIES:
+:ID:       3BEC0A0C-17C5-4C68-9937-E44E79DB9C4C
+:END:
+#+title:CS2106 Notes
+#+filetags: :CS2106:
+  
+* Operating System
+:PROPERTIES:
+:ID:       D289CD47-38F4-481F-BED1-FEAF25C4D709
+:ROAM_ALIASES: OS
+:END:
+
+** Why learn OS?
+- Become a better programmer
+  - Know how your program is interacting with the OS.
+- Become a better software engineer
+  - Understand the most complicated program
+- Become a better computer user
+** What is an OS?
+- Invented in order to allow the creation of general-purpose computers which were not hardcoded to do their one job
+- Abstractly, was developed as something that can take "code" and cause the effects described by the code.
+  - A program that controls a program
+- Definition
+  - "A program that acts as an intermediary between a computer user (AKA the program) and the computer hardware."
+  - [[https://en.wikipedia.org/wiki/Operating_system][Wikipedia]]: "An operating system (OS) is system software that manages computer hardware, software resources, and provides common services for computer programs."
+    - "System software" which comes with the system, and does not interact directly with the user
+    - Hardware: physical objects
+    - Software: virtual objects
+    - "Common services": providing tools that allow interaction with the hardware
+      - [[id:FAAB67BF-9DDB-4AC3-AA45-472F439686EB][Client-Server Model]]
+
+** Examples
+- PC
+  - Windows
+  - macOS
+  - Linux
+  - Solaris
+  - FreeBSD
+- Mobile
+  - Android
+  - iOS
+- Other
+  - XBOX, PlayStation
+
+* Batch [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]]
+:PROPERTIES:
+:ID:       D9F3E442-3F6C-48DF-A404-283C7A15CFBA
+:END:
+- Run user program (jobs) one at a time
+
+* Multiprogramming
+:PROPERTIES:
+:ID:       70308734-2797-4277-9DF1-5A145F773AC7
+:END:
+
+* Time Sharing [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]]
+:PROPERTIES:
+:ID:       6276534B-2CDD-4F8B-BD8A-73DDEA2C1A31
+:END:
+- Allows multiple points of interaction using terminals (teletype, AKA TTY)
+- Schedule user jobs
+  - Illusion of [[id:62A2FCE1-6909-4C5A-8D25-015D1F2FAAFA][concurrency]]
+- Memory management / provisioning between jobs
+- CPU time, memory, and storage are split between the [[id:CEED7EB1-C9DD-40C6-ABBF-32D3E41FA6F7][users]].
+*** Examples
+- CTSS at MIT, 1960s
+- Multics, 1970s
+
+
+* [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] Implementations
+:PROPERTIES:
+:ID:       28C8C09A-0B31-4354-AD0F-FE83226939E9
+:END:
+** OS For Mainframes
+:PROPERTIES:
+:ID:       A1AF2D25-EF35-45E0-A085-9487826DD8B7
+:END:
+*** IBM360
+:PROPERTIES:
+:ID:       8A913B91-E03C-4348-9AF3-9FE55CA7290D
+:END:
+- International Business Machines
+- Programmed using punchcards
+- The [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]]:
+  - [[id:D9F3E442-3F6C-48DF-A404-283C7A15CFBA][Batch OS]]
+  - Still interact with hardware directly
+  - Code gains some additional information from the OS
+
+*** Improvements
+- CPU is idle when doing I/O, so we should run other tasks
+- [[id:70308734-2797-4277-9DF1-5A145F773AC7][Multiprogramming]]
+- [[id:6276534B-2CDD-4F8B-BD8A-73DDEA2C1A31][Time Sharing OS]]
+
+** Minicomputer
+- A smaller mainframe, adopting the same ideas about the [[id:A1AF2D25-EF35-45E0-A085-9487826DD8B7][OS]]
+- Adoption of [[id:C4CA2869-8F42-446C-A25A-570E4765A00C][UNIX]], developed by AT&T
+
+*** Examples
+- PDP-11, 1970
+
+* Client-Server Model
+:PROPERTIES:
+:ID:       FAAB67BF-9DDB-4AC3-AA45-472F439686EB
+:END:
+- A server acts as an intermediary between a client and another interface.
+  - In the case of the OS, the clients are the programs and the interfaces are the hardware.
+
+* Concurrency
+:PROPERTIES:
+:ID:       62A2FCE1-6909-4C5A-8D25-015D1F2FAAFA
+:END:
+- Jobs can be "active" at the same time, which means that the CPU can be processing multiple jobs at the same time.
+- Note that this is not the same as parallel running.
+
+* Users
+:PROPERTIES:
+:ID:       CEED7EB1-C9DD-40C6-ABBF-32D3E41FA6F7
+:END:
+- In the context of [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]], the "user" is either the actual person, or the program that they are running.
+
+* UNIX
+:PROPERTIES:
+:ID:       C4CA2869-8F42-446C-A25A-570E4765A00C
+:END:
+- An operating system developed by AT&T
+- Inspired GNU/Linux, which is not UNIX
+
+* Motivations for [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]]
+:PROPERTIES:
+:ID:       187C6FEC-1472-4AC3-9C78-CD345A297436
+:END:
+
+** Abstraction
+:PROPERTIES:
+:ID:       F81C54C3-E2DF-4E15-9679-0FA58A23E3B0
+:END:
+- Hide low-level details from the [[id:CEED7EB1-C9DD-40C6-ABBF-32D3E41FA6F7][user]]
+- User can perform tasks without an understanding of what the OS is doing
+- User can perform tasks without caring what the specifics of the hardware is
+- Provides
+  - Efficiency
+  - Programmability
+  - Portability
+
+** Resource Allocator
+:PROPERTIES:
+:ID:       9A7A50F0-44D7-465F-A377-ADDF2D53A8FA
+:END:
+- Barrier between [[id:CEED7EB1-C9DD-40C6-ABBF-32D3E41FA6F7][users]] and the resources
+  - CPU
+  - Memory
+  - I/O devices
+  - Other hardware
+
+** Control Program
+:PROPERTIES:
+:ID:       760712ED-0C18-4C5E-A5E7-B3B1770D6E92
+:END:
+- Prevent programs from misusing the computer
+  - Both accidentally (due to bugs)
+  - And purposely (viruses)
+- Ensure isolation between the multiple [[id:CEED7EB1-C9DD-40C6-ABBF-32D3E41FA6F7][users]].
+- Control execution of the programs
+  - Security
+  - Isolation
+  - Protection
+  - Prevent errors
+  - Prevent improper use

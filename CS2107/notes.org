@@ -1,0 +1,225 @@
+:PROPERTIES:
+:ID:       D0F12033-8149-4A0A-AD04-1B0754314ADC
+:END:
+#+TITLE: CS2107 Notes
+#+filetags: :CS2107:
+  
+* Cybersecurity
+:PROPERTIES:
+:ID:       EB9F00D0-CAC6-4873-985D-AC4BF9F01C09
+:END:
+
+- What does security really mean?
+  - "A [[id:47B9EEDF-4983-47BE-B8E9-251798139859][threat]] is blocked by [[id:16BCFF2F-F89F-4D2F-B629-EC2E2EBA78D9][control]] of a [[id:C0052FB7-4CF6-4487-BDB5-7FA738E64422][vulnerability]]"
+
+* Components of [[id:EB9F00D0-CAC6-4873-985D-AC4BF9F01C09][Cybersecurity]]
+:PROPERTIES:
+:ID:       B4C9EFC3-3CAE-4D3F-A141-4798C490B3DF
+:END:
+** Assets
+:PROPERTIES:
+:ID:       2FC2E041-1497-4A1B-87FE-D2A28737F6C2
+:END:
+- Objects of value
+  - Hardware
+  - Software
+  - Data and information
+  - Reputation
+
+** Threats
+:PROPERTIES:
+:ID:       47B9EEDF-4983-47BE-B8E9-251798139859
+:END:
+- Set of circumstances with the potential to cause loss or harm
+
+** Vulnerability
+:PROPERTIES:
+:ID:       C0052FB7-4CF6-4487-BDB5-7FA738E64422
+:END:
+- Weaknesses in a system
+
+** Control
+:PROPERTIES:
+:ID:       16BCFF2F-F89F-4D2F-B629-EC2E2EBA78D9
+:END:
+- A method of countering threats
+
+** Why is security hard?
+- Why can't we blame the developers?
+  - Many developers lack the adversarial thinking to address potential problems during the development stage.
+
+* CIA
+:PROPERTIES:
+:ID:       B165C62D-4F62-4818-A7AC-391B65877BC5
+:END:
+
+- Requrirements for [[id:EB9F00D0-CAC6-4873-985D-AC4BF9F01C09][security]].
+** Confidentiality
+:PROPERTIES:
+:ID:       42696A4B-0DFA-435B-858E-D061FEB2CCA0
+:END:
+- [[id:99FB3BDD-CFF6-42FF-AC75-1A8DB3CEE9B4][Privacy]], anonymity
+- Covert channel
+- Plausible deniability
+
+** Integrity
+:PROPERTIES:
+:ID:       1FE1E862-1BEC-409A-93BB-7CBF73FACB14
+:END:
+- Process integrity
+- Authenticity
+  - Validate message sender/origin
+- Non-repudiation
+  - Digital signature
+
+** Availability
+:PROPERTIES:
+:ID:       932259C5-7559-4B50-9133-5B00E0002256
+:END:
+
+* Tradeoffs
+- Ease of use
+- Performance
+- Cost
+- Security, functionality, usability triangle
+
+* Privacy
+:PROPERTIES:
+:ID:       99FB3BDD-CFF6-42FF-AC75-1A8DB3CEE9B4
+:END:
+
+- A.K.A. PII
+
+* Cryptosystems
+:PROPERTIES:
+:ID:       03871803-1117-479D-90D9-90A648B192EF
+:END:
+- The general flow has plaintext to cyphertext back to plaintext.
+  - When evaluating the system, we assume that the cyphertext is known to any attackers
+    - In general, we assume that the attacker can read all data sent accross the communication channel
+  - Requirements:
+    - Correctness
+      - For any given plaintext, applying the encryption and decryption will result in the original plaintext
+    - Security
+      - An attacker will not be able to figure out the plaintext.
+    - Performance
+      - The encryption and decryption steps must be sufficently fast, and use sufficiently small keys and cyphertexts.
+      
+** Symmetric vs Asymmetric Cryptosystems
+
+*** Symmetric Cryptosystem
+:PROPERTIES:
+:ID:       7765D5BC-0C92-4AC3-BFA6-822A5517070A
+:END:
+- The same [[id:DE8B7A61-3F92-4079-8F99-035A82B5CFF6][key]] is used for encryption and decryption of plaintext data.
+
+*** Asymmetric Cryptosystem
+:PROPERTIES:
+:ID:       7A154837-3682-4C60-BC05-A284FC06290E
+:END:
+- Different [[id:DE8B7A61-3F92-4079-8F99-035A82B5CFF6][keys]] are used for encryption and decryption of plaintext data.
+
+** Cryptology
+:PROPERTIES:
+:ID:       4AB2DE71-90AE-47A8-85E2-23C7361DAF21
+:END:
+
+- [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptography]] + [[id:18A7FDEC-431B-4D8C-A0C2-93831A0A2F5B][Cryptanalysis]]
+
+*** Cryptography
+:PROPERTIES:
+:ID:       287CF85B-BF15-47AE-9C6C-B203F1FDF3DE
+:END:
+- The act of creating cyrptosystems
+
+*** Cryptanalysis
+:PROPERTIES:
+:ID:       18A7FDEC-431B-4D8C-A0C2-93831A0A2F5B
+:END:
+- The act of studying and breaking cryptosystems
+
+** Characters
+:PROPERTIES:
+:ID:       C4D031D7-4879-4D41-A60F-21234529EB2C
+:END:
+- Recurring characters in stories about cryptograhy
+*** Alice
+:PROPERTIES:
+:ID:       FA0748AA-F706-4A4B-8369-917B8928E52B
+:END:
+- Usually the sender of a message.
+*** Bob
+:PROPERTIES:
+:ID:       C0FD5E9B-B0B4-4547-B38A-725D46A09C0E
+:END:
+- Usually the recipient of a message.
+*** Eve
+:PROPERTIES:
+:ID:       28DAED70-FF28-43A9-AABE-A1FC13D0A639
+:END:
+- An "evesdropper", who passively reads the communication channel.
+*** Mallory
+:PROPERTIES:
+:ID:       C6BD6271-3B92-4538-9398-FCCA53B7A1B5
+:END:
+- A "malicious actor", who actively reads and edits the communication channel.
+
+** Key
+:PROPERTIES:
+:ID:       DE8B7A61-3F92-4079-8F99-035A82B5CFF6
+:END:
+
+- A set of data used in encryption and/or decryption of data within a cryptosystem.
+
+** Key Space
+:PROPERTIES:
+:ID:       0FD182B5-6597-4D82-A45D-9F5A2F32E5A6
+:END:
+- The set of all possible [[id:DE8B7A61-3F92-4079-8F99-035A82B5CFF6][keys]] for a particular [[id:605D780C-F8CA-4C2A-A008-1D2019935535][cipher]].
+
+** Ciphers
+:PROPERTIES:
+:ID:       605D780C-F8CA-4C2A-A008-1D2019935535
+:END:
+
+- A scheme for encrypting plaintext
+
+*** Attacking a Cipher
+:PROPERTIES:
+:ID:       51F8780E-D175-4194-9C9B-803B07FB500B
+:END:
+- An attacker's goal is generally to find the key, in order to determine the plaintext
+- It could also be simply to figure out some limited information about the plaintext.
+- Generally, to commence an attack, an attacker would know some information about the cipher
+
+**** Known Plaintext
+:PROPERTIES:
+:ID:       51C901FF-09EA-40C6-AE8E-107F33D1D66D
+:END:
+- Some pairs of plaintext and its corresponding cyphertexts.
+  - In many cases the attacker can guess at what the plaintext is depending on the context of the data (email headers, HTML headers, common words, etc.)
+  - If a cipher can be broken when we have this information, we call it "insecure under known-plaintext attack" or "broken under known-plaintext attack".
+
+**** Cyphertext Only
+:PROPERTIES:
+:ID:       50B37D8A-18F7-49B5-B0D5-917D42BA7F02
+:END:
+- A large number of cyphertext all using the same key.
+  - In some cases, especially with human languages, many substrings have much higher frequency in usage.
+  - If a cipher can be broken when we have this information, we call it "not secure under cyphertext-only attack".
+
+*** Simple Ciphers
+:PROPERTIES:
+:ID:       0937F10B-AF62-460A-BCB9-CBB65A3AFB5E
+:END:
+- Simple cryptographic schemes used for studying basic cryptology.
+
+**** Substitution Cipher
+:PROPERTIES:
+:ID:       A7E04A38-A085-4646-B01F-94D9EAFA157F
+:END:
+- Each character is mapped to another character.
+- [[id:0FD182B5-6597-4D82-A45D-9F5A2F32E5A6][Key Space]]
+  - All possible permutations of the alphabet
+  - AKA all possible bijections between the set of characters and itself.
+- Not secure under [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]] or under [[id:50B37D8A-18F7-49B5-B0D5-917D42BA7F02][Cyphertext Only]] attacks.

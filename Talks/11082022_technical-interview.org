@@ -1,0 +1,97 @@
+:PROPERTIES:
+:ID:       F8FA0948-D348-4618-A7F1-B8B4D4767C70
+:END:
+#+TITLE:Technical Interview Talks
+#+filetags: :Talk:
+
+* Speakers
+
+** Hong Yi
+:PROPERTIES:
+:ID:       B3B21EA8-AA57-4AF7-A257-4780D20F55E9
+:END:
+- Director of OGP (Open Government Projects)
+
+** Faisal
+:PROPERTIES:
+:ID:       67129A67-DD2D-4E20-924E-811104881EE2
+:END:
+- Software/Engineering Head of Goldman Sachs Singapore
+  
+** Stephen Wang
+:PROPERTIES:
+:ID:       5DC105A8-1605-46CB-9F92-351EF1156E2A
+:END:
+- Lead for WeChat users outside of China
+- Cofounder of Rotten Tomatoes
+
+** Lei Lei
+:PROPERTIES:
+:ID:       8307DFFD-D2A0-43E6-BA4F-88B3A6266BA3
+:END:
+- Engineering Director for Shopee
+
+** San
+:PROPERTIES:
+:ID:       493C47CA-7B04-43CD-AD9B-9C42FF18C52A
+:END:
+- CTO of Shopback
+- Slack
+
+* What I wish I knew...
+- [[id:B3B21EA8-AA57-4AF7-A257-4780D20F55E9][Hong Yi]]
+  - "Your intelligence as an engineer is important, but secondary to your communication skills"
+    - Lack of communication leads to poor teamwork
+    - Inner- and Inter- team communcation
+- [[id:67129A67-DD2D-4E20-924E-811104881EE2][Faisal]]
+  - Don't give up, prepare again
+  - Don't be afraid to be the first to present the idea
+    - Use and abuse resources
+  - Spend time networking, even with people outside your direct expertise
+  - Talking to people gives you a natural boost in value
+- [[id:5DC105A8-1605-46CB-9F92-351EF1156E2A][Stephen]]
+  - Do not be discouraged by the marathon
+  - Being rejected does not necessitate a failure on your part, just not a good fit
+  - Large organizations: specialists
+    - Show a passion for the skillset they are looking for
+  - Startups: generalist
+    - Multiple interviews to ensure a personal fit
+    - Display a large amount of skills
+    - Show a passion for the field or the product
+    - Learn about the startup
+  - Many times a question is asked to gain insight into your thinking process, not about the answer's correctness.
+- [[id:8307DFFD-D2A0-43E6-BA4F-88B3A6266BA3][Lei Lei]]
+  - Some companies are willing to take someone with a knowledge deficit paired with a willingness to learn
+- [[id:493C47CA-7B04-43CD-AD9B-9C42FF18C52A][San]]
+  - Don't compromise with yourself
+    - "It's not your job to say no to yourself"
+  - You will always be "underqualified" because companies require you to be overqualified
+  - Never too early to apply for internships
+  - Take any internship that you can
+  - Improve in as many aspects as you can.
+    - Technical skills are not the end-all-be-all
+
+* Insights into the Field
+
+** Management
+- The machine does not care about your engineering practices
+- Being a good engineer is about empathy for other engineers and what they want in developing a system.
+- As a manager/system engineer, being able to figure out what the best practices to use in a certain context is essential to having a team run efficiently
+
+** Breadth vs Depth
+- Undergrads don't know shit
+- You do not know that you like something until you have to do it against your will
+- In fact, screw your generalist studies too.
+  - Do what you enjoy so that you can demonstrate passion
+  - Specialization comes later
+- In fact, screw your ideas of definitions too.
+  - Things aren't well defined, don't rely on black-and white breakdowns to make your decisions.
+
+* Lessons Learned
+- It is your responsibility to make other people understand you
+- The worst mistake of your life is an opportunity for reflection, not for sharing
+- Interest isn't enough, you need passion in users
+  - Passion from yourself is necessary
+- Sometimes pidgeon complaints will be your first customer
+  - Take all the customers you can get
+- Things do not change by themselves

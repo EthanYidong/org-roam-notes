@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       192A0605-67DE-4277-9FEF-5C16C81937F8
+:END:
+#+title: CS2105
+#+filetags: :CS2105:
+
+* Class Information
+
+** Grading
+
+- Tutorial Attendance (5%)
+- Assignments (20%)
+- Midterm Assessment (25%)
+- Final Exam (50%)
+
+** CS2105 Exams
+:PROPERTIES:
+:ID:       1F24CF84-A241-4317-AC6D-C4C4683F34DF
+:END:
+
+- Midterm Exam
+  - MCQ
+- Final Exam
+  - MCQ
+  - Short Answer Questions
+  
