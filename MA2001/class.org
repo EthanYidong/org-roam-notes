@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       c05cbeec-6a23-4ac8-ab3d-a0fbd3dfbe40
+:END:
+#+title: MA2001
+#+filetags: :MA2001:
+
+* Class Information
+
+** Grading
+- Weekly Online Quiz (15%)
+  - 12 Quizzes
+- Homeworks (20%)
+  - 4 Homeworks
+- Lab Assignment (5%)
+- Final Exam (60%)
+** MA2001 Exam
+:PROPERTIES:
+:ID:       064e0f67-745e-4d9f-b4f1-a178e273d2aa
+:END:

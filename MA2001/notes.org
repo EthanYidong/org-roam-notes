@@ -1,0 +1,290 @@
+:PROPERTIES:
+:ID:       7039eb35-01ee-43ef-8334-74824a443069
+:END:
+#+title: MA2001 Notes
+#+filetags: :MA2001:
+
+* Linear Equation
+:PROPERTIES:
+:ID:       3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d
+:ROAM_ALIASES: Line
+:END:
+- A line in the XY plane is something that can be represented by the equation $ax + by = c$, such that at least one of $a$ and $b$ are not 0.
+- A line in $n$ variables has the form $a_1 x_1 + a_2 x_2 + ... + a_n x_n = b$ where $a_1$, $a_2$, ..., $a_n$, and b are real constants.
+* Zero Linear Equation
+:PROPERTIES:
+:ID:       8ca5b581-af4b-44c2-99a6-fe3c0a725edf
+:END:
+- A [[id:3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d][Linear Equation]] where all the constants are zero.
+* Non-Zero Linear Equation
+:PROPERTIES:
+:ID:       13d3821f-2ef7-4cc7-a344-d74ffb302286
+:END:
+- A [[id:3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d][Linear Equation]] which is not a [[id:8ca5b581-af4b-44c2-99a6-fe3c0a725edf][Zero Linear Equation]].
+* Solution of a Linear Equation
+:PROPERTIES:
+:ID:       0ac0637e-128d-4efa-8791-b673199d42f9
+:END:
+- A soltion to a [[id:3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d][Linear Equation]] is a set of values that when assigned to the variables, the equation holds true.
+* Solution Set
+:PROPERTIES:
+:ID:       6d6c3bfc-2b01-4012-b255-d155b17fdc04
+:END:
+- The set of all [[id:0ac0637e-128d-4efa-8791-b673199d42f9][Solution of a Linear Equation]].
+- Examples:
+  - For a [[id:8ca5b581-af4b-44c2-99a6-fe3c0a725edf][Zero Linear Equation]], all ordered tuples are valid solutions.
+  - For a [[id:3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d][Linear Equation]] where all constants are zero except the non-coefficient, the solution set is the empty set.
+* General Solution
+:PROPERTIES:
+:ID:       f2b18f06-e5f6-49b6-adc2-d89b51db1fa9
+:END:
+- An expression which produces the [[id:6d6c3bfc-2b01-4012-b255-d155b17fdc04][Solution Set]].
+- Generally given by writing all variables in terms of some number of arbitrary parameters.
+  - In general, the arbitrary parameters is related to the [[id:d23c199d-d127-423a-8c56-48e59b71ed9c][Dimention]] of the equation.
+- Examples:
+  - $4x - 2y = 1$ has the general solution $\begin{cases}x=t\\y=2t-\frac{1}{2}\end{cases}$ (not unique)
+* System of Linear Equations
+:PROPERTIES:
+:ID:       4de0b32f-feb4-42e9-8bca-194ed2408758
+:ROAM_ALIASES: "Linear System"
+:END:
+- A finite set of [[id:3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d][Linear Equation]]
+- When lined up with variables in the same column, the coefficients take the form $a_{\text{Row number},\text{Column number}}$
+- Examples:
+  - $\begin{cases}a_{11} x_1 + a_{12} x_2 = b_1\\a_{21} x_1 + a_{22} x_2 = b_2 \end{cases}$
+* Solution of a Linear System
+:PROPERTIES:
+:ID:       a03cd843-9760-47c4-9069-ca75d9aec0e4
+:END:
+- The set of values that when assigned to the variables, all equations in the [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][System of Linear Equations]] hold true.
+- A linear system can have
+  - No solutions ([[id:dd4a724b-7288-448f-8be9-7e885699af51][Inconsistant Linear System]])
+  - Exactly 1 solution ([[id:b2f4051d-ee59-40dc-a561-4ea4f14fb79f][Consistant Linear System]])
+  - Infinitely many solutions ([[id:b2f4051d-ee59-40dc-a561-4ea4f14fb79f][Consistant Linear System]])
+
+* Inconsistant Linear System
+:PROPERTIES:
+:ID:       dd4a724b-7288-448f-8be9-7e885699af51
+:END:
+- A [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][System of Linear Equations]] without any solutions
+* Consistant Linear System
+:PROPERTIES:
+:ID:       b2f4051d-ee59-40dc-a561-4ea4f14fb79f
+:END:
+- A [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][System of Linear Equations]] with at least one solution
+
+* Augmented Matrices
+:PROPERTIES:
+:ID:       ecb5ed8b-d483-4934-ab99-f3c4858e2e31
+:END:
+- A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] which represents a [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][System of Linear Equations]] with the coefficients transcribed such that each row is one equation, and the last column is the non-coefficient constant.
+  - Conventionally, there is a dividing line between the last column and the rest of the matrix.
+- Examples:
+  - $\begin{cases}1 x_1 + 2 x_2 = 3\\4 x_1 + 5 x_2 = 6 \end{cases}$ is the same as $\left[\begin{array}{cc|c}1&2&3\\4&5&6\end{array}\right]$
+* Elementary Row Operations
+:PROPERTIES:
+:ID:       bf26f901-fa17-4c98-b8bf-8d54d5a8f01d
+:END:
+- Operations you can do on an [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]].
+  - Multiply the row by a nonzero constant
+    - Notation for multiplying the ith row by $c$ is $cR_i$
+  - Interchange two rows
+    - Notaion for changing the ith and jth row is $R_i \leftrightarrow R_j$
+  - Adding a multiple of a row to another row
+    - Notation for adding c times of the jth row to the ith row is $R_i + cR_j$
+    - Can be 0, since adding an equation multiplied by 0 does not change anything
+- Multiple operations are not considered elementary.
+- These operations mirror the algebraic operations of adding and multiplying equations.
+- After an arbitrary number of these operations, the [[id:a03cd843-9760-47c4-9069-ca75d9aec0e4][Solutions]] remain the same. (See [[id:03fd9b35-48e8-42da-a4bf-bb6942228e03][Row Equivalent]])
+* Row Equivalent
+:PROPERTIES:
+:ID:       03fd9b35-48e8-42da-a4bf-bb6942228e03
+:END:
+- Two [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrices]] are considered row equivalent iff they can be tranformed into one another by applying a series of [[id:bf26f901-fa17-4c98-b8bf-8d54d5a8f01d][Elementary Row Operations]].
+- Two row equivalent matrices have the same [[id:a03cd843-9760-47c4-9069-ca75d9aec0e4][Solution]].
+
+* Leading Entry
+:PROPERTIES:
+:ID:       6800c4a5-7da7-4464-90a7-d587d9e37beb
+:END:
+- The leftmost non-zero number in a row of an [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]]
+
+* Pivot Point
+:PROPERTIES:
+:ID:       a9286172-954d-4085-b8a6-af330ee19d0d
+:END:
+- The [[id:6800c4a5-7da7-4464-90a7-d587d9e37beb][Leading Entry]] in a row of an [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]] in [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][Row-Echelon Form]]
+
+* Pivot Column
+:PROPERTIES:
+:ID:       2e30e6b2-9251-4c46-996d-f73cc7a14329
+:END:
+- A column of an [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]] which contains a [[id:a9286172-954d-4085-b8a6-af330ee19d0d][Pivot Point]].
+- If the last column is a pivot column, then the system is a [[id:dd4a724b-7288-448f-8be9-7e885699af51][Inconsistant Linear System]]
+- If all columns except the last column is a pivot column, then the system has one solution
+
+* Row-Echelon Form
+:PROPERTIES:
+:ID:       b0ddc803-3424-4cd1-b60e-4311c41a6098
+:ROAM_ALIASES: REF
+:END:
+- An [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]] with the properties:
+  - All rows entirely composed of zero (which represent [[id:8ca5b581-af4b-44c2-99a6-fe3c0a725edf][Zero Linear Equations]]) are at the bottom of the matrix.
+  - The [[id:6800c4a5-7da7-4464-90a7-d587d9e37beb][Leading Entry]] in a row must be *strictly* to the right of the leftmost non-zero number of the row above.
+- If a matrix R is a [[id:03fd9b35-48e8-42da-a4bf-bb6942228e03][Row Equivalent]] matrix of matrix A, then R is called a REF of A, and A is said to have a REF of R (*not unique!*)
+* Reduced Row-Echelon Form
+:PROPERTIES:
+:ID:       4546b235-26c0-4582-b238-594d24f1360e
+:ROAM_ALIASES: RREF
+:END:
+- An [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]] which is in [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][Row-Echelon Form]] and also has the properties:
+  - The [[id:6800c4a5-7da7-4464-90a7-d587d9e37beb][Leading Entry]] is always 1
+  - In each [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Column]], all values (other than the [[id:a9286172-954d-4085-b8a6-af330ee19d0d][Pivot Point]]) are zero.
+- While in RREF, the solutions can be read directly from the matrix.
+- All matrices have a unique RREF
+* Back Substitution
+:PROPERTIES:
+:ID:       1fd4e4db-bdb7-4352-8cfa-699cd2ebcf6e
+:END:
+- Method for solving while in [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]]
+- While in REF, the solutions can be found as so:
+  - Set all non-pivot columns as arbitrary parameters
+  - Solve for the pivots in terms of constants and the arbitrary parameters
+    - This can be done by going from the last non-zero row and working your way up.
+  - If the last non-zero row's [[id:6800c4a5-7da7-4464-90a7-d587d9e37beb][Leading Entry]] is the rightmost number, then the system has no solutions
+
+* Gaussian Elimination
+:PROPERTIES:
+:ID:       fb8122ac-2940-4312-be6b-e26198af619d
+:END:
+- An algorithm to reduce a [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]] to a [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]] matrix.
+  - Locate the leftmost nonzero column
+  - Interchange the top row with another row to make the entry of that column in the top row non-zero
+  - For all rows below the top, add a multiple of the new top row to it to make the value in the chosen column 0
+  - Continue by ignoring the top row, then repeating the previous steps with the rest of the rows
+  - The matrix will eventually reach [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]]
+* Gaussian-Jordan Elimination
+:PROPERTIES:
+:ID:       d75d83b9-0a43-4b94-b94e-1321627fa2b8
+:END:
+- An algorithm to reduce a [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]] to a [[id:4546b235-26c0-4582-b238-594d24f1360e][RREF]] matrix.
+  - First apply [[id:fb8122ac-2940-4312-be6b-e26198af619d][Gaussian Elimination]]
+  - Multiply each row by a constant such that the leading entry becomes 1
+  - Starting from the last [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Column]], add multiples of the row of that [[id:a9286172-954d-4085-b8a6-af330ee19d0d][Pivot Point]] to the rows above in order to set the values in that column to 0.
+* Solve for Constants to Ensure Solutions
+:PROPERTIES:
+:ID:       3cbffdb7-6c89-469a-af22-f760a906f0c0
+:END:
+- Instead, solve for when there are no solutions
+  - Express the [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]] in a form such that you can determine where the [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Columns]] are by conducting [[id:fb8122ac-2940-4312-be6b-e26198af619d][Gaussian Elimination]]
+  - Use the properties of [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Column]] to determine when there are no solutions
+  - May need to do casework on the unknowns if you need to divide (cannot divide by 0)
+    - To avoid somewhat, don't use a unknown at the top as the pivot
+    - In general, you cannot divide or multiply by an unknown which could be 0
+    - You are, however, allowed to add a row multiplied by an unknown which could be 0 since if it is 0, nothing changes
+* Geometrical Interpretation
+:PROPERTIES:
+:ID:       de666d50-86a6-4390-8606-bb621d089416
+:END:
+- In a [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]], each non-zero row corresponds to a [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Column]].
+  - Therefore, the number of non-zero rows must be less than or equal to the number of variables plus 1, which is the maximum number of [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Columns]].
+  - In a [[id:b2f4051d-ee59-40dc-a561-4ea4f14fb79f][Consistant Linear System]], the number of non-zero rows must be less than or equal to the number of variables, since the last column must not be a [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Column]]
+- The number of arbitrary parameters is given by the number of variables minus the number of pivot columns.
+* Homegenous Linear System
+:PROPERTIES:
+:ID:       98073aba-eb13-435c-b020-535c499f2767
+:END:
+- A homogenous linear system is a [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear System]] where all the non-coefficient constants are equal to zero.
+- All homegenous systems have the solution $x_1 = 0$, $x_2 = 0", ..., "$x_n = 0". This is called the trivial solution
+- All other solutions are known as non-trivial solutions
+  - Therefore homegenous linear systems have either one solution or infinitely many solutions
+  - If there are more variables than rows then there are infinitely many solutions
+* Matrix
+:PROPERTIES:
+:ID:       d7a14523-8aca-462b-96d7-96f8c198e3e9
+:END:
+- A m by n matrix has m rows and n columns
+- The (i, j) th entry of the matrix is in the ith row and the jth column
+* Column Matrix
+:PROPERTIES:
+:ID:       caffc8a6-388b-4a79-86e0-8c1301215c15
+:END:
+- A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] with only one column
+* Row Matrix
+:PROPERTIES:
+:ID:       6c4371a6-1c7a-4823-b4fe-2a2b98ebcd76
+:END:
+- A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] with only one row
+* Square Matrix
+:PROPERTIES:
+:ID:       390d4ad5-a285-441e-a435-b613c1ad4190
+:END:
+- A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] with the same number of rows and columns
+* Diagonal of a Square Matrix
+:PROPERTIES:
+:ID:       25ed9f16-6ad2-4bf5-a8d1-ae1ac9f32608
+:END:
+- The sequence of entries $a_{11}, a_{22}, ..., a_{33}$ in a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]]
+* Diagonal Matrix
+:PROPERTIES:
+:ID:       60269c0a-1614-4f10-bb35-6831c702d103
+:END:
+- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] called a diagonal matrix if all values not in its [[id:25ed9f16-6ad2-4bf5-a8d1-ae1ac9f32608][Diagonal]] are zero
+* Scalar Matrix
+:PROPERTIES:
+:ID:       3e5d983a-458a-4a8e-b1df-4862f4d1ce25
+:END:
+- A [[id:60269c0a-1614-4f10-bb35-6831c702d103][Diagonal Matrix]] where all values in its [[id:25ed9f16-6ad2-4bf5-a8d1-ae1ac9f32608][Diagonal]] are equal
+* Identity Matrix
+:PROPERTIES:
+:ID:       ec6a800b-bfc4-4498-9158-1a209cf0e2c5
+:END:
+- A [[id:3e5d983a-458a-4a8e-b1df-4862f4d1ce25][Scalar Matrix]] where all the values in its [[id:25ed9f16-6ad2-4bf5-a8d1-ae1ac9f32608][Diagonal]] are equal to 1
+- Can be notated by $\mathbb{I}_n$ for a n by n identity matrix
+* Zero Matrix
+:PROPERTIES:
+:ID:       d65d98af-766e-4be4-8c44-7b054a7848a7
+:END:
+- A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] where all the values are 0.
+- Can be notated by $0_{m\times n}$ for a m by n identity matrix
+  - The subscript can be dropped if it is clear what the size is
+* Symmetrical Matrix
+:PROPERTIES:
+:ID:       a518a757-1129-4a2b-bc67-da392434ad7e
+:END:
+- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where $a_{i,j} = a_{j, i}$ for all $i$ and $j$
+* Upper Triangular Matrix
+:PROPERTIES:
+:ID:       42792e44-1879-489f-b58e-32f01fec557f
+:END:
+- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where $a_{i,j} = 0$ for all $i > j$
+* Lower Triangular Matrix
+:PROPERTIES:
+:ID:       c26f10dd-0798-45eb-be5f-837e5aad51bd
+:END:
+- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where $a_{i,j} = 0$ for all $j > i$
+* Matrix Operations
+** Matrix Equality
+:PROPERTIES:
+:ID:       444fe283-2f38-45c4-a1bc-a75a83f22c8a
+:END:
+- Two [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] are equal when corresponding entries are all equal (size must be equal too)
+** Matrix Addition
+:PROPERTIES:
+:ID:       0152a8ec-6aa4-4510-9562-a5026200f17e
+:END:
+- Two [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] are added by adding corresponding entries (size must be equal)
+** Matrix Subtraction
+:PROPERTIES:
+:ID:       280f46d1-a2bf-4474-9f82-5a0fb260bff3
+:END:
+- Two [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] are subtracted by subtracting the entry in the second matrix from the one in the first
+** Matrix Scalar Multiplication
+:PROPERTIES:
+:ID:       4c80d776-74bb-42bb-a07b-b2b88b8deeaf
+:END:
+- A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] is multiplied by a scalar by multiplying each entry by that scalar
+* Dimention
+:PROPERTIES:
+:ID:       d23c199d-d127-423a-8c56-48e59b71ed9c
+:END:

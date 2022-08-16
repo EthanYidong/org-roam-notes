@@ -1,0 +1,140 @@
+:PROPERTIES:
+:ID:       e43586e7-aae2-4bca-aae7-56bec7b36ef0
+:END:
+#+title: ST2334 Notes
+#+filetags: :ST2334:
+
+* Statistical Experiment
+:PROPERTIES:
+:ID:       66f7bb17-6edb-46ee-a6b7-0f26e5712a09
+:END:
+- Any procedure that obtains data
+* Sample Space
+:PROPERTIES:
+:ID:       c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9
+:END:
+- The set (usually denoted by $S$) of all possible outcomes of a [[id:66f7bb17-6edb-46ee-a6b7-0f26e5712a09][Statistical Experiment]]
+* Sample Point
+:PROPERTIES:
+:ID:       f9b31ced-5160-4717-8776-e9e4b32ff94c
+:END:
+- Every outcome (element) in a [[id:c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9][Sample Space]]
+- The brackets $\{\}$ notates a set and order does not matter; that is, {1, 2} and {2, 1} are indistinguishable
+- The brackets $()$ notates an ordered tuple and order does matter; that is, (1, 2) and (2, 1) are distinguishable
+* Event
+:PROPERTIES:
+:ID:       2b8713f1-41e0-4967-a8af-5bef33624109
+:END:
+- Subset of a [[id:c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9][Sample Space]]
+* Sure Event
+:PROPERTIES:
+:ID:       f09b3ec0-7c31-42de-a5b6-eef1ea0811fe
+:END:
+- An [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Event]] which is equal to the [[id:c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9][Sample Space]]
+* Null Event
+:PROPERTIES:
+:ID:       b07771ac-3814-43c8-ab73-a36a979c3b7a
+:END:
+- An [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Event]] which does not contain any [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]]
+* Event Operations
+:PROPERTIES:
+:ID:       598efe18-f6c2-41f1-9ca1-21a92a9f94ee
+:END:
+- Operations of [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]]
+  - Union: $A \cup B$
+    - The set of all [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]] which are in either A or B
+    - Over n events: $\bigcup_{i=1}^{n}A_i$
+  - Intersection: $A \cap B$
+    - The set of all [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]] which are in both A and B
+    - Over n events: $\bigcap_{i=1}^{n}A_i$
+  - Complement: $A'$, "A prime"
+    - The set of all [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]] which are not in A
+  - Contain: $A \subset B$
+    - True if all [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]] in A are also in B
+    - If $A \subset B$ and $B \subset A$ then $A = B$
+    - Note: $\subset$ here includes when the sets are equal, strict subsets are denoted by $\subsetneq$
+  - Equivalent: $A = B$
+    - If every [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Point]] in A are in B, and every [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Point]] in B are in A
+* Event Operation Properties
+:PROPERTIES:
+:ID:       8b7d6979-f0ea-4e0f-b85c-df2b3d1ba407
+:END:
+- Properties of [[id:598efe18-f6c2-41f1-9ca1-21a92a9f94ee][Event Operations]]
+  - $A \cap A' = \emptyset$
+  - $A \cap \emptyset$ = \emptyset$
+  - $A \cup A' = S$
+  - $(A')' = A$
+  - $A\cup(B\cap C) = (A\cup B)\cap(A\cup C)$
+  - $A\cap(B\cup C) = (A\cap B)\cup(A\cap C)$
+  - $A\cup B = A \cup (B \cap A')$
+  - $A = (A \cap B) \cup (A \cap B')$
+  - $A' \cap B' = (A \cup B)'$ (Extends to more than 2)
+  - $A' \cup B' = (A \cap B)'$ (Extends to more than 2)
+* Mutually Exclusive
+:PROPERTIES:
+:ID:       2e60818e-a6a7-4d04-a74d-d23d44570549
+:END:
+- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are mutually exclusive if $A \cap B$ is equal to $\emptyset$
+* Counting Methods
+:PROPERTIES:
+:ID:       6aa1cd9f-fd99-489d-8dc7-eda6533bbc91
+:END:
+- How many ways for a situation to happen
+* Multiplication Principle
+:PROPERTIES:
+:ID:       4ddfdea2-f063-4a59-8068-dcd98f0ddb86
+:END:
+- Principle of [[id:6aa1cd9f-fd99-489d-8dc7-eda6533bbc91][Counting]]
+- If experiments are performed sequentially, then the number of outcomes of the overall experiment is equal to the product of the number of outcomes of the individual experiments
+* Addition Principle
+:PROPERTIES:
+:ID:       90b31528-500e-45cc-8933-92203b1915f3
+:END:
+- Principle of [[id:6aa1cd9f-fd99-489d-8dc7-eda6533bbc91][Counting]]
+- If an experiment can be carried out with different procedures, then the number of outcomes of the overall experiment is equal to the sum of the number of outcomes of the individual procedures
+* Permutations
+:PROPERTIES:
+:ID:       e7066e9c-c24e-49f4-8173-32ea9f2bbab4
+:END:
+- Method of [[id:6aa1cd9f-fd99-489d-8dc7-eda6533bbc91][Counting]]
+- Number of ways to choose $n$ objects out of $r$ objects, including ordering
+- $P_n^r = \frac{n!}{(n-r)!}$
+* Combinations
+:PROPERTIES:
+:ID:       9d4ab2df-003b-4f3a-8198-1203b69692d7
+:END:
+- Method of [[id:6aa1cd9f-fd99-489d-8dc7-eda6533bbc91][Counting]]
+- Number of ways to choose $n$ objects out of $r$ objects, not caring about order
+- $C_n^r = \frac{n!}{(n-r)! \times (r)!}$
+* Probability
+:PROPERTIES:
+:ID:       7b143707-19ff-4cb9-95a5-c3ad210297d8
+:END:
+- How likely an [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Event]] will occur
+- Probability of A to occur: $P(A)$
+* Relative Frequency
+:PROPERTIES:
+:ID:       9c3a91ed-ec3c-488b-a7d7-c6a56f7f1615
+:END:
+- One interpretation of [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]]
+- Repeat an experiment E $n$ times
+- Let the event A occur $n_A$ times
+- The relative frequency $f_A$ of an event A is equal to $\frac{n_A}{n}$
+- When n approaches infinity, the relative frequency approaches $P(A)$
+- Properties of $f_A$
+  - $0 \leq f_A \leq 1$
+  - $f_A = 1$ if A occurs in every repetition
+  - If A and B are mutually exclusive then $f_{A\cup B} = f_A + f_B$
+* Basic Axioms of Probability
+:PROPERTIES:
+:ID:       cedcb399-0696-46d2-96d0-d78e72b629d7
+:END:
+- Propositions about [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]]
+  - $P(\emptyset) = 0$
+* Finite Sample Space, Equal Outcomes
+:PROPERTIES:
+:ID:       173c2fa8-667b-4cde-b7fe-07450267724a
+:END:
+- Let the sample space be $S = {a_1, a_2, ..., a_k}$
+- Assume that $P(a_1) = P(a_2) = ... = P(a_k)$
+- Then $P(A)$ = $\frac{\text{Number of sample points in A}}{\text{Number of sample points in S}}$

@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       6da58c7e-65a4-4788-9257-782914772c11
+:END:
+#+title: MA2001 TODO
+#+filetags: :TODO:MA2001:
+
+* Watch Lecture
+
+** DONE Watch Lecture 1 <2022-08-16 Tue>
+** DONE Watch Lecture 2 <2022-08-16 Tue>
+** TODO Watch Lecture 3 <2022-08-23 Tue>
+
+* Lecture Quiz
+
+** TODO Lecture Quiz 1 <2022-08-19 Fri>
+** TODO Lecture Quiz 2 <2022-08-19 Fri>

@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       f9db7063-b80c-4f2e-b13c-f17c545e7323
+:END:
+#+title: EG2301
+#+filetags: :EG2301:
+
+* Class information
+
+** Grading
+
+** EG2301 Exams
+:PROPERTIES:
+:ID:       e7a770ff-46a5-421b-a3d7-b55eefb1abbd
+:END:

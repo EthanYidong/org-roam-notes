@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       ec7952bd-2932-43a3-98de-69f151c97505
+:END:
+#+title: ST2334
+#+filetags: :ST2334:
+
+* Class Information
+
+** Grading
+- Final Exam (70%)
+- Midterm (20%)
+- Lecture Attendance (10%)
+  - Taken via lecture quizzes after each lecture
+  - About 11 total, top 6 scores are taken
+** ST2334 Exams
+:PROPERTIES:
+:ID:       10452402-dca4-452f-8dc5-680c950c7f16
+:END:

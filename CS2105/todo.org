@@ -2,4 +2,12 @@
 :ID:       CE22AD86-8D19-418C-A7BE-CB3AB67C3AAB
 :END:
 #+TITLE:CS2105 TODO
-#+filetags: :CS2105:
+#+filetags: :TODO:CS2105:
+
+* Watch Lecture
+
+** DONE Watch Lecture 2 <2022-08-15 Mon>
+
+* Assignments
+
+** TODO Assignment 0 <2022-08-26 Fri>

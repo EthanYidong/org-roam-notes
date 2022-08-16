@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       95e23c3f-86d9-475c-9b74-7b8036266a1b
+:END:
+#+title: NUS Cycling TODO
+
+* ReCycle
+** TODO Send the subsidy proposal to CH
+* Recruitment
+** TODO Tell YuXuan to set interview time slots

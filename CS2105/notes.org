@@ -13,7 +13,7 @@
 - Internet is made up of routers
   - Data packets are sent through the network from source to destination
 
-** Data Transmission
+* Data Transmission
 :PROPERTIES:
 :ID:       A6B358C8-8DF4-4D6D-84C3-E91031768743
 :END:
@@ -30,13 +30,13 @@
     - This is for the purpose for:
       - Integrity Checks
 
-** Network Conditions
+* Network Conditions
 :PROPERTIES:
 :ID:       EC0E367A-1B1E-4ED4-B493-B1AF845FF108
 :END:
 
 - links :: [[id:1F24CF84-A241-4317-AC6D-C4C4683F34DF][CS2105 Exams]]
-*** Packet Loss
+** Packet Loss
 :PROPERTIES:
 :ID:       1D1E365F-4870-4C9D-ADE5-054FF94FA514
 :END:
@@ -44,26 +44,26 @@
 - Connectivity issues may occur (both wired and wireless)
 - Signal noise may result in corrupted packets
 
-*** Packet Delay
+** Packet Delay
 :PROPERTIES:
 :ID:       86A82389-CC39-4780-8D82-E05918A03EFF
 :END:
 
-**** Processing Delay
+*** Processing Delay
 :PROPERTIES:
 :ID:       83010D99-9421-44DC-B1B7-9350ED7945B6
 :END:
 - Generally ignored
 - How long it takes to process the packet (check for integrity, determine what to do with the packet)
 
-**** Queueing Delay
+*** Queueing Delay
 :PROPERTIES:
 :ID:       8AA81F32-434F-47F8-BE09-B6162306640D
 :END:
 - Generally ignored
 - Time taken waiting for the router to finish processing packets that arrived before
 
-**** Transmission Delay
+*** Transmission Delay
 :PROPERTIES:
 :ID:       8C08E406-EC45-4D89-BF95-FE4A5A5505FE
 :END:
@@ -71,10 +71,125 @@
 - "How long do I have to wait before can I send the next bit?"
 - $\frac{\text{bits per time}}{\text{number of bits}}$
 
-**** Propagation Delay
+*** Propagation Delay
 :PROPERTIES:
 :ID:       5AA300BB-EFBE-4AAF-BBD3-1550EA76D34B
 :END:
 - Limited by the speed of the signal along the connection.
 - "How long does it take for the data to go from point A to point B"?
 - $\frac{\text{length of connection}}{\text{speed of data through connection}}$
+
+* Network Protocols
+:PROPERTIES:
+:ID:       f2612135-5501-4169-a391-b27184c99a12
+:END:
+- The [[id:3E696C35-46F4-4C10-98C9-584A8D60616C][Internet]] supports many various kinds of network applications
+  - The Web, VoIP, email, games, etc.
+
+* Transport Services
+:PROPERTIES:
+:ID:       d6f93509-cb17-4d83-bd33-e41fdf15577e
+:END:
+- Closely tied to the [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]]
+- Needs:
+  - Data Integrity
+    - "Is the data correct?"
+  - Timing
+    - "Is the data recent?"
+  - Throughput
+    - "Is the data fast?"
+  - Security
+
+* OSI Layers
+:PROPERTIES:
+:ID:       e0360e0e-695b-4db0-8bda-f1ab12bd6019
+:END:
+- The OSI Layer Model is a structure that can be used to describe the way data is transmitted and used by computers
+** Packet Layer
+:PROPERTIES:
+:ID:       7e0f0d9b-1e1c-4e54-ba6a-4887208ed730
+:END:
+- 1st layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+** Data Link Layer
+:PROPERTIES:
+:ID:       491f607a-a390-4694-8544-1fce9a3a7d86
+:END:
+- 2nd layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+** Network Layer
+:PROPERTIES:
+:ID:       5d0b0590-fd98-4db1-89f1-f8f38bd11bb7
+:END:
+- 3rd layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+** Transport Layer
+:PROPERTIES:
+:ID:       dff0f2f7-2b30-48bd-8fb5-220db2076834
+:END:
+- 4th layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+** Session Layer
+:PROPERTIES:
+:ID:       256fc6cf-5e0a-4cd0-bf54-c5b62c290dcc
+:END:
+- 5th layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+- Grouped under the [[id:89296f19-c817-43a7-8ef6-013e697d32ab][Application Layer]] for [[id:192A0605-67DE-4277-9FEF-5C16C81937F8][CS2105]]
+** Presentation Layer
+:PROPERTIES:
+:ID:       4c5e16a5-d378-40ca-875b-566705d10018
+:END:
+- 6th layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+- Grouped under the [[id:89296f19-c817-43a7-8ef6-013e697d32ab][Application Layer]] for [[id:192A0605-67DE-4277-9FEF-5C16C81937F8][CS2105]]
+** Application Layer
+:PROPERTIES:
+:ID:       89296f19-c817-43a7-8ef6-013e697d32ab
+:END:
+- 7th layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+
+* The Web
+:PROPERTIES:
+:ID:       d81d3738-a08e-498a-ae6b-1118a0341de1
+:END:
+- An application of the [[id:3E696C35-46F4-4C10-98C9-584A8D60616C][Internet]]
+* TCP
+:PROPERTIES:
+:ID:       458a323f-763b-458e-9ce8-7b7fb008a473
+:END:
+- [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]] protocol
+* UDP
+:PROPERTIES:
+:ID:       be4e6279-b595-4fcf-befc-06d57273d988
+:END:
+- [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]] protocol
+* Round Trip Timing
+:PROPERTIES:
+:ID:       be2e19da-7142-44a9-8707-6e6f3412d46f
+:ROAM_ALIASES: RTT
+:END:
+- The amount of time taken for a packet to be sent from client to server and for a reply to be received.
+* HTTP
+:PROPERTIES:
+:ID:       b8499489-7b0e-4fbe-a5aa-367e4cf88e81
+:END:
+- The application protocol for [[id:d81d3738-a08e-498a-ae6b-1118a0341de1][The Web]]
+** HTTP 1.0
+:PROPERTIES:
+:ID:       7f45ae07-bd4b-4322-8d0f-77a2c1fb90e2
+:END:
+- links :: [[id:1F24CF84-A241-4317-AC6D-C4C4683F34DF][CS2105 Exams]]
+- Non-persistant HTTP connection
+  - Each object needs 2 [[id:be2e19da-7142-44a9-8707-6e6f3412d46f][RTTs]]
+  - Time taken to send data is based on [[id:86A82389-CC39-4780-8D82-E05918A03EFF][Packet Delay]]
+  - Timing of message = $2 \times \text{RTT} + \text{HTTP Header Time} + \text{Data Time}$
+  - Note that speed is often given in bits per second, while size is given in bytes.
+
+** HTTP 1.1
+:PROPERTIES:
+:ID:       279fe9cd-959c-49e1-839f-712e446c45e9
+:END:
+- links :: [[id:1F24CF84-A241-4317-AC6D-C4C4683F34DF][CS2105 Exams]]
+- Persistant HTTP connection
+  - The TCP connection is opened once across all objects (1 [[id:be2e19da-7142-44a9-8707-6e6f3412d46f][RTT]])
+  - Multiple objects can be grouped together with one request, so each group also requires one request (1 [[id:be2e19da-7142-44a9-8707-6e6f3412d46f][RTT]])
+    - This occurs when the client knows that it needs multiple resources to be fetched.
+  - If there is time where the computer does not know what it needs to be fetching, it will need to idle until it knows.
+  - Time taken to send data is based on [[id:86A82389-CC39-4780-8D82-E05918A03EFF][Packet Delay]]
+  - Timing across all messages = $\text{RTT} \times (\text{Number of Objects} + 1) + \text{Data Time} + \text{Idle Time}$
+  - Note that the speed is often given in bits per second, while size is given in bytes.
