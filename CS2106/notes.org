@@ -3,7 +3,8 @@
 :END:
 #+title:CS2106 Notes
 #+filetags: :CS2106:
-  
+- links :: [[id:539C8BDD-D2EA-4131-8F31-F2C3F0BC3799][CS2106]]
+
 * Operating System
 :PROPERTIES:
 :ID:       D289CD47-38F4-481F-BED1-FEAF25C4D709
@@ -28,7 +29,17 @@
     - Software: virtual objects
     - "Common services": providing tools that allow interaction with the hardware
       - [[id:FAAB67BF-9DDB-4AC3-AA45-472F439686EB][Client-Server Model]]
-
+** QNA
+- Isn't the OS an overhead? Wouldn't it be better to do without?
+  - It is an overhead but it is worth it in almost all cases, sometimes it can actually save on some resources
+  - In some MCUs there is no OS because the computer only has one job
+- What if I only have one CPU? How can it run so many things?
+  - The OS can take over the CPU ("scheduled to run") and transfer control to other processes
+  - Context switching
+    - Register data is stored into the memory
+  - Hardware is designed for interrupts to be possible
+- What is system software?
+  - Software in the OS that assists and services the other applications running
 ** Examples
 - PC
   - Windows
@@ -166,3 +177,208 @@
   - Protection
   - Prevent errors
   - Prevent improper use
+
+* Modern [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]]
+:PROPERTIES:
+:ID:       f770e083-fe6b-4e22-ae67-3292bda84695
+:END:
+- Examples:
+  - Desktop
+    - Windows
+    - macOS
+    - Linux
+  - Mobile
+    - iOS
+    - Android
+  - Embedded
+    - Raspibian
+  - RTOS
+    - freeRTOS (ESP32 my beloved)
+** Features of Modern (Desktop) OS
+- Multitasking
+  - Concurrent execution of programs on multiple cores
+  - # of programs >>> # of cores, how?
+  - Switch between programs very fast, just like people
+- Multiuser
+  - Multiple users can be logged in and use at the same time
+- Variety of Hardware
+  - Single PCs, shared memory systems (10-100s of processors), ...
+** Features of Modern (Mobile) OS
+- Customized verson of PC OS which has software dedicated to mobile haredware such as cellular modems
+** Features of Embedded OS
+- Operating system which needs to address specialized hardware
+- Has to consider more restrictions such as power and hardware
+- Not general purpose, only runs in specific environments
+- Mostly stored in read only memory
+** Features of Real-Time OS
+- When applications need to deal with real time input-output data, RTOS is used
+  - "Fly by wire", needs to respond instantly to inputs
+- Cannot add new software without rewriting the code
+- Can be soft (missable) or hard (cannot miss) time constraints
+** Features of Distributed OS
+- OS for large networks of computers which can be loosly or tightly connected
+
+* OS Structure
+:PROPERTIES:
+:ID:       8212b8c8-23c8-445a-9cd4-2a9fc44950f9
+:END:
+- Implementation of [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]]
+- Factors:
+  - Flexibility
+    - Easy to adapt
+  - Robustness
+    - Hard to break
+  - Maintainability
+    - Easy fo sysadmins to change things
+  - Performance
+    - Low overhead
+- Runs in the kernel [[id:79d9b1f3-2e86-41b0-a5a7-d56a31ada65d][Protection Mode]]
+- Programs running under the operating system run in the user [[id:79d9b1f3-2e86-41b0-a5a7-d56a31ada65d][Protection Mode]]
+- Libraries may directly interact with the hardware, others may talk to the OS instead
+- System processes are OS processes that help with the functionality, but may be run under the user [[id:79d9b1f3-2e86-41b0-a5a7-d56a31ada65d][Protection Mode]].
+- User programs may also talk to the OS directly, through the library, or directly to the hardware
+- [[file:media/os-structure_1.png][OS Structure Diagram]]
+* Kernel Organization
+:PROPERTIES:
+:ID:       dbdda23c-3747-4896-abec-6cd72a98cc93
+:END:
+- [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] also known as the kernel
+  - Deals with hardware issues
+  - Provides system call interface
+  - Special code which allows user programs to use interrupt handlers and device drivers
+  - Kernel code does not have access to system calls (of courses), normal libraries, or normal IO
+    - "Code targets bare metal"
+    - Code written in higher level compiled langauges like C/C++/🦀
+      - Previously written in assembly
+    - Heaviliy hardware dependant
+    - How do you debug
+    - Code is split into machine independant HLL code, machine depandant HLL code, and assembly code
+** Kernel Types
+*** Monolithic Kernel
+:PROPERTIES:
+:ID:       89c5da4b-e47d-46be-b73a-db52dfc13241
+:END:
+- Large kernel which includes most of the non-user code running on the computer
+- Drivers run within the monolith, which can cause BSOD/Crashes
+- [[file:media/monolithic-kernel_1.png][Monolithic Kernel]]
+*** Microkernel
+:PROPERTIES:
+:ID:       f932193f-1834-49e7-b2fa-631d4f008cec
+:END:
+- Small and clean
+- Only essential services
+- Other services are ran outside the kernel to provide resiliance
+- [[file:media/microkernel_1.png][Microkernel]]
+
+* Protection Mode
+:PROPERTIES:
+:ID:       79d9b1f3-2e86-41b0-a5a7-d56a31ada65d
+:END:
+- Hardware enforces protection modes which allow some instructions to only be run by certain privieged programs
+- In a coarse overview, there are kernel and user modes
+* VMs
+:PROPERTIES:
+:ID:       2240ad3a-9c58-44ab-adc8-f53388009f72
+:END:
+- What if you want to run more than one [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][Operating System]]?
+- Use a virtual machine
+- Virtualizes some underlying hardware that the OS expects
+  - The layer in charge of this is called the [[id:a8b405f0-555f-43d2-af3f-93a38a43dd5c][Hypervisor]]
+* Hypervisor
+:PROPERTIES:
+:ID:       a8b405f0-555f-43d2-af3f-93a38a43dd5c
+:END:
+- Type one hypervisor OS
+  - Runs directly on the OS, may be stored in the ROM or BIOS
+  - [[file:media/type-1-hypervisor_1.png][Type 1 Hypervisor]]
+- Type two hypervisor
+  - Runs above the OS
+  - [[file:media/type-2-hypervisor_2.png][Type 2 Hypervisor]]
+- WSL
+- Docker/Kubernetes (container engines)
+
+* Process Abstraction
+:PROPERTIES:
+:ID:       bbf11da3-2536-43e2-b1d7-93c46b3bf3ba
+:END:
+- Work queue
+  - Workers take work from a work queue and execute them
+- Master-slave
+  - A main unit instructs worker units to work on different tasks
+* Program Execution
+:PROPERTIES:
+:ID:       8245e915-ceba-4c96-9183-ce12f38f7b31
+:END:
+- Memory space is split amongst the different requirements of the program
+- [[file:media/memory_1.png][Memory]]
+- *Executable file format stores the instruction to the [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] on how to construct the process*
+  - The file is a blueprint for the processes
+  - Contains Instructions and Data
+  - What address is the program located at?
+  - During runtime, it also contains:
+    - Text and Data (memory context)
+** Hardware Layout
+:PROPERTIES:
+:ID:       2a0d3e9a-b060-4725-9cd2-882e52a9c356
+:END:
+- Memory is slower than registers
+- Memory cache is used to speed up memory access
+  - SRAM close (inside) the CPU
+- Fetch unit grabs data from memory into the registers
+  - Program Counter to indicate current program
+- Registers come in general and special
+  - General is used by programs to store data for instructions
+  - Special is used for specific purpose
+    - Stack Pointer
+    - Program Counter
+    - Frame Pointer
+- [[file:media/hardware_1.png][Hardware]]
+** Function Call
+:PROPERTIES:
+:ID:       8b9d71e1-fde5-4517-999a-64f413207b37
+:END:
+- Problems we need to solve:
+  - How do we allocate data for the variables?
+  - Where do we put the function such that it won't get mixed up?
+- Caller function calls the Callee
+  - Jump to the function body
+  - Execute
+  - Jump back to the original location
+  - On the way, we need to store parameters and outputs
+- These give rise to using a stack to store data
+- In the stack, there will be a region called the [[id:1e0a4e58-4815-44c6-8872-000dd5c6e8b4][Stack Frame]]
+- A stack pointer points to the top of the [[id:22f8b191-cc90-4c01-b9f5-10f78d597b42][Stack]]
+- Basic Linkage
+  - As calls are created, data is created on a stack
+    - Command jump and link "jal" is used to jump to the callee and save the PC of the caller
+    - Arguments stored in argument registers or the stack
+  - As calls return, data is popped back off the stack
+    - Jump back to the ra register
+    - ra register must be saved if you want to further call a function
+    - Save return values in return registers or the stack
+    - Push back callee saved registers from the stack
+- Frame-based linkage
+  - The callee must:
+    - Allocate space on the stack by creating a frame pointer with enough space to store all its variables, then move the stack pointer to where the frame pointer is
+    - Stack may continue to grow if other functions are called
+    - Finally, restore fp to the orginal value (since it is callee-saved) by adding to the stack pointer and storing in the frame pointer
+  - This gives the function stack space to store variables
+- The methods differ based on hardware and programming language, but must preserve certain states
+  - This is known as the calling convention and must be consistant
+** Stack
+:PROPERTIES:
+:ID:       22f8b191-cc90-4c01-b9f5-10f78d597b42
+:END:
+- A FIFO list
+- Grows in one direction
+- A stack pointer points to the top
+- Composed by [[id:1e0a4e58-4815-44c6-8872-000dd5c6e8b4][Stack Frames]]
+** Stack Frame
+:PROPERTIES:
+:ID:       1e0a4e58-4815-44c6-8872-000dd5c6e8b4
+:END:
+- Stores things like
+  - Return address
+  - Arguments
+  - Local variable storage
+  - Register data

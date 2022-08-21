@@ -4,6 +4,13 @@
 #+title:CS2106 TODO
 #+filetags: :TODO:CS2106:
 
+- links :: [[id:539C8BDD-D2EA-4131-8F31-F2C3F0BC3799][CS2106]]
+
 * Post-Lecture Quiz
 ** DONE Post Lecture Quiz 1 <2022-08-11 Thu>
-** TODO Post Lecture Quiz 2 <2022-08-18 Thu>
+** DONE Post Lecture Quiz 2 <2022-08-18 Thu>
+
+* Tutorial
+** DONE Tutorial Preparation 1 <2022-08-22 Mon>
+* Lab
+** TODO Lab Preparation 1 <2022-08-26 Fri>

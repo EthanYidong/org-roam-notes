@@ -4,6 +4,8 @@
 #+title: NUS Cycling TODO
 
 * ReCycle
-** TODO Send the subsidy proposal to CH
+** DONE Send the subsidy proposal to CH
 * Recruitment
-** TODO Tell YuXuan to set interview time slots
+** DONE Tell YuXuan to set interview time slots
+* SLF
+** DONE Set timing for prize collection

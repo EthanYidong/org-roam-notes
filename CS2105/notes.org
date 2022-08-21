@@ -5,6 +5,8 @@
 #+title: CS2105 Notes
 #+filetags: :CS2105:
 
+- links :: [[id:192A0605-67DE-4277-9FEF-5C16C81937F8][CS2105]]
+
 * Internet
 :PROPERTIES:
 :ID:       3E696C35-46F4-4C10-98C9-584A8D60616C
@@ -193,3 +195,118 @@
   - Time taken to send data is based on [[id:86A82389-CC39-4780-8D82-E05918A03EFF][Packet Delay]]
   - Timing across all messages = $\text{RTT} \times (\text{Number of Objects} + 1) + \text{Data Time} + \text{Idle Time}$
   - Note that the speed is often given in bits per second, while size is given in bytes.
+* IP Address
+:PROPERTIES:
+:ID:       11fd492e-05ef-4acd-818c-60fdcc28ae46
+:END:
+- 32 bit(IPv4) or 128 bit(IPv6) that identifies a node in a network
+- IPv4 addresses look like [0-255].[0-255].[0-255].[0-255]
+* Domain Name System
+:PROPERTIES:
+:ID:       a3ae3cdc-5328-402e-8c47-177e942fa4fb
+:ROAM_ALIASES: DNS
+:END:
+- Two ways to identify a host:
+  - Hostname: www.example.org
+  - [[id:11fd492e-05ef-4acd-818c-60fdcc28ae46][IP Address]]: 93.184.216.34
+- Hostnames are easier to remember, but computers can only use IP addresses to communicate
+- DNS allows computers to find the IP address associated with a host name
+- These calls are made by browser when attempting to visit a [[id:d81d3738-a08e-498a-ae6b-1118a0341de1][Website]]
+- Can lookup using nslookup or dig
+  - nslookup <domain>
+  - dig <type?> <domain> <"+short"?>
+- DNS uses [[id:be4e6279-b595-4fcf-befc-06d57273d988][UDP]] for speed
+  - UDP is unreliabale but DNS does not need reliability
+  - Locally served DNS has lower chance of packet loss
+  - Browsers can send multiple identical DNS requests
+** DNS Servers
+:PROPERTIES:
+:ID:       021e6dab-9bc6-4432-bddb-6010e378a3bd
+:END:
+- DNS servers exist in a hierarchy
+  - Root server on top
+  - TLD servers next
+  - Then authoritative domain servers
+  - ...
+** Local [[id:021e6dab-9bc6-4432-bddb-6010e378a3bd][DNS Servers]]
+:PROPERTIES:
+:ID:       755c25c6-acc8-4bb8-80ef-2495f0919ade
+:END:
+- A DNS Server hosted within a LAN, such as your workplace, your ISP, your school, your house
+- The Local DNS Server is "Non-authoritative"
+- Querys and records are [[id:7a342c16-c2cd-4098-9326-17e0e9654c0b][Cached]] locally to speed up request fufillment
+** DNS Cacheing
+:PROPERTIES:
+:ID:       7a342c16-c2cd-4098-9326-17e0e9654c0b
+:END:
+- Records are saved locally as a cache to speed up repeated [[id:a3ae3cdc-5328-402e-8c47-177e942fa4fb][DNS]] requests
+- Life is based on the TTL property of a DNS record
+** Resource Records
+:PROPERTIES:
+:ID:       46f135e4-e2fa-422f-a038-677b08ddcda0
+:END:
+- Format of DNS records
+- Maps between host and IP address
+- (name, value, type, ttl)
+  - Name is the hostname, i.e. www.example.com
+  - Value is the value mapped to the hostname, i.e. 93.184.216.34
+  - [[id:1cb6721f-2c5a-40a0-a447-58e3bc3aea04][Type]]: the type of entry
+  - TTL: Time to Live ([[id:7a342c16-c2cd-4098-9326-17e0e9654c0b][DNS Cache]] life)
+** Record Types
+:PROPERTIES:
+:ID:       1cb6721f-2c5a-40a0-a447-58e3bc3aea04
+:END:
+*** A
+:PROPERTIES:
+:ID:       93b7ce91-aa85-4195-a528-c342661a9aa3
+:END:
+- "Alias"
+- Name is the hostname
+- Value is the ip address the name maps to
+*** CNAME
+:PROPERTIES:
+:ID:       5bfc5249-36a9-43f8-83a6-9c185adc2ffa
+:END:
+- "Canonical name"
+- Name is the alias name
+- Value is the canonical location that the alias name maps to
+- Essentially operates like [[id:93b7ce91-aa85-4195-a528-c342661a9aa3][A]] but value is a hostname
+*** NS
+:PROPERTIES:
+:ID:       6d582497-506c-4e29-9dfc-042e996ecb9a
+:END:
+- "Name Server"
+- Name is the domain
+- Value is the name server
+- The name server provides the hostname of the canonical nameserver which is in charge of providing values to the [[id:a3ae3cdc-5328-402e-8c47-177e942fa4fb][DNS]]
+*** MX
+:PROPERTIES:
+:ID:       bae007b2-3ece-432c-bb20-abc5283f589f
+:END:
+- "Mail Exchanger"
+- Name is the domain
+- Value is the mail server
+* Addressing
+:PROPERTIES:
+:ID:       4201faab-cb57-4a69-992a-fd9328ac0dd4
+:END:
+- [[id:11fd492e-05ef-4acd-818c-60fdcc28ae46][IP Addresses]] are used to identify hosts
+- This is not however, because many different applications might be running on the host
+- Applications are identified by using a port number (16 bits)
+  - Ports 1-1023 are reserved
+- Example Ports:
+  - 80: HTTP server
+  - 25: SMTP server
+* Socket
+:PROPERTIES:
+:ID:       b9e8bfd8-a7b3-4e36-806f-f58eeebc3283
+:END:
+- Sockets are an interface that sit between the [[id:89296f19-c817-43a7-8ef6-013e697d32ab][Application Layer]] and [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]]
+- Applications treat the internet like a black box, and communicate only using the socket
+- [[id:be4e6279-b595-4fcf-befc-06d57273d988][UDP]]:
+  - Socket has no connection, packets are all sent as they are to the server and port
+  - [[file:media/udp-diagram_1.png][UDP Diagram]]
+- [[id:458a323f-763b-458e-9ce8-7b7fb008a473][TCP]]:
+  - A connection must first be established
+  - Server creates a socket for each client
+  - [[file:media/tcp-diagram_1.png][TCP Diagram]]

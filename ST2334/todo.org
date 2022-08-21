@@ -4,10 +4,15 @@
 #+title: ST2334 TODO
 #+filetags: :TODO:ST2334:
 
+- links :: [[id:ec7952bd-2932-43a3-98de-69f151c97505][ST2334]]
+
 * Watch Lecture
 ** DONE Watch Lecture 1 <2022-08-16 Tue>
 ** DONE Watch Lecture 2 <2022-08-16 Tue>
-** TODO Watch Lecture 3 <2022-08-23 Tue>
+** DONE Watch Lecture 3 <2022-08-23 Tue>
 
 * Lecture Quiz
-** TODO Lecture Quiz 2 <2022-08-16 Tue>
+** DONE Lecture Quiz 2 <2022-08-16 Tue>
+
+* Tutorial
+** TODO Tutorial Preparation 1 <2022-08-24 Wed>

@@ -1,0 +1,132 @@
+:PROPERTIES:
+:ID:       a0066e7b-19d4-4c4c-897c-375a15806437
+:END:
+#+title: EG2301 Notes
+#+filetags: :EG2301:
+
+- links :: [[id:f9db7063-b80c-4f2e-b13c-f17c545e7323][EG2301]]
+* Philosophy of Jin Yong
+:PROPERTIES:
+:ID:       b1240c38-94c1-404e-9192-52f92af31b9f
+:END:
+- A young man finds power
+- Learns the reason for the power
+- Completes their story
+
+* Philosophy of Bruce Lee
+:PROPERTIES:
+:ID:       c899bf0a-2e30-4a67-877d-9613b4d012fa
+:END:
+- Be like water
+- Don't be dogmatic, approach with an open mind
+- Learn from multiple disciplines
+
+* Design Thinking
+:PROPERTIES:
+:ID:       35c18c68-06a0-4231-8f8b-cd18bcc37538
+:END:
+- Human-centered approach to innovation
+- Focus on helping people and organization to become more innovative and creative
+- Center the design process on Viability, Feasibility, and Desirability
+- How to change and deliver new products fast
+  - Encourage the creation of new processes
+- AirBNB Professional Photography experiment
+  - Renting a professional camera increased their revenue for the first time in months
+- "How might we..."
+
+* Ideas vs Opportunity
+:PROPERTIES:
+:ID:       62f6df90-2be2-4046-80b2-197757169202
+:END:
+- Ideas are "dime a dozen"
+- Opportunities are ideas that offer the potential for more return on investment than the cost of the original investment
+
+* Effective Business Plan
+:PROPERTIES:
+:ID:       a0547510-6581-4abe-af83-5d144c629839
+:END:
+- What is your current situation?
+- What is your goal?
+- How will you reach this goal?
+- What do you offer?
+- How big is the business you are entering?
+- Who are the key players?
+- How will you differentiate yourself?
+- What will be your marketing plan?
+- What are the economics of your business?
+- What is the capital requirement to get your business started?
+
+* Presentation Feedback
+:PROPERTIES:
+:ID:       dae64658-d755-4af1-bd05-84297bb2daf7
+:END:
+- Don't stutter
+- Don't make unsubstantiated claims
+- Add energy
+
+* Tria
+:PROPERTIES:
+:ID:       8d777859-f540-45d9-81a0-0935d781190b
+:END:
+- Company focused on people and the planet before the products
+- Sustainable food packaging
+- Sustainability, design, and innovation
+- Incremental improvement and radical change
+- Crave Nasi Lemak case study
+  - Crave Nasi Lemak saved 100 tonnes of plastic waste
+  - Wanted to sell in Changi Airport
+  - Premium feel achieved through package design
+- Tim Ho Wan case study
+  - Changed from white (required bleaching) to brown paper (made with bamboo, can recycle more)
+  - Bamboo both helped their environmental impact and also strengthened their brand image
+- The Soup Spoon case study
+  - Sustainability push, change from styrofoam to paper
+  - Requirement was practical usage (keep soup properly contained)
+  - Engineered better paper based materials
+  - Both price point and function were competetive with styrofoam
+- "In & Out" case study
+  - A convertable packaging which works for dine in and take-out
+  - Saves dish washing and management complexity
+  - Hooked big fish small fish
+  - Won the 2019 Singapore Packaging Star Award
+- 4Fingers case study
+  - Redesigned the 4fingers packaging
+  - Patented cup lid - get rid of straws
+  - Pop-open box brings brand recognition
+  - Drive customer engagement
+- Wrappel case study
+  - Print on food-contact surfaces in a safe way
+  - Drive brand engagement with Old Chang Kee
+- Appeal of Sustainability
+  - Cost must not hinder the business for switching
+  - Well designed packaging is a plus in itself
+  - Go to the marketing department first
+- Single use is single use?
+  - How do you close the loop on single-use packaging?
+  - Reduce: not much less to reduce
+  - Reuse: Pretty much impossible for the food sector
+  - Recycle: Generally too expensive to justify, and requires more equipment and hassle for consumers
+  - Biodegrading requqires you to take the steps to make sure it goes through the process
+    - Use it on a farm
+    - Service to bring food waste and foodware waste to the farm ("table to farm")
+    - Everything is bio-based, so you can use it as a fertilizer after some fertilizing
+* Value Proposition Canvas
+:PROPERTIES:
+:ID:       973cc44f-df38-40ff-bd7b-57fd74321350
+:ROAM_REFS: https://youtu.be/ReM1uqmVfP0
+:END:
+- https://youtu.be/ReM1uqmVfP0
+- A tool to visualize, design, and test how you create value for customers
+- Two parts: customer profile, value map
+- Customer profile
+  - What job does your customer want to get done
+    - Functional
+    - Social
+    - Emotional
+  - Highlight the pains existing in the jobs
+  - Demonstrate the gains that may be achieved by using your product
+- Value map
+  - List the products and services
+  - How do these reduce or eliminate pain?
+  - How do these produce gain?
+- Make a clear connection between your customer profile and your value map

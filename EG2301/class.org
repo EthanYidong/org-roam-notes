@@ -5,7 +5,6 @@
 #+filetags: :EG2301:
 
 * Class information
-
 ** Grading
 
 ** EG2301 Exams

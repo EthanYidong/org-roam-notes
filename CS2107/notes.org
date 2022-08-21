@@ -3,6 +3,8 @@
 :END:
 #+TITLE: CS2107 Notes
 #+filetags: :CS2107:
+
+- links :: [[id:3B2DB3CE-7EDA-4289-B06B-8882D7749848][CS2107]]
   
 * Cybersecurity
 :PROPERTIES:
@@ -44,7 +46,10 @@
 :END:
 - A method of countering threats
 
-** Why is security hard?
+* Why is security hard?
+:PROPERTIES:
+:ID:       21dce284-1d50-4427-8140-c353334f4b64
+:END:
 - Why can't we blame the developers?
   - Many developers lack the adversarial thinking to address potential problems during the development stage.
 
@@ -119,80 +124,93 @@
 :END:
 - Different [[id:DE8B7A61-3F92-4079-8F99-035A82B5CFF6][keys]] are used for encryption and decryption of plaintext data.
 
-** Cryptology
+* Cryptology
 :PROPERTIES:
 :ID:       4AB2DE71-90AE-47A8-85E2-23C7361DAF21
 :END:
 
 - [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptography]] + [[id:18A7FDEC-431B-4D8C-A0C2-93831A0A2F5B][Cryptanalysis]]
 
-*** Cryptography
+** Cryptography
 :PROPERTIES:
 :ID:       287CF85B-BF15-47AE-9C6C-B203F1FDF3DE
 :END:
 - The act of creating cyrptosystems
 
-*** Cryptanalysis
+** Cryptanalysis
 :PROPERTIES:
 :ID:       18A7FDEC-431B-4D8C-A0C2-93831A0A2F5B
 :END:
 - The act of studying and breaking cryptosystems
 
-** Characters
+* Characters
 :PROPERTIES:
 :ID:       C4D031D7-4879-4D41-A60F-21234529EB2C
 :END:
-- Recurring characters in stories about cryptograhy
-*** Alice
+- Recurring characters in stories about [[id:03871803-1117-479D-90D9-90A648B192EF][Cryptosystems]]
+** Alice
 :PROPERTIES:
 :ID:       FA0748AA-F706-4A4B-8369-917B8928E52B
 :END:
 - Usually the sender of a message.
-*** Bob
+** Bob
 :PROPERTIES:
 :ID:       C0FD5E9B-B0B4-4547-B38A-725D46A09C0E
 :END:
 - Usually the recipient of a message.
-*** Eve
+** Eve
 :PROPERTIES:
 :ID:       28DAED70-FF28-43A9-AABE-A1FC13D0A639
 :END:
 - An "evesdropper", who passively reads the communication channel.
-*** Mallory
+** Mallory
 :PROPERTIES:
 :ID:       C6BD6271-3B92-4538-9398-FCCA53B7A1B5
 :END:
 - A "malicious actor", who actively reads and edits the communication channel.
 
-** Key
+* Key
 :PROPERTIES:
 :ID:       DE8B7A61-3F92-4079-8F99-035A82B5CFF6
 :END:
 
-- A set of data used in encryption and/or decryption of data within a cryptosystem.
+- A set of data used in encryption and/or decryption of data within a [[id:03871803-1117-479D-90D9-90A648B192EF][Cryptosystem]].
 
-** Key Space
+* Key Space
 :PROPERTIES:
 :ID:       0FD182B5-6597-4D82-A45D-9F5A2F32E5A6
 :END:
 - The set of all possible [[id:DE8B7A61-3F92-4079-8F99-035A82B5CFF6][keys]] for a particular [[id:605D780C-F8CA-4C2A-A008-1D2019935535][cipher]].
 
-** Ciphers
+* Key Size
+:PROPERTIES:
+:ID:       099f0004-fd96-43ee-b583-24f2528d6893
+:END:
+- The number of bits needed to represent the [[id:DE8B7A61-3F92-4079-8F99-035A82B5CFF6][Keys]] of the [[id:0FD182B5-6597-4D82-A45D-9F5A2F32E5A6][Key Space]]
+** Proving Key Size is Correct
+:PROPERTIES:
+:ID:       c1f5bc20-33c0-4e0b-8410-204b4f3efb7e
+:END:
+- Method: index pairs table
+  - Essentially prove that for every value representable using N bits, mapping it to one [[id:DE8B7A61-3F92-4079-8F99-035A82B5CFF6][Key]] will cover the [[id:0FD182B5-6597-4D82-A45D-9F5A2F32E5A6][Key Space]] by using all possible N bits
+  - AKA are there at least as many values represented by N bits as there are possible keys?
+
+* Ciphers
 :PROPERTIES:
 :ID:       605D780C-F8CA-4C2A-A008-1D2019935535
 :END:
 
 - A scheme for encrypting plaintext
 
-*** Attacking a Cipher
+* Attacking a Cipher
 :PROPERTIES:
 :ID:       51F8780E-D175-4194-9C9B-803B07FB500B
 :END:
 - An attacker's goal is generally to find the key, in order to determine the plaintext
 - It could also be simply to figure out some limited information about the plaintext.
-- Generally, to commence an attack, an attacker would know some information about the cipher
+- Generally, to commence an attack, an attacker would know some information about the [[id:605D780C-F8CA-4C2A-A008-1D2019935535][Cipher]]
 
-**** Known Plaintext
+** Known Plaintext
 :PROPERTIES:
 :ID:       51C901FF-09EA-40C6-AE8E-107F33D1D66D
 :END:
@@ -200,7 +218,7 @@
   - In many cases the attacker can guess at what the plaintext is depending on the context of the data (email headers, HTML headers, common words, etc.)
   - If a cipher can be broken when we have this information, we call it "insecure under known-plaintext attack" or "broken under known-plaintext attack".
 
-**** Cyphertext Only
+** Ciphertext Only
 :PROPERTIES:
 :ID:       50B37D8A-18F7-49B5-B0D5-917D42BA7F02
 :END:
@@ -208,13 +226,13 @@
   - In some cases, especially with human languages, many substrings have much higher frequency in usage.
   - If a cipher can be broken when we have this information, we call it "not secure under cyphertext-only attack".
 
-*** Simple Ciphers
+* Simple Ciphers
 :PROPERTIES:
 :ID:       0937F10B-AF62-460A-BCB9-CBB65A3AFB5E
 :END:
-- Simple cryptographic schemes used for studying basic cryptology.
+- Simple [[id:605D780C-F8CA-4C2A-A008-1D2019935535][Ciphers]] are schemes used for studying basic cryptology.
 
-**** Substitution Cipher
+** Substitution Cipher
 :PROPERTIES:
 :ID:       A7E04A38-A085-4646-B01F-94D9EAFA157F
 :END:
@@ -222,4 +240,166 @@
 - [[id:0FD182B5-6597-4D82-A45D-9F5A2F32E5A6][Key Space]]
   - All possible permutations of the alphabet
   - AKA all possible bijections between the set of characters and itself.
-- Not secure under [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]] or under [[id:50B37D8A-18F7-49B5-B0D5-917D42BA7F02][Cyphertext Only]] attacks.
+- [[id:099f0004-fd96-43ee-b583-24f2528d6893][Key Size]]
+  - Each key is a permutation of the 27 letters in the alphabet
+  - Naive method: 1 byte per letter = 8 * 27 = 216
+  - Smarter method: 5 bits per letter = 5 * 27 = 135
+  - Theoretical lower bound: $\log_2(27!) \approx 94$
+    - $2^{94} = 1.9E28$
+    - $27! = 1.0E28$
+- Not secure under [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]] or under [[id:50B37D8A-18F7-49B5-B0D5-917D42BA7F02][Ciphertext Only]] attacks.
+** Permutation Cipher
+:PROPERTIES:
+:ID:       cd202af0-25ca-4c9d-a11a-ddc63ca59014
+:ROAM_ALIASES: "Transposition Cipher"
+:END:
+- A key uses a key length t and a list of numbers representing a permutation of the numbers from 1 to t.
+- For each group of t characters, permutate the characters as given by the list
+- Not secure under [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]]
+  - Given the plaintext you can easily figure out the key length, and then the list of permutation itself very trivially
+- Not secure under [[id:50B37D8A-18F7-49B5-B0D5-917D42BA7F02][Cyphertext Only]]
+  - If the text is known to be some language, then words and phrases can be guessed at
+** One Time Pad
+:PROPERTIES:
+:ID:       cc5982a8-8c3e-453c-9393-fa278a1c8f8e
+:END:
+- Utilizes the [[id:11af3871-9e7c-4b46-92f5-8ee8acd06481][XOR]] operation
+- Needs a n-bit key for a n-bit plaintext
+- XOR the plaintext with the key
+- Decrypt by XOR the ciphertext with the key
+- Key must be random and used only once
+- Under [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]], the key can be found but it will not be used any more
+- Impossible to find the key under [[id:50B37D8A-18F7-49B5-B0D5-917D42BA7F02][Ciphertext Only]]
+  - Any n-bit plaintext can result in a specific n-bit ciphertext given the correct key
+- "Unbreakable"/"[[id:0864648d-4915-4973-9b93-0f513ee5e5d6][Perfect Secrecy]]" given unlimited computing power and time, as long as the key is not reused
+- No information about the plaintext can be gained given a ciphertext
+  - Except the length, but can also be mitigated if messages are all padded out
+- Weaknesses
+  - Length of the key = length of the plaintext, so becomes hard to use in many applications (like without a machine)
+  - [[https://www.nsa.gov/portals/75/documents/about/cryptologic-heritage/historical-figures-publications/publications/coldwar/venona_story.pdf][The Veona Story]]: Broken OTP due to repeated key
+- Usage: [[https://ciphermachines.com/onetimepad.html][Cipher Machines]]
+* XOR
+:PROPERTIES:
+:ID:       11af3871-9e7c-4b46-92f5-8ee8acd06481
+:END:
+- "Are the bits different" operation
+- Associative operation
+- Applying it twice to one bit string with the same other bit string results in the original one.
+- Applying it to itself becomes 0
+* Perfect Secrecy
+:PROPERTIES:
+:ID:       0864648d-4915-4973-9b93-0f513ee5e5d6
+:END:
+- $Pr(X = x | Y = y) = Pr(X = x)$ given any distribution X, for all x and y
+- "The probability that the plaintext is any given value is equal to the probability that the plaintext is that value given the ciphertext"
+- "No knowledge is gained by knowing the ciphertext"
+
+* Security Models
+:PROPERTIES:
+:ID:       b30c808d-acea-428a-9564-6fb356072eb6
+:ROAM_ALIASES: "Attack Models"
+:END:
+- Security achieved by an encryption is formulating by stating the class of attacks that it prevents
+- Attack described by:
+  - Attacker's goal
+  - Attacker's capability
+- Attack models are application-dependant
+** Encryption Security Models
+:PROPERTIES:
+:ID:       626045a3-13e4-43d8-8b2d-724b0e40fb6d
+:END:
+- Capabilities
+  - [[id:50B37D8A-18F7-49B5-B0D5-917D42BA7F02][Ciphertext Only]]
+  - [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]]
+  - Chosen Plaintext
+    - Attacker can get the ciphertext for arbitrary plaintexts through use of some black box (usually contacting the server) "The Encryption Oracle"
+    - In a public key scheme, the encyrption oracle is always available
+  - Chosen Ciphertext
+    - Attacker can get the plaintext for arbitrary ciphertexts through use of some black box "The Decryption Oracle"
+  - In these attacks the attacker can "adapt", meaning give different inputs to the oracle based on the previous outputs
+- Goals
+  - Total break
+    - Find the encryption key
+  - Partial break
+    - Find the plaintext of a cipher
+    - Find some information about the plaintext
+* Comparing Models
+:PROPERTIES:
+:ID:       2cff7ab5-1b5f-4195-bf3c-3f576551a604
+:END:
+- If under an attack model a system $S_1$ prevents more attacks than $S_2$, then $S_2$ is more secure than $S_1$, specifically *with respect to the [[id:b30c808d-acea-428a-9564-6fb356072eb6][Attack Model]]*
+- The goal is to prevent attacks under the strongest capability and the weakest goals
+- Modern ciphers aim for [[id:0864648d-4915-4973-9b93-0f513ee5e5d6][Perfect Secrecy]] under Chosen Plaintext ([[id:626045a3-13e4-43d8-8b2d-724b0e40fb6d][Encryption Security Models]])
+* Block Ciphers
+:PROPERTIES:
+:ID:       4a483da5-7655-4fe5-b67b-d724b2ee1d8d
+:END:
+- [[id:605D780C-F8CA-4C2A-A008-1D2019935535][Ciphers]] which operate on blocks of data at a time
+- Use an [[id:52f7f8f6-2a6c-4286-866c-1d9e337237ec][IV]] to make keys non-deterministic
+- Properties:
+  - Has a block size: number of bits in a plaintext (n)
+  - Has a keys size: number of bits in a key size (s)
+- Examples:
+  - DES n=64bits, s=56bits
+    - Became searchable as computing power increased
+  - 3DES n=64bits, s=168bits (is literally just 3 applications of DES)
+  - AES n=128bits, s=128, 192, 256bits
+    - Selected by NIST among many other proposals
+    - "Rijndael", proposed by Belgian researchers Daemen and Rijmen
+    - Still in use today
+- Longer key = more secure, slower
+- Techniques:
+  - Substitution-permutation network (AES)
+  - Feistel scheme (DES)
+* Stream Ciphers
+:PROPERTIES:
+:ID:       82e3a5fd-e575-4bdd-8e78-90b18b84b031
+:END:
+- [[id:605D780C-F8CA-4C2A-A008-1D2019935535][Ciphers]] which operate on a stream of data (such as [[id:cc5982a8-8c3e-453c-9393-fa278a1c8f8e][One time Pad]])
+- Good for streaming data which needs low latency
+- May be known as "pseudo/simulated OTP"
+  - Generates a one time pad key using a much smaller key, using a [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptographically]] secure pseudorandom process
+  - Weaness: generation is deterministic
+    - This means that the same key will be generated every time
+    - If given two ciphertexts using the same key, by XORing them together you get the XOR of the two plaintexts
+    - Depending on the structure of the data information will be leaked
+  - Solution: use an [[id:52f7f8f6-2a6c-4286-866c-1d9e337237ec][IV]]
+* IVs
+:PROPERTIES:
+:ID:       52f7f8f6-2a6c-4286-866c-1d9e337237ec
+:END:
+ - Generate data by using an IV (Initialization Vector)
+ - IV must be different for each plaintext
+ - IV must be shared between both sender and recipient such that the same keystream can be generated
+ - IV is in the clear (may or may not be considered part of the ciphertext depending on who you ask)
+* Stream Ciphers vs Block Ciphers
+:PROPERTIES:
+:ID:       2539627c-eb3f-4ca4-bfb2-08bc3f82fccd
+:END:
+- [[id:82e3a5fd-e575-4bdd-8e78-90b18b84b031][Stream Ciphers]]
+  - Pros
+    - Speed of transformation
+    - Low error propagation
+  - Cons
+    - Low [[id:efc76398-34e2-4e48-aaa6-df034c082796][Diffusion]]
+    - Susceptibility to malicious modification
+- [[id:4a483da5-7655-4fe5-b67b-d724b2ee1d8d][Block Ciphers]]
+  - Pros
+    - High [[id:efc76398-34e2-4e48-aaa6-df034c082796][Diffusion]]
+    - Immunity to insertion of data
+  - Cons
+    - Slow
+    - Padding
+    - Errors affect larger amounts of data
+* Diffusion
+:PROPERTIES:
+:ID:       efc76398-34e2-4e48-aaa6-df034c082796
+:END:
+- A change in the plaintext causes many changes in the ciphertext
+- A part of the ciphertext depends on many parts of the plaintext
+- Means that attackers need a large amount of ciphertext to infer the encryption algorithm
+* Confusion
+:PROPERTIES:
+:ID:       1f2fd325-589c-442d-96be-eeba13e18217
+:END:
+- Attacker should not be able to predict the output of the encryption when a single character of the plaintext or the key is changed

@@ -4,6 +4,8 @@
 #+title: ST2334 Notes
 #+filetags: :ST2334:
 
+- links :: [[id:ec7952bd-2932-43a3-98de-69f151c97505][ST2334]]
+
 * Statistical Experiment
 :PROPERTIES:
 :ID:       66f7bb17-6edb-46ee-a6b7-0f26e5712a09
@@ -125,12 +127,21 @@
   - $0 \leq f_A \leq 1$
   - $f_A = 1$ if A occurs in every repetition
   - If A and B are mutually exclusive then $f_{A\cup B} = f_A + f_B$
-* Basic Axioms of Probability
+* Basic Properties of Probability
 :PROPERTIES:
 :ID:       cedcb399-0696-46d2-96d0-d78e72b629d7
 :END:
 - Propositions about [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]]
   - $P(\emptyset) = 0$
+  - $P(S) = 1$
+  - $0\leq P(A) \leq 1$
+  - If A and B are mutually exclusive, then $P(A\cup B) = P(A) + P(B)$
+    - This extends to any arbitrary number of mutually exclusive [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]]
+  - $P(A')=1-P(A)$
+  - $P(A) = P(A \cap B) + P(A \cap B')$
+  - $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+  - If $A \subset B$ then $P(A) \leq P(B)$
+
 * Finite Sample Space, Equal Outcomes
 :PROPERTIES:
 :ID:       173c2fa8-667b-4cde-b7fe-07450267724a
@@ -138,3 +149,43 @@
 - Let the sample space be $S = {a_1, a_2, ..., a_k}$
 - Assume that $P(a_1) = P(a_2) = ... = P(a_k)$
 - Then $P(A)$ = $\frac{\text{Number of sample points in A}}{\text{Number of sample points in S}}$
+
+* Conditional Probability
+:PROPERTIES:
+:ID:       f4f63c08-6447-4f2e-8285-779b35072f4c
+:END:
+- Find the [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]] of an [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Event]] B, but only when we know that another event A has occured
+- Denoted as $P(B \mid A)$, the mid line can be read as "given"
+- $P(B \mid A) = \frac{P(A \cap B)}{P(A)}$
+  - This formula essentially restricts the sample space to the event $A$
+- We also have $P(A \mid B) = \frac{P(A)P(B \mid A)}{P(B)}
+  - This essentially reframes the previous formula using the multiplication rule
+* Independence
+:PROPERTIES:
+:ID:       6172717b-8761-40ed-a989-0f55eb10bcfa
+:END:
+- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are independent iff $P(A\cap B) - P(A)P(B)$
+- This implies that $P(B \mid A) = 0$. If $B \neq 0$, then two events are independent iff $P(B \mid A) = 0$ (and vice versa)
+- This is denoted as $A \perp B$
+* Mutually Exclusive
+:PROPERTIES:
+:ID:       79b01f9a-9ea6-4148-b03e-4b8923181368
+:END:
+- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are mutually exclusive iff $P(A \cap B) = 0$
+- "A and B will never happen at the same time"
+
+* Partition
+:PROPERTIES:
+:ID:       e7d7332e-0605-4c6a-a062-4987a9b9595c
+:END:
+- If [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] $A_1, A_2, A_3, ..., A_n$ are mutually exclusive and $\cup_{k=1}^{n}A_1$ is equal to the [[id:c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9][Sample Space]] $S$, then $A_1, A_2, A_3,...,A_n$ is said to be a partition of $S$.
+* The Law of Total [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]]
+:PROPERTIES:
+:ID:       02ce18bb-5c8b-4ed3-aa73-6321bcf6b215
+:END:
+- If we have a partition $A_1, A_2, A_3, ..., A_n$, then $P(B) = \sum_{i=1}^{n}P(B \cap A_i) = \sum_{i=1}^{n}P(A_i)P(B \mid A_i)$
+* Bayes' Theorem
+:PROPERTIES:
+:ID:       a30eb7b7-e4af-4779-ab4a-5831f89bc095
+:END:
+- If we have a partition $A_1, A_2, A_3, ..., A_n$, then $P(A_k | B)= \frac{P(A_k)P(B\mid A_k)}{\sum_{i=1}^{n}P(A_i)P(B \mid A_i)}$

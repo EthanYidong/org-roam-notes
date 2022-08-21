@@ -4,6 +4,8 @@
 #+title: MA2001 Notes
 #+filetags: :MA2001:
 
+- links :: [[id:c05cbeec-6a23-4ac8-ab3d-a0fbd3dfbe40][MA2001]]
+
 * Linear Equation
 :PROPERTIES:
 :ID:       3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d
@@ -190,14 +192,14 @@
   - Therefore, the number of non-zero rows must be less than or equal to the number of variables plus 1, which is the maximum number of [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Columns]].
   - In a [[id:b2f4051d-ee59-40dc-a561-4ea4f14fb79f][Consistant Linear System]], the number of non-zero rows must be less than or equal to the number of variables, since the last column must not be a [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Column]]
 - The number of arbitrary parameters is given by the number of variables minus the number of pivot columns.
-* Homegenous Linear System
+* Homogenous Linear System
 :PROPERTIES:
 :ID:       98073aba-eb13-435c-b020-535c499f2767
 :END:
 - A homogenous linear system is a [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear System]] where all the non-coefficient constants are equal to zero.
-- All homegenous systems have the solution $x_1 = 0$, $x_2 = 0", ..., "$x_n = 0". This is called the trivial solution
+- All homogenous systems have the solution $x_1 = 0$, $x_2 = 0", ..., "$x_n = 0". This is called the trivial solution
 - All other solutions are known as non-trivial solutions
-  - Therefore homegenous linear systems have either one solution or infinitely many solutions
+  - Therefore homogenous linear systems have either one solution or infinitely many solutions
   - If there are more variables than rows then there are infinitely many solutions
 * Matrix
 :PROPERTIES:
@@ -263,7 +265,10 @@
 :ID:       c26f10dd-0798-45eb-be5f-837e5aad51bd
 :END:
 - A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where $a_{i,j} = 0$ for all $j > i$
-* Matrix Operations
+* [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] Operations
+:PROPERTIES:
+:ID:       279de6eb-6af8-41fd-bc58-71687659bbce
+:END:
 ** Matrix Equality
 :PROPERTIES:
 :ID:       444fe283-2f38-45c4-a1bc-a75a83f22c8a
@@ -284,6 +289,134 @@
 :ID:       4c80d776-74bb-42bb-a07b-b2b88b8deeaf
 :END:
 - A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] is multiplied by a scalar by multiplying each entry by that scalar
+** Basic Properties of Matrix Operations
+:PROPERTIES:
+:ID:       55248702-1ef5-4612-b117-45d4936392c8
+:END:
+- Let A, B, C be equally sized [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] and c and d be scalars
+- Commutative property of addition: $A + B = B + A$
+- Associative property of addition: $A + B + C = (A + B) + C = A + (B + C)$
+- Scalar multiplication distributes into addition: $c(A + B) = cA + cB$
+- Also: $(c + d)A = cA + dA$
+- Also: $(cd)A = c(dA) = d(cA)$
+- Zero addition: $A + 0 = 0 + A = A$ (0 here means the appropriately sized [[id:d65d98af-766e-4be4-8c44-7b054a7848a7][Zero Matrix]])
+- $A - A$ = 0$
+- $0A = 0$
+** Matrix Multiplication
+:PROPERTIES:
+:ID:       76f39bdc-085f-459e-a0e3-533fe66188d4
+:END:
+- To multiply two [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] $A \times B$:
+- Number of columns in A must be equal to the number of rows in B.
+- If A is $m \times p$ and B is $p \times n$, then $A \times B$ is $m \times n$
+- The (i, j)th entry is equal to $\sum_{k=1}^{p} a_{ik} b_{kj}$
+- Not commutative
+- "pre-multiplication" of A to B = $AB$
+- "post-multiplication" of A to B = $BA$
+** Properties of [[id:76f39bdc-085f-459e-a0e3-533fe66188d4][Matrix Multiplication]]
+:PROPERTIES:
+:ID:       e79dec60-803d-4c5b-9987-c90efe15cbec
+:END:
+- If A/A_n, B/B_n, C/C_n are dimentioned such that the multipliation is defined and c is a scalar, then
+- $A(BC) = (AB)C$
+- $A(B_1 + B_2) = AB_1 + AB_2$
+- $(C_1 + C_2)A = C_1A + C_2A$
+- $c(AB) = (cA)B = A(cB)$
+** Power of a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]]
+:PROPERTIES:
+:ID:       77806fef-4ae7-484e-ae51-6e62b3de6ae4
+:END:
+- Let A be a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]]
+- $A^n$ is the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] when n is 0
+- $A^n$ is A times itself n times total when n is not 0
+- Because multiplication is not commutative, we cannot say $(AB)^2$ = $A^2B^2$
+** [[id:76f39bdc-085f-459e-a0e3-533fe66188d4][Matrix Multiplication]] Notation
+:PROPERTIES:
+:ID:       88db205b-1cfb-40b3-ad13-5827454de810
+:END:
+- $AB = A[b_1 b_2 b_3 ... b_n] = [Ab_1 Ab_2 Ab_3 ... Ab_n]$, essentially writing B as a list of columns
+- Similarly, $AB = \begin{bmatrix}a_1\\a_2\\a_3\\...\\a_n\end{bmatrix} = \begin{bmatrix}Ba_1\\Ba_2\\Ba_3\\...\\Ba_n\end{bmatrix}$
+** Transpose of a [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]]
+:PROPERTIES:
+:ID:       c4062e3e-4992-4d7f-8621-984120945600
+:END:
+- Each column becomes a row, flipping the dimention
+- The (i, j)th entry of the matrix is the (j, i)th entry of the transpose of the matrix
+- Denoted as $A^T$
+** Properties of [[id:c4062e3e-4992-4d7f-8621-984120945600][Transpose of a Matrix]]
+:PROPERTIES:
+:ID:       500dce9e-2036-4fe7-8652-c3b4a94e6576
+:END:
+- $(A^T)^T=A$
+- $(A + B)^T = A^T + B^T$
+- (cA)^T=cA^T
+- (AB)^T=B^T A^T$
+* Proof of Matrix Equality
+:PROPERTIES:
+:ID:       041eb1cb-cb5e-4efb-aa43-cf6755e64235
+:END:
+- Both [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] must have same size
+- Must have matching entries
+- Show both properties somehow to get the proof
+* Representing Solutions of [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear Systems]] as a [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]]
+:PROPERTIES:
+:ID:       2d595692-0b5d-4f84-95b7-e4c2da4b070f
+:END:
+- Simply write the solutions as a column matrix
+- Then, the product of the [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrices]] not including the non-coefficient constant (last column), to the solutions matrix, is equal to the column removed (non-coefficient constants)
+* Inverses of [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrices]]
+:PROPERTIES:
+:ID:       1fa53496-0920-4486-8a8f-3cbc26d118ed
+:END:
+- If we have $AX = B$, in matrix-world, how do you find $X$?
+- We want to find an "inverse" of $A$ such that $A A^{-1} = I$ and $A^{-1} A = I$ ($I$ is the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]])
+- A matrix $A$ is invertiable iff there exist a matrix $B$ such that $AB=BA=I$)
+- In this case, $B$ and $A$ are inverses of each other
+- A square matrix with no inverse is known as singular
+** Cancellation Laws
+:PROPERTIES:
+:ID:       94d4982d-bd1c-4d6e-a4cd-1aec31b2729e
+:END:
+- Let A be an invertible matrix
+- If $AB_1 = AB_2$ then $B_1 = B_2$
+- If $B_1A = B_2A$ then $B_1 = B_2$
+** Uniqueness of Inverses
+:PROPERTIES:
+:ID:       d7988dc7-802b-49bd-aa49-a71d161886ba
+:END:
+- If $B$ and $C$ are inverses of $A$ then $B=C$
+- The unique inverse of $A$ is denoted by $A^{-1}$
+** Inverse of a 2x2 Matrix
+:PROPERTIES:
+:ID:       0b76b425-f331-4cc4-9d6a-d7ff33e40bb7
+:END:
+- Let $A = \begin{bmatrix}a&b\\c&d\end{bmatrix}$
+- Then $A^{-1} = \frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}=\begin{bmatrix}\frac{d}{ad-bc}&\frac{-b}{ad-bc}\\ \frac{-c}{ad-bc}&\frac{a}{ad-bc}\end{bmatrix}$
+** Powers of an Inverse Matrix
+:PROPERTIES:
+:ID:       ce6fa8ea-505a-4a06-82ea-005afb2b91df
+:END:
+- $A^{-n}$ is $A^{-1}$ times itself $n$ times
+** Properties of Invertible Matrices
+:PROPERTIES:
+:ID:       a4fb6efc-f6c2-4484-a35f-27527827b839
+:END:
+- If A and B are invertible and c is not 0, then
+- $cA$ is invertible, $(cA)^{-1}=\frac{1}{c}A^{-1}$
+- $A^T$ is invertible and $(A^T)^{-1}=(A^{-1})^T$ ([[id:c4062e3e-4992-4d7f-8621-984120945600][Transpose of a Matrix]])
+- $A^{-1}$ is invertible and $(A^{-1})^{-1}=A$
+- $AB$ is invertible and $(AB)^{-1}=B^{-1}A^{-1}$
+  - More generally, $(A_1 A_2 A_3...A_n)^{-1} = A_n^{-1} A_{n-1}^{-1} A_{n-2}^{-1}...A_1^{-1}$
+- $A^r A^s = A^{r+s}$ ([[id:ce6fa8ea-505a-4a06-82ea-005afb2b91df][Powers of an Inverse Matrix]])
+- $A^n$ is invertible and $(A^n)^{-1}=(A^{-1})^n$
+* Elementary Matrices
+:PROPERTIES:
+:ID:       dee66fdd-85a5-403e-b7e6-65b062c19307
+:END:
+- Terms defined under [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrices]] are all valid under normal [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] as well
+** Applying [[id:bf26f901-fa17-4c98-b8bf-8d54d5a8f01d][Elementary Row Operations]] to [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]]
+- The operations are applied to the appropriate [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]], then the identity matrix is multiplied to the matrix you want to operate on
+- The effect is the same
 * Dimention
 :PROPERTIES:
 :ID:       d23c199d-d127-423a-8c56-48e59b71ed9c

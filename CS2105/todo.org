@@ -4,10 +4,16 @@
 #+TITLE:CS2105 TODO
 #+filetags: :TODO:CS2105:
 
+- links :: [[id:192A0605-67DE-4277-9FEF-5C16C81937F8][CS2105]]
+
+
 * Watch Lecture
 
 ** DONE Watch Lecture 2 <2022-08-15 Mon>
 
 * Assignments
 
-** TODO Assignment 0 <2022-08-26 Fri>
+** STRT Assignment 0 <2022-08-26 Fri>
+
+* Tutorial
+** TODO Tutorial Preparation 1 <2022-08-26 Fri>

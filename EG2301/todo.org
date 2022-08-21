@@ -3,3 +3,12 @@
 :END:
 #+title: EG2301 TODO
 #+filetags: :TODO:EG2301:
+
+- links :: [[id:f9db7063-b80c-4f2e-b13c-f17c545e7323][EG2301]]
+
+* Prereading
+** DONE Prereading Lesson 2 <2022-08-23 Tue>
+
+* Homework
+** STRT Speak with Project Designers <2022-08-23 Tue>
+*** Talk about what assumptions they had
