@@ -7,4 +7,5 @@
 - links :: [[id:3B2DB3CE-7EDA-4289-B06B-8882D7749848][CS2107]]
 
 * Tutorial
-** TODO Tutorial Preparation 1 <2022-08-25 Thu>
+** DONE Tutorial Preparation 1 <2022-08-25 Thu>
+** TODO Tutorial Preparation 2 <2022-09-01 Thu>

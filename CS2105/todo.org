@@ -10,10 +10,13 @@
 * Watch Lecture
 
 ** DONE Watch Lecture 2 <2022-08-15 Mon>
+** DONE Watch Lecture 3 <2022-08-22 Mon>
+** TODO Watch Lecture 4 <2022-08-29 Mon>
 
 * Assignments
 
-** STRT Assignment 0 <2022-08-26 Fri>
+** DONE Assignment 0 <2022-08-26 Fri>
 
 * Tutorial
-** TODO Tutorial Preparation 1 <2022-08-26 Fri>
+** DONE Tutorial Preparation 1 <2022-08-26 Fri>
+** TODO Tutorial Preparation 2 <2022-09-02 Fri>

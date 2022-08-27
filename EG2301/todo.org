@@ -10,5 +10,9 @@
 ** DONE Prereading Lesson 2 <2022-08-23 Tue>
 
 * Homework
-** STRT Speak with Project Designers <2022-08-23 Tue>
+** DONE Speak with Project Designers <2022-08-23 Tue>
 *** Talk about what assumptions they had
+** DONE Value Proposition <2022-08-30 Tue>
+*** DONE Technology Steps
+*** DONE Current/Future Reality Trees
+*** DONE Value Proposition Canvas or Statement

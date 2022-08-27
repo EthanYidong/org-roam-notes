@@ -5,6 +5,43 @@
 #+filetags: :CS2106:
 - links :: [[id:539C8BDD-D2EA-4131-8F31-F2C3F0BC3799][CS2106]]
 
+* QNA
+:PROPERTIES:
+:ID:       e1a1f936-5cb0-4093-a7da-5a375d9a8655
+:END:
+- Isn't the OS an overhead? Wouldn't it be better to do without?
+  - It is an overhead but it is worth it in almost all cases, sometimes it can actually save on some resources
+  - In some MCUs there is no OS because the computer only has one job
+- What if I only have one CPU? How can it run so many things?
+  - The OS can take over the CPU ("scheduled to run") and transfer control to other processes
+  - Context switching
+    - Register data is stored into the memory
+  - Hardware is designed for interrupts to be possible
+- What is system software?
+  - Software in the OS that assists and services the other applications running
+- How do you know how much space to allocate?
+  - Compiler checks which variables you want to store
+- Endianness
+  - Let a value $A=0xdeadbeef$
+  - Let's say we want to store this in the memory space: $0x100, 0x101, 0x102, 0x103$
+  - Little Endian:
+    - [[id:0a64e439-8706-4401-ab6a-71577970d7aa][MSB]] is stored in the lowest address
+|  Addr |  Val |
+|-------+------|
+| 0x100 | 0xde |
+| 0x101 | 0xad |
+| 0x102 | 0xbe |
+| 0x103 | 0xef |
+
+  - Big Endian:
+    - [[id:6a212478-657e-4121-a5f2-ad26de5cf35e][LSB]] stored in the lowest address
+|  Addr |  Val |
+|-------+------|
+| 0x100 | 0xef |
+| 0x101 | 0xbe |
+| 0x102 | 0xad |
+| 0x103 | 0xde |
+
 * Operating System
 :PROPERTIES:
 :ID:       D289CD47-38F4-481F-BED1-FEAF25C4D709
@@ -29,17 +66,6 @@
     - Software: virtual objects
     - "Common services": providing tools that allow interaction with the hardware
       - [[id:FAAB67BF-9DDB-4AC3-AA45-472F439686EB][Client-Server Model]]
-** QNA
-- Isn't the OS an overhead? Wouldn't it be better to do without?
-  - It is an overhead but it is worth it in almost all cases, sometimes it can actually save on some resources
-  - In some MCUs there is no OS because the computer only has one job
-- What if I only have one CPU? How can it run so many things?
-  - The OS can take over the CPU ("scheduled to run") and transfer control to other processes
-  - Context switching
-    - Register data is stored into the memory
-  - Hardware is designed for interrupts to be possible
-- What is system software?
-  - Software in the OS that assists and services the other applications running
 ** Examples
 - PC
   - Windows
@@ -244,7 +270,7 @@
 :END:
 - [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] also known as the kernel
   - Deals with hardware issues
-  - Provides system call interface
+  - Provides [[id:583386a9-eb89-491c-9de6-11cf052817da][System Call]] interface
   - Special code which allows user programs to use interrupt handlers and device drivers
   - Kernel code does not have access to system calls (of courses), normal libraries, or normal IO
     - "Code targets bare metal"
@@ -382,3 +408,227 @@
   - Arguments
   - Local variable storage
   - Register data
+
+* Least Significant Byte
+:PROPERTIES:
+:ID:       6a212478-657e-4121-a5f2-ad26de5cf35e
+:ROAM_ALIASES: LSB
+:END:
+- The "smallest contributer" to a byte
+- In 0xdeadbeef, it is 0xef
+
+* Most Significant Byte
+:PROPERTIES:
+:ID:       0a64e439-8706-4401-ab6a-71577970d7aa
+:ROAM_ALIASES: MSB
+:END:
+- The "largest contributer" to a byte
+- IN 0xdeadbeef, it is 0xde
+
+* Dynamically Alllocated Memory
+:PROPERTIES:
+:ID:       16e4886a-101b-4cf9-8e9d-f979234176b1
+:END:
+- When the scope of the data spans many procedure calls, you need dynamic allocation
+- Lifetime can be as long as needed
+- Languages:
+  - C: malloc()
+  - C++: new
+  - Java: new
+- Unlike local data: requires lifetime not tied to a process
+- Unlike global data: needs to be allocated at runtime
+- Solution: use heap
+  - Heap is on the same side as the data and text of the program, and grows towards the stack (On Linux, heap grows towards higher addresses, downward in diagrams, stack grows towards lower addresses, upward in diagrams)
+    - If they meet, too bad
+  - Allocate heap space requires variable sizing, with variable allocation or deallocation timing
+  - Create gaps during allocation
+* Process
+:PROPERTIES:
+:ID:       f77c8ce6-2418-40ea-9cf2-0759fe185dfb
+:END:
+- A process is a dynamic abstraction for an executing program
+- Includes
+  - Memory Context
+    - Code(Text), Data, Stack, Heap
+    - All programs think they are running at memory location 0, but the OS has abstracted it out and virtualized another location in the memory
+  - Hardware Context
+    - Registers, Program counter, Stack pointer, Stack frame pointer
+  - [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] Context
+    - [[id:82259759-8435-4702-872d-c5ba1e790a2d][Process Management]] Properties
+    - Resources used
+* Process Management
+:PROPERTIES:
+:ID:       82259759-8435-4702-872d-c5ba1e790a2d
+:END:
+- The [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] must be able to switch between programs
+- [[id:f77c8ce6-2418-40ea-9cf2-0759fe185dfb][Process]] vs code
+  - Code is just data on the hard disk
+  - Processes are running code with allocated resources
+** Process Identification
+:PROPERTIES:
+:ID:       1fa862c5-7ef2-4084-a884-b3f5e3f6f831
+:ROAM_ALIASES: PID
+:END:
+- An unique ID number to distinguish two processes
+- Issues:
+  - Are they reused?
+  - Does it limit the maximum number of processes?
+  - Are there reserved PIDs?
+** Process State
+:PROPERTIES:
+:ID:       3925466a-d2e6-4534-af63-0198ec7c2f90
+:END:
+- In multitasking, a [[id:f77c8ce6-2418-40ea-9cf2-0759fe185dfb][Process]] can be:
+  - Running
+  - Not running
+- The OS may run as a separate process or along with the current process
+- A [[id:f77c8ce6-2418-40ea-9cf2-0759fe185dfb][Process]] can also be Ready to run
+- Each process has an associated process state associated with it
+- [[file:media/5-state-process_1.png][5 State Process Model]]
+  - Create
+    - OS records information such as the memory context of the new process
+    - "Creation process"
+  - Admit
+    - Process initialized
+    - Ready to run
+  - Scheduled
+    - OS gives the CPU to the process
+  - Release
+    - The program or OS returns control back to the OS
+  - Wait
+    - The program signals that it needs an event to occur in order to continue
+  - Event occurs
+    - Pulls a process out of the blocked state into the ready state, meaning the event has occured and the program can continue execution
+  - Exit
+    - Program is done
+  - New
+    - Process just created
+    - May still be initializing
+  - Ready
+    - Process is waiting to run on the CPU
+  - Running
+    - Process is running on the CPU
+  - Blocked
+    - The program is waiting for an event, it is not ready
+    - Generally waiting for IO
+    - Could also be waiting for a child process
+  - Terminate
+    - The OS must clear out the allocated resources to be used elsewhere
+    - "Teardown process"
+** Multicore management
+:PROPERTIES:
+:ID:       e3f37058-ba20-498b-b7d7-a6b17fd9a4eb
+:END:
+- With only 1 core, there is 1 running process and 1 transition at one time
+- With m cores, there can be up to m running processes and multiple transitions
+- Assumption in [[id:15F9BA90-8952-47DC-A1E9-951A8D12D158][CS2106]]: SINGLE CORE
+** Process Queueing
+:PROPERTIES:
+:ID:       29fcb90f-8ae3-4196-b634-74412dc6b403
+:END:
+- [[file:media/process-queue_1.png][Process Queue]]
+- Two queues: ready queue and blocked queue
+** Process Creation
+:PROPERTIES:
+:ID:       9d9878a2-8dc4-44b5-93d8-f3d65c2f18b9
+:ROAM_ALIASES: Forking
+:END:
+- AKA "Forking"
+- To create a new [[id:f77c8ce6-2418-40ea-9cf2-0759fe185dfb][Process]],
+  - Clone yourself
+  - Lay out the new process using the instructions from the executable
+- In Linux, the fork and exec [[id:583386a9-eb89-491c-9de6-11cf052817da][Syscalls]] are used
+- [[file:media/fork-c_1.png][Fork = Clone]]
+  - The program state is exactly copied at the point in time after the fork call
+  - Only difference is the return value of fork. The parent process will get the PID of the child, the child gets nothing
+  - Use ~exec()~ to change to another executable
+  - Use copy-on-write to prevent unnecessary cloning of information
+- Parents should "reap" their child processes before exiting to cleanup
+  - In C, the function is ~wait()~
+- A process will only have one parent unless,
+  - Debugging: the child process could be a surrogate parent to another child (the debugger "attaches" to the process)
+  - Parent killed: orphan processes will attach to another child process
+  - Parent doesn't wait: child becomes a zombie process which isn't properly cleaned up
+** Process Tree
+:PROPERTIES:
+:ID:       07f63771-0d15-43cb-b1d6-a9d59c2bd3bd
+:END:
+- ~pstree~ command in Linux
+- Every process except a single parent process is a child of another process, giving rise to a tree
+- The "mother of all processes" is that parent, in some Linux systems, it is Systemd.
+** Process Control Block
+:PROPERTIES:
+:ID:       936f40d0-ff0e-4680-a31b-cd08d9ecf5e1
+:ROAM_ALIASES: PCB "Process Table Entry"
+:END:
+- A block of data containing the entire execution context of a [[id:f77c8ce6-2418-40ea-9cf2-0759fe185dfb][Process]].
+- Contains hardware, memory, and [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] contexts.
+** Process Table
+:PROPERTIES:
+:ID:       0a67a841-29cc-4614-a951-cf4e747e01f5
+:ROAM_ALIASES: PCB
+:END:
+- The kernel stores [[id:0a67a841-29cc-4614-a951-cf4e747e01f5][PCBs]] for all processes
+- Issues:
+  - Scalability: how many processes can you run at the same time?
+  - Efficiency: efficient access to PCBs vs space usage
+- [[file:media/process-table_1.png][Process Table]]
+* System Calls
+:PROPERTIES:
+:ID:       583386a9-eb89-491c-9de6-11cf052817da
+:ROAM_ALIASES: Syscalls
+:END:
+- An API to interact with the [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]]
+- Provides a way to call facilities or services existing in the kernel
+- *NOT* the same as a normal function call
+  - Requires [[id:79d9b1f3-2e86-41b0-a5a7-d56a31ada65d][Kernel Mode]]
+- OS Dependent
+  - UNIX: ~100 syscalls
+  - Windows: ~1000 syscalls
+- Languages
+  - C/C++ can almost directly use syscalls
+    - For example, ~getpid()~, or ~printf~ which calls ~write~ under the hood
+    - These functions are provided by GNU LIBC
+** Invoking System Calls
+:PROPERTIES:
+:ID:       b13d6413-611f-4c38-8930-7db3548bb23b
+:END:
+- User program invokes the library call
+- Library call places the system call number in the correct register
+- Library call executes a special instruction to enter [[id:79d9b1f3-2e86-41b0-a5a7-d56a31ada65d][Kernel Mode]]
+  - Instruction is usually called TRAP
+- In the kernel mode, the system call handler is determined based on the value in the register
+  - Uses the value as an index for searching for the appropriate handler
+  - Handled by a "dispatcher"
+- System call is executed
+- System call handler ends
+  - Return control to the calling library
+  - Switch back to user mode
+- Library call returns to the user program
+- [[file:media/syscall-process_1.png][Syscall Process]]
+* Handler Routines
+:PROPERTIES:
+:ID:       50712286-ce75-4c85-b77c-218514d2ab5e
+:END:
+- After an interruption:
+- [[file:media/interrupt_1.png][Interruption]]
+- The hardware will transfer control to the handler routine
+- Program execution may resume
+** Exceptions
+:PROPERTIES:
+:ID:       c2323338-f9ba-4ba0-bf10-1c0d94151b37
+:END:
+- Sometimes machine level instructions can cause errors
+- Examples:
+  - Divide by 0
+  - Illegal address access
+- The hardware will force a [[id:583386a9-eb89-491c-9de6-11cf052817da][Syscall]] execute the exception handler
+- Execution is synchronous, i.e. right after the error
+** Event Handler
+:PROPERTIES:
+:ID:       3e26cb31-e015-4a89-ba3e-4cdbcedefafa
+:END:
+- External events may interrupt a program
+- Usually hardware inputs
+- Interrupts are asynchronous, meaning that it happens outside of program execution flow
+- The interrupt handler will be called

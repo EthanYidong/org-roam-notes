@@ -158,14 +158,14 @@
 - Denoted as $P(B \mid A)$, the mid line can be read as "given"
 - $P(B \mid A) = \frac{P(A \cap B)}{P(A)}$
   - This formula essentially restricts the sample space to the event $A$
-- We also have $P(A \mid B) = \frac{P(A)P(B \mid A)}{P(B)}
+- We also have $P(A \mid B) = \frac{P(A)P(B \mid A)}{P(B)}$
   - This essentially reframes the previous formula using the multiplication rule
 * Independence
 :PROPERTIES:
 :ID:       6172717b-8761-40ed-a989-0f55eb10bcfa
 :END:
-- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are independent iff $P(A\cap B) - P(A)P(B)$
-- This implies that $P(B \mid A) = 0$. If $B \neq 0$, then two events are independent iff $P(B \mid A) = 0$ (and vice versa)
+- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are independent iff $P(A\cap B) = P(A)P(B)$
+- This implies that $P(B \mid A) = P(B)$. If $B \neq 0$, then two events are independent iff $P(B \mid A) = 0$ (and vice versa)
 - This is denoted as $A \perp B$
 * Mutually Exclusive
 :PROPERTIES:
@@ -189,3 +189,68 @@
 :ID:       a30eb7b7-e4af-4779-ab4a-5831f89bc095
 :END:
 - If we have a partition $A_1, A_2, A_3, ..., A_n$, then $P(A_k | B)= \frac{P(A_k)P(B\mid A_k)}{\sum_{i=1}^{n}P(A_i)P(B \mid A_i)}$
+* Random Variables
+:PROPERTIES:
+:ID:       d5961102-6352-4a14-957a-1928b891b7e3
+:END:
+- Let $S$ be the sample space for the outcomes of an experiment
+- A function $X$, which assignes a real number to every element of $S$ is called a random variable
+- Examples:
+  - Let $S={HH, HT, TH, TT}$
+  - This is the sample space for the experiment of flipping two coins
+  - Define the random variable $X$ "the number of heads flipped"
+  - $X(HH) = 2$
+- Uppercase letters denote the random variables themselves
+- Lowercase letters denote the specific values from an experiment
+** Probability with Random Variables
+:PROPERTIES:
+:ID:       183ffea3-b9ae-40e7-a1d1-331707c7379b
+:END:
+- $P(X = x) = P({s \in S : X(s) = x})$
+- $P(X \in A) = P({s \in S : X(s) \in A})$
+** Discrete Random Variables
+:PROPERTIES:
+:ID:       11246aed-52b0-4c98-b9f3-1337548e0502
+:END:
+- A discrete random variable has a range $R_x$ which is finite or countable infinite.
+- In this case, $P(X = x)$ is defined and positive when x is in the range of the discrete random variable
+** Continuous Random Variables
+:PROPERTIES:
+:ID:       fe324f54-728a-47e8-8777-1ff360b0457b
+:END:
+- A continuous random variable has a range $R_x$ which is an interval or a collection of intervals
+* Probability Distributions
+:PROPERTIES:
+:ID:       ef1c9700-1ee3-44d4-86bd-890b5cd912b9
+:ROAM_ALIASES: "Probability Density Function" "Probabiltity Mass Function"
+:END:
+- For [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variables]]:
+  - Let $f(x_i) = P(X = x_i)$ for $x_i \in R_x$ and $f(x_i) = 0$ otherwise
+  - $f(x)$ is the probability function or probability mass function.
+  - The collection of pairs $(x_i, f(x_i))$ is called the probability distrubtion of $X$.
+  - This function will satisfy:
+    - $f(x_i) \geq 0$ for all $x_i \in R_x$
+    - $f(x) = 0$ for all $x \notin R_x$
+    - $\sum^{\infty}_{i=1}{f(x_i)}=1$
+- For [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variables]]:
+  - For any $x \in \mathbb{R}$, we have $P(X=x)=0$
+  - The probability function or probability density function is defined to quantify the probability that $X$ is in a certain range.
+  - Denote this p.d.f. by f(x).
+  - This function will satisfy:
+    - $f(x) \geq 0$ for all $x \in R_x$, and $f(x) = 0$ otherwise
+    - $\int_{R_x} f(x)dx=1$
+    - For any a and b such that $a \leq b$, $P(a \leq X \leq b)=\int_{a}^{b}f(x)dx$
+* Cumulative Distributions
+:PROPERTIES:
+:ID:       cc1d3ee7-44ab-4d3e-b450-7805be27b50e
+:ROAM_ALIASES: CDF
+:END:
+- We define the cumulative distribution function (c.d.f) as $F(x) = P(X \leq x)$.
+  - This applies to both discrete and continuous [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]]
+- Using this, we can find the value $P(a \leq X \leq b) = P(X \leq b) - P(X < a) = F(b) - F(a-)$ where $a-$ is the largest value in $R_x$ that is less than $a$
+- For [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variables]]:
+  - $F(x)$ is just the sum of all $P(X = k)$ such that $k \leq x$
+- For [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variables]]:
+  - $F(x) = \int_{-\infty}^{x}f(t)dt$
+- This function satisfies:
+  - $0 \leq F(x) \leq 1$

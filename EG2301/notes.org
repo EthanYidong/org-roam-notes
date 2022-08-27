@@ -63,6 +63,43 @@
 - Don't stutter
 - Don't make unsubstantiated claims
 - Add energy
+- Apply critical thinking when evaluating other and your own presentations
+- Ensure consistency between your problem statements and goals, and ensure they carry throughout
+  - Don't oversell and regret
+- "Thank you for the question" - PC version of "that's a stupid question"
+  - No-go for the final
+- Address the audience
+- Be comfortable
+
+* Presentation Vent
+:PROPERTIES:
+:ID:       04c12175-c590-455a-a69e-c0efab50b030
+:END:
+- Wheelchair
+  - WTF is this Apple WWDC tier graph
+- Surgical Tools
+  - GIFS IN A POWERPOINT???? bro this is a business class not a special needs class for ADHD people
+  - The AI has ~90% guess, but only ~1% of people actually get infected
+    - Someone needs to take GEA again
+- Island-wide aircon
+  - They're literally just selling a dehumidifier?
+  - "Double whammy" is not a phrase I expected out of a presentation
+  - "No other alternatives" but dehumidifers exist??
+  - CPU cooling??
+  - They literally do not understand the school they just want us to suffer
+  - "How much does this cost?" "We don't know"
+- Eye testing
+  - Color blindness test like how tf do you not know if you're colorblind
+  - This infographic... "More than 50,000 people in japan are 100 or over" presented in 3 separate baloons??? And why do we care?
+    - Again with Apple tier wording "in ten years there will be one billion older people worldwide"
+  - Like quite slow
+  - Need a contact tonometer for "accurate" testing and proceeds to list all the downsides as if whatever the AI decides to poop out of its black box is any more accurate
+- Recycling
+  - They use canva only to fill only ~30% of their slide with text
+  - This is just 3D printing recycled plastic bottles?
+- Drain Cleaining
+  - Borderline plagiarism off their project group
+- Aircon but it's 🌈 solar powered 🌈
 
 * Tria
 :PROPERTIES:
@@ -130,3 +167,90 @@
   - How do these reduce or eliminate pain?
   - How do these produce gain?
 - Make a clear connection between your customer profile and your value map
+
+* Translating Technology Advancements to Benefits
+:PROPERTIES:
+:ID:       b75b809b-de84-4e41-ad4a-7d752214d005
+:END:
+- Process to value creation
+  - What are the step changes in the technology in the domain?
+  - What is the important performance factor?
+  - For each step change, what undesireable state (possibly an unarticulated problem or latent need) could be alleviated from the previous state?
+  - What was the exponential benefit derived?
+- MP3 player case study:
+  - MP3 was a patented technology which eared money by licensing it to companies who wanted to build their own devices
+  - The iPod was introduced in 2001
+  - What did the iPod actually provide, and what was the value proposition?
+  - Actually, how is Apple successful at all considering they are never first to the market?
+  - The pitch was "1000 songs in your pocket", for the iPod's higher storage
+  - MP3 players before the iPod didn't have that much more capacity
+    - The main selling point used was the ability to pick songs digitally
+  - Each step change (8 track to vinyl to cassettes (Walkman by Sony) to CDs to MP3s (iPod) to streaming) is associated with an iconic product
+    - The new product adds capabilities not seen before, but also creates new problems to be solved
+* Problem Context of Opportunity — Current vs Future Reality
+:PROPERTIES:
+:ID:       2b1c1bbd-d642-4c07-927d-81a17db3f8e4
+:END:
+- Validating your thesis
+  - In each technology step change, there is a problem or latent need worth solving. We call this the undesirable effect (UdE). What is the key UdE for the problem space?
+  - Do you know what the future desireable effect looks like?
+  - Where does you technology fit in the solution space of the future desired effect?
+** Current Reality Tree
+:PROPERTIES:
+:ID:       e65cfb7e-1ac0-4fb9-a832-7cc5eb764561
+:END:
+  - [[file:media/current-reality-tree_1.png][Current Reality Tree]]
+  - [[file:media/current-reality-tree-example_1.png][Current Reality Tree Example]]
+  - The undesired effect is observable
+  - Problems can cause others, be hidden or observed, negative feedback loops
+  - Sometimes causes may be products of design decisions in previous technological step
+    - For example, the MP3 player was forced to be small because the primary innovation of cassette players was to be a small device
+  - Questions to ask:
+    - What UdE are you targeting?
+    - Which problem are you solving?
+    - Does you technology solve this?
+    - Will solving this problem achieve the desired effect?
+** Future Reality Tree
+:PROPERTIES:
+:ID:       295f6aff-d993-45ec-8e2c-c83dfda29cca
+:END:
+- [[file:media/future-reality-tree_1.png][Future Reality Tree]]
+- [[file:media/future-reality-tree-example_1.png][Future Reality Tree Example]]
+- Questions to ask:
+  - How can you change the undesirable effects to a Desired Outcome?
+  - Identify where you can inject a better solution
+  - Would the sum total of the injections create the desired outcome?
+  - If not, you may have to add new injections.
+
+* Expectancy Theory
+:PROPERTIES:
+:ID:       c54e0db3-d8f3-47e1-8370-f930f5a5d09a
+:END:
+- Or, "The Philosophy of Shocking Dogs"
+- Seligman showed that dogs (people) conditioned to think that their actions cannot help their situation (learned helplessness)
+- Creating expectations that your work and actions can lead to desireable outcomes will help to motivate you to continue to work
+
+* Value Proposition (circa 2000s)
+:PROPERTIES:
+:ID:       c000ef6f-c766-47d2-ba11-1375ed1b84dd
+:END:
+- Value
+  - There is a "fair return" for the money
+  - There is a need, utility, and importance
+  - There is a desire to own or use
+  - There is a benefit to the user or payer or beneficiary
+- Proposition
+  - The product is offered for consideration
+  - What is being offered is true as claimed
+- Should be:
+  - Targeted
+  - Authentic
+  - Differentiated
+  - Needs focused
+  - Benefits articulate
+  - Realizable by customers
+- Should answer:
+  - Who are the intended customers?
+  - What do we want these customers to do?
+  - What compelling alternatives do they have?
+  - What resulting experiences/benefits will they derive, vs alternatives, if they do as we propose?

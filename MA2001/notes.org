@@ -409,15 +409,110 @@
   - More generally, $(A_1 A_2 A_3...A_n)^{-1} = A_n^{-1} A_{n-1}^{-1} A_{n-2}^{-1}...A_1^{-1}$
 - $A^r A^s = A^{r+s}$ ([[id:ce6fa8ea-505a-4a06-82ea-005afb2b91df][Powers of an Inverse Matrix]])
 - $A^n$ is invertible and $(A^n)^{-1}=(A^{-1})^n$
+** Properties Equivalent to Invertability
+:PROPERTIES:
+:ID:       5c656b0b-ab52-4d87-89b7-268c6aa6661c
+:END:
+- The following are all equivalent:
+  - $A$ is [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Invertible]]
+  - The linear system $Ax=0$ has the [[id:98073aba-eb13-435c-b020-535c499f2767][Trivial Solution]]
+  - The [[id:4546b235-26c0-4582-b238-594d24f1360e][RREF]] form of $A$ is an identity matrix.
+  - $A$ can be expresed by the product of [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrices]]
+
 * Elementary Matrices
 :PROPERTIES:
 :ID:       dee66fdd-85a5-403e-b7e6-65b062c19307
 :END:
 - Terms defined under [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrices]] are all valid under normal [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] as well
-** Applying [[id:bf26f901-fa17-4c98-b8bf-8d54d5a8f01d][Elementary Row Operations]] to [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]]
-- The operations are applied to the appropriate [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]], then the identity matrix is multiplied to the matrix you want to operate on
+- An elementary matrix is a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] which can be obtained by performing an [[id:bf26f901-fa17-4c98-b8bf-8d54d5a8f01d][Elementary Row Operation]] to an [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]].
+* Applying [[id:bf26f901-fa17-4c98-b8bf-8d54d5a8f01d][Elementary Row Operations]] to [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]]
+- The operations are applied to an [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] to obtain the appropriate [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrix]] E, then E is multiplied to the matrix you want to operate on (E \times A), in that order
 - The effect is the same
+- To multiply the ith row by k, take the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] and multiply the (i,i)th entry by k
+  - For example, to multiply the second row by 2:
+    - $\begin{bmatrix}1&0\\0&2\end{bmatrix}$
+  - Note: if $k \neq 0$ then the operation has an [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Inverse]] by swapping $k$ with $\frac{1}{k}$
+- To swap the ith row with the jth row, take the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] and swap the ith row and the jth row
+  - This is equivalent to setting the (i,i)th entry and the (j,j)th entries to 0, and setting the (i,j)th and (j,i)th entries to 1
+  - For example, to swap the first and second rows:
+    - $\begin{bmatrix}0&1\\1&0\end{bmatrix}$
+  - Note: this matrix is its own [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Inverse]]
+- To add a multiple of the ith row to the jth row, take the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] and add k to the (j,i)th entry
+  - For example, to add two times of the first row to the second row:
+    - $\begin{bmatrix}1&0\\2&1\end{bmatrix}$
+  - Note: to invert, swap $k$ with $-k$
 * Dimention
 :PROPERTIES:
 :ID:       d23c199d-d127-423a-8c56-48e59b71ed9c
 :END:
+
+* Counting Forms of a [[id:4546b235-26c0-4582-b238-594d24f1360e][RREF]]
+:PROPERTIES:
+:ID:       05bfdb22-3129-4e5c-ba9a-3b0913ceb454
+:END:
+- links :: [[id:064e0f67-745e-4d9f-b4f1-a178e273d2aa][MA2001 Exam]]
+
+- Two forms are different if they have a different set of pivot points.
+- Forms may have unknown values which are usually denoted by *, this still only contributes one to the count.
+- Need to consider cases with zero rows
+
+* Finding Inverses
+:PROPERTIES:
+:ID:       770cccac-1c27-432a-ab09-0510d927fd92
+:END:
+- Using [[id:5c656b0b-ab52-4d87-89b7-268c6aa6661c][Properties Equivalent to Invertability]]
+- Find [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrices]] $E_1...E_k$ such that $E_k E_{k-1}...E_1 A=I$
+- $E_k E_{k-1}...E_1 = A^{-1}$
+- To find these matrices, write the $n \times 2n$ matrix $(A | I)$
+- We know that $E_k E_{k-1}...E_1(A|I)=(I|A^{-1})$, so to find the matrices we do [[id:d75d83b9-0a43-4b94-b94e-1321627fa2b8][Gaussian-Jordan Elimination]] on $(A|I)$
+  - If we don't get a matrix of the form $(I|A^{-1})$ as the result, there is no inverse.
+
+* Singular Matrices
+:PROPERTIES:
+:ID:       19f4d185-2389-455b-afb7-7d341beb5453
+:END:
+** Properties of Singular Matrices
+:PROPERTIES:
+:ID:       7ad24bb1-4688-47e2-a3be-1c4551859e15
+:END:
+- If $A$ is singular, then $AB$ and $BA$ are singular
+
+* Elementary Column Operations
+:PROPERTIES:
+:ID:       962804fa-c96b-49f0-8da1-94fe6ba3e26d
+:END:
+- Instead of applying [[id:bf26f901-fa17-4c98-b8bf-8d54d5a8f01d][Elementary Row Operations]] by multiplying the [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrix]] on the left, you multiply on the right, it becomes a column operation.
+
+* Determinant
+:PROPERTIES:
+:ID:       f8c95c88-93e0-4d50-8e0c-6ef45ece0511
+:END:
+- A property of a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] $A$ with entries (a_{i,j})
+- Let $M_{ij}$ be the matrix generated by removing the ith row and jth column from $A$
+  - Then we have $det(A) = \begin{cases}a_{1,1}&\text{if } n = 1 \\ a_{1,1}A_{1,1}+a_{1,2}A_{1,2} + ... + a_{1,n}A_{1,n} &\text{if } n > 1\end{cases}$
+    - where $A_{i,j} = (-1)^{i+j}det(M_{i,j})$, known as the (i,j) cofactor of $A$
+** Determinant of a 2x2 matrix
+- $\begin{bmatrix}a&b\\c&d\end{bmatrix}$
+- $ad-bc$
+** Geometrical Interpretation
+- [[file:media/determinant-geometry-2d_1.png][Parallelogram]]
+- [[file:media/determinant-geometry-3d_1.png][Parallelepiped]]
+
+** Cofactor Expansions
+:PROPERTIES:
+:ID:       a79b27cd-982a-4846-9c5e-257caf4f17e9
+:END:
+- For any $i in 1...n, j in 1...n$,
+  - $det(A) =  a_{i,1}A_{i,1}+a_{i,2}A_{i,2} + ... + a_{i,n}A_{i,n}$
+  - $det(A) = a_{1,i}A_{1,i}+a_{2,i}A_{2,i} + ... + a_{n,j}A_{n,j}$
+- In other words, you can use any row or column to find the determinant of a matrix
+** Determinant of a [[id:c4062e3e-4992-4d7f-8621-984120945600][Transpose of a Matrix]]
+:PROPERTIES:
+:ID:       dfea781a-3f39-4b65-befe-9851ae0c141e
+:END:
+ - $det(A) = det(A^T)$
+** Determinant of Special Matrices
+:PROPERTIES:
+:ID:       e01768ae-a402-455e-b932-479297e23f46
+:END:
+- If there are two identical rows or two identical columns, then the determinant is 0.

@@ -81,7 +81,13 @@
 :PROPERTIES:
 :ID:       932259C5-7559-4B50-9133-5B00E0002256
 :END:
+- Information is accessible to the intended people
 
+** Authenticity
+:PROPERTIES:
+:ID:       ba3c205b-306c-4bb8-9803-5e0c9c1460f6
+:END:
+- Knowing and verifying who a message is from
 * Tradeoffs
 - Ease of use
 - Performance
@@ -403,3 +409,156 @@
 :ID:       1f2fd325-589c-442d-96be-eeba13e18217
 :END:
 - Attacker should not be able to predict the output of the encryption when a single character of the plaintext or the key is changed
+
+* Exhaustive Search
+:PROPERTIES:
+:ID:       13695deb-3d7e-40cc-8625-59c18476e61f
+:END:
+- All ciphers are vulnerable to exhaustive search (except OTP)
+- If the key length is 56 bits, there are $2^{56}$ possible keys
+- The time for an exhaustive search is thus:
+  - $2^{56}$ worst case
+  - $2^{55}$ average
+- Schemes can be stronger w.r.t exhaustive search based on how many keys must be searched to break the cipher
+- Some schemes have more efficient search schemes
+  - For example, in 2048-bit RSA, only about $2^{112}$ searches are required
+  - Thus we can say that 2048-bit RSA has the key strength of 112 bits
+
+* Modes-of-Operation
+:PROPERTIES:
+:ID:       01929c27-22c2-45b8-a539-47b2a9e6d39b
+:END:
+- Answers the question: "how do we encyrpt an arbitrarily long plaintext using a [[id:4a483da5-7655-4fe5-b67b-d724b2ee1d8d][Block Cipher]]?"
+- Extends the encryption from single to multiple blocks, securely
+** Electronic Codebook Mode
+:PROPERTIES:
+:ID:       c407cc60-cb13-401d-b3b1-0dbb8df36fa6
+:ROAM_ALIASES: "ECB Mode"
+:END:
+- Split the plaintext into blocks, apply the block cipher to each block with the *same key*
+- Insecure (leaks information about the plaintext)
+  - When two blocks contain the same data, their output ciphertext will be the same.
+    - This is an issue, for example, when encrypting an image which has consistant colors, since many blocks may be repeated.
+    - This issue arises because AES is deterministic.
+    - If we use a random [[id:52f7f8f6-2a6c-4286-866c-1d9e337237ec][IV]] instead, the algorithm becomes probabilistic
+    - This leads to possible solutsions such as including a random IV with each block
+      - This is secure but leads to large sizes (~ double the size of the plaintext)
+** Cipher Block Chaining Mode
+:PROPERTIES:
+:ID:       cecab1ed-7de2-4e50-98a1-2b98d0f543a5
+:ROAM_ALIASES: "CBC Mode"
+:END:
+- Building off the technique in [[id:c407cc60-cb13-401d-b3b1-0dbb8df36fa6][ECB Mode]]
+- Start with a single [[id:52f7f8f6-2a6c-4286-866c-1d9e337237ec][IV]], to be used only on the first block
+- For subsequent blocks, the IV is equal to the output ciphertext of the previous block
+- [[file:media/cbc_1.png][CBC]]
+- Issues
+  - If one block gets corrupted the rest are also corrupted
+  - No parallelization
+** Counter Mode
+:PROPERTIES:
+:ID:       5a35c2ef-ea90-48f0-911d-17014d43a05f
+:ROAM_ALIASES: "CTR Mode"
+:END:
+- Uses a [[id:4a483da5-7655-4fe5-b67b-d724b2ee1d8d][Block Cipher]], but acts closer to a [[id:82e3a5fd-e575-4bdd-8e78-90b18b84b031][Stream Cipher]]
+- Start with single [[id:52f7f8f6-2a6c-4286-866c-1d9e337237ec][IV]]
+- Increment it for each block
+- Apply the blcok cipher to the IV
+- [[id:11af3871-9e7c-4b46-92f5-8ee8acd06481][XOR]] the IV with the plaintext to get the ciphertext
+- Essentially the application of the block cipher to a sequence of increasing IVs will generate an acceptably random keystream
+- [[file:media/ctr_1.png][CTR]]
+* Meet-in-the-Middle Attack
+:PROPERTIES:
+:ID:       f9d73516-fc1c-4f71-9de4-8098c4f7e160
+:END:
+ [[id:0826056f-f8ab-48d8-b4a3-4d62b40119a4][2DES]] key length is 2 * 56 bits = 112 bits
+- But, is the strength really equivalent to 112 bits?
+- Meet-in-the-Middle is a [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]] attack
+- The problem: Given c and m, find the two keys used for 2DES encryption
+  - From the plaintext m, run encryption for all possible keys $k_1$
+  - Similarly, from the ciphertext c, run decryption for all possible keys $k_2$
+  - If a value occurs as the output of the encryption of m and as the output of the decryption of c, then the keys used in that pair is the key set used
+  - This reduces the [[id:13695deb-3d7e-40cc-8625-59c18476e61f][Exhaustive Search]] timing from $2^{112}$ to $2^{57}$
+    - In general, the search time for applying this attack will be just $2^{k + 1}$ assuming the encyrption is applied twice.
+* 2DES
+:PROPERTIES:
+:ID:       0826056f-f8ab-48d8-b4a3-4d62b40119a4
+:END:
+- [[id:4a483da5-7655-4fe5-b67b-d724b2ee1d8d][DES]] is not secure w.r.t. today's computing power
+- Apply it twice or more to increase key space
+- 2DES applies DES twice
+
+* 3DES
+:PROPERTIES:
+:ID:       9d765281-0e63-4521-9aa8-f39ae9589e00
+:END:
+- [[https://en.wikipedia.org/wiki/Triple_DES][3DES wikipedia]]
+  - Different keying options
+- Used before AES was fully developed
+- No efficient attacks currently, but is inefficient to use compared to AES.
+* Padding Oracle Attack
+:PROPERTIES:
+:ID:       0920a4ca-e492-441e-85d7-b6d7805782c3
+:END:
+- Capabilities:
+  - A ciphertext and [[id:52f7f8f6-2a6c-4286-866c-1d9e337237ec][IV]] ([[id:50B37D8A-18F7-49B5-B0D5-917D42BA7F02][Ciphertext Only]])
+  - Access to the padding oracle
+    - Accepts a ciphertext, and will tell the attacker if it is in the correct [[id:fe0cb2f0-461c-4f1a-befc-4d83585b0a8b][Padding]] format
+  - No knowledge of the padding oracle's secret key
+- Goal:
+  - Find the plaintext
+- [[id:cecab1ed-7de2-4e50-98a1-2b98d0f543a5][CBC Mode]] is vulnerable to this attack, specifically using [[id:1bbca30f-1ab3-42b7-8b58-c6a47168d989][PKCS #7]]
+  - By changing the IV to a new value IV', we can modify the padding at the end
+  - Assume there are 3 bytes of padding. We know the last bytes of the plaintext are 3, 3, 3.
+  - Set IV' such tht the last bytes are 4, 4, 4, 4. This is easy to derive for the last 3, and we use the oracle to find the correct value for the fourth-to-last
+  - [[file:media/padding-oracle_1.png][Padding Oracle]]
+  - After we find the correct IV', the corresponding plaintext tells us the original plaintext
+  - [[file:media/padding-oracle_2.png][Padding Oracle Derive Value]]
+  - Conceptually:
+    - We have a bit array M, which when [[id:11af3871-9e7c-4b46-92f5-8ee8acd06481][XOR]]'d with the original
+    - M will effectively be XOR'd with each block of the original plaintext during decryption to produce a modified plaintext x'.
+    - We set M such that we can figure out the last bits of x' by virtue of it being a valid PKCS #7 padded value
+    - From that, we can know the original plaintext x since we know x' XOR M = x.
+
+* Padding
+:PROPERTIES:
+:ID:       fe0cb2f0-461c-4f1a-befc-4d83585b0a8b
+:END:
+** PKCS #7
+:PROPERTIES:
+:ID:       1bbca30f-1ab3-42b7-8b58-c6a47168d989
+:ROAM_REFS: https://en.wikipedia.org/wiki/PKCS_7
+:END:
+- If the block size is $n$ bytes, but the last block only has $m$ values, then we need $p=n-m$ padding bytes
+- Each padding byte will be set to $p$
+
+* [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptography]] Pitfalls
+- Secure ciphers may be vulnerable if not implemented or adopted properly
+  - Don't reuse IV
+    - For example, IV derived from filename, but many files may share the same name ([[https://www.schneier.com/blog/archives/2005/01/microsoft_rc4_f.html][Microsoft]])
+  - Wrong IV choice
+    - IV choice should be psuedorandom, if choosing 1, 2, 3, 4, ... then it is vulnerable ([[https://resources.infosecinstitute.com/ssl-attacks/][BEAST]])
+  - Reusing OTP
+    - [[https://www.nsa.gov/portals/75/documents/about/cryptologic-heritage/historical-figures-publications/publications/coldwar/venona_story.pdf][Veona Story]]
+  - Secure RNG
+    - Random based on time may be predictable
+    - Use something like /dev/urandom for unpredictable values
+  - DIY
+    - Don't roll your own crypto
+    - It takes an expert to guarantee the security of a system, don't even think about modifying unless you know what you're doing
+      - There are many existing solutions based on your constraints (memory, computation power, speed)
+  - Reliance on Obscurity
+    - Kerckhoffs' Principle: "A system should be secure even if everything about the system, except the secret key, is a public knowledge" (Encryption engine be stolen by attackers, see the Enigma machines used by Nazis in WWII)
+    - It is easier to keep a key secret rather than the whole algorithm
+    - It is easier to change a key rather than the whole algorithm
+    - Standardized algorithms allow for easier communication
+    - Public scrutiny of open algorithms encourage better security
+    - Should we have security by obscurity?
+      - Examples against:
+        - RC4 ([[https://en.wikipedia.org/wiki/RC4][Wikipedia]]) was broken when a description was anonymously posted to a mailing group
+        - MIFARE Classic ([[https://en.wikipedia.org/wiki/MIFARE][Wikipedia]]) was found to be using a weak algorithm when reverse engineered
+      - Examples for:
+        - Username: it isn't secret information but should not be shared anyhow
+        - Computer network and storage settings: isn't secret but may give attackers an advantage
+        - Program used inside the smart card: isn't secret but makes it easier for attackers to identify vulnerabilities
+      - It is ok to use it as only *one* of the many security factors.

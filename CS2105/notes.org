@@ -127,6 +127,13 @@
 :ID:       dff0f2f7-2b30-48bd-8fb5-220db2076834
 :END:
 - 4th layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+- Runs in hosts:
+  - Sender side:
+    - Break message into segments and pass to the [[id:5d0b0590-fd98-4db1-89f1-f8f38bd11bb7][Network Layer]]
+  - Receiver side:
+    - Reassembles segments into message and pass to the [[id:89296f19-c817-43a7-8ef6-013e697d32ab][Application Layer]]
+  - In between:
+    - Check destination IP to decide routing
 ** Session Layer
 :PROPERTIES:
 :ID:       256fc6cf-5e0a-4cd0-bf54-c5b62c290dcc
@@ -155,11 +162,29 @@
 :ID:       458a323f-763b-458e-9ce8-7b7fb008a473
 :END:
 - [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]] protocol
+- Well ordered
+- [[file:media/transport-diagram-tcp_1.png][TCP]]
 * UDP
 :PROPERTIES:
 :ID:       be4e6279-b595-4fcf-befc-06d57273d988
 :END:
 - [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]] protocol
+- No ordering
+- Adds very little to [[id:c66bc940-0321-468b-86c1-21ae30542ab4][IP]]
+  - Multiplexing data on the sender into many packets
+  - Demultiplexing packets on the receiver into the original data
+  - Checksum
+- When a UDP receiver receives a UDP segment,
+  1. It checks the destination port from the segment
+  2. The UDP segment is sent to the socket for that port
+  3. IP Datagrams (with possibly different sources) with the same port are directed to the same UDP port
+- [[file:media/transport-diagram-udp_1.png][UDP]]
+- Checksum calculation:
+  - Treat the segment as a sequence of 16-bit integers
+  - Add all 16-bit integers in the sequence together
+  - Any carries are also added to the checksum in the lowest significant bit
+  - Get the 1s complement to find the checksum
+    - This is just flipping all the bits
 * Round Trip Timing
 :PROPERTIES:
 :ID:       be2e19da-7142-44a9-8707-6e6f3412d46f
@@ -170,7 +195,8 @@
 :PROPERTIES:
 :ID:       b8499489-7b0e-4fbe-a5aa-367e4cf88e81
 :END:
-- The application protocol for [[id:d81d3738-a08e-498a-ae6b-1118a0341de1][The Web]]
+- The [[id:89296f19-c817-43a7-8ef6-013e697d32ab][Application Layer]] protocol for [[id:d81d3738-a08e-498a-ae6b-1118a0341de1][The Web]]
+- Uses [[id:458a323f-763b-458e-9ce8-7b7fb008a473][TCP]] as the [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]]
 ** HTTP 1.0
 :PROPERTIES:
 :ID:       7f45ae07-bd4b-4322-8d0f-77a2c1fb90e2
@@ -195,7 +221,12 @@
   - Time taken to send data is based on [[id:86A82389-CC39-4780-8D82-E05918A03EFF][Packet Delay]]
   - Timing across all messages = $\text{RTT} \times (\text{Number of Objects} + 1) + \text{Data Time} + \text{Idle Time}$
   - Note that the speed is often given in bits per second, while size is given in bytes.
-* IP Address
+* IP
+:PROPERTIES:
+:ID:       c66bc940-0321-468b-86c1-21ae30542ab4
+:END:
+- [[id:5d0b0590-fd98-4db1-89f1-f8f38bd11bb7][Network Layer]] service of the internet
+* [[id:c66bc940-0321-468b-86c1-21ae30542ab4][IP]] Address
 :PROPERTIES:
 :ID:       11fd492e-05ef-4acd-818c-60fdcc28ae46
 :END:
@@ -210,7 +241,7 @@
   - Hostname: www.example.org
   - [[id:11fd492e-05ef-4acd-818c-60fdcc28ae46][IP Address]]: 93.184.216.34
 - Hostnames are easier to remember, but computers can only use IP addresses to communicate
-- DNS allows computers to find the IP address associated with a host name
+- DNS is an [[id:89296f19-c817-43a7-8ef6-013e697d32ab][Application Layer]] protocol which allows computers to find the IP address associated with a host name
 - These calls are made by browser when attempting to visit a [[id:d81d3738-a08e-498a-ae6b-1118a0341de1][Website]]
 - Can lookup using nslookup or dig
   - nslookup <domain>
@@ -310,3 +341,98 @@
   - A connection must first be established
   - Server creates a socket for each client
   - [[file:media/tcp-diagram_1.png][TCP Diagram]]
+  - Note: In the [[id:1F24CF84-A241-4317-AC6D-C4C4683F34DF][Exam]], make sure to count a +1 for the welcome socket
+* Bytes vs Bits
+:PROPERTIES:
+:ID:       143f2320-d086-44d1-bcd3-41332fde6116
+:END:
+- If the b is lowercase (b, Kb, Mb, ...), then it refers to bits
+- If the B is uppercase (B, KB, MB), then it refers to bytes
+* Topology
+:PROPERTIES:
+:ID:       f7c55006-b0a3-4842-b668-0be675ac1aab
+:END:
+- Minimal:
+  - Tree topology
+    - Organized in a tree
+  - Chain topology
+    - Special case of tree topology where every node has at most one child
+  - Star topology
+    - Special case of tree topology where one node has all the children
+- Maximal:
+  - Mesh
+    - Fully connected
+* Reliable Data Transfer
+:PROPERTIES:
+:ID:       074a6a63-d7ce-4112-972f-58fa072d2a0e
+:ROAM_ALIASES: RDT
+:END:
+- "Sending data reliably over the internet is hard"
+- Question: how do we build a reliable [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]] protocol on top of an unreliable [[id:5d0b0590-fd98-4db1-89f1-f8f38bd11bb7][Network Layer]]?
+- The network may:
+  - Corrupt packets
+  - Drop packets
+  - Reorder packets
+  - Deliver packets after an arbitrary delay
+- Our reliable transport service should:
+  - Guarantee packet delivery and correctness
+  - Deliver packets in the same order that they are sent
+- [[file:media/rdt-protocol_1.png][RDT Protocol]]
+* Toy [[id:074a6a63-d7ce-4112-972f-58fa072d2a0e][RDTs]]
+:PROPERTIES:
+:ID:       111511f6-3caf-4fd8-848e-414646b24187
+:END:
+- [[file:media/toy-rdt_1.png][Chart]]
+** Toy RDT 1.0
+- Assume that the channel is 100% reliable
+- We just have to simply send the packets as is
+- We get this [[id:6ec79c40-1a4a-4f24-b947-dc6cb3611532][FSM]]:
+- [[file:media/toy-rdt-1.0_1.png][Example]]
+** Toy RDT 2.0
+ - Assume that the channel may flip bits
+ - Other than that, the channel is 100% reliable
+ - We can detect errors with a checksum
+ - Use ACK (acknowledge) and NAK (negative acknowledge) on the receiver side to tell the sender whether or not the packet was ok
+ - This is a [[id:f4930941-2e92-4fff-a7b3-4ee7f8583e60][Send-and-Wait Protocol]]
+ - [[file:media/toy-rdt-2.0_1.png][Demo]]
+ - We get this [[id:6ec79c40-1a4a-4f24-b947-dc6cb3611532][FSM]]:
+ - [[file:media/toy-rdt-2.0_2.png][Example]]
+ - Flaw: what happens when the ACK or NAK is corrupted?
+   - Can the sender just resend the packet if it receives garbled feedback?
+** Toy RDT 2.1 (2.0 w/ Packet Sequence #)
+- Include the sequence number to each packet
+- Receiver can discard packets that have already been received
+- [[file:media/toy-rdt-2.1_1.png][Demo 1]]
+- [[file:media/toy-rdt-2.1_2.png][Demo 2]]
+- We get this [[id:6ec79c40-1a4a-4f24-b947-dc6cb3611532][FSM]]:
+- [[file:media/toy-rdt-2.1_3.png][Example Sender]]
+- [[file:media/toy-rdt-2.1_4.png][Example Receiver]]
+** Toy RDT 2.2 (2.1 w/out NAK)
+- Instead of sending NAK for corrupted packets, instead send ACK for the previous correct packet
+- [[file:media/toy-rdt-2.2_1.png][Demo]]
+** Toy RDT 3.0
+- Assume that the channel may flip bits, lose packets, and may have arbitrarily long delay
+- Will not reorder packets
+- How do we detect packet loss, since the delay can be arbitrary?
+- Set a reasonable timeout value to trigger an assumption that the packet is lost, so the sender will resend if an ACK is not received in time
+- If the packet is delayed and timeout is triggered, this means that a duplicate will have been sent.
+- [[file:media/toy-rdt-3.0_1.png][Demo 1]]
+- [[file:media/toy-rdt-3.0_2.png][Demo 2]]
+- We get this [[id:6ec79c40-1a4a-4f24-b947-dc6cb3611532][FSM]]:
+- [[file:media/toy-rdt-3.0_3.png][Example Sender]]
+- Receiver is about the same as Toy RDT 2.1
+-
+
+* Finite State Machines
+:PROPERTIES:
+:ID:       6ec79c40-1a4a-4f24-b947-dc6cb3611532
+:ROAM_ALIASES: FSM
+:END:
+- A finite state machine is defined by a finite set of states and a set of transitions between states
+- [[file:media/example-fsm_1.png][Example]]
+
+* Send-and-Wait Protocol
+:PROPERTIES:
+:ID:       f4930941-2e92-4fff-a7b3-4ee7f8583e60
+:END:
+- This is a protocol which requires senders to wait for a response after each packet is sent.
