@@ -545,6 +545,7 @@
   - Use copy-on-write to prevent unnecessary cloning of information
 - Parents should "reap" their child processes before exiting to cleanup
   - In C, the function is ~wait()~
+  - NOTE: ~wait()~ does not block if there are no child processes to wait for ([[id:15F9BA90-8952-47DC-A1E9-951A8D12D158][CS2106 Exam]])
 - A process will only have one parent unless,
   - Debugging: the child process could be a surrogate parent to another child (the debugger "attaches" to the process)
   - Parent killed: orphan processes will attach to another child process
@@ -632,3 +633,201 @@
 - Usually hardware inputs
 - Interrupts are asynchronous, meaning that it happens outside of program execution flow
 - The interrupt handler will be called
+* Concurrent Execution
+:PROPERTIES:
+:ID:       5f016241-05b6-4c76-b61f-a06964ed1e88
+:END:
+- Concurrent processes are processes that multiple processes can progress in execution at the same time
+- Could be virtual parallelism: illusion of process running at the same time
+  - AKA [[id:adfa430b-a10a-4e21-8025-cd95f5a8ecb2][Timeslicing]]
+- Could be physical parallelism: processes are actually running at the same time on multiple CPUs
+  - AKA [[id:adfa430b-a10a-4e21-8025-cd95f5a8ecb2][Timeslicing]] on multiple processors
+
+* Timeslicing
+:PROPERTIES:
+:ID:       adfa430b-a10a-4e21-8025-cd95f5a8ecb2
+:END:
+- [[file:media/interleaved-execution_1.png][Interleaved Execution]]
+- Sharing a CPU's time amongst many processes
+- Every time you switch processes, the [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] needs to decide which [[id:f77c8ce6-2418-40ea-9cf2-0759fe185dfb][Process]] to switch to
+  - Involves an overhead with context switching
+- Problems
+  - What happens when you have more processes to run than you do CPUs? Then how do you choose which to run?
+    - This is known as the scheduling problem
+    - Scheduler: the part of the OS which makes the decision
+    - [[id:330baf6a-5e30-4f41-8847-f9eddf19f71e][Scheduling Algorithm]]: the algorithm used by the scheduler
+** Scheduling Algorithm
+:PROPERTIES:
+:ID:       330baf6a-5e30-4f41-8847-f9eddf19f71e
+:END:
+ - Need to consider the amount of CPU time required by each process
+ - Divide the processes into two classes:
+   - CPU-Activity, most time is spent doing calculations
+   - IO-Activity, most time is spent waiting for IO
+ - Type of process:
+   - Batch, low priority because no user interaction is required, no responsivity requirements
+   - Interactive, should be responsive to user
+   - Real time processing, has a deadline for something to be completed
+ - The algorithm may be influenced by the current processing enviroment, but it has to balance between conflicting criteria:
+   - Fairness, each process should get enough CPU time, no process should be starved
+     - Applies per user or per process
+   - Utilization, all parts of the computing system should be constantly in use
+ - Two types of scheduling policies:
+   - Non-preemptive (cooperative)
+     - Process will stay scheduled until it blocks or yields to other processes
+   - Preemptive
+     - Process will be evicted based on its time quota, it will be removed whether or not it blocks once the timer is up.
+     - The OS will come in even when there is only one process
+*** Scheduling for Batch Processing Systems
+- Criteria:
+  - Turnaround time (finish time - arrival time)
+  - Throughput (how many tasks per time)
+  - Makespan (total time for all tasks, only applicable when the set of tasks is fixed)
+  - CPU utilization (percent of time when CPU is working on tasks)
+- Generally easier to implement and understand
+  - First come first serve
+    - Tasks stored in a Queue data structure based on arrival time
+    - Run the first task in the queue to block, yield, or completion
+    - Place the task to the back of the queue if it is not completed
+    - Guarantees no starvation as the number of tasks left to run before a process gets the CPU is always decreasing
+    - Averge waiting time can be further optimized by reorganizing
+      - Convoy Effect
+      - If I/O-bound tasks are queued after CPU-bound tasks, then the I/O bound tasks are idling when they could be waiting on I/O if given a short amount of time to run
+  - Shortest job first
+    - Select tasks with smallest CPU time
+    - May not be known, sometimes musst be guessed at
+      - Common approach is exponential average
+        - $P_{n+1}=wA_n +(1-w)P_n$
+        - Where P = prediction, A = actual, and w is how we weight the actual vs the prediction
+    - Good for minimizing average wait time
+    - May starve long jobs if shorter jobs are consistently being added
+      - In fact, being able to not starve the longest job requires the CPU to be exacty at or less than full utilization compared to the volume of tasks coming in
+  - Shortest remaining time
+    - Variation of shortest job first with preemtion
+    - If a new job is added with a shorter remaining time, the current process may be evicted to run it.
+    - Allows short jobs arriving later to not have to wait for longer jobs
+*** Scheduling for Interactive Systems
+- Criteria:
+  - Response Time (time between requests and response)
+  - Predictability (low variance in wait time)
+- Utilizes preemtive scheduling by creating timer based interrupt to hand control over to the OS
+- Algorithms:
+  - Round Robin
+    - All tasks are stored in a FIFO queue
+    - When each task blocks, yields, or completes, we evict it from the CPU
+    - The task is moved to the back of the queue if it is not completed
+    - Guarantees each tasks can get some CPU time every $q(n-1)$ units, where q is the [[id:1fd3da26-d080-477b-b2bd-da4a0c914a09][Time Quantum]] and n is the number of tasks
+    - [[id:b3ef1808-f8f2-4f6b-89a3-c9dfb5046182][ITI]] and [[id:1fd3da26-d080-477b-b2bd-da4a0c914a09][Time Quantum]] must be carefully chosen
+  - Priority Scheduling
+    - Some tasks are more important than others
+    - Assign priority to each process
+      - (Always clarify whether low number or high number have higher priority)
+    - Select tasks with higher priority to run first
+    - May starve low priority tasks
+    - Possible solutions:
+      - Decrease the priority every time quantum
+      - Don't consider the process for the next round of scheduling
+    - Hard to guarantee the amount of CPU time given to a process using priority
+    - [[id:a0007235-a2a1-4d4f-99f7-99fbe63ededc][Priority Inversion]]
+  - Multilevel Feedback Queue
+    - How do we schedule without perfect knowledge?
+    - Learn along the way
+    - Minimize both Response time for IO bound process, and turnaround time for CPU bound process
+    - Basic Rules:
+      - If Priority(A)>Priority(B), then A should run
+      - If Priority(A)=Priority(B), then they run in round robin
+    - Priority setting/changing
+      - New jobs given maximum priority
+      - If a job fully uses the [[id:1fd3da26-d080-477b-b2bd-da4a0c914a09][Time Quantum]], then its priority is reduced
+      - Otherwise, no change
+      - In some systems, when tasks are dropped to the lowest priority then some are re-elevated
+  - Lottery Scheduling
+    - Give lottery ticket for each process for each resource
+    - For each scheduling decision, randomly choose one ticket to grant that process
+    - In the long run, a process with X% of the tickets for a resource can use the resource X% of the time
+    - Lottery tickets can be distributed to children
+    - Important process given more tickets
+    - Each resource has its own set of tickets
+** Scheduling Process
+:PROPERTIES:
+:ID:       6809f87c-1a74-4932-9d98-141bd54e191b
+:END:
+- When schedule is triggered:
+  1. [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] decides if context switching is necessary
+  2. The OS picks a suitable process to run next, based on the [[id:330baf6a-5e30-4f41-8847-f9eddf19f71e][Scheduling Algorithm]]
+  3. The OS sets up the context for the [[id:f77c8ce6-2418-40ea-9cf2-0759fe185dfb][Process]]
+  4. Process is allowed to run
+* Interval of Timer Interrupt
+:PROPERTIES:
+:ID:       b3ef1808-f8f2-4f6b-89a3-c9dfb5046182
+:ROAM_ALIASES: ITI
+:END:
+- How long between when the [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] is handed control.
+- Generally 1-10ms.
+- Decreasing it increases overhead
+* Time Quantum
+:PROPERTIES:
+:ID:       1fd3da26-d080-477b-b2bd-da4a0c914a09
+:END:
+- How long each task is given to run on the CPU.
+- Generally 5-100ms.
+- Decreasing it increases overhead but increases responsiveness
+* Priority Inversion
+:PROPERTIES:
+:ID:       a0007235-a2a1-4d4f-99f7-99fbe63ededc
+:END:
+- Occurs when a resource is locked by a lower priority process, which is then supersceded and unable to unlock the resource
+- Then, high priority tasks which needs that resource cannot run and lower priority tasks will be run instead
+* Isolation vs Cooperation
+:PROPERTIES:
+:ID:       805bb2b2-1af9-46fe-9af1-04b2c13e0f4d
+:END:
+- Under the OS, processes run as if it is the only process in the system
+- Sometimes processes must cooperate and send data
+  - Share nothing (client server model)
+  - Shared memory (may be prone to abuse or accidents)
+- Solution: use [[id:5eb73086-a3c9-43f2-98a6-c864225b6ef3][IPC]]
+* Inter-Process Communication
+:PROPERTIES:
+:ID:       5eb73086-a3c9-43f2-98a6-c864225b6ef3
+:ROAM_ALIASES: IPC
+:END:
+- Mechanisms introduced in Unix System V
+  - Shared memory
+  - Message passing
+  - Semaphores
+** Shared Memory
+:PROPERTIES:
+:ID:       25e99b54-148b-41c1-9a5e-105bf59c80fd
+:END:
+- A process creates a shared memory region
+- That shared memory region is appended to another process' memory
+  - The virtual address for the memory region is not guaranteed to be the same across processes
+- Processes can now write and read to the memory in order to communicate
+- OS only needs to manage the creation and sending of shared memory region to other processes, rest is done by processes
+- Pros:
+  - Efficient (OS has very little to do)
+  - Easy to Use (behaves like normal memory)
+- Cons:
+  - Synchronization: requires locks and ordering
+  - Implementation is harder
+** Message Passing
+:PROPERTIES:
+:ID:       c6ff3ba9-c369-40d7-8123-d2418df8930b
+:END:
+- Simply give a function which allows processes to send messages to other processes
+- Message first stored in OS memory space
+- Processes must know some way to identify the other
+  - Direct communication: sockets
+    - Sender and receiver knows the socket / name of the other
+    - One link per pair of processes
+    - Need to know the ID of the other party
+  - Indirect communication: mailbox/port
+    - Processes deposit and read messagefs from mailboxes
+    - Mailbox can be shared
+- Can block (synchronous) to wait for a message, or not (asynchronous) and just check if the message is there to receive.
+- Pros:
+  - Synchronization: each process knows that a message has actually been sent, whereas in shared memory each process may be unsure if the message has been sent
+  - Portable: Conceptually can be extended to different environments, such as over a network
+- Cons:
+  - Inefficient: needs OS intervention and copying of messages

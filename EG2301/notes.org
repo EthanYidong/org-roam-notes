@@ -100,6 +100,18 @@
 - Drain Cleaining
   - Borderline plagiarism off their project group
 - Aircon but it's 🌈 solar powered 🌈
+- Fun Farm
+  - This is just farmville but more expensive and worse for the environment
+
+* Presentation Notes
+:PROPERTIES:
+:ID:       7d80f5cb-adc2-4e11-9847-72bd0c77556a
+:END:
+- Better highlighting on [[id:c000ef6f-c766-47d2-ba11-1375ed1b84dd][Value Proposition]]
+  - Less technical
+  - Clearly demonstrate the value of your product
+- CRT and FRT boxes should be properly labeled
+- Tech progress should be ideally limited to a single factor
 
 * Tria
 :PROPERTIES:
@@ -254,3 +266,188 @@
   - What do we want these customers to do?
   - What compelling alternatives do they have?
   - What resulting experiences/benefits will they derive, vs alternatives, if they do as we propose?
+
+* Industry Structure Analysis
+:PROPERTIES:
+:ID:       c85f75d5-95b7-4537-89d1-919ab92b55d2
+:END:
+** Making Choices
+- Innovation enables multiple choices in value propositions
+  - Your ideas and designs can be used for many different purposes, how do you decide which is the most viable?
+- Positioning
+  - What business are you in?
+  - What products are you offering?
+  - Who are you propositioning?
+  - What benefits are you offering?
+- Internal Choices
+  - Processes, shared services, and infrastructure
+  - People and Partners
+  - Organization and culture
+  - Customer engagement process
+- Which industry should you be in?
+** Doing Analysis
+- *Which industry has the best opportunity gap to apply*
+  - Your core technology is supposed to solve an entrenched problem
+- Tools:
+  - Industry outlook
+  - Trend analysis
+  - PESTLE analysis
+  - Value Chain analysis
+  - Technology Adoption Rate
+  - Risk appetite
+  - Profit margins
+  - Growth rates
+  - Impact analysis from trends
+  - 5 force field
+  - Competetive analysis
+  -
+- But first...
+  - Set boundaries:
+    - Define industry along 4 dimensions: what, who, where, how?
+  - This clarifies many different possible roles:
+    - Industry/rivals
+    - Potential entrants
+    - Substitutes
+    - Complementors
+    - Suppliers
+    - Buyers
+- Evaluate attractiveness
+  - How easy or hard is it to make money in the industry?
+** Tools
+*** Market Size
+:PROPERTIES:
+:ID:       4872de2d-c683-4bf0-967f-0fa8c9a50f76
+:END:
+- TAM (Total Available Market): aka how large is the max possible size of your market, including every single person you could expand to
+- SAM (Serviceable Available Market): aka how large is the currently possible size of your outreach given your current conditions
+- Target Market: aka how large is the market that you are going to market to
+- Market Share: aka how much of your target market you will be able to serve
+*** Industry Growth Cycle
+:PROPERTIES:
+:ID:       4ebd101b-cb8c-4ffa-b973-0c53483cbfb0
+:END:
+- [[file:media/industry-growth-cycle_1.png][Industry Growth Cycle]]
+- A cycle that generally applies across many different industries
+- Used to chart the rise and fall of each company/industry
+- Figure out where the industry you want to join is on the cycle
+- Don't join a sunset industry, which is on the decline
+*** Return On Invested Capital
+:PROPERTIES:
+:ID:       78d9e0cc-7a18-46b7-b393-5f8e6e58d786
+:ROAM_ALIASES: ROIC
+:END:
+- How much an invester would earn per dollar invested in an industry
+*** Porter's Five Force Field
+:PROPERTIES:
+:ID:       5e3cfdc4-df74-4564-be61-8c0a32154693
+:END:
+- Five key forces in every industry
+  - Rivalry (other companies)
+  - Bargaining power of buyers
+  - Bargaining power of suppliers
+  - Threat of Substitute products
+  - Threat of new entrants
+- [[file:media/five-force-field_1.png][Five Force Field]]
+*** PESTLE Analysis
+:PROPERTIES:
+:ID:       59e5ad68-f026-4ef6-bc9d-2b75aacdb144
+:END:
+- Addresses these factors:
+  - Political
+  - Economical
+  - Social
+  - Technological
+  - Legal
+  - Environmental
+- [[file:media/pestle_1.png][PESTLE]]
+*** GE-McKinsey 9 Block Matrix
+:PROPERTIES:
+:ID:       c8826763-304b-4c1b-83c6-3427d5e18443
+:END:
+- Charts industry attractiveness against competitive strength
+- [[file:media/mckinsey-9-block-matrix_1.png][McKinsey 9-Block Matrix]]
+*** Competition Perceptual Diagram
+:PROPERTIES:
+:ID:       bee9eb85-d35a-4fd4-bd2c-701c3714ac66
+:END:
+- The final product after applying all the other tools of Industry Analysis
+- Position competetors along three factors to chart out everything in the industry
+- [[file:media/competition-perceptual-diagram_1.png][Competition Perceptual Diagram]]
+
+* Library Research
+:PROPERTIES:
+:ID:       42c336ba-fccf-4d22-b00d-1b0bc34de87d
+:END:
+- Access library from [[https://nus.edu.sg/nuslibraries][NUS Libraries]]
+** Databases
+- Suggested databases mapped to the [[id:71d0000b-2674-4625-98d5-e7ce8405a6a2][Business Model Canvas]]:
+  - [[file:media/business-model-canvas-db_1.png][Databases]]
+- Use help pages to learn more about how to search and what information is included
+*** Frost & Sullivan
+:PROPERTIES:
+:ID:       f4f9178d-9678-434c-94b9-7fdc5acf3fa9
+:END:
+- Many technical aspects of each industry
+- Use Advanced Search
+- Make sure to select all subcategories for each sector
+- Citations are given in APA format, but ideally you should change it to [[id:6d82cf2b-191f-47c0-888b-84e10ff31d2d][IEEE Citations]]
+*** Passport
+:PROPERTIES:
+:ID:       2152cd54-0f8b-4e3a-bb15-59d57be4984e
+:END:
+- Information such as market shares, market sizes, and more
+- Use Advanced Search
+- Choose industries by going to choose category > industries
+- Data Processing
+  - Convert currency to a single currency (ideally use year-on-year exchange rates)
+  - Change data type to appropriate type
+  - Select per capita
+- Also provides analysis on industries, by region
+- Find data on the economy of a country ([[id:59e5ad68-f026-4ef6-bc9d-2b75aacdb144][PESTLE Analysis]])
+*** D&B Hoovers
+:PROPERTIES:
+:ID:       8890ac53-7166-406c-ade9-dc071598612c
+:END:
+- Company profiles
+- Company family trees
+- Contacts
+- News
+  - Can also find through Factiva
+- Conceptual Search
+- No easy citation, no persistent URL, no publish date
+*** PatSnap
+:PROPERTIES:
+:ID:       06960b92-408a-4938-814c-3c5e83b94ce0
+:END:
+- Patent Information
+- Country and importance of patents
+*** Statistica
+:PROPERTIES:
+:ID:       8e69e71e-0003-46ef-a3e5-a6ceec65c4dc
+:END:
+- Statistics about industries
+** Citations
+:PROPERTIES:
+:ID:       184428f7-d97b-4621-a9f9-5649a5c91a41
+:END:
+- Why?
+  - Acknowledge other's ideas
+  - Avoid plagiarism
+  - Easily locate sources
+  - Robustness in research
+- How?
+  - Use [[https://www.zotero.org][Zotero]] or [[http://endnote.com][Endnote]]
+*** IEEE Citations
+:PROPERTIES:
+:ID:       6d82cf2b-191f-47c0-888b-84e10ff31d2d
+:END:
+- Preferred citation style for engineering
+- [[https://libguides.nus.edu.sg/citation/ieee][Guide]]
+- In text citations, you will insert [#(, #, #, ...)]
+- The #s are in reference to the #s in your reference list
+
+* Business Model Canvas
+:PROPERTIES:
+:ID:       71d0000b-2674-4625-98d5-e7ce8405a6a2
+:END:
+- A canvas with 9 areas

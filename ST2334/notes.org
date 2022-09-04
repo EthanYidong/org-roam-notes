@@ -189,6 +189,7 @@
 :ID:       a30eb7b7-e4af-4779-ab4a-5831f89bc095
 :END:
 - If we have a partition $A_1, A_2, A_3, ..., A_n$, then $P(A_k | B)= \frac{P(A_k)P(B\mid A_k)}{\sum_{i=1}^{n}P(A_i)P(B \mid A_i)}$
+- Special case: $P(A|B)=\frac{P(A)P(B|A)}{P(A)P(B|A)+P(A')P(B|A')}$
 * Random Variables
 :PROPERTIES:
 :ID:       d5961102-6352-4a14-957a-1928b891b7e3
@@ -254,3 +255,61 @@
   - $F(x) = \int_{-\infty}^{x}f(t)dt$
 - This function satisfies:
   - $0 \leq F(x) \leq 1$
+* Expectation of [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]]
+:PROPERTIES:
+:ID:       c49ef5b5-51fb-434b-a145-fbd8eebabae0
+:END:
+- "Mean" or "expected value" of $X$
+- Denoted as $E(X)$ or $\mu_X$
+- For [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variables]]:
+  - $E(X) = \sum_{x_i \in R_X} x_i f(x_i)$
+- For [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variables]]:
+  - $E(X) = \int_{-\infty}^\infty xf(x)dx$
+- Satisfies:
+  - $E(aX+b)=aE(X)+b$
+  - $E(X+Y)=E(X)+E(Y)$
+  - If g is an arbitrary function, then $E[g(X)]=\sum_{x\in R_X}g(x)f(x)$ for discrete random variables
+    - $E[g(X)] = \int_{R_X}g(x)f(x)dx$ for continuous random variables
+* Variance of [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]]
+:PROPERTIES:
+:ID:       ab8cb1c3-a402-4c15-9317-b327447a3d5a
+:END:
+- Denoted as $\sigma_X^2=V(X)=E(X-\mu_X)^2$,
+- Properties:
+  - $V(X) \geq 0$
+  - $V(X) = 0$ iff $P(X=E(X)) = 1$, i.e. $X$ is constant
+  - $V(aX+b)=a^2 V(X)$
+  - $V(X)=E(X^2)-[E(X)]^2$
+  - $\sigma(X) = \sqrt{V(X)}$
+
+* Joint Distributions
+:PROPERTIES:
+:ID:       c89a77a2-3af0-42ec-b6ba-d371bc47439a
+:END:
+- This is what happens when we are interested in multiple random variables at once
+- A two-dimentional random vector or a two-dimentional random variable is denoted as (X, Y) where X and Y are [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]]
+  - In this case, the range space is the range of all possible ordered pair outputs (x, y) from applying the function to all possible outcomes in the sample space.
+  - Note that this is not the cartesian product of the ranges of the individual variables, as some outcomes are unattainable (e.x. dice roll is a multiple of 4 and is odd)
+- This definition works for an arbitrary number of variables
+- A N-dimentional RV is a [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variable]] iff the range is countable
+- It is a [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variable]] if it can assume any value in some defined range of the space $\mathbb{R}^N$
+- If all components are descrete, then it is descrete
+- If all components are continuous, then it is continuous
+- In other cases, unhandled for now
+** Joint Probability Mass Function
+:PROPERTIES:
+:ID:       1989137d-e58f-4685-9e4b-b8ac9760b3c2
+:END:
+- For [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variables]]:
+  - Defined as $f_{X,Y}(x,y)=P(X=x, Y=y)$
+  - Satisfies:
+    - $f(x,y) \geq 0$ for any $(x,y)$
+    - $f(x,y) = 0$ for any $(x,y) \notin R_{X,Y}$
+    - $\sum_{i=1}^\infty  \sum_{j=1}^\infty f(x_i,y_j)=1$
+- For [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variables]]:
+  - Defined as $f_{X,Y}(x,y)$ such that $P((X,Y)\in D)= \int \int_{(x,y)\in D} f(x,y)dy dx$
+    - $P(a \leq X \leq b, c \leq Y \leq d) = \int_a^b \int_c^d f(x,y)
+  - Satisfies:
+    - $f(x,y) \geq 0$ for any $(x,y)$
+    - $f(x,y) = 0$ for any $(x,y) \notin R_{X,Y}$
+    - $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x, y) dy dx =1$

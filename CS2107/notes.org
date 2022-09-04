@@ -515,8 +515,8 @@
   - After we find the correct IV', the corresponding plaintext tells us the original plaintext
   - [[file:media/padding-oracle_2.png][Padding Oracle Derive Value]]
   - Conceptually:
-    - We have a bit array M, which when [[id:11af3871-9e7c-4b46-92f5-8ee8acd06481][XOR]]'d with the original
-    - M will effectively be XOR'd with each block of the original plaintext during decryption to produce a modified plaintext x'.
+    - We have a bit array M, which when [[id:11af3871-9e7c-4b46-92f5-8ee8acd06481][XOR]]'d with the original IV or a block of ciphertext
+    - M will effectively be XOR'd with the first block (or next block, if you are attacking by modifying the ciphertext) of the original plaintext during decryption to produce a modified plaintext x'.
     - We set M such that we can figure out the last bits of x' by virtue of it being a valid PKCS #7 padded value
     - From that, we can know the original plaintext x since we know x' XOR M = x.
 
@@ -562,3 +562,160 @@
         - Computer network and storage settings: isn't secret but may give attackers an advantage
         - Program used inside the smart card: isn't secret but makes it easier for attackers to identify vulnerabilities
       - It is ok to use it as only *one* of the many security factors.
+* Covert Channel
+:PROPERTIES:
+:ID:       48fa0dee-27fe-4bf0-9337-d073743c82dd
+:END:
+- An attack that allows transfer of information between processes which should not be able to communicate.
+* Side Channel Attack
+:PROPERTIES:
+:ID:       2fc854d5-befd-402b-823c-0c57c8deb2aa
+:END:
+- An attack based on additional information provided by the fundamental design of a protocol
+* End-to-End Encryption
+:PROPERTIES:
+:ID:       304afe4f-6676-41ee-a337-8b126bfbd52a
+:END:
+- A system of communication in which only the two endpoints are able to read the messages.
+* Authentication
+:PROPERTIES:
+:ID:       4ef52bfb-193b-4fee-8332-33018153a3a3
+:END:
+- The process of assuring either the communicating entity or the origin of a piece of information is the one that it claims to be
+- Authentic: the claimed origin is supported by evidence
+- Authenticity imples [[id:1FE1E862-1BEC-409A-93BB-7CBF73FACB14][Integrity]] (a stronger mechanism)
+** Entity Authentication
+:PROPERTIES:
+:ID:       0559e28b-44eb-4dd4-91cc-d343594df65b
+:END:
+- Connection-oriented communication
+- Methods: Password, challenge in response, biometrics
+- Examples:
+  - A website wants to ensure that the user is actually who they say they are, and the user also needs to know that the website is who they claim to be
+** Data-origin Authentication
+:PROPERTIES:
+:ID:       7ebbff58-f3bc-4b78-9d38-9597b0a0022d
+:END:
+- Connection-less communication
+- Communicating entity is the origin of a piece of information
+- Methods: MAC or digital signature
+- Examples:
+  - Is a set of digital or physical data issued by who the document claims to be from?
+* Replay Attack
+:PROPERTIES:
+:ID:       489649f3-c12b-4a87-a61b-ccf5e9966c1e
+:END:
+- When an attacker sends a copy of what the genuine user sent previously.
+* Password
+:PROPERTIES:
+:ID:       3f75bf07-bf2b-4f70-819c-938598fd43d2
+:END:
+- A form of [[id:0559e28b-44eb-4dd4-91cc-d343594df65b][Entity Authentication]]
+- Stages
+  1. Bootstrapping: user and server agree on a password
+     - May be done by users or sysadmin/server
+  2. Authentication: the user provides the password for the server to verify
+  3. Password reset: the user may need to change the password
+- The password is a secret, while the associated id (email, username) is not.
+  - However, the id must be unique so that the passwords will never come into conflict event when they are not unique (i.e., every user id, password pair needs to be unique)
+- Things to note:
+  - Every time the password is in the clear is an opportunity for it to be stolen
+    - Requests/authentication can be [[id:489649f3-c12b-4a87-a61b-ccf5e9966c1e][Replay Attack]] by attackers
+  - Password can be cracked by brute force
+  - Storing password in plaintext is bad practice
+  - There are many ways to steal or find the password
+  - Default passwords are easy to exploit
+    - Case study: Mirai botnet + chinese IoT (default password 888888)
+** Password Guessing
+:PROPERTIES:
+:ID:       470fc6fa-c82c-434c-a3ee-f6cfd6397102
+:END:
+- Online guessing means actually interacting with the server
+- Offline guessing means checking the password against some hash/password file
+- Guessing socially relavent things may assist in finding the password faster than brute force
+- Can also use [[id:fd64bcf7-edf8-456c-a529-23c62e9ab348][Dictionary Attack]]
+** Password Eavesdropping
+:PROPERTIES:
+:ID:       29799090-763a-471d-a301-0eaa743473e0
+:END:
+- Shoulder surfing (looking at other people enter passwords)
+- Sniffing (listening on the communication channel to find the password)
+  - Works over insecure protocols such as HTTP
+- Sniffing wireless keyboard data
+- Seeing how muscles move over zoom and analysis via AI
+- Sound made by keyboard
+** Login Spoofing
+:PROPERTIES:
+:ID:       0a57b29c-2b3d-486f-959b-7b1c3444c2f6
+:END:
+- Create a mimic login page
+- Capture the password, potentially checking it with the real server as well
+** Password Cacheing
+:PROPERTIES:
+:ID:       449271e2-2144-4693-be0c-a43a75662cd3
+:END:
+- When logging in on a public machine, the password may sometimes be stored for later use
+** Insider Attack
+:PROPERTIES:
+:ID:       0440b23f-2ef6-4489-b46b-6a21c08bf5ca
+:END:
+- Somehow the attack goes through the system administrator, either willingly by a malicious admin or through another attack
+- The password data is leaked through the admin
+** Stronger Passwords
+:PROPERTIES:
+:ID:       c9ae42fe-177d-47d1-88bd-42a5cf1d53bb
+:END:
+- Use randomly chosen passwords, long, and high [[id:1b1ffa4f-135b-41e8-8584-bc5ee549d316][Entropy]](pair with a password manager)
+- Other modifications on combinations of words with symbols may be easier to remember while providing a reasonable level of security
+- Systems may implement limited login attempts, password strength checker, and password metering to show the user how strong their password is
+- Passwords should be stored as a hash, with salt
+** Self-Help Password Reset
+:PROPERTIES:
+:ID:       fb8c56d7-c7f1-4f76-9806-bf1a53baf6d2
+:END:
+- Allows users to reset password without too much hassle
+- Asking security questions: not the most secure secrets
+  - Must be safe, memorable, universal, and consistent
+  - If you want to use a site with these, just treat them as backup passwords and generate more, store it somewhere else
+- One time password: hinges on the email being only accessible by the authorized entity
+  - So if the Email is broken into or the OTP is stolen, then the password protected system is broken as well.
+* Keylogging
+:PROPERTIES:
+:ID:       c7b6cb77-7b67-4c34-b2c4-b1f9b548bd88
+:END:
+- A method to grab data such as a person's [[id:3f75bf07-bf2b-4f70-819c-938598fd43d2][Password]]
+- Either done through physical (between the keyboard and the PC), or software means
+* Phishing
+:PROPERTIES:
+:ID:       a7ab4c55-e8a8-43de-a2f5-75c45709b74d
+:END:
+- Pretending to be someone else (usually an authority) to make a request that would cause the target to leak some data
+- Often done through emails requesting a user to log in to some [[id:0a57b29c-2b3d-486f-959b-7b1c3444c2f6][Spoofed]] system to steal [[id:3f75bf07-bf2b-4f70-819c-938598fd43d2][Passwords]]
+- [[https://phishtank.com][PhishTank]] can help prevent phishing attack
+- Mail servers should also attempt to filter out these attacks.
+** Spear Phishing
+:PROPERTIES:
+:ID:       31fa104e-58b1-4efe-b762-2f63c48ec6fc
+:END:
+- A phishing attack hypertargeted at a target audience to increase the effectiveness
+* Dictionary Attack
+:PROPERTIES:
+:ID:       fd64bcf7-edf8-456c-a529-23c62e9ab348
+:END:
+- Using a subset of brute force possible passwords/keys, such as a list of common passwords to speed up guessing, especially when you have arbitrary targets
+* Entropy
+:PROPERTIES:
+:ID:       1b1ffa4f-135b-41e8-8584-bc5ee549d316
+:END:
+- Measurement of randomness or unpredictability
+- Let a set P contain N unique passwords. If a password is chosen randomly and uniformly from the set P, then the entropy of that password is $\log_2(N)$ bits
+- If the password is not chosen uniformly, then the entropy will be lower.
+- [[id:3f75bf07-bf2b-4f70-819c-938598fd43d2][Passwords]] are reccomended to have around 128 bits of entropy to be secure against offline attacks
+* ATM Attacks
+:PROPERTIES:
+:ID:       d77637a1-ebc7-4e2f-847f-60db674617f5
+:END:
+- Users are authenticated by a card and a pin
+- Cards can be stolen or copied
+  - An ATM skimmer can also be used to pull data from the card
+  - The attacker must also have the PIN, which can be stolen using a camera or a spoofed keypad

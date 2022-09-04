@@ -164,6 +164,36 @@
 - [[id:dff0f2f7-2b30-48bd-8fb5-220db2076834][Transport Layer]] protocol
 - Well ordered
 - [[file:media/transport-diagram-tcp_1.png][TCP]]
+- Properties:
+  - Point-to-Point: one sender, one receiver
+  - Connection-oriented: requires handshake before sending of data
+  - Full duplex: bidirectional sending of data
+  - Reliable: guaranteed to get an in-order, correct reassembly of the sent data
+- Connection is defined by src IP, src port, dest IP, dest port
+- TCP will break the message into packets. The maximum segement size (MSS) is typically 1460 bytes, with a 20 byte header
+- Header contains:
+  - [[file:media/tcp-header_1.png][Header]]
+- Sequence #
+  - First one is randomly chosen
+  - Subsequent ones are equal to the first one plus the byte number of the first byte of the data in sequence.
+- Ack #
+  - Equal to the sequence number of the first byte in sequence not received as part of the stream
+- [[file:media/tcp-seq-ack_1.png][Example]]
+- TCP does not specify how the receiver should handle out-of-order packets
+- [[file:media/tcp-diagram_2.png][Diagram 2]]
+- [[file:media/tcp-diagram_3.png][Diagram 3]]
+  - ? = 105, because byte 105 is the first byte not received
+- Timeout
+  - Timeout must be set based on the connection state
+  - It is dynamically calculated based on the connection speed
+  - [[file:media/tcp-timeout_1.png][Timeout]]
+- Because the timeout may be long, TCP also has a mechanism to resend packets assumed to be lost, known as fast resend
+  - If 4 identical ACKs, then TCP will assume the packet after the acked packet was lost
+- [[file:media/tcp-fast-resend_1.png][Fast Resend]]
+- Establishing the connection: handshake
+  - [[file:media/tcp-connect_1.png][Connect]]
+- Closing the connection:
+  - [[file:media/tcp-close_1.png][Close]]
 * UDP
 :PROPERTIES:
 :ID:       be4e6279-b595-4fcf-befc-06d57273d988
@@ -411,6 +441,9 @@
 - Instead of sending NAK for corrupted packets, instead send ACK for the previous correct packet
 - [[file:media/toy-rdt-2.2_1.png][Demo]]
 ** Toy RDT 3.0
+:PROPERTIES:
+:ID:       7a3e843b-8568-45e8-9af3-9d963ba4b722
+:END:
 - Assume that the channel may flip bits, lose packets, and may have arbitrarily long delay
 - Will not reorder packets
 - How do we detect packet loss, since the delay can be arbitrary?
@@ -421,8 +454,6 @@
 - We get this [[id:6ec79c40-1a4a-4f24-b947-dc6cb3611532][FSM]]:
 - [[file:media/toy-rdt-3.0_3.png][Example Sender]]
 - Receiver is about the same as Toy RDT 2.1
--
-
 * Finite State Machines
 :PROPERTIES:
 :ID:       6ec79c40-1a4a-4f24-b947-dc6cb3611532
@@ -436,3 +467,35 @@
 :ID:       f4930941-2e92-4fff-a7b3-4ee7f8583e60
 :END:
 - This is a protocol which requires senders to wait for a response after each packet is sent.
+
+* Pipelining Protocol
+:PROPERTIES:
+:ID:       a63ee94c-54af-43e8-acd7-199f0577f6d5
+:END:
+- A protocol which allows senders to send multiple un-acknowledged responses at once
+** Go-Back-N
+:PROPERTIES:
+:ID:       362bcf01-6358-4517-850d-7976dc2b089e
+:END:
+- [[file:media/go-back-N_1.png][Diagram]]
+- Send multiple packets at once
+- Receiving out-of-order or invalid packets will cause the receiver to re-acknowledge the last well-ordered packet
+- Receiving repeat acknowledgements will be ignored, then the sender will calculate the last acknowledged packet
+- Uses a window size "N" which indicates the maximum number of unacknowledged packets to be sent
+** Selective Repeat
+:PROPERTIES:
+:ID:       6a576a73-58ab-4fe1-adce-fde423ec2119
+:END:
+- [[file:media/selective-repeat_1.png][Diagram]]
+- [[file:media/selective-repeat_2.png][Diagram 2]]
+- Send multiple packets at once
+- All valid received packets will be acknowledged
+- Sender keeps a timer for all unacknowledged packets
+- Resend unacked packets on timeout
+- More efficient than [[id:362bcf01-6358-4517-850d-7976dc2b089e][Go-Back-N]], but more complicated, as everything may be out of order
+- Also keeps a window size, and the window is guaranteed to contain all unacked packets
+
+* Speed of [[id:f4930941-2e92-4fff-a7b3-4ee7f8583e60][Send-and-Wait Protocol]] and [[id:a63ee94c-54af-43e8-acd7-199f0577f6d5][Pipelining Protocol]]
+- Send and wait implementations such as [[id:7a3e843b-8568-45e8-9af3-9d963ba4b722][Toy RDT 3.0]] are generally very slow because the sender must wait for a reply every time it wants to send a packet, leading to a vast underutilization of the bandwidth
+- Pipelining: send multiple un-acknowledged packets at once
+- Sending 3 packets at once multiplies the utilization by 3

@@ -5,7 +5,14 @@
 
 * ReCycle
 ** DONE Send the subsidy proposal to CH
+** TODO NUSync Submission budget
 * Recruitment
 ** DONE Tell YuXuan to set interview time slots
+** Contact Participants
 * SLF
 ** DONE Set timing for prize collection
+* Room Booking
+** DONE Send Payment Confirmation <2022-09-02 Fri>
+* Members
+** TODO Work out the Details
+** TODO Contact the members

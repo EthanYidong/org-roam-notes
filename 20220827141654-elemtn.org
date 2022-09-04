@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       99b0b9d6-4771-4ef8-8128-0e2cfbecb1b1
-:END:
-#+title: elemtn

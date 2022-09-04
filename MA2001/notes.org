@@ -418,6 +418,7 @@
   - The linear system $Ax=0$ has the [[id:98073aba-eb13-435c-b020-535c499f2767][Trivial Solution]]
   - The [[id:4546b235-26c0-4582-b238-594d24f1360e][RREF]] form of $A$ is an identity matrix.
   - $A$ can be expresed by the product of [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrices]]
+  - $det(A) \neq 0$
 
 * Elementary Matrices
 :PROPERTIES:
@@ -511,8 +512,96 @@
 :ID:       dfea781a-3f39-4b65-befe-9851ae0c141e
 :END:
  - $det(A) = det(A^T)$
+** Determinant of a Triangular Matrix
+:PROPERTIES:
+:ID:       dbd29807-554b-4169-a53d-ac70674f15bc
+:END:
+- For [[id:42792e44-1879-489f-b58e-32f01fec557f][Upper Triangular Matrix]] and [[id:c26f10dd-0798-45eb-be5f-837e5aad51bd][Lower Triangular Matrix]], the determinant is the product of the diagonal elements.
 ** Determinant of Special Matrices
 :PROPERTIES:
 :ID:       e01768ae-a402-455e-b932-479297e23f46
 :END:
 - If there are two identical rows or two identical columns, then the determinant is 0.
+
+* Effect of [[id:bf26f901-fa17-4c98-b8bf-8d54d5a8f01d][Elementary Row Operations]] on the [[id:f8c95c88-93e0-4d50-8e0c-6ef45ece0511][Determinant]]
+:PROPERTIES:
+:ID:       33a7d7a7-a693-464d-a0a7-340053c882e9
+:END:
+- Multiplying a row by k multiplies the determinant by k
+  - In this case, E would be something like $\begin{bmatrix}1&0\\0&k\end{bmatrix}$, where $B=EA$
+  - Then, we have $det(E)det(A)=k \times det(A) = det(B) = det(EA)$
+- Swapping row i and row j multiplies the determinant by -1
+  - In this case, E would be something like $\begin{bmatrix}0&1\\1&0\end{bmatrix}$, where $B=EA$
+  - Then, we have $det(E)det(A)=-1 \times det(A) = det(B) = det(EA)$
+- Adding k times row j to row i does not change the determinant
+  - In this case, E would be something like $\begin{bmatrix}1&k\\0&1\end{bmatrix}$, where $B=EA$
+  - Then, we have $det(E)det(A)=1 \times det(A) = det(B) = det(EA)$
+
+** Finding the Determinant Easily By Hand
+- Use Gaussian Elimination to make the matrix triangular, then use [[id:dbd29807-554b-4169-a53d-ac70674f15bc][Determinant of a Triangular Matrix]] to find the determinant of the [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]] of the matrix
+- Use the above transformations in relation to the determinant to determine the [[id:f8c95c88-93e0-4d50-8e0c-6ef45ece0511][Determinant]] of the original matrix
+* [[id:f8c95c88-93e0-4d50-8e0c-6ef45ece0511][Determinant]] Properties
+- If c is a scalar and A is a n by n square matrix, then $det(cA)=c^n \times det(A)$
+  - Simply proven by writing as applying n row operations
+- $det(AB) = det(A) \times det(B)$
+  - Simply proven when A is invertible, just write it as product of elementary matrices. If A is not, then the determinant is 0
+- $det(A^{-1})=\frac{1}{det(A)}$
+  - Simply proven by writing A as the product of elementary matrices
+* Adjoints
+:PROPERTIES:
+:ID:       cf429507-5ed4-4d38-a3e5-f5cbf0075f2f
+:END:
+- Let A be a square matrix of order n
+- $adj(A)$ is found by replacing all elements i,j with the i,j-cofactor of A, then taking the tranpose
+- $A^{-1}=\frac{1}{det(A)} \times adj(A)$
+* Cramer's Rule
+:PROPERTIES:
+:ID:       90e7cee6-a91a-4c16-89b5-9d88b3f0ab3b
+:END:
+- If $Ax=B$, and $A_i$ is the matrix obtained by replacing the ith column of $A$ by $B$
+- And, If $A$ is invertible, $x=\frac{1}{det(A)}\begin{bmatrix}det(A_1)\\det(A_2)\\det(A_3)\\...\\det(A_n)\end{bmatrix}$
+* Vectors
+:PROPERTIES:
+:ID:       33bef66c-f30e-461c-92c0-45d75d742445
+:END:
+- Geometric Representation
+  - A vector is a line segement with a direction and a length (magnitude)
+  - The exception is the zero vector, which has no direction
+  - Two vectors are considered equivalent if their length and direction are equal
+  - Vectors can be summed by attaching one to the end of the other, and completing the triangle
+    - Addition is commutative
+  - The negative of a vector is obtained by reversing the direction
+  - The scalar multiple of a vector is obtained by multiplying the length (and reversing direction if the scalar is negative)
+- Algebraic Representation
+  - Use a N-Dimentional coordinate system
+  - If a vector has an initial point at the origin, we represent the vector as the other endpoint of V
+  - Adding two vectors is just adding the coordinates
+  - Multiplying vectors by a scalar is just multiplying the coordinates by that scalar
+** N-Vectors
+:PROPERTIES:
+:ID:       dc6fb874-3fa2-4f2a-86f5-108546757cff
+:END:
+- A vector with N components
+- $(u_1, u_2, ..., u_N)$, where u_k are all real (at least for MA2001)
+- Can be represented either as a 1 by n matrix as a "row vector" or a n by 1 matrix as a "column vector"
+  - Should not be mixed within the same context
+** Euclidean N-Space
+:PROPERTIES:
+:ID:       5860489e-a49c-4eb2-be85-e4a4ae6c3f60
+:END:
+- The set of all [[id:dc6fb874-3fa2-4f2a-86f5-108546757cff][N-Vectors]] with real number coordinates for some N
+** Vector Sets
+- Subsets are inplicitly denoted as $S={\text{form} | \text{conditions}}$, for example $S={(0, a, b, a) | a \in {3,4}, b \in {4,5}}$
+- Can also be explicitly denoted like similarly to the general solutions to [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear System]]
+- Finite sets have a cardinality aka how many are in the set, denoted by $|S|$
+* Linear Combinations
+:PROPERTIES:
+:ID:       1e829ed7-c312-4549-95de-3a4b11156f87
+:END:
+- Given a set of k [[id:33bef66c-f30e-461c-92c0-45d75d742445][Vectors]], having k constants $c_1, c_2, ..., c_k$ gives you the linear combination $c_1 v_1 + c_2 v_2 + ... + c_k v_k$
+- Related to [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear Systems]]
+* Linear Spans
+:PROPERTIES:
+:ID:       6fb2cd00-5a7a-48c6-baa8-89cc39579c6a
+:END:
+- Given a set of k [[id:33bef66c-f30e-461c-92c0-45d75d742445][Vectors]], the linear span is the set of all [[id:1e829ed7-c312-4549-95de-3a4b11156f87][Linear Combinations]] of those vectors is the linear span of those vectors

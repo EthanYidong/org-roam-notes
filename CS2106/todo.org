@@ -13,8 +13,9 @@
 
 * Tutorial
 ** DONE Tutorial Preparation 1 <2022-08-22 Mon>
-** TODO Tutorial Preparation 2 <2022-08-29 Mon>
+** DONE Tutorial Preparation 2 <2022-08-29 Mon>
 
 * Lab
 ** DONE Lab Preparation 1 <2022-08-26 Fri>
-** TODO Lab Preparation 2 <2022-09-02 Fri>
+** DONE Lab Preparation 2 <2022-09-02 Fri>
+** TODO Lab 1 <2022-09-10 Sat>
