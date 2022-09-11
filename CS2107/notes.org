@@ -719,3 +719,215 @@
 - Cards can be stolen or copied
   - An ATM skimmer can also be used to pull data from the card
   - The attacker must also have the PIN, which can be stolen using a camera or a spoofed keypad
+* Biometrics
+:PROPERTIES:
+:ID:       639eec5e-7118-4903-82b3-0446466b3242
+:END:
+- Utilizes unique-ish physical characteristics of a person for authentication
+- During enrollment, a reference is provided to the system
+- During verification, a sample is collected then ran through a matching algorithm to compare with the original reference
+- Can be used for:
+  - Verification (1:1), to confirm that you are who you claim to be
+  - Identification (1:n), to figure out who you are among a list of many people
+- Matching algorithm cannot be 100% correct
+  - Noise during capture
+- Types of biometrics
+  - Fingerprint
+  - Face
+  - Iris
+  - Retina
+  - DNA
+  - Palm
+- The system assumes the scanner is not compromised
+- Systems may employ liveliness checks (for example, body heat), in order to confirm that it is a live sample
+** Biometric Matching Algorithm
+:PROPERTIES:
+:ID:       f35f8daf-5cd3-42ac-805e-941cfa250ba2
+:END:
+- [[file:media/match-rates_1.png][Match Rates]]
+- The algorithm may generate a probability that a sample is a match. The algorithm must set a proper threshold to balance between [[id:34aeb63c-45c2-457e-9b6c-8c4d31765b51][FMR]] and [[id:10edba79-d9d6-41d3-99d7-f485b2c84ca2][FNMR]].
+*** False Match Rate
+:PROPERTIES:
+:ID:       34aeb63c-45c2-457e-9b6c-8c4d31765b51
+:ROAM_ALIASES: FMR
+:END:
+- Number of correct "rejected" responses divided by the total number of "rejected" responses
+*** False Non-Match Rate
+:PROPERTIES:
+:ID:       10edba79-d9d6-41d3-99d7-f485b2c84ca2
+:ROAM_ALIASES: FNMR
+:END:
+- Number of correct "accepted" responses divided by the total number of "accepted" responses
+*** Equal Error Rate
+:PROPERTIES:
+:ID:       3f04870b-8a4e-40b9-a6b9-e1a26bae346c
+:END:
+- When [[id:10edba79-d9d6-41d3-99d7-f485b2c84ca2][FNMR]] = [[id:34aeb63c-45c2-457e-9b6c-8c4d31765b51][FMR]]
+*** Failure-to-enroll Rate
+:PROPERTIES:
+:ID:       861c4c2b-492a-4332-8046-2a25821806bd
+:END:
+- Proportion of users who cannot be enrolled (past injury, lacking body parts)
+*** Failure-to-capture Rate
+:PROPERTIES:
+:ID:       fed34721-0969-4387-8526-8bb812874620
+:END:
+- Proportion of sample capture attempts which fail due to some circumstance (e.x. fingers too wet)
+** Fingerprint [[id:639eec5e-7118-4903-82b3-0446466b3242][Biometrics]]
+:PROPERTIES:
+:ID:       1b877c73-5a45-4f9f-a727-8e0f4edf8a4d
+:END:
+- Extracts [[id:9ec22be3-4b36-403f-89b2-8675b450974e][Feature Points]] from the sensor, which are called minutiae for fingerprints
+- Compares locations of the [[id:9ec22be3-4b36-403f-89b2-8675b450974e][Feature Points]], and generates some match ranking / percentage
+** Feature Points
+:PROPERTIES:
+:ID:       9ec22be3-4b36-403f-89b2-8675b450974e
+:END:
+- A commonly used method of comparing two samples of biometric data.
+* Multi-Factor Authentication
+:PROPERTIES:
+:ID:       48e45628-7ad0-4356-a10a-1645c53a5e28
+:END:
+- Also known as n-Factor authentication
+- At least 2 different authentication factors, such as:
+  - [[id:3f75bf07-bf2b-4f70-819c-938598fd43d2][Password]]
+  - [[id:b3c92481-7407-42a7-aeee-015b7db819ce][One Time Password]] (SMS, Email, hardware token)
+  - Smart card
+  - [[id:a21f098b-91fc-47ca-8c3a-ba67410ff176][SSO]]
+  - [[id:639eec5e-7118-4903-82b3-0446466b3242][Biometrics]]
+* One Time Password
+:PROPERTIES:
+:ID:       b3c92481-7407-42a7-aeee-015b7db819ce
+:END:
+- Also refered to as OTP, not to be confused with [[id:cc5982a8-8c3e-453c-9393-fa278a1c8f8e][One Time Pad]]
+- A value sent to you via email, SMS, or even mail which is used to authenticate you
+- OTP via SMS is now depreciated, because:
+  - SMS is stored in plaintext
+  - May be intercepted in flight
+  - May be intercepted on the phone (malware)
+  - However, it is still better than single-factor authentication
+* Single Sign-On
+:PROPERTIES:
+:ID:       a21f098b-91fc-47ca-8c3a-ba67410ff176
+:ROAM_ALIASES: SSO
+:END:
+- A system which uses a different service (e.x. Google or Facebook) to confirm someone's identity
+* Public Key Encryption
+:PROPERTIES:
+:ID:       ba7c1150-8c97-4862-87db-edf38efaa278
+:ROAM_ALIASES: PKC PKE
+:END:
+- [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptography]]([[id:7A154837-3682-4C60-BC05-A284FC06290E][Asymmetric Cryptosystem]]) scheme which has a public key which is known to everybody, and a private key only known by those who can decrypt the ciphertext.
+- Allows anyone to encrypt data for a person to decrypt
+- [[id:b30c808d-acea-428a-9564-6fb356072eb6][Security Models]]:
+  - Security requirement: public key and ciphertext is known, but not the private key
+  - Implies: the private key should not be easy/practically impossible to derive from the public key
+- Why PKE?
+  - Suppose we have n people who want to communicate with each other
+  - With pairwise [[id:7765D5BC-0C92-4AC3-BFA6-822A5517070A][Symmetric Cryptosystem]] schemes, we need $\frac{(n)(n-1)}{2}$ keys total
+  - With a single broadcast channel using PKE, we only need $n$ keys.
+- Popular PKE Schemes:
+  - [[id:036994b9-0dff-4b8e-adea-283df9012d31][RSA]](key size ~2048 bits)
+    - Rivest, Shamir, Adleman
+    - Pioneered by Diffie-Hellman key exchange
+  - ElGamal (uses the Elliptic Curve Cryptography techniques, reduces key size to ~300 bits)
+- PKE as a key management solution
+  - [[id:036994b9-0dff-4b8e-adea-283df9012d31][RSA]] is slow, so it will be used to generate a private key for a [[id:7765D5BC-0C92-4AC3-BFA6-822A5517070A][Symmetric Cryptosystem]] such as AES, then both the RSA-encrypted key and the AES-encrypted message will be sent.
+  - This removes the requirement to pre-share a key
+* RSA
+:PROPERTIES:
+:ID:       036994b9-0dff-4b8e-adea-283df9012d31
+:END:
+ - We cover only the basic form of RSA in this class
+   - Real implementations employ padding and special restrictions on the parameters
+ - The data will be represented as integers, and the algorithms are operations on the integers
+ - The integer's binary representation is the "actual" data we are sending
+ - How it works:
+   - Two large primes $p$ and $q$ are selected
+   - Calculate $n = pq$
+   - Choose an exponent $e$ s.t. $gcd(e, \phi (n)) = 1$
+     - We also know $\phi (n) = (p-1)(q-1)$ because $n$ is the product of two primes.
+     - $\phi (n)$ is the totient function, the number of values less than $n$ which is relatively prime to $n$
+   - Determing $d$ such that $de \equiv 1 (\mod \phi (n))$ (i.e. $d$ is the modular inverse of $e$ mod $\phi (n)$)
+   - Our public key is $(n, e)$, and our private key is $(n, d)$
+     - $p$ and $q$ may be discarded for security, since they are no longer required
+   - To encrypt a plaintext $m$, we calculate the ciphertext $c=m^e (\mod n)$
+   - To decrypt a ciphertext $c$, we calculate the plaintext $m=c^d (\mod n)$
+ - Ok but like how:
+   - $d$ can be calculated easily using the Extended Euclidean Algorithm
+     - This allows us to solve $x$ and $y$ when $ax+by=gcd(a,b)$
+     - We let $a = e, b= \phi (n), x=d$. This means $gcd(a, b)=1$ by definition
+     - This gives us the equation $ed + \phi (n) y = 1$, which is identical to the original equation
+     - [[file:media/extended-euclidian-algorithm_1.png][Example]]
+   - $m^e$ and $c^d$ can be easily found by doing successive squaring, logarithmic time
+ - RSA can be cracked by either factoring n or finding d some other way, which may be easier
+   - Smaller n has been shown to be too weak as computers get more powerful
+   - Quantum computers can run factorization in polynomial time, which will break RSA once they get practical enough
+     - Post-quantum algorithms are now being developed, such as lattice-based cryptography or multivariabe cryptography
+ - Real world RSA uses padding
+   - We have an issue with "base" RSA where $E(m_1) * E(m_2) = E(m_1 * m_2)$
+   - Usually an IV is used
+   - Also, a padding such as PKCS#1 is used
+ - Pitfall: using RSA as a symmetric key setting
+   - RSA is much slower than AES
+   - May be vulnerable to the same issues as [[id:c407cc60-cb13-401d-b3b1-0dbb8df36fa6][ECB Mode]].
+* Hash
+:PROPERTIES:
+:ID:       e80b6bfc-5b6a-4c2e-ae03-a513f6bef6b5
+:END:
+- A hash function is a function which takes in an arbitrary amount of data and determinitstically outputs a fixed size digest.
+- Non-[[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptographic]] hash functions designed for efficiency rather than the security requirements are not to be used in a crypto setting
+- [[id:b30c808d-acea-428a-9564-6fb356072eb6][Security Models]]
+  - Security Requirements:
+    - Efficiency: calculating $h(m)$ is easy
+    - Pre-image resistance: calculating $h^{-1}(m)$ is hard
+    - Collision resistance: finding $m_1 and m_2$ such tht $h(m_1) = h(m_2)$ is hard
+      - Implies pre-image resistance
+- Examples
+  - SHA-1
+    - Succeeds the withdrawn SHA-0 by NIST
+    - Considered broken, but still commonly used
+      - A collision was theoretically possible to find in $2^{63}$ time
+      - Google applied it in practice: [[http://shattered.io][Shattered]]
+    - Now supersceded by SHA-256 or SHA-3
+  - MD5
+    - Extremely broken, do not use
+- Usage
+  - Verifying files
+    - A website may provide a checksum which is a hash of a file they provide for download, which you can use to verify that you have the correct files
+    - [[file:media/hash_1.png][Example]]
+  - Password files
+    - We can hash the passwords stored on our computers in order to make it hard for attackers to find the original passwords
+    - We must add features such as salting (adding random data to our password) such that identical passwords will still have unique hashes (Salt is stored in plaintext next to the passwords)
+      - This also helps prevent rainbow table attacks (where attackers have access to a large database of common password-hash pairs)
+* Keyed-Hash
+:PROPERTIES:
+:ID:       b534f6fc-0a19-4899-b0cd-d690668fdce5
+:ROAM_ALIASES: MAC
+:END:
+- Also known as MAC
+- A Hash function which also takes in a key
+- [[id:b30c808d-acea-428a-9564-6fb356072eb6][Security Models]]
+  - Security Requirements:
+    - Even when given many valid pairs of messages and the corresponding MAC, an attacker should not be able to generate the MAC for a message not seen before
+- Examples
+  - CBC-MAC
+  - HMAC
+- Usage
+  - Verifying files in a insecure channel
+    - If the key has been pre-shared:
+    - [[file:media/mac_1.png][Example]]
+    - Generally sent together
+** Digital Signature
+:PROPERTIES:
+:ID:       f6d86fcf-3694-4ae1-999d-d3a087484b83
+:END:
+- The public key version of [[id:b534f6fc-0a19-4899-b0cd-d690668fdce5][MAC]]
+- The public key is used to verify the origin of a file or data
+- Signature is sent along with the data so that anyone can confirm who sent the data
+- Additional security requirements:
+  - Non-repudiation: By using public key version, it is possible to tell for sure who created the signature, since only one party needs to know the private key
+- [[file:media/signature_1.png][Signature]]
+- [[file:media/signature_rsa_1.png][Signature with RSA]]
+  - Note: the roles of public and private keys are flipped since we want only one party be be able to encrypt, but anyone be able to decrypt
+- [[file:media/signature_2.png][Example]]

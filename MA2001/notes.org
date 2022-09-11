@@ -415,7 +415,7 @@
 :END:
 - The following are all equivalent:
   - $A$ is [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Invertible]]
-  - The linear system $Ax=0$ has the [[id:98073aba-eb13-435c-b020-535c499f2767][Trivial Solution]]
+  - The linear system $Ax=0$ has only the [[id:98073aba-eb13-435c-b020-535c499f2767][Trivial Solution]]
   - The [[id:4546b235-26c0-4582-b238-594d24f1360e][RREF]] form of $A$ is an identity matrix.
   - $A$ can be expresed by the product of [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrices]]
   - $det(A) \neq 0$
@@ -605,3 +605,84 @@
 :ID:       6fb2cd00-5a7a-48c6-baa8-89cc39579c6a
 :END:
 - Given a set of k [[id:33bef66c-f30e-461c-92c0-45d75d742445][Vectors]], the linear span is the set of all [[id:1e829ed7-c312-4549-95de-3a4b11156f87][Linear Combinations]] of those vectors is the linear span of those vectors
+- The span takes up the whole space ($span(S) = \mathbb{R}^n$) iff the equation $c_1u_1 + c_2u_2 + ... + c_ku_k = v$ has a solution for any v
+- In other words if $A = \begin{bmatrix}u_1 & u_2 & u_3 & \dots & u_k\end{bmatrix}$:
+  - If the [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]] of A has no zero rows, then the linear span takes up the whole space
+  - If the REF of A has at least one zero row, then the system is not always consistent, and thus the span does not take up the whole space.
+- Let $S$ be a set of k vectors
+  - If $k<n$, then $span(S) \neq \mathbb{R}^n$
+- Properties
+  - $0 \in span(S)$
+  - Span is closed under linear combinations (For any $v_1, v_2, ..., v_r \in span(S)$, $c_1v_1 + c_2v_2 + ... + c_rv_r \in span(S)$)
+  - $span(S_1) \subseteq span(S_2)$ iff each element in $S_1$ satisfies $u_i \in span(S_2)$, a.k.a. all $u_i$ is a linear combination of $v_1, v_2, ... v_l$
+    - $S_1 = \{u_1, u_2, ..., u_k\}$, $S_2 = \{v_1, v_2, ..., v_l\}$
+** Redundant Vector
+:PROPERTIES:
+:ID:       c23ade51-65bc-4de5-89ed-d628f2e2e773
+:END:
+- Let $S = \{u_1, u_2, ..., u_k\}$
+- If $u_k$ is a linear combination of $\{u_1, u_2, ..., u_{k-1}\}$, then $span(\{u_1, u_2, ..., u_k\}) = span(\{u_1, u_2, ..., u_{k-1}\})$
+** Geometrical Interpretations
+:PROPERTIES:
+:ID:       714e83f9-5fd7-44f8-9a5a-0d04a2d61aa0
+:END:
+- If we have a single vector in 2D, the span is a line through the origin parallel to that vector
+- If we have two vectors in 2D:
+  - If they are parallel, one of them is a [[id:c23ade51-65bc-4de5-89ed-d628f2e2e773][Redundant Vector]], and so it is also a line through the origin parallel to the vectors
+  - Otherwise, it encompasses the whole space
+- If we have two vectors in 2D:
+  - Parallel, same thing
+  - Otherwise, it encompasses the plane that contains the two vectors (when set to the origin) and the origin
+- [[file:media/line_1.png][Line]]
+- [[file:media/plane_1.png][Plane]]
+*** k-Plane
+:PROPERTIES:
+:ID:       6144f960-7456-44e7-ae72-68a444e73cf4
+:END:
+- In n-dimensions
+- If we have $x, u_1, u_2, ..., u_r \in \mathbb{R}^n$
+- The set $Q= \{x+w | w \in span(\{u_1, u_2, ..., u_r\})\}$ is a k-plane in $\mathbb{R}^n$, where k is the dimension of the span
+* Subspaces
+:PROPERTIES:
+:ID:       b91e4b67-de10-40c3-bea8-b950d195156e
+:END:
+- From [[id:6fb2cd00-5a7a-48c6-baa8-89cc39579c6a][Linear Spans]], we know that the linear span of, for example, a plane in a 3D space can act the same as the $\mathbb{R}^2$ space
+- More rigidly, a subset $V \subset \mathbb{R}^n$ is a subspace of $\mathbb{R}^n$ if there exist $S=\{u_1, u_2, ..., u_k \in \mathbb{R}^n\}$ such that $V = span(S)$
+  - In this case we say $V$ is a subspace spanned by $S$
+- Alternatively: a non empty set $V$ is a subspace iff for all $u, v \in V$, $c, d \in \mathbb{R}$ $cu + dv \in V$
+- Trivial subspaces:
+  - $span(\{0\})$, or the zero subspace.
+  - $\mathbb{R}^n$, which itself is also a subspace ($\span{\{(1, 0, ...), (0, 1, ...),..., (0, 0, ..., 1)\}$)
+- Subspaces of $\mathbb{R}^2$
+  - The origin
+  - Any line through the origin
+  - The whole space
+- Subspaces of $\mathbb{R}^3$
+  - The origin
+  - Any line through the origin
+  - Any plane through the origin
+  - The whole space
+** Proving Subspaces
+:PROPERTIES:
+:ID:       bf2956d1-0da6-47f9-bbd7-adc69657097f
+:END:
+- To prove a subset is not a subspace, we simply need a counterexample.
+- We can use some of these properties:
+  - $0 \in V$
+  - For any $v_1, v_2, ..., v_r \in V$, and any $c_1, c_2, ..., c_r \in \mathbb{R}$, $c_1v_1 + c_2v_2 + ... + c_rv_r \in V$
+- Use the alternate definition of subspace
+** Solution Spaces
+:PROPERTIES:
+:ID:       c99030a7-f2fe-408d-ae2b-2fae64b1c1df
+:END:
+ - The [[id:6d6c3bfc-2b01-4012-b255-d155b17fdc04][Solution Set]] of a [[id:98073aba-eb13-435c-b020-535c499f2767][Homogenous Linear System]] in $n$ variables is a subspace of $\mathbb{R}^n$
+* Linear Independence
+:PROPERTIES:
+:ID:       b11750a1-3628-44c3-bf17-bedc80748f5e
+:END:
+- Let $S = \{u_1, u_2, ..., u_k\} \in \mathbb{R}^n$
+- Consider the equation $c_1u_1+c_2u_2+...+c_ku_k = 0$ with c as variables (this is a [[id:98073aba-eb13-435c-b020-535c499f2767][Homogenous Linear System]])
+- Iff the trivial solution is the only solution, $S$ is said to be linearly independent
+- Otherwise, $S$ can be said to be linearly dependent
+- Alternatively, we have $S$ is linearly independent iff no vector in $S$ is a linear combination of the other vectors in $S$
+- A [[id:6fb2cd00-5a7a-48c6-baa8-89cc39579c6a][Linear Span]] of $S$ has no redundant vectors iff $S$ is linearly independent

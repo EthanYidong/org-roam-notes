@@ -831,3 +831,140 @@
   - Portable: Conceptually can be extended to different environments, such as over a network
 - Cons:
   - Inefficient: needs OS intervention and copying of messages
+* Pipes
+:PROPERTIES:
+:ID:       36f3628e-a51f-40b6-afef-bb38a8ca55f5
+:END:
+- A mainly UNIX concept
+- Links the output of one process to the input of another
+- In the command line: ~A | B~ sends the STDOUT of A to STDIN of B
+  - Process A is the producer, which writes bytes to a virtual buffer
+  - Process B is the consumer, which reads bytes from that buffer
+  - The buffer behaves like a FIFO queue of bytes, like an anonymous file
+- Pipe behaves as a "circular bounded byte buffere with implicit synchronization"
+  - Fixed max size
+  - Writers will wait when the buffer is full
+  - Readers will wait when the buffer is empty
+- Has multi-producer and multi-consumer variants, but generally we only consider the simple case
+- Can be full-duplex where both parties can read and write
+- Pipes are made with the ~pipe()~ syscall
+- File descriptors are duplicated with the ~dup()~ and ~dup2()~ syscalls
+* Signals
+:PROPERTIES:
+:ID:       4c09e377-8418-4c2f-aba8-bf48b0506d9e
+:END:
+- Signals are asynchronous notifications sent to the process
+- Some signals have default handlers, but programs can provide their own handlers
+* Threads
+:PROPERTIES:
+:ID:       1ad82130-71b0-4ec2-b8af-1fb02fae19bf
+:END:
+- Motivations
+  - Processes are expensive, so [[id:9d9878a2-8dc4-44b5-93d8-f3d65c2f18b9][Forking]] is inefficient
+    - ~fork()~ requires duplication of memory space and program context
+  - Context switching also takes resources
+  - IPC is hard with independant memory spaces, which requires [[id:5eb73086-a3c9-43f2-98a6-c864225b6ef3][IPC]]
+- Threads are built to make parallel execution easier
+- A traditional process only has a single thread, so only a single instruction is executing at any time
+- Instead, we add more threads to execute multiple parts of the program
+- Threads share:
+  - Memory context
+  - OS Context
+- Threads have unique:
+  - ID
+  - Registers
+    - Includes PC
+  - "Stack"
+    - Under the hood, it just modifies the $fp and $sp headers
+- Threads are more lightweight
+- Questions:
+  - What happens when system calls are made in parallel?
+  - What happens when you ~fork()~ a multithreaded process?
+  - What happens when a single thread exits?
+  - What happens when a single thread calls ~exec()~?
+- Hardware support exists within modern CPUs
+  - Intel Hyperthreading
+** User Threads
+:PROPERTIES:
+:ID:       7ea2c32e-f16b-4cb1-92aa-368576cff979
+:END:
+    - Thread is a user library
+    - Kernel is unaware of threads
+    - [[file:media/user-threads_1.png][Diagram]]
+    - Advantages:
+      - Works on any OS
+      - Simply library calls
+      - More flexible
+    - Disadvantages:
+      - OS cannot schedule at the thread level
+** Kernel Threads
+:PROPERTIES:
+:ID:       31a4c5f8-16b8-4cc4-a783-473ebd9a67d1
+:END:
+- Kernel now schedules threads instead of processes
+- [[file:media/kernel-threads_1.png][Diagram]]
+- Advantages:
+  - Kernel can schedule at the thread level
+- Disadvantages:
+  - Less flexible
+  - Thread operations require system calls (more expensive)
+** Hybrid Thread Model
+:PROPERTIES:
+:ID:       d4445289-6dfc-40b0-8e49-b71865f6ab36
+:END:
+- Combines ideas from [[id:7ea2c32e-f16b-4cb1-92aa-368576cff979][User Threads]] and [[id:31a4c5f8-16b8-4cc4-a783-473ebd9a67d1][Kernel Threads]]
+- OS schedules on kernel threads
+- User threads can be bound to kernel threads
+- Provides more flexibility
+- [[file:media/hybrid-threads_1.png][Diagram]]
+** POSIX Threads
+:PROPERTIES:
+:ID:       f6db6e39-c578-4e9b-8069-37b142f0c4c8
+:END:
+- AKA pthreads
+- Defines the API of thread behavior
+- Can be implmented either as user or kernel threads
+- Defined using a routine/function, its arguments, and some extra attributes with ~pthread_create(mut ref ThreadID, ThreadAttr, Routine, RoutineArgs)~
+- Thread will exit on return, or on a call to ~pthread_exit()~
+- Thread can be joined or waited on with a call to ~pthread_join()~
+  - By default, we do not know when the threads will be executed, so we usually use joining to synchronize
+- pthreads have a lot more options such as:
+  - Yielding
+  - Advanced synchronization
+  - Scheduling policies
+  - Binding to kernel threads
+* Synchronization
+:PROPERTIES:
+:ID:       239f9594-8127-40b4-b7fd-2acc158cfb2c
+:END:
+- Concurrent execution may lead to non-deterministic outcomes
+  - This means that the outcome depends on the order in which processes / instructions are run
+** Race Condition
+:PROPERTIES:
+:ID:       9c2cc20c-45b4-41d9-a1aa-72faa17f33d1
+:END:
+- When access to mutable resources occurs in an unsynchronized manner
+- [[file:media/race-condition_1.png][Race Condition]]
+- Generally solved by marking out certain sections of code as "critical", and preventing other threads from running critical sections while a certain thread is
+- Critical Section Must:
+  - Only be run by at most one process at a time (mutual exclusion)
+  - Allow a waiting process to enter it once it is no longer in use (progress)
+  - Limit the maximum number of times other processes can enter the section before any particular waiting process (bounded wait)
+  - Processes not in the critical section should not block other processes (independance)
+- Critical Section Must Not Have:
+  - Deadlock, where all processes are blocked (happens when processes have cyclic dependancies and wait for each other)
+  - Livelock, where processes do useless work like changing state to avoid deadlock, but makes no meaningful process
+  - Starvation, where a particular waiting process never gets to enter the critical section
+** Atomic Instruction
+:PROPERTIES:
+:ID:       4e685ce2-19fc-44d4-a7ce-433014ba8829
+:END:
+- Instructions that can run within a single machine operation, which provides certain guarantees about everything being successful or nothing being done at all
+** Test and Set
+:PROPERTIES:
+:ID:       76b57868-3982-487c-abd0-b3ad6822861a
+:END:
+- An [[id:4e685ce2-19fc-44d4-a7ce-433014ba8829][Atomic Instruction]] which loads data from memory and sets the data in memory to 1
+- This can be use to implement a lock
+- [[file:media/simple-testandset_1.png][Example]]
+  - This is a good start and works, but results in busy waiting (the program is in the ready state while running the while loop)

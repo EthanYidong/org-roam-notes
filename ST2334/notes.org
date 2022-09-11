@@ -167,6 +167,10 @@
 - Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are independent iff $P(A\cap B) = P(A)P(B)$
 - This implies that $P(B \mid A) = P(B)$. If $B \neq 0$, then two events are independent iff $P(B \mid A) = 0$ (and vice versa)
 - This is denoted as $A \perp B$
+- Properties of Independent $X$ and $Y$
+  - P(X \in A; Y \in B) = P(X \in A) \times P(Y \in B)
+  - f(X) and g(Y) are independent for any $f$ and $g$
+  - The [[id:f65e3581-f113-47f4-b98b-9317083def60][Conditional Distribution]] of Y, $f(y | x)$ is equal to the [[id:64af4f21-1f96-4dc1-b0fb-cc5b5a40bdf0][Marginal Probability Distribution]] $f(y)$
 * Mutually Exclusive
 :PROPERTIES:
 :ID:       79b01f9a-9ea6-4148-b03e-4b8923181368
@@ -292,7 +296,7 @@
   - Note that this is not the cartesian product of the ranges of the individual variables, as some outcomes are unattainable (e.x. dice roll is a multiple of 4 and is odd)
 - This definition works for an arbitrary number of variables
 - A N-dimentional RV is a [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variable]] iff the range is countable
-- It is a [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variable]] if it can assume any value in some defined range of the space $\mathbb{R}^N$
+- It is a [[id:fe324f54-728a-47e8-8777-1ff360b0457b][C[[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]ontinuous Random Variable]] if it can assume any value in some defined range of the space $\mathbb{R}^N$
 - If all components are descrete, then it is descrete
 - If all components are continuous, then it is continuous
 - In other cases, unhandled for now
@@ -313,3 +317,44 @@
     - $f(x,y) \geq 0$ for any $(x,y)$
     - $f(x,y) = 0$ for any $(x,y) \notin R_{X,Y}$
     - $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x, y) dy dx =1$
+** Joint Distibutions of [[id:6172717b-8761-40ed-a989-0f55eb10bcfa][Independent]] Random Variables
+:PROPERTIES:
+:ID:       dbef14ae-c127-42b2-ac71-fe79db1ad2ce
+:END:
+- Iff we have a joint distribution of [[id:6172717b-8761-40ed-a989-0f55eb10bcfa][Independent]] Random Variables, then we have $R_{X,Y}={(x,y)x \in R_X; y \in R_Y}=R_X \times R_Y$
+** Expectation for Joint Distributions
+:PROPERTIES:
+:ID:       43cf4c4d-822e-4221-94d0-1bbc0c9b1e52
+:END:
+- Assuming we have [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] f(x,y), then:
+  - $E(g(X,Y)) = \sum_x \sum_y g(x,y) f(x,y)$ for discrete distributions
+  - $E(g(X,Y)) = \int_{-\intfy}^{\infty} \int_{-\intfy}^{\infty} g(x,y) f(x,y) dy dx$ for continuous distributions
+** Covariance for Joint Distributions
+:PROPERTIES:
+:ID:       7cac8039-e815-4565-892f-1cc785e861b6
+:END:
+- If we let $g(X,Y) = (X - E(X))(Y - E(Y))= (X- \mu_X)(Y - \mu_Y)$, then the covariance is given by $E(g(X,Y))$ ([[id:43cf4c4d-822e-4221-94d0-1bbc0c9b1e52][Expectation for Joint Distributions]])
+- Properties:
+  - $cov(X, Y) = E(XY) - E(X)E(Y)$
+  - If X and Y are [[id:6172717b-8761-40ed-a989-0f55eb10bcfa][Independent]], then $cov(X,Y) = 0$, but we do not have the converse.
+  - $cov(aX+b, cY+d) = ac \times cov(X,Y)$
+  - $V(aX + bY) = a^2 V(X) + b^2 V(Y) + 2ab \times cov(X,Y)$ ([[id:ab8cb1c3-a402-4c15-9317-b327447a3d5a][Variance of Random Variables]])
+
+* Marginal Probability Distribution
+:PROPERTIES:
+:ID:       64af4f21-1f96-4dc1-b0fb-cc5b5a40bdf0
+:END:
+- If we have a 2-dimentional [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]] with a [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] $f(x, y)$, then the marginal distribution of X is
+  - $f(x) = \sum_{y}f(x,y)$ for discrete y
+  - $f(x) = \int_{-\infty}^{\infty}f(x,y)dy
+- This is also how we get the marginal distribution of Y
+- $f$ is a probability function and thus follows the properties of [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]
+
+* Conditional Distribution
+:PROPERTIES:
+:ID:       f65e3581-f113-47f4-b98b-9317083def60
+:END:
+- Given the [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] $f(x,y)$ and the [[id:64af4f21-1f96-4dc1-b0fb-cc5b5a40bdf0][Marginal Probability Distribution]] $f(x)$, we get
+- $f(y|x)=\frac{f(x, y)}{f(x)}$
+- This is the probability distribution of $Y$ for some given value $x$
+- $f$ is a probability function and thus follows the properties of [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]

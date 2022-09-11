@@ -112,6 +112,9 @@
   - Clearly demonstrate the value of your product
 - CRT and FRT boxes should be properly labeled
 - Tech progress should be ideally limited to a single factor
+- PESTLE should be more macro
+- Target market should map to value proposition
+- 5-force to include labels
 
 * Tria
 :PROPERTIES:
@@ -343,6 +346,8 @@
 :END:
 - Five key forces in every industry
   - Rivalry (other companies)
+    - "How intense is the rivalry?"
+    - Industry should be growing
   - Bargaining power of buyers
   - Bargaining power of suppliers
   - Threat of Substitute products
@@ -451,3 +456,70 @@
 :ID:       71d0000b-2674-4625-98d5-e7ce8405a6a2
 :END:
 - A canvas with 9 areas
+
+* Stakeholder
+:PROPERTIES:
+:ID:       0fa897f8-b481-466e-a359-b18489e900f4
+:END:
+- Any entity which is involved in the project, or whose interest are positively or negatively affected by the outcomes of your project
+- [[https://www.edrawsoft.com/article/what-is-stakeholder-map.html][Stakeholder Map]]
+  - Tria example:
+    - Least important = Customers at resturaunts
+    - Show Consideration = Environmentally concerned customers, Shanaya
+    - Meet their needs = Yara, ESG
+    - Key player = KFC
+
+* Business Model
+:PROPERTIES:
+:ID:       09c6211c-4d7d-463f-ae13-f62bbbf857a0
+:END:
+- Used to augment the primary innovation
+- iTunes + the iPod
+- Examples:
+  - Razor + Razorblade
+    - Printer + Toner
+  - Franchise
+    - McDonald's
+  - Profit & Process
+    - Look at quality and processes
+  - Digital busines models
+  - One-time payment
+  - Multi-sided platforms
+  - Pay per use
+  - Subscription
+  - Freemium
+  - Micropayments
+  - Data reseller
+  - Advertising
+  - Un-bundling
+- Pattern recognition
+  - Value propositions
+    - What do you offer your customer
+  - Customer segments
+    - Who is your customer
+  - Customer Relationships
+    - How does the customer interact with you
+  - Channels
+    - How does the customer pay you and buy your product
+  - Revenue Streams
+  - Key Resources
+  - Key Activities
+  - Key Partnerships
+    - What entities complement your business
+  - Cost Structure
+    - When and how much do your customers pay you?
+- Developing a business model
+  - Make sure that you can actually sell to people
+
+
+* Capital Expense
+:PROPERTIES:
+:ID:       9b71ffd5-c679-4434-8952-5ee3eb7e8a6c
+:END:
+- Large, one-time purchases that are usually long-term use equipment
+
+* Operational Expense
+:PROPERTIES:
+:ID:       4a2ceb28-a9ce-4405-adae-173e1c7ee0e6
+:END:
+- Costs of running regularly, such as ingredients or consumables which are used up constantly

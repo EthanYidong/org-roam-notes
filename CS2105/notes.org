@@ -122,6 +122,7 @@
 :ID:       5d0b0590-fd98-4db1-89f1-f8f38bd11bb7
 :END:
 - 3rd layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+- Delivers packets from sender to receiver hosts
 ** Transport Layer
 :PROPERTIES:
 :ID:       dff0f2f7-2b30-48bd-8fb5-220db2076834
@@ -175,6 +176,7 @@
   - [[file:media/tcp-header_1.png][Header]]
 - Sequence #
   - First one is randomly chosen
+  - Randomized to provide some distinctions between repeat connections
   - Subsequent ones are equal to the first one plus the byte number of the first byte of the data in sequence.
 - Ack #
   - Equal to the sequence number of the first byte in sequence not received as part of the stream
@@ -256,12 +258,39 @@
 :ID:       c66bc940-0321-468b-86c1-21ae30542ab4
 :END:
 - [[id:5d0b0590-fd98-4db1-89f1-f8f38bd11bb7][Network Layer]] service of the internet
+- Runs within routers between the sender and receiver hosts
+  - Routers will read the IP header to determine where to send the packet
+-
 * [[id:c66bc940-0321-468b-86c1-21ae30542ab4][IP]] Address
 :PROPERTIES:
 :ID:       11fd492e-05ef-4acd-818c-60fdcc28ae46
 :END:
 - 32 bit(IPv4) or 128 bit(IPv6) that identifies a node in a network
+  - Both Hosts and Routers
 - IPv4 addresses look like [0-255].[0-255].[0-255].[0-255]
+- IPv4 blocks look like [0-255].[0-255].[0-255].[0-255]/N
+  - N denotes the number of constant bits at the front
+  - IP addresses can be split into two parts, the subnet prefix and the hosst ID
+- IP addresses are associated with a [[id:16c49997-a487-4021-b7d1-a91b09859d1d][Network Interface]]
+** Special IP Addresses
+:PROPERTIES:
+:ID:       d888ff99-23b4-4f35-a91f-983d77c9b1ef
+:END:
+- 0.0.0.0: Non-routable meta-address, special use
+- 127.0.0.0/8: Loopback address, sends to the host
+  - Originally 127.0.0.1/32
+- Private addresses
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+- 255.255.255.255/32
+  - Broadcast address, which will send a message to all hosts on that subnet
+** IP Address Allocation
+:PROPERTIES:
+:ID:       160b1d3b-04d0-4162-b7be-501077aacb5b
+:END:
+- Organizations will buy IP addresses from a registry or rent from their ISP
+- ISPs get their blocks from ICANN
 * Domain Name System
 :PROPERTIES:
 :ID:       a3ae3cdc-5328-402e-8c47-177e942fa4fb
@@ -499,3 +528,59 @@
 - Send and wait implementations such as [[id:7a3e843b-8568-45e8-9af3-9d963ba4b722][Toy RDT 3.0]] are generally very slow because the sender must wait for a reply every time it wants to send a packet, leading to a vast underutilization of the bandwidth
 - Pipelining: send multiple un-acknowledged packets at once
 - Sending 3 packets at once multiplies the utilization by 3
+* DHCP
+:PROPERTIES:
+:ID:       c12c24ab-126a-45fd-8b2c-2e95e9876f8f
+:END:
+- A protocol which allows hosts to dynamically obtain an [[id:11fd492e-05ef-4acd-818c-60fdcc28ae46][IP Address]] when it joins a network
+- Renewable
+- Allows reuse of address (hosts can only hold an address while connected)
+- 4 steps:
+  1. Host broadcasts DHCP discover
+  2. DHCP server responds with a DHCP offer message
+  3. Host requests an IP address with a DHCP request messages
+  4. DHCP server will respond with a DHCP ack
+- Note that the apparent "redundancy" occurs because there may be multiple DHCP servers in a network
+- DHCP may also provide the router IP, local [[id:a3ae3cdc-5328-402e-8c47-177e942fa4fb][DNS]] IP, as well as the [[id:355ba6f2-81ee-4124-9d6a-29c26024ccb8][Subnet Mask]]
+- [[file:media/dhcp_1.png][Diagram]]
+* Network Mask
+:PROPERTIES:
+:ID:       fd2506eb-6c99-4546-9514-c972a9112c0d
+:END:
+- INdicates the network prefix vs host ID of an IP address
+* Network Interface
+:PROPERTIES:
+:ID:       16c49997-a487-4021-b7d1-a91b09859d1d
+:END:
+- An interface which enables a computer to connect to a network
+- For example
+  - WiFi
+  - Ethernet
+- A host will usually have one or two, and a router may have many
+* Subnet
+:PROPERTIES:
+:ID:       369efc83-fcbc-437c-8aee-e1037bb0877c
+:END:
+- A network formed by directly connected computers
+- Subnets are assigned a IP address prefix
+** Subnet Mask
+:PROPERTIES:
+:ID:       355ba6f2-81ee-4124-9d6a-29c26024ccb8
+:END:
+- Set all the subnet prefix bits to 1, and all the host ID bits to 0
+- For the IP Address 192.168.1.0/24: 255.255.255.0
+* Classless Inter-domain Routing
+:PROPERTIES:
+:ID:       1885a461-f189-49d2-a978-e6bad07506f9
+:ROAM_ALIASES: CIDR
+:END:
+- AKA CIDR
+- The method of assigning IP addresses with a subnet prefix and a host ID
+*
+
+* [[id:11fd492e-05ef-4acd-818c-60fdcc28ae46][IP Address]] Prefix Matching
+:PROPERTIES:
+:ID:       967b6e69-622b-4b0f-a4aa-87b300078e21
+:END:
+- Routers can request for all packets with a prefix to be routed to them after [[id:160b1d3b-04d0-4162-b7be-501077aacb5b][IP Address Allocation]]
+- This is done based on the longest matching prefix, so if someone requests for 192.0.0.0/8, and someone else requests for 192.168.0.0/16, then packets with IP 192.168.1.1 will get routed to the second.
