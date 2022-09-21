@@ -652,7 +652,7 @@
 - Alternatively: a non empty set $V$ is a subspace iff for all $u, v \in V$, $c, d \in \mathbb{R}$ $cu + dv \in V$
 - Trivial subspaces:
   - $span(\{0\})$, or the zero subspace.
-  - $\mathbb{R}^n$, which itself is also a subspace ($\span{\{(1, 0, ...), (0, 1, ...),..., (0, 0, ..., 1)\}$)
+  - $\mathbb{R}^n$, which itself is also a subspace ($span(\{(1, 0, ...), (0, 1, ...),..., (0, 0, ..., 1)\}$)
 - Subspaces of $\mathbb{R}^2$
   - The origin
   - Any line through the origin

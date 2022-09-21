@@ -18,10 +18,10 @@
 * Assignments
 
 ** DONE Assignment 0 <2022-08-26 Fri>
-** TODO Assignment 1 <2022-09-18 Sun>
+** DONE Assignment 1 <2022-09-18 Sun>
 
 * Tutorial
 ** DONE Tutorial Preparation 1 <2022-08-26 Fri>
 ** DONE Tutorial Preparation 2 <2022-09-02 Fri>
 ** DONE Tutorial Preparation 3 <2022-09-09 Fri>
-** TODO Tutorial Preparation 4 <2022-09-16 Fri>
+** DONE Tutorial Preparation 4 <2022-09-16 Fri>

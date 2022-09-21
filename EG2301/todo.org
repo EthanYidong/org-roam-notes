@@ -17,5 +17,5 @@
 *** DONE Current/Future Reality Trees
 *** DONE Value Proposition Canvas or Statement
 ** DONE Market Analysis <2022-09-06 Tue>
-** TODO Business Model of Compeditors <2022-09-13 Tue>
+** DONE Business Model of Compeditors <2022-09-13 Tue>
 - Only the right side of the canvas

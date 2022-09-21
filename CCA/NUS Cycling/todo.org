@@ -5,7 +5,7 @@
 
 * ReCycle
 ** DONE Send the subsidy proposal to CH
-** TODO NUSync Submission budget
+** DONE NUSync Submission budget
 * Recruitment
 ** DONE Tell YuXuan to set interview time slots
 ** Contact Participants
@@ -13,6 +13,13 @@
 ** DONE Set timing for prize collection
 * Room Booking
 ** DONE Send Payment Confirmation <2022-09-02 Fri>
+** TODO Book Room for October Meetings <2022-09-21 Wed>
 * Members
-** TODO Work out the Details
-** TODO Contact the members
+** DONE Work out the Details
+** DONE Contact the members
+* Picolove Rental
+** DONE Bill Members <2022-09-12 Mon>
+* WellNUS
+** TODO Final Budget
+* HalloWheels
+** TODO Budget

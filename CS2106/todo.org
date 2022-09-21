@@ -11,13 +11,13 @@
 ** DONE Post Lecture Quiz 2 <2022-08-18 Thu>
 ** DONE Post Lecture Quiz 3 <2022-08-25 Thu>
 ** DONE Post Lecture Quiz 4 <2022-09-08 Thu>
-** TODO Post Lecture Quiz 5 <2022-09-15 Thu>
+** DONE Post Lecture Quiz 5 <2022-09-15 Thu>
 
 * Tutorial
 ** DONE Tutorial Preparation 1 <2022-08-22 Mon>
 ** DONE Tutorial Preparation 2 <2022-08-29 Mon>
 ** DONE Tutorial Preparation 3 <2022-09-05 Mon>
-** TODO Tutorial Preparation 4 <2022-09-12 Mon>
+** DONE Tutorial Preparation 4 <2022-09-12 Mon>
 
 * Lab
 ** DONE Lab Preparation 1 <2022-08-26 Fri>

@@ -533,6 +533,9 @@
 - Each padding byte will be set to $p$
 
 * [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptography]] Pitfalls
+:PROPERTIES:
+:ID:       2bebee28-37df-40f1-a7fd-f957cdffdb79
+:END:
 - Secure ciphers may be vulnerable if not implemented or adopted properly
   - Don't reuse IV
     - For example, IV derived from filename, but many files may share the same name ([[https://www.schneier.com/blog/archives/2005/01/microsoft_rc4_f.html][Microsoft]])
@@ -562,6 +565,8 @@
         - Computer network and storage settings: isn't secret but may give attackers an advantage
         - Program used inside the smart card: isn't secret but makes it easier for attackers to identify vulnerabilities
       - It is ok to use it as only *one* of the many security factors.
+  - Using Encryption for authenticity:
+    - If you use encryption of authenticity, you run the risk of the attacker brute forcing a valid message if the messages are short enough
 * Covert Channel
 :PROPERTIES:
 :ID:       48fa0dee-27fe-4bf0-9337-d073743c82dd
@@ -931,3 +936,139 @@
 - [[file:media/signature_rsa_1.png][Signature with RSA]]
   - Note: the roles of public and private keys are flipped since we want only one party be be able to encrypt, but anyone be able to decrypt
 - [[file:media/signature_2.png][Example]]
+* Birthday Attack
+:PROPERTIES:
+:ID:       436330df-4367-4ba9-b42c-c33281a5c4b9
+:END:
+- Birthday Attack works by finding two different sets of data which results in the same hash value.
+  - $h(m_1)=h(m_2)$ when $m_1 \neq m_2$
+- Birthday paradox: a surprisingly few number of people are required to have a good chance of having a duplicate birthday
+- If we have M messages, each paired with a random value chosen from ${v_1, v_2, v_3, ..., v_T}$, then if $M > 1.17 T^{0.5}$ there is a probability of more than 0.5 that there exists a pair of messages with the same value.
+  - In general, the chance that a probability occurs = $1-e^{\frac{-M^2}{2T}}$
+- Thus, the approximate work factor is the square root of the digest length
+* [[id:ba7c1150-8c97-4862-87db-edf38efaa278][Public Key]] Distribution
+:PROPERTIES:
+:ID:       216301b0-5552-47c6-88d9-b92c5df17683
+:END:
+- How do you share your public key with other parties across an insecure channel?
+  - If an attacker can spoof messages, then they can send a message signed with their own private key and send their own public key
+** Public Announcement
+:PROPERTIES:
+:ID:       9c6f60c8-f1cd-4abf-a875-888d5332837c
+:END:
+- Just publically broadcast the key
+- Could be done through a website, social media, email blast, or even physically
+- Issues:
+  - Not standardized, there are many different methods to do this
+  - At the end of the day, you still need to trust an external entity to distribute the correct key
+** Public Directory
+:PROPERTIES:
+:ID:       a6419e46-f19c-4e98-962a-f54364c9d93c
+:END:
+- Keep a standardized database of public keys for people
+- For example, [[https://pgp.mit.edu][PGP MIT EDU]]
+- Issues:
+  - Anyone can post their public key, and the server must have some way to verify it
+  - You still have to trust the directory server, as well as making sure that the server is the authentic server
+  - Single point of failure
+  - Performance bottleneck
+** Public Key Infrastructure
+:PROPERTIES:
+:ID:       81f652ea-5fea-453f-aab3-6259684c0efa
+:ROAM_ALIASES: PKI
+:END:
+- AKA PKI
+- Objectives:
+  - Large scale
+  - Verify public keys without requiring the two communicating parties to trust one another
+  - Manage public and private keys throughout their lifecycle
+- Uses [[id:9a87fcc7-08ee-41b4-a15e-b39782520075][Certificates]] issued by [[id:e9a3e661-4685-4381-b082-21cf94b4699b][CAs]] in order to validate the authenticity of private keys
+- May also include online systems which can allow users to check that a certificate has not been [[id:8911cb0c-3b6a-4068-bcbc-c5e6b15dec56][Revoked]]
+*** Certificate Authority
+:PROPERTIES:
+:ID:       e9a3e661-4685-4381-b082-21cf94b4699b
+:ROAM_ALIASES: CA
+:END:
+- Entity which issues and signs digital [[id:9a87fcc7-08ee-41b4-a15e-b39782520075][Certificate]] using its own public-private key pair
+- OSes and browsers will have pre-loaded public keys for trusted CAs
+  - These root CAs go through stringent checks and audits
+- CA needs to check:
+  - Whether the requester owns the domain name
+  - For higher "classes" of SSL certificates (e.x. Extended Validation SSL certificates), more checks must be done
+    - May include manual checks
+    - Only EV SSL certs will activate the green address bar (UI elements getting phased out nowadays)
+- For distribution purposes, we have intermediate CAs under the root CA which interact with external entities
+  - [[file:media/ca-tree_1.png][CA Tree]]
+  - This leads to a hierarchy of trust, which allows parties which trust a Root CA to also infer trust on its children
+  - The verifier may either receive the intermediate certificates from the sender, or find it through other means
+  - [[file:media/certificate-chain_1.png][Certificate Chain]]
+*** Certificate
+:PROPERTIES:
+:ID:       9a87fcc7-08ee-41b4-a15e-b39782520075
+:END:
+- A digital document which contains:
+  - The identity of an owner
+  - The public key of that owner
+  - The time window for the validity of the certificate
+  - The [[id:f6d86fcf-3694-4ae1-999d-d3a087484b83][Digital Signature]] of the [[id:e9a3e661-4685-4381-b082-21cf94b4699b][CA]]
+- Used in protocols such as SSL/TLS
+- Sent during the handshake process
+- Classes:
+  - Domain Validation: Does the entity own the domain?
+  - Organization Validation: Does the entity's organization exist as a legal entity?
+  - Extended Validation: Can the entity prove its legal identity?
+*** X.509
+:PROPERTIES:
+:ID:       b9dd6a31-0ddc-4374-b311-531e538597f0
+:END:
+- A standardization of the [[id:9a87fcc7-08ee-41b4-a15e-b39782520075][Certificate]] format
+- Includes:
+  - Version Number
+  - Serial Number (unique)
+  - Signautre Algorithm ID
+  - Issuer Name
+  - Validity Period
+  - Subject Name
+  - Subject Public Key and Algorithm
+  - Issuer ID (unique, optional)
+  - Subject ID (unique, optional)
+  - Extensions (optional)
+  - Certificate Signature and Algorithm
+- Distinguished Name: a name used to identify an entity
+  - Commonly includes:
+    - Country
+    - State
+    - Locale
+    - Organization name
+    - Organizational unit name
+    - Common name
+*** Revoking Certificates
+:PROPERTIES:
+:ID:       8911cb0c-3b6a-4068-bcbc-c5e6b15dec56
+:END:
+- Non-expired certificates may need to be revoked
+  - Private key compromised
+  - Issuing CA compromised
+  - Entity left the organization
+  - Business entity closed
+- Different approaches:
+  - Certificate Revocation List (CRL)
+    - CA periodically signs and publishes a list of revoked certificates
+    - Requires a system to periodically download the list
+  - Online Certificate Status Protocol (OCSP)
+    - Requres an online service to validate a cert
+    - Problems:
+      - Leak of privacy, since you have to send data to the OCSP which can figure out what sites you are visiting
+      - If the responder does not respond, then should the browser treat it as a success or a fail?
+    - Solutions:
+      - OCSP stapling: A certificate can also include a timestamped OCSP response signed by the CA, so that the verifier's privacy is not compromised
+      - TLS handshake: same as stapling but place the OCSP response with the handshake protocol
+      - Drawback: Increased network cost
+*** Attacks on PKI
+:PROPERTIES:
+:ID:       e34d94cc-50ef-4983-b709-4b2c469ad124
+:END:
+- CAs compromised: for example, DigiNotar
+- CAs go rogue: allows for man-in-the-middle attacks to occur by CAs which generate spoofed certificates
+- Null byte attack: The URL looks the same, but there is a null byte in the URL which has a different, valid certificate, but the user cannot tell
+- Similarly, typosquatting attacks may use similar looking URLs to trick users into visiting a spoofed site

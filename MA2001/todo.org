@@ -23,13 +23,13 @@
 ** DONE Lecture Quiz 3 <2022-08-26 Fri>
 ** DONE Lecture Quiz 4 <2022-09-02 Fri>
 ** DONE Lecture Quiz 5 <2022-09-09 Fri>
-** TODO Lecture Quiz 6 <2022-09-16 Fri>
+** DONE Lecture Quiz 6 <2022-09-16 Fri>
 
 * Tutorial
 ** DONE Tutorial Preparation 1 <2022-08-26 Fri>
 ** DONE Tutorial Preparation 2 <2022-09-02 Fri>
 ** DONE Tutorial Preparation 3 <2022-09-09 Fri>
-** TODO Tutorial Preparation 4 <2022-09-16 Fri>
+** DONE Tutorial Preparation 4 <2022-09-16 Fri>
 
 * Homework
 ** DONE Homework 1 <2022-09-09 Fri>

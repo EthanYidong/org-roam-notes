@@ -968,3 +968,110 @@
 - This can be use to implement a lock
 - [[file:media/simple-testandset_1.png][Example]]
   - This is a good start and works, but results in busy waiting (the program is in the ready state while running the while loop)
+** Peterson's Algorithm
+:PROPERTIES:
+:ID:       9add2553-fdd5-4ebd-89f1-4e75567f0358
+:END:
+- Use two mechanisms: a turn counter and a wait array
+- In the case of two processes, we have a turn counter (0 or 1), and wait[0] and wait[1]
+- Want indicates which process wants to enter the CS
+- Turn indicates which process should be given priority
+- [[file:media/petersons-algorithm_1.png][Diagram]]
+- Assumes that writes to Turn are atomic, otherwise it could be overwritten while the other process checks the value
+- Problems:
+  - While loop is a busy loop, and uses CPU time instead of going into a blocked state
+    - Busy waiting should be employed for short waits to avoid blocking overhead
+    - Blocked state should be employed for longer waits when blocking overhead is less than the cost of busy waiting
+  - Low level, which requires interacting with many variables
+  - Not general, doesn't work for general synchronization
+** Semaphore
+:PROPERTIES:
+:ID:       927e6d69-9220-448c-a23c-a74746e763e6
+:END:
+- High level concept which provides general synchronization
+- Only specifies desired behaviors, but ignores implementation
+- Invented by Dijkstra
+- Provides
+  - A way to block a number of processes
+  - A way to wake up one or more sleeping processes
+- Stores an integer
+- Defines Two Operations (Atomic!)
+  - Wait
+    - While the value of S is $S \leq 0$, block/sleep
+    - Decrement S (upon wake up if blocked, otherwise as normal)
+    - AKA P() or Down()
+  - Signal
+    - Increment S
+    - Wake up one sleeping process, if any
+    - This operation never blocks
+    - AKA V() or Up()
+- [[file:media/semaphore_1.png][Diagram]]
+- Properties:
+  - Given initial value of S is $S_{\text{initial}} \geq 0$
+  - $S_{\text{current}}=S_{\text{initial}}+numSignal(S)-numWait(S)$
+    - where numSignal is number of signal operations completed and
+    - numWait is the number of wait operations completed
+    - Requires each process to call signal after every wait
+- Types
+  - General semaphore, takes any integer $S \geq 0$
+  - Binary semaphore, takes values 0 or 1
+    - It has the same power as a general semaphore, that is, a general semaphore can be implemented given a semaphore.
+- Solves all known synchronization problems
+** Mutex
+:PROPERTIES:
+:ID:       3e85ccda-9e07-4e37-9f1f-3b14451abd34
+:END:
+- [[file:media/mutex_1.png][Diagram]]
+- A usage of a [[id:927e6d69-9220-448c-a23c-a74746e763e6][Semaphore]] which allows the programmer to restrict a critical section to only one process at a time.
+- [[file:media/mutex-proof_1.png][Proof]]
+- [[file:media/mutex-proof_2.png][Proof 2]]
+- Usage of Semaphores incorrectly may still lead to deadlock:
+  - [[file:media/mutex-deadlock_1.png][Deadlock]]
+  - In general, when we have a cycle in the wait graph, then deadlocks may occur
+** Classical Synchronization Problems
+:PROPERTIES:
+:ID:       49bbc7b1-f852-4e7f-97e4-c505a274d1d0
+:END:
+*** Producer Consumer
+:PROPERTIES:
+:ID:       7938563c-4d8d-4eea-bd35-58648ab02b79
+:END:
+- Processes share a bounded buffer with a bounded size
+- Producers insert items into buffer (waits when buffer is full)
+- Consumers remove items from buffer (waits when buffer is empty)
+- Busy waiting version:
+  - [[file:media/producer-consumer-busy-wait_1.png][Busy Wait]]
+- Blocking version:
+  - [[file:media/producer-consumer-blocking_1.png][Blocking]]
+*** Readers Writer
+:PROPERTIES:
+:ID:       b74cf2d0-fda7-4410-a0b8-8e5a6cf4d089
+:END:
+- Multiple readers read from data simultaneously
+- Only a single writer can write to the data
+- Data cannot be read to and wrote to simultaneously
+- [[file:media/reader-writer_1.png][Example]]
+  - In this case, the writer may starve if there is a continuous stream of readers
+*** Dining Philosophers
+:PROPERTIES:
+:ID:       c804675c-5a9b-4073-88f3-0082bd20110a
+:END:
+- We have N philosophers sitting around a table, with single chopsticks in between each one
+- Each philosopher can only eat by aquiring the chopsticks to their left and their right
+- We want a deadlock and starve free for all philosophers to eat
+- Attempt 1:
+  - [[file:media/philosophers-deadlock_1.png][Deadlock]]
+  - This will deadlock when all philosophers pick up their left chopsticks simultaneously
+  - What if we put the left chopstick down if we cannot get the right?
+  - Leads to a livelock where the philosophers will repeatedly pick up and put down the left chopstick
+- Attempt 2:
+  - [[file:media/philosophers-slow_1.png][Slow]]
+  - Works, but does not allow simultaneous eating
+- Tannenbaum Solution
+  - [[file:media/philosophers-tannenbaum_1.png][1]]
+  - [[file:media/philosophers-tannenbaum_2.png][2]]
+    - Note the macro use for LEFT and RIGHT make them automatically relative to i (disgusting, I know)
+  - [[file:media/philosophers-tannenbaum_3.png][3]]
+- Limited Eater Solution
+  - Leave an empty seat
+  - By PHP there is at least one person who can eat

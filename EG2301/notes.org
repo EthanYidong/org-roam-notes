@@ -115,6 +115,17 @@
 - PESTLE should be more macro
 - Target market should map to value proposition
 - 5-force to include labels
+- Numbers:
+  - Turnover AKA Sales(Top line)
+  - Gross profit: sales - cost of product
+  - EBITA - Earnings before interest, taxes, and amortization
+  - Cash flow statement - cash in, cash out
+- Business Model:
+  - What is the trend in revenue streams? Should you change it up?
+  - Capital leasing
+  - Service revenue
+  - Add insights and what does it means
+  - If your actual competetor is manpower, then analyze companies that *could* do what you're doing
 
 * Tria
 :PROPERTIES:
@@ -431,6 +442,21 @@
 :ID:       8e69e71e-0003-46ef-a3e5-a6ceec65c4dc
 :END:
 - Statistics about industries
+*** ORBIS
+:PROPERTIES:
+:ID:       4db80bab-3056-4ea1-bbdd-ae9d367ea88f
+:END:
+-
+*** Factiva
+:PROPERTIES:
+:ID:       8f76a1c7-dca4-4130-8a67-db516745d7f4
+:END:
+-
+*** Crunchbase
+:PROPERTIES:
+:ID:       5ca92cc5-d8d5-4141-8aa0-733df7635b33
+:END:
+-
 ** Citations
 :PROPERTIES:
 :ID:       184428f7-d97b-4621-a9f9-5649a5c91a41
@@ -511,7 +537,37 @@
 - Developing a business model
   - Make sure that you can actually sell to people
 
-
+** Customer Segment
+:PROPERTIES:
+:ID:       fdf48451-41b6-4021-b94a-568e3cc36f66
+:END:
+- How do you describe your customers?
+- The act of partitioning your target market into different types of customeers is called market segmentation
+- Common approaches
+  - Geographic/Demographic segmentation
+  - Psychological/Behavioral (lifestyle)
+  - Activity/Value
+  - NEW: Data Driven (RFM)
+    - Recency, how recent their activity is
+    - Frequency, how frequency their activity is
+    - Monetary, how much their activity is worth
+- Come up with an archetype:
+  - Facts
+  - Pain
+  - Behavior
+  - Goal
+- Detailed archetype:
+  - Come up with some story
+- B2B segmentation:
+  - You're still selling to a person at the end of the day...
+  - Job level/function segmentation
+  - Company size/location
+  - Industry segmentation
+- Precision is key
+- Why?
+  - Direct and focused marketing
+  - Data analytics for marketing spend
+  - Maximize ROI on marketing
 * Capital Expense
 :PROPERTIES:
 :ID:       9b71ffd5-c679-4434-8952-5ee3eb7e8a6c
