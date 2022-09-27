@@ -15,14 +15,14 @@
 :PROPERTIES:
 :ID:       c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9
 :END:
-- The set (usually denoted by $S$) of all possible outcomes of a [[id:66f7bb17-6edb-46ee-a6b7-0f26e5712a09][Statistical Experiment]]
+- The set (usually denoted by \(S\)) of all possible outcomes of a [[id:66f7bb17-6edb-46ee-a6b7-0f26e5712a09][Statistical Experiment]]
 * Sample Point
 :PROPERTIES:
 :ID:       f9b31ced-5160-4717-8776-e9e4b32ff94c
 :END:
 - Every outcome (element) in a [[id:c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9][Sample Space]]
-- The brackets $\{\}$ notates a set and order does not matter; that is, {1, 2} and {2, 1} are indistinguishable
-- The brackets $()$ notates an ordered tuple and order does matter; that is, (1, 2) and (2, 1) are distinguishable
+- The brackets \(\{\}\) notates a set and order does not matter; that is, {1, 2} and {2, 1} are indistinguishable
+- The brackets \(()\) notates an ordered tuple and order does matter; that is, (1, 2) and (2, 1) are distinguishable
 * Event
 :PROPERTIES:
 :ID:       2b8713f1-41e0-4967-a8af-5bef33624109
@@ -43,40 +43,40 @@
 :ID:       598efe18-f6c2-41f1-9ca1-21a92a9f94ee
 :END:
 - Operations of [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]]
-  - Union: $A \cup B$
+  - Union: \(A \cup B\)
     - The set of all [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]] which are in either A or B
-    - Over n events: $\bigcup_{i=1}^{n}A_i$
-  - Intersection: $A \cap B$
+    - Over n events: \(\bigcup_{i=1}^{n}A_i\)
+  - Intersection: \(A \cap B\)
     - The set of all [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]] which are in both A and B
-    - Over n events: $\bigcap_{i=1}^{n}A_i$
-  - Complement: $A'$, "A prime"
+    - Over n events: \(\bigcap_{i=1}^{n}A_i\)
+  - Complement: \(A'\), "A prime"
     - The set of all [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]] which are not in A
-  - Contain: $A \subset B$
+  - Contain: \(A \subset B\)
     - True if all [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Points]] in A are also in B
-    - If $A \subset B$ and $B \subset A$ then $A = B$
-    - Note: $\subset$ here includes when the sets are equal, strict subsets are denoted by $\subsetneq$
-  - Equivalent: $A = B$
+    - If \(A \subset B\) and \(B \subset A\) then \(A = B\)
+    - Note: \(\subset\) here includes when the sets are equal, strict subsets are denoted by \(\subsetneq\)
+  - Equivalent: \(A = B\)
     - If every [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Point]] in A are in B, and every [[id:f9b31ced-5160-4717-8776-e9e4b32ff94c][Sample Point]] in B are in A
 * Event Operation Properties
 :PROPERTIES:
 :ID:       8b7d6979-f0ea-4e0f-b85c-df2b3d1ba407
 :END:
 - Properties of [[id:598efe18-f6c2-41f1-9ca1-21a92a9f94ee][Event Operations]]
-  - $A \cap A' = \emptyset$
-  - $A \cap \emptyset$ = \emptyset$
-  - $A \cup A' = S$
-  - $(A')' = A$
-  - $A\cup(B\cap C) = (A\cup B)\cap(A\cup C)$
-  - $A\cap(B\cup C) = (A\cap B)\cup(A\cap C)$
-  - $A\cup B = A \cup (B \cap A')$
-  - $A = (A \cap B) \cup (A \cap B')$
-  - $A' \cap B' = (A \cup B)'$ (Extends to more than 2)
-  - $A' \cup B' = (A \cap B)'$ (Extends to more than 2)
+  - \(A \cap A' = \emptyset\)
+  - \(A \cap \emptyset\) = \emptyset\)
+  - \(A \cup A' = S\)
+  - \((A')' = A\)
+  - \(A\cup(B\cap C) = (A\cup B)\cap(A\cup C)\)
+  - \(A\cap(B\cup C) = (A\cap B)\cup(A\cap C)\)
+  - \(A\cup B = A \cup (B \cap A')\)
+  - \(A = (A \cap B) \cup (A \cap B')\)
+  - \(A' \cap B' = (A \cup B)'\) (Extends to more than 2)
+  - \(A' \cup B' = (A \cap B)'\) (Extends to more than 2)
 * Mutually Exclusive
 :PROPERTIES:
 :ID:       2e60818e-a6a7-4d04-a74d-d23d44570549
 :END:
-- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are mutually exclusive if $A \cap B$ is equal to $\emptyset$
+- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are mutually exclusive if \(A \cap B\) is equal to \(\emptyset\)
 * Counting Methods
 :PROPERTIES:
 :ID:       6aa1cd9f-fd99-489d-8dc7-eda6533bbc91
@@ -99,192 +99,192 @@
 :ID:       e7066e9c-c24e-49f4-8173-32ea9f2bbab4
 :END:
 - Method of [[id:6aa1cd9f-fd99-489d-8dc7-eda6533bbc91][Counting]]
-- Number of ways to choose $n$ objects out of $r$ objects, including ordering
-- $P_n^r = \frac{n!}{(n-r)!}$
+- Number of ways to choose \(n\) objects out of \(r\) objects, including ordering
+- \(P_n^r = \frac{n!}{(n-r)!}\)
 * Combinations
 :PROPERTIES:
 :ID:       9d4ab2df-003b-4f3a-8198-1203b69692d7
 :END:
 - Method of [[id:6aa1cd9f-fd99-489d-8dc7-eda6533bbc91][Counting]]
-- Number of ways to choose $n$ objects out of $r$ objects, not caring about order
-- $C_n^r = \frac{n!}{(n-r)! \times (r)!}$
+- Number of ways to choose \(n\) objects out of \(r\) objects, not caring about order
+- \(C_n^r = \frac{n!}{(n-r)! \times (r)!}\)
 * Probability
 :PROPERTIES:
 :ID:       7b143707-19ff-4cb9-95a5-c3ad210297d8
 :END:
 - How likely an [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Event]] will occur
-- Probability of A to occur: $P(A)$
+- Probability of A to occur: \(P(A)\)
 * Relative Frequency
 :PROPERTIES:
 :ID:       9c3a91ed-ec3c-488b-a7d7-c6a56f7f1615
 :END:
 - One interpretation of [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]]
-- Repeat an experiment E $n$ times
-- Let the event A occur $n_A$ times
-- The relative frequency $f_A$ of an event A is equal to $\frac{n_A}{n}$
-- When n approaches infinity, the relative frequency approaches $P(A)$
-- Properties of $f_A$
-  - $0 \leq f_A \leq 1$
-  - $f_A = 1$ if A occurs in every repetition
-  - If A and B are mutually exclusive then $f_{A\cup B} = f_A + f_B$
+- Repeat an experiment E \(n\) times
+- Let the event A occur \(n_A\) times
+- The relative frequency \(f_A\) of an event A is equal to \(\frac{n_A}{n}\)
+- When n approaches infinity, the relative frequency approaches \(P(A)\)
+- Properties of \(f_A\)
+  - \(0 \leq f_A \leq 1\)
+  - \(f_A = 1\) if A occurs in every repetition
+  - If A and B are mutually exclusive then \(f_{A\cup B} = f_A + f_B\)
 * Basic Properties of Probability
 :PROPERTIES:
 :ID:       cedcb399-0696-46d2-96d0-d78e72b629d7
 :END:
 - Propositions about [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]]
-  - $P(\emptyset) = 0$
-  - $P(S) = 1$
-  - $0\leq P(A) \leq 1$
-  - If A and B are mutually exclusive, then $P(A\cup B) = P(A) + P(B)$
+  - \(P(\emptyset) = 0\)
+  - \(P(S) = 1\)
+  - \(0\leq P(A) \leq 1\)
+  - If A and B are mutually exclusive, then \(P(A\cup B) = P(A) + P(B)\)
     - This extends to any arbitrary number of mutually exclusive [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]]
-  - $P(A')=1-P(A)$
-  - $P(A) = P(A \cap B) + P(A \cap B')$
-  - $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
-  - If $A \subset B$ then $P(A) \leq P(B)$
+  - \(P(A')=1-P(A)\)
+  - \(P(A) = P(A \cap B) + P(A \cap B')\)
+  - \(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)
+  - If \(A \subset B\) then \(P(A) \leq P(B)\)
 
 * Finite Sample Space, Equal Outcomes
 :PROPERTIES:
 :ID:       173c2fa8-667b-4cde-b7fe-07450267724a
 :END:
-- Let the sample space be $S = {a_1, a_2, ..., a_k}$
-- Assume that $P(a_1) = P(a_2) = ... = P(a_k)$
-- Then $P(A)$ = $\frac{\text{Number of sample points in A}}{\text{Number of sample points in S}}$
+- Let the sample space be \(S = {a_1, a_2, ..., a_k}\)
+- Assume that \(P(a_1) = P(a_2) = ... = P(a_k)\)
+- Then \(P(A)\) = \(\frac{\text{Number of sample points in A}}{\text{Number of sample points in S}}\)
 
 * Conditional Probability
 :PROPERTIES:
 :ID:       f4f63c08-6447-4f2e-8285-779b35072f4c
 :END:
 - Find the [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]] of an [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Event]] B, but only when we know that another event A has occured
-- Denoted as $P(B \mid A)$, the mid line can be read as "given"
-- $P(B \mid A) = \frac{P(A \cap B)}{P(A)}$
-  - This formula essentially restricts the sample space to the event $A$
-- We also have $P(A \mid B) = \frac{P(A)P(B \mid A)}{P(B)}$
+- Denoted as \(P(B \mid A)\), the mid line can be read as "given"
+- \(P(B \mid A) = \frac{P(A \cap B)}{P(A)}\)
+  - This formula essentially restricts the sample space to the event \(A\)
+- We also have \(P(A \mid B) = \frac{P(A)P(B \mid A)}{P(B)}\)
   - This essentially reframes the previous formula using the multiplication rule
 * Independence
 :PROPERTIES:
 :ID:       6172717b-8761-40ed-a989-0f55eb10bcfa
 :END:
-- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are independent iff $P(A\cap B) = P(A)P(B)$
-- This implies that $P(B \mid A) = P(B)$. If $B \neq 0$, then two events are independent iff $P(B \mid A) = 0$ (and vice versa)
-- This is denoted as $A \perp B$
-- Properties of Independent $X$ and $Y$
+- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are independent iff \(P(A\cap B) = P(A)P(B)\)
+- This implies that \(P(B \mid A) = P(B)\). If \(B \neq 0\), then two events are independent iff \(P(B \mid A) = 0\) (and vice versa)
+- This is denoted as \(A \perp B\)
+- Properties of Independent \(X\) and \(Y\)
   - P(X \in A; Y \in B) = P(X \in A) \times P(Y \in B)
-  - f(X) and g(Y) are independent for any $f$ and $g$
-  - The [[id:f65e3581-f113-47f4-b98b-9317083def60][Conditional Distribution]] of Y, $f(y | x)$ is equal to the [[id:64af4f21-1f96-4dc1-b0fb-cc5b5a40bdf0][Marginal Probability Distribution]] $f(y)$
+  - f(X) and g(Y) are independent for any \(f\) and \(g\)
+  - The [[id:f65e3581-f113-47f4-b98b-9317083def60][Conditional Distribution]] of Y, \(f(y | x)\) is equal to the [[id:64af4f21-1f96-4dc1-b0fb-cc5b5a40bdf0][Marginal Probability Distribution]] \(f(y)\)
 * Mutually Exclusive
 :PROPERTIES:
 :ID:       79b01f9a-9ea6-4148-b03e-4b8923181368
 :END:
-- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are mutually exclusive iff $P(A \cap B) = 0$
+- Two [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] are mutually exclusive iff \(P(A \cap B) = 0\)
 - "A and B will never happen at the same time"
 
 * Partition
 :PROPERTIES:
 :ID:       e7d7332e-0605-4c6a-a062-4987a9b9595c
 :END:
-- If [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] $A_1, A_2, A_3, ..., A_n$ are mutually exclusive and $\cup_{k=1}^{n}A_1$ is equal to the [[id:c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9][Sample Space]] $S$, then $A_1, A_2, A_3,...,A_n$ is said to be a partition of $S$.
+- If [[id:2b8713f1-41e0-4967-a8af-5bef33624109][Events]] \(A_1, A_2, A_3, ..., A_n\) are mutually exclusive and \(\cup_{k=1}^{n}A_1\) is equal to the [[id:c5ba33ab-a7a1-4cc3-ad6f-52261a7ec0c9][Sample Space]] \(S\), then \(A_1, A_2, A_3,...,A_n\) is said to be a partition of \(S\).
 * The Law of Total [[id:7b143707-19ff-4cb9-95a5-c3ad210297d8][Probability]]
 :PROPERTIES:
 :ID:       02ce18bb-5c8b-4ed3-aa73-6321bcf6b215
 :END:
-- If we have a partition $A_1, A_2, A_3, ..., A_n$, then $P(B) = \sum_{i=1}^{n}P(B \cap A_i) = \sum_{i=1}^{n}P(A_i)P(B \mid A_i)$
+- If we have a partition \(A_1, A_2, A_3, ..., A_n\), then \(P(B) = \sum_{i=1}^{n}P(B \cap A_i) = \sum_{i=1}^{n}P(A_i)P(B \mid A_i)\)
 * Bayes' Theorem
 :PROPERTIES:
 :ID:       a30eb7b7-e4af-4779-ab4a-5831f89bc095
 :END:
-- If we have a partition $A_1, A_2, A_3, ..., A_n$, then $P(A_k | B)= \frac{P(A_k)P(B\mid A_k)}{\sum_{i=1}^{n}P(A_i)P(B \mid A_i)}$
-- Special case: $P(A|B)=\frac{P(A)P(B|A)}{P(A)P(B|A)+P(A')P(B|A')}$
+- If we have a partition \(A_1, A_2, A_3, ..., A_n\), then \(P(A_k | B)= \frac{P(A_k)P(B\mid A_k)}{\sum_{i=1}^{n}P(A_i)P(B \mid A_i)}\)
+- Special case: \(P(A|B)=\frac{P(A)P(B|A)}{P(A)P(B|A)+P(A')P(B|A')}\)
 * Random Variables
 :PROPERTIES:
 :ID:       d5961102-6352-4a14-957a-1928b891b7e3
 :END:
-- Let $S$ be the sample space for the outcomes of an experiment
-- A function $X$, which assignes a real number to every element of $S$ is called a random variable
+- Let \(S\) be the sample space for the outcomes of an experiment
+- A function \(X\), which assignes a real number to every element of \(S\) is called a random variable
 - Examples:
-  - Let $S={HH, HT, TH, TT}$
+  - Let \(S={HH, HT, TH, TT}\)
   - This is the sample space for the experiment of flipping two coins
-  - Define the random variable $X$ "the number of heads flipped"
-  - $X(HH) = 2$
+  - Define the random variable \(X\) "the number of heads flipped"
+  - \(X(HH) = 2\)
 - Uppercase letters denote the random variables themselves
 - Lowercase letters denote the specific values from an experiment
 ** Probability with Random Variables
 :PROPERTIES:
 :ID:       183ffea3-b9ae-40e7-a1d1-331707c7379b
 :END:
-- $P(X = x) = P({s \in S : X(s) = x})$
-- $P(X \in A) = P({s \in S : X(s) \in A})$
+- \(P(X = x) = P({s \in S : X(s) = x})\)
+- \(P(X \in A) = P({s \in S : X(s) \in A})\)
 ** Discrete Random Variables
 :PROPERTIES:
 :ID:       11246aed-52b0-4c98-b9f3-1337548e0502
 :END:
-- A discrete random variable has a range $R_x$ which is finite or countable infinite.
-- In this case, $P(X = x)$ is defined and positive when x is in the range of the discrete random variable
+- A discrete random variable has a range \(R_x\) which is finite or countable infinite.
+- In this case, \(P(X = x)\) is defined and positive when x is in the range of the discrete random variable
 ** Continuous Random Variables
 :PROPERTIES:
 :ID:       fe324f54-728a-47e8-8777-1ff360b0457b
 :END:
-- A continuous random variable has a range $R_x$ which is an interval or a collection of intervals
+- A continuous random variable has a range \(R_x\) which is an interval or a collection of intervals
 * Probability Distributions
 :PROPERTIES:
 :ID:       ef1c9700-1ee3-44d4-86bd-890b5cd912b9
 :ROAM_ALIASES: "Probability Density Function" "Probabiltity Mass Function"
 :END:
 - For [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variables]]:
-  - Let $f(x_i) = P(X = x_i)$ for $x_i \in R_x$ and $f(x_i) = 0$ otherwise
-  - $f(x)$ is the probability function or probability mass function.
-  - The collection of pairs $(x_i, f(x_i))$ is called the probability distrubtion of $X$.
+  - Let \(f(x_i) = P(X = x_i)\) for \(x_i \in R_x\) and \(f(x_i) = 0\) otherwise
+  - \(f(x)\) is the probability function or probability mass function.
+  - The collection of pairs \((x_i, f(x_i))\) is called the probability distrubtion of \(X\).
   - This function will satisfy:
-    - $f(x_i) \geq 0$ for all $x_i \in R_x$
-    - $f(x) = 0$ for all $x \notin R_x$
-    - $\sum^{\infty}_{i=1}{f(x_i)}=1$
+    - \(f(x_i) \geq 0\) for all \(x_i \in R_x\)
+    - \(f(x) = 0\) for all \(x \notin R_x\)
+    - \(\sum^{\infty}_{i=1}{f(x_i)}=1\)
 - For [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variables]]:
-  - For any $x \in \mathbb{R}$, we have $P(X=x)=0$
-  - The probability function or probability density function is defined to quantify the probability that $X$ is in a certain range.
+  - For any \(x \in \mathbb{R}\), we have \(P(X=x)=0\)
+  - The probability function or probability density function is defined to quantify the probability that \(X\) is in a certain range.
   - Denote this p.d.f. by f(x).
   - This function will satisfy:
-    - $f(x) \geq 0$ for all $x \in R_x$, and $f(x) = 0$ otherwise
-    - $\int_{R_x} f(x)dx=1$
-    - For any a and b such that $a \leq b$, $P(a \leq X \leq b)=\int_{a}^{b}f(x)dx$
+    - \(f(x) \geq 0\) for all \(x \in R_x\), and \(f(x) = 0\) otherwise
+    - \(\int_{R_x} f(x)dx=1\)
+    - For any a and b such that \(a \leq b\), \(P(a \leq X \leq b)=\int_{a}^{b}f(x)dx\)
 * Cumulative Distributions
 :PROPERTIES:
 :ID:       cc1d3ee7-44ab-4d3e-b450-7805be27b50e
 :ROAM_ALIASES: CDF
 :END:
-- We define the cumulative distribution function (c.d.f) as $F(x) = P(X \leq x)$.
+- We define the cumulative distribution function (c.d.f) as \(F(x) = P(X \leq x)\).
   - This applies to both discrete and continuous [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]]
-- Using this, we can find the value $P(a \leq X \leq b) = P(X \leq b) - P(X < a) = F(b) - F(a-)$ where $a-$ is the largest value in $R_x$ that is less than $a$
+- Using this, we can find the value \(P(a \leq X \leq b) = P(X \leq b) - P(X < a) = F(b) - F(a-)\) where \(a-\) is the largest value in \(R_x\) that is less than \(a\)
 - For [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variables]]:
-  - $F(x)$ is just the sum of all $P(X = k)$ such that $k \leq x$
+  - \(F(x)\) is just the sum of all \(P(X = k)\) such that \(k \leq x\)
 - For [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variables]]:
-  - $F(x) = \int_{-\infty}^{x}f(t)dt$
+  - \(F(x) = \int_{-\infty}^{x}f(t)dt\)
 - This function satisfies:
-  - $0 \leq F(x) \leq 1$
+  - \(0 \leq F(x) \leq 1\)
 * Expectation of [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]]
 :PROPERTIES:
 :ID:       c49ef5b5-51fb-434b-a145-fbd8eebabae0
 :END:
-- "Mean" or "expected value" of $X$
-- Denoted as $E(X)$ or $\mu_X$
+- "Mean" or "expected value" of \(X\)
+- Denoted as \(E(X)\) or \(\mu_X\)
 - For [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variables]]:
-  - $E(X) = \sum_{x_i \in R_X} x_i f(x_i)$
+  - \(E(X) = \sum_{x_i \in R_X} x_i f(x_i)\)
 - For [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variables]]:
-  - $E(X) = \int_{-\infty}^\infty xf(x)dx$
+  - \(E(X) = \int_{-\infty}^\infty xf(x)dx\)
 - Satisfies:
-  - $E(aX+b)=aE(X)+b$
-  - $E(X+Y)=E(X)+E(Y)$
-  - If g is an arbitrary function, then $E[g(X)]=\sum_{x\in R_X}g(x)f(x)$ for discrete random variables
-    - $E[g(X)] = \int_{R_X}g(x)f(x)dx$ for continuous random variables
+  - \(E(aX+b)=aE(X)+b\)
+  - \(E(X+Y)=E(X)+E(Y)\)
+  - If g is an arbitrary function, then \(E[g(X)]=\sum_{x\in R_X}g(x)f(x)\) for discrete random variables
+    - \(E[g(X)] = \int_{R_X}g(x)f(x)dx\) for continuous random variables
 * Variance of [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]]
 :PROPERTIES:
 :ID:       ab8cb1c3-a402-4c15-9317-b327447a3d5a
 :END:
-- Denoted as $\sigma_X^2=V(X)=E(X-\mu_X)^2$,
+- Denoted as \(\sigma_X^2=V(X)=E(X-\mu_X)^2\),
 - Properties:
-  - $V(X) \geq 0$
-  - $V(X) = 0$ iff $P(X=E(X)) = 1$, i.e. $X$ is constant
-  - $V(aX+b)=a^2 V(X)$
-  - $V(X)=E(X^2)-[E(X)]^2$
-  - $\sigma(X) = \sqrt{V(X)}$
+  - \(V(X) \geq 0\)
+  - \(V(X) = 0\) iff \(P(X=E(X)) = 1\), i.e. \(X\) is constant
+  - \(V(aX+b)=a^2 V(X)\)
+  - \(V(X)=E(X^2)-[E(X)]^2\)
+  - \(\sigma(X) = \sqrt{V(X)}\)
 
 * Joint Distributions
 :PROPERTIES:
@@ -296,7 +296,7 @@
   - Note that this is not the cartesian product of the ranges of the individual variables, as some outcomes are unattainable (e.x. dice roll is a multiple of 4 and is odd)
 - This definition works for an arbitrary number of variables
 - A N-dimentional RV is a [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variable]] iff the range is countable
-- It is a [[id:fe324f54-728a-47e8-8777-1ff360b0457b][C[[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]ontinuous Random Variable]] if it can assume any value in some defined range of the space $\mathbb{R}^N$
+- It is a [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variable]] if it can assume any value in some defined range of the space \(\mathbb{R}^N\)
 - If all components are descrete, then it is descrete
 - If all components are continuous, then it is continuous
 - In other cases, unhandled for now
@@ -305,56 +305,56 @@
 :ID:       1989137d-e58f-4685-9e4b-b8ac9760b3c2
 :END:
 - For [[id:11246aed-52b0-4c98-b9f3-1337548e0502][Discrete Random Variables]]:
-  - Defined as $f_{X,Y}(x,y)=P(X=x, Y=y)$
+  - Defined as \(f_{X,Y}(x,y)=P(X=x, Y=y)\)
   - Satisfies:
-    - $f(x,y) \geq 0$ for any $(x,y)$
-    - $f(x,y) = 0$ for any $(x,y) \notin R_{X,Y}$
-    - $\sum_{i=1}^\infty  \sum_{j=1}^\infty f(x_i,y_j)=1$
+    - \(f(x,y) \geq 0\) for any \((x,y)\)
+    - \(f(x,y) = 0\) for any \((x,y) \notin R_{X,Y}\)
+    - \(\sum_{i=1}^\infty  \sum_{j=1}^\infty f(x_i,y_j)=1\)
 - For [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous Random Variables]]:
-  - Defined as $f_{X,Y}(x,y)$ such that $P((X,Y)\in D)= \int \int_{(x,y)\in D} f(x,y)dy dx$
-    - $P(a \leq X \leq b, c \leq Y \leq d) = \int_a^b \int_c^d f(x,y)
+  - Defined as \(f_{X,Y}(x,y)\) such that \(P((X,Y)\in D)= \int \int_{(x,y)\in D} f(x,y)dy dx\)
+    - \(P(a \leq X \leq b, c \leq Y \leq d) = \int_a^b \int_c^d f(x,y)\)
   - Satisfies:
-    - $f(x,y) \geq 0$ for any $(x,y)$
-    - $f(x,y) = 0$ for any $(x,y) \notin R_{X,Y}$
-    - $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x, y) dy dx =1$
+    - \(f(x,y) \geq 0\) for any \((x,y)\)
+    - \(f(x,y) = 0\) for any \((x,y) \notin R_{X,Y}\)
+    - \(\int_{-\infty}^\infty \int_{-\infty}^\infty f(x, y) dy dx =1\)
 ** Joint Distibutions of [[id:6172717b-8761-40ed-a989-0f55eb10bcfa][Independent]] Random Variables
 :PROPERTIES:
 :ID:       dbef14ae-c127-42b2-ac71-fe79db1ad2ce
 :END:
-- Iff we have a joint distribution of [[id:6172717b-8761-40ed-a989-0f55eb10bcfa][Independent]] Random Variables, then we have $R_{X,Y}={(x,y)x \in R_X; y \in R_Y}=R_X \times R_Y$
+- Iff we have a joint distribution of [[id:6172717b-8761-40ed-a989-0f55eb10bcfa][Independent]] Random Variables, then we have \(R_{X,Y}={(x,y)x \in R_X; y \in R_Y}=R_X \times R_Y\)
 ** Expectation for Joint Distributions
 :PROPERTIES:
 :ID:       43cf4c4d-822e-4221-94d0-1bbc0c9b1e52
 :END:
 - Assuming we have [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] f(x,y), then:
-  - $E(g(X,Y)) = \sum_x \sum_y g(x,y) f(x,y)$ for discrete distributions
-  - $E(g(X,Y)) = \int_{-\intfy}^{\infty} \int_{-\intfy}^{\infty} g(x,y) f(x,y) dy dx$ for continuous distributions
+  - \(E(g(X,Y)) = \sum_x \sum_y g(x,y) f(x,y)\) for discrete distributions
+  - \(E(g(X,Y)) = \int_{-\intfy}^{\infty} \int_{-\intfy}^{\infty} g(x,y) f(x,y) dy dx\) for continuous distributions
 ** Covariance for Joint Distributions
 :PROPERTIES:
 :ID:       7cac8039-e815-4565-892f-1cc785e861b6
 :END:
-- If we let $g(X,Y) = (X - E(X))(Y - E(Y))= (X- \mu_X)(Y - \mu_Y)$, then the covariance is given by $E(g(X,Y))$ ([[id:43cf4c4d-822e-4221-94d0-1bbc0c9b1e52][Expectation for Joint Distributions]])
+- If we let \(g(X,Y) = (X - E(X))(Y - E(Y))= (X- \mu_X)(Y - \mu_Y)\), then the covariance is given by \(E(g(X,Y))\) ([[id:43cf4c4d-822e-4221-94d0-1bbc0c9b1e52][Expectation for Joint Distributions]])
 - Properties:
-  - $cov(X, Y) = E(XY) - E(X)E(Y)$
-  - If X and Y are [[id:6172717b-8761-40ed-a989-0f55eb10bcfa][Independent]], then $cov(X,Y) = 0$, but we do not have the converse.
-  - $cov(aX+b, cY+d) = ac \times cov(X,Y)$
-  - $V(aX + bY) = a^2 V(X) + b^2 V(Y) + 2ab \times cov(X,Y)$ ([[id:ab8cb1c3-a402-4c15-9317-b327447a3d5a][Variance of Random Variables]])
+  - \(cov(X, Y) = E(XY) - E(X)E(Y)\)
+  - If X and Y are [[id:6172717b-8761-40ed-a989-0f55eb10bcfa][Independent]], then \(cov(X,Y) = 0\), but we do not have the converse.
+  - \(cov(aX+b, cY+d) = ac \times cov(X,Y)\)
+  - \(V(aX + bY) = a^2 V(X) + b^2 V(Y) + 2ab \times cov(X,Y)\) ([[id:ab8cb1c3-a402-4c15-9317-b327447a3d5a][Variance of Random Variables]])
 
 * Marginal Probability Distribution
 :PROPERTIES:
 :ID:       64af4f21-1f96-4dc1-b0fb-cc5b5a40bdf0
 :END:
-- If we have a 2-dimentional [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]] with a [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] $f(x, y)$, then the marginal distribution of X is
-  - $f(x) = \sum_{y}f(x,y)$ for discrete y
-  - $f(x) = \int_{-\infty}^{\infty}f(x,y)dy
+- If we have a 2-dimentional [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]] with a [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] \(f(x, y)\), then the marginal distribution of X is
+  - \(f(x) = \sum_{y}f(x,y)\) for discrete y
+  - \(f(x) = \int_{-\infty}^{\infty}f(x,y)dy\)
 - This is also how we get the marginal distribution of Y
-- $f$ is a probability function and thus follows the properties of [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]
+- \(f\) is a probability function and thus follows the properties of [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]
 
 * Conditional Distribution
 :PROPERTIES:
 :ID:       f65e3581-f113-47f4-b98b-9317083def60
 :END:
-- Given the [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] $f(x,y)$ and the [[id:64af4f21-1f96-4dc1-b0fb-cc5b5a40bdf0][Marginal Probability Distribution]] $f(x)$, we get
-- $f(y|x)=\frac{f(x, y)}{f(x)}$
-- This is the probability distribution of $Y$ for some given value $x$
-- $f$ is a probability function and thus follows the properties of [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]
+- Given the [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] \(f(x,y)\) and the [[id:64af4f21-1f96-4dc1-b0fb-cc5b5a40bdf0][Marginal Probability Distribution]] \(f(x)\), we get
+- \(f(y|x)=\frac{f(x, y)}{f(x)}\)
+- This is the probability distribution of \(Y\) for some given value \(x\)
+- \(f\) is a probability function and thus follows the properties of [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]

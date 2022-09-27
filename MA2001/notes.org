@@ -11,8 +11,8 @@
 :ID:       3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d
 :ROAM_ALIASES: Line
 :END:
-- A line in the XY plane is something that can be represented by the equation $ax + by = c$, such that at least one of $a$ and $b$ are not 0.
-- A line in $n$ variables has the form $a_1 x_1 + a_2 x_2 + ... + a_n x_n = b$ where $a_1$, $a_2$, ..., $a_n$, and b are real constants.
+- A line in the XY plane is something that can be represented by the equation \(ax + by = c\), such that at least one of \(a\) and \(b\) are not 0.
+- A line in \(n\) variables has the form \(a_1 x_1 + a_2 x_2 + ... + a_n x_n = b\) where \(a_1\), \(a_2\), ..., \(a_n\), and b are real constants.
 * Zero Linear Equation
 :PROPERTIES:
 :ID:       8ca5b581-af4b-44c2-99a6-fe3c0a725edf
@@ -42,18 +42,18 @@
 :END:
 - An expression which produces the [[id:6d6c3bfc-2b01-4012-b255-d155b17fdc04][Solution Set]].
 - Generally given by writing all variables in terms of some number of arbitrary parameters.
-  - In general, the arbitrary parameters is related to the [[id:d23c199d-d127-423a-8c56-48e59b71ed9c][Dimention]] of the equation.
+  - In general, the arbitrary parameters is related to the [[id:5ba9a192-afee-4100-9f47-f6a4f81b57de][Dimension]] of the equation.
 - Examples:
-  - $4x - 2y = 1$ has the general solution $\begin{cases}x=t\\y=2t-\frac{1}{2}\end{cases}$ (not unique)
+  - \(4x - 2y = 1\) has the general solution \(\begin{cases}x=t\\y=2t-\frac{1}{2}\end{cases}\) (not unique)
 * System of Linear Equations
 :PROPERTIES:
 :ID:       4de0b32f-feb4-42e9-8bca-194ed2408758
 :ROAM_ALIASES: "Linear System"
 :END:
 - A finite set of [[id:3bee8ee1-8e7c-476e-9b88-fa42b9a5c67d][Linear Equation]]
-- When lined up with variables in the same column, the coefficients take the form $a_{\text{Row number},\text{Column number}}$
+- When lined up with variables in the same column, the coefficients take the form \(a_{\text{Row number},\text{Column number}}\)
 - Examples:
-  - $\begin{cases}a_{11} x_1 + a_{12} x_2 = b_1\\a_{21} x_1 + a_{22} x_2 = b_2 \end{cases}$
+  - \(\begin{cases}a_{11} x_1 + a_{12} x_2 = b_1\\a_{21} x_1 + a_{22} x_2 = b_2 \end{cases}\)
 * Solution of a Linear System
 :PROPERTIES:
 :ID:       a03cd843-9760-47c4-9069-ca75d9aec0e4
@@ -82,18 +82,18 @@
 - A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] which represents a [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][System of Linear Equations]] with the coefficients transcribed such that each row is one equation, and the last column is the non-coefficient constant.
   - Conventionally, there is a dividing line between the last column and the rest of the matrix.
 - Examples:
-  - $\begin{cases}1 x_1 + 2 x_2 = 3\\4 x_1 + 5 x_2 = 6 \end{cases}$ is the same as $\left[\begin{array}{cc|c}1&2&3\\4&5&6\end{array}\right]$
+  - \(\begin{cases}1 x_1 + 2 x_2 = 3\\4 x_1 + 5 x_2 = 6 \end{cases}\) is the same as \(\left[\begin{array}{cc|c}1&2&3\\4&5&6\end{array}\right]\)
 * Elementary Row Operations
 :PROPERTIES:
 :ID:       bf26f901-fa17-4c98-b8bf-8d54d5a8f01d
 :END:
 - Operations you can do on an [[id:ecb5ed8b-d483-4934-ab99-f3c4858e2e31][Augmented Matrix]].
   - Multiply the row by a nonzero constant
-    - Notation for multiplying the ith row by $c$ is $cR_i$
+    - Notation for multiplying the ith row by \(c\) is \(cR_i\)
   - Interchange two rows
-    - Notaion for changing the ith and jth row is $R_i \leftrightarrow R_j$
+    - Notaion for changing the ith and jth row is \(R_i \leftrightarrow R_j\)
   - Adding a multiple of a row to another row
-    - Notation for adding c times of the jth row to the ith row is $R_i + cR_j$
+    - Notation for adding c times of the jth row to the ith row is \(R_i + cR_j\)
     - Can be 0, since adding an equation multiplied by 0 does not change anything
 - Multiple operations are not considered elementary.
 - These operations mirror the algebraic operations of adding and multiplying equations.
@@ -197,7 +197,7 @@
 :ID:       98073aba-eb13-435c-b020-535c499f2767
 :END:
 - A homogenous linear system is a [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear System]] where all the non-coefficient constants are equal to zero.
-- All homogenous systems have the solution $x_1 = 0$, $x_2 = 0", ..., "$x_n = 0". This is called the trivial solution
+- All homogenous systems have the solution \(x_1 = 0\), \(x_2 = 0", ..., "\)x_n = 0". This is called the trivial solution
 - All other solutions are known as non-trivial solutions
   - Therefore homogenous linear systems have either one solution or infinitely many solutions
   - If there are more variables than rows then there are infinitely many solutions
@@ -226,7 +226,7 @@
 :PROPERTIES:
 :ID:       25ed9f16-6ad2-4bf5-a8d1-ae1ac9f32608
 :END:
-- The sequence of entries $a_{11}, a_{22}, ..., a_{33}$ in a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]]
+- The sequence of entries \(a_{11}, a_{22}, ..., a_{33}\) in a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]]
 * Diagonal Matrix
 :PROPERTIES:
 :ID:       60269c0a-1614-4f10-bb35-6831c702d103
@@ -242,29 +242,29 @@
 :ID:       ec6a800b-bfc4-4498-9158-1a209cf0e2c5
 :END:
 - A [[id:3e5d983a-458a-4a8e-b1df-4862f4d1ce25][Scalar Matrix]] where all the values in its [[id:25ed9f16-6ad2-4bf5-a8d1-ae1ac9f32608][Diagonal]] are equal to 1
-- Can be notated by $\mathbb{I}_n$ for a n by n identity matrix
+- Can be notated by \(\mathbb{I}_n\) for a n by n identity matrix
 * Zero Matrix
 :PROPERTIES:
 :ID:       d65d98af-766e-4be4-8c44-7b054a7848a7
 :END:
 - A [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] where all the values are 0.
-- Can be notated by $0_{m\times n}$ for a m by n identity matrix
+- Can be notated by \(0_{m\times n}\) for a m by n identity matrix
   - The subscript can be dropped if it is clear what the size is
 * Symmetrical Matrix
 :PROPERTIES:
 :ID:       a518a757-1129-4a2b-bc67-da392434ad7e
 :END:
-- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where $a_{i,j} = a_{j, i}$ for all $i$ and $j$
+- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where \(a_{i,j} = a_{j, i}\) for all \(i\) and \(j\)
 * Upper Triangular Matrix
 :PROPERTIES:
 :ID:       42792e44-1879-489f-b58e-32f01fec557f
 :END:
-- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where $a_{i,j} = 0$ for all $i > j$
+- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where \(a_{i,j} = 0\) for all \(i > j\)
 * Lower Triangular Matrix
 :PROPERTIES:
 :ID:       c26f10dd-0798-45eb-be5f-837e5aad51bd
 :END:
-- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where $a_{i,j} = 0$ for all $j > i$
+- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] where \(a_{i,j} = 0\) for all \(j > i\)
 * [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]] Operations
 :PROPERTIES:
 :ID:       279de6eb-6af8-41fd-bc58-71687659bbce
@@ -294,63 +294,63 @@
 :ID:       55248702-1ef5-4612-b117-45d4936392c8
 :END:
 - Let A, B, C be equally sized [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] and c and d be scalars
-- Commutative property of addition: $A + B = B + A$
-- Associative property of addition: $A + B + C = (A + B) + C = A + (B + C)$
-- Scalar multiplication distributes into addition: $c(A + B) = cA + cB$
-- Also: $(c + d)A = cA + dA$
-- Also: $(cd)A = c(dA) = d(cA)$
-- Zero addition: $A + 0 = 0 + A = A$ (0 here means the appropriately sized [[id:d65d98af-766e-4be4-8c44-7b054a7848a7][Zero Matrix]])
-- $A - A$ = 0$
-- $0A = 0$
+- Commutative property of addition: \(A + B = B + A\)
+- Associative property of addition: \(A + B + C = (A + B) + C = A + (B + C)\)
+- Scalar multiplication distributes into addition: \(c(A + B) = cA + cB\)
+- Also: \((c + d)A = cA + dA\)
+- Also: \((cd)A = c(dA) = d(cA)\)
+- Zero addition: \(A + 0 = 0 + A = A\) (0 here means the appropriately sized [[id:d65d98af-766e-4be4-8c44-7b054a7848a7][Zero Matrix]])
+- \(A - A\) = 0
+- \(0A = 0\)
 ** Matrix Multiplication
 :PROPERTIES:
 :ID:       76f39bdc-085f-459e-a0e3-533fe66188d4
 :END:
-- To multiply two [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] $A \times B$:
+- To multiply two [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrices]] \(A \times B\):
 - Number of columns in A must be equal to the number of rows in B.
-- If A is $m \times p$ and B is $p \times n$, then $A \times B$ is $m \times n$
-- The (i, j)th entry is equal to $\sum_{k=1}^{p} a_{ik} b_{kj}$
+- If A is \(m \times p\) and B is \(p \times n\), then \(A \times B\) is \(m \times n\)
+- The (i, j)th entry is equal to \(\sum_{k=1}^{p} a_{ik} b_{kj}\)
 - Not commutative
-- "pre-multiplication" of A to B = $AB$
-- "post-multiplication" of A to B = $BA$
+- "pre-multiplication" of A to B = \(AB\)
+- "post-multiplication" of A to B = \(BA\)
 ** Properties of [[id:76f39bdc-085f-459e-a0e3-533fe66188d4][Matrix Multiplication]]
 :PROPERTIES:
 :ID:       e79dec60-803d-4c5b-9987-c90efe15cbec
 :END:
 - If A/A_n, B/B_n, C/C_n are dimentioned such that the multipliation is defined and c is a scalar, then
-- $A(BC) = (AB)C$
-- $A(B_1 + B_2) = AB_1 + AB_2$
-- $(C_1 + C_2)A = C_1A + C_2A$
-- $c(AB) = (cA)B = A(cB)$
+- \(A(BC) = (AB)C\)
+- \(A(B_1 + B_2) = AB_1 + AB_2\)
+- \((C_1 + C_2)A = C_1A + C_2A\)
+- \(c(AB) = (cA)B = A(cB)\)
 ** Power of a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]]
 :PROPERTIES:
 :ID:       77806fef-4ae7-484e-ae51-6e62b3de6ae4
 :END:
 - Let A be a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]]
-- $A^n$ is the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] when n is 0
-- $A^n$ is A times itself n times total when n is not 0
-- Because multiplication is not commutative, we cannot say $(AB)^2$ = $A^2B^2$
+- \(A^n\) is the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] when n is 0
+- \(A^n\) is A times itself n times total when n is not 0
+- Because multiplication is not commutative, we cannot say \((AB)^2\) = \(A^2B^2\)
 ** [[id:76f39bdc-085f-459e-a0e3-533fe66188d4][Matrix Multiplication]] Notation
 :PROPERTIES:
 :ID:       88db205b-1cfb-40b3-ad13-5827454de810
 :END:
-- $AB = A[b_1 b_2 b_3 ... b_n] = [Ab_1 Ab_2 Ab_3 ... Ab_n]$, essentially writing B as a list of columns
-- Similarly, $AB = \begin{bmatrix}a_1\\a_2\\a_3\\...\\a_n\end{bmatrix} = \begin{bmatrix}Ba_1\\Ba_2\\Ba_3\\...\\Ba_n\end{bmatrix}$
+- \(AB = A[b_1 b_2 b_3 ... b_n] = [Ab_1 Ab_2 Ab_3 ... Ab_n]\), essentially writing B as a list of columns
+- Similarly, \(AB = \begin{bmatrix}a_1\\a_2\\a_3\\...\\a_n\end{bmatrix} = \begin{bmatrix}Ba_1\\Ba_2\\Ba_3\\...\\Ba_n\end{bmatrix}\)
 ** Transpose of a [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]]
 :PROPERTIES:
 :ID:       c4062e3e-4992-4d7f-8621-984120945600
 :END:
 - Each column becomes a row, flipping the dimention
 - The (i, j)th entry of the matrix is the (j, i)th entry of the transpose of the matrix
-- Denoted as $A^T$
+- Denoted as \(A^T\)
 ** Properties of [[id:c4062e3e-4992-4d7f-8621-984120945600][Transpose of a Matrix]]
 :PROPERTIES:
 :ID:       500dce9e-2036-4fe7-8652-c3b4a94e6576
 :END:
-- $(A^T)^T=A$
-- $(A + B)^T = A^T + B^T$
-- (cA)^T=cA^T
-- (AB)^T=B^T A^T$
+- \((A^T)^T=A\)
+- \((A + B)^T = A^T + B^T\)
+- \((cA)^T=cA^T\)
+- \((AB)^T=B^T A^T\)
 * Proof of Matrix Equality
 :PROPERTIES:
 :ID:       041eb1cb-cb5e-4efb-aa43-cf6755e64235
@@ -368,57 +368,59 @@
 :PROPERTIES:
 :ID:       1fa53496-0920-4486-8a8f-3cbc26d118ed
 :END:
-- If we have $AX = B$, in matrix-world, how do you find $X$?
-- We want to find an "inverse" of $A$ such that $A A^{-1} = I$ and $A^{-1} A = I$ ($I$ is the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]])
-- A matrix $A$ is invertiable iff there exist a matrix $B$ such that $AB=BA=I$)
-- In this case, $B$ and $A$ are inverses of each other
+- If we have \(AX = B\), in matrix-world, how do you find \(X\)?
+- We want to find an "inverse" of \(A\) such that \(A A^{-1} = I\) and \(A^{-1} A = I\) (\(I\) is the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]])
+- A matrix \(A\) is invertiable iff there exist a matrix \(B\) such that \(AB=BA=I\))
+- In this case, \(B\) and \(A\) are inverses of each other
 - A square matrix with no inverse is known as singular
 ** Cancellation Laws
 :PROPERTIES:
 :ID:       94d4982d-bd1c-4d6e-a4cd-1aec31b2729e
 :END:
 - Let A be an invertible matrix
-- If $AB_1 = AB_2$ then $B_1 = B_2$
-- If $B_1A = B_2A$ then $B_1 = B_2$
+- If \(AB_1 = AB_2\) then \(B_1 = B_2\)
+- If \(B_1A = B_2A\) then \(B_1 = B_2\)
 ** Uniqueness of Inverses
 :PROPERTIES:
 :ID:       d7988dc7-802b-49bd-aa49-a71d161886ba
 :END:
-- If $B$ and $C$ are inverses of $A$ then $B=C$
-- The unique inverse of $A$ is denoted by $A^{-1}$
+- If \(B\) and \(C\) are inverses of \(A\) then \(B=C\)
+- The unique inverse of \(A\) is denoted by \(A^{-1}\)
 ** Inverse of a 2x2 Matrix
 :PROPERTIES:
 :ID:       0b76b425-f331-4cc4-9d6a-d7ff33e40bb7
 :END:
-- Let $A = \begin{bmatrix}a&b\\c&d\end{bmatrix}$
-- Then $A^{-1} = \frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}=\begin{bmatrix}\frac{d}{ad-bc}&\frac{-b}{ad-bc}\\ \frac{-c}{ad-bc}&\frac{a}{ad-bc}\end{bmatrix}$
+- Let \(A = \begin{bmatrix}a&b\\c&d\end{bmatrix}\)
+- Then \(A^{-1} = \frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}=\begin{bmatrix}\frac{d}{ad-bc}&\frac{-b}{ad-bc}\\ \frac{-c}{ad-bc}&\frac{a}{ad-bc}\end{bmatrix}\)
 ** Powers of an Inverse Matrix
 :PROPERTIES:
 :ID:       ce6fa8ea-505a-4a06-82ea-005afb2b91df
 :END:
-- $A^{-n}$ is $A^{-1}$ times itself $n$ times
+- \(A^{-n}\) is \(A^{-1}\) times itself \(n\) times
 ** Properties of Invertible Matrices
 :PROPERTIES:
 :ID:       a4fb6efc-f6c2-4484-a35f-27527827b839
 :END:
 - If A and B are invertible and c is not 0, then
-- $cA$ is invertible, $(cA)^{-1}=\frac{1}{c}A^{-1}$
-- $A^T$ is invertible and $(A^T)^{-1}=(A^{-1})^T$ ([[id:c4062e3e-4992-4d7f-8621-984120945600][Transpose of a Matrix]])
-- $A^{-1}$ is invertible and $(A^{-1})^{-1}=A$
-- $AB$ is invertible and $(AB)^{-1}=B^{-1}A^{-1}$
-  - More generally, $(A_1 A_2 A_3...A_n)^{-1} = A_n^{-1} A_{n-1}^{-1} A_{n-2}^{-1}...A_1^{-1}$
-- $A^r A^s = A^{r+s}$ ([[id:ce6fa8ea-505a-4a06-82ea-005afb2b91df][Powers of an Inverse Matrix]])
-- $A^n$ is invertible and $(A^n)^{-1}=(A^{-1})^n$
+- \(cA\) is invertible, \((cA)^{-1}=\frac{1}{c}A^{-1}\)
+- \(A^T\) is invertible and \((A^T)^{-1}=(A^{-1})^T\) ([[id:c4062e3e-4992-4d7f-8621-984120945600][Transpose of a Matrix]])
+- \(A^{-1}\) is invertible and \((A^{-1})^{-1}=A\)
+- \(AB\) is invertible and \((AB)^{-1}=B^{-1}A^{-1}\)
+  - More generally, \((A_1 A_2 A_3...A_n)^{-1} = A_n^{-1} A_{n-1}^{-1} A_{n-2}^{-1}...A_1^{-1}\)
+- \(A^r A^s = A^{r+s}\) ([[id:ce6fa8ea-505a-4a06-82ea-005afb2b91df][Powers of an Inverse Matrix]])
+- \(A^n\) is invertible and \((A^n)^{-1}=(A^{-1})^n\)
 ** Properties Equivalent to Invertability
 :PROPERTIES:
 :ID:       5c656b0b-ab52-4d87-89b7-268c6aa6661c
 :END:
 - The following are all equivalent:
-  - $A$ is [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Invertible]]
-  - The linear system $Ax=0$ has only the [[id:98073aba-eb13-435c-b020-535c499f2767][Trivial Solution]]
-  - The [[id:4546b235-26c0-4582-b238-594d24f1360e][RREF]] form of $A$ is an identity matrix.
-  - $A$ can be expresed by the product of [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrices]]
-  - $det(A) \neq 0$
+  - \(A\) is [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Invertible]]
+  - The linear system \(Ax=0\) has only the [[id:98073aba-eb13-435c-b020-535c499f2767][Trivial Solution]]
+  - The [[id:4546b235-26c0-4582-b238-594d24f1360e][RREF]] form of \(A\) is an identity matrix.
+  - \(A\) can be expresed by the product of [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrices]]
+  - \(det(A) \neq 0\)
+  - The rows of \(A\) form a [[id:b3caafea-8006-4974-b41a-13c2917d32c9][Basis]] for \(\mathbb{R}^n\)
+  - The columns of \(A\) form a [[id:b3caafea-8006-4974-b41a-13c2917d32c9][Basis]] for \(\mathbb{R}^n\)
 
 * Elementary Matrices
 :PROPERTIES:
@@ -431,21 +433,17 @@
 - The effect is the same
 - To multiply the ith row by k, take the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] and multiply the (i,i)th entry by k
   - For example, to multiply the second row by 2:
-    - $\begin{bmatrix}1&0\\0&2\end{bmatrix}$
-  - Note: if $k \neq 0$ then the operation has an [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Inverse]] by swapping $k$ with $\frac{1}{k}$
+    - \(\begin{bmatrix}1&0\\0&2\end{bmatrix}\)
+  - Note: if \(k \neq 0\) then the operation has an [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Inverse]] by swapping \(k\) with \(\frac{1}{k}\)
 - To swap the ith row with the jth row, take the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] and swap the ith row and the jth row
   - This is equivalent to setting the (i,i)th entry and the (j,j)th entries to 0, and setting the (i,j)th and (j,i)th entries to 1
   - For example, to swap the first and second rows:
-    - $\begin{bmatrix}0&1\\1&0\end{bmatrix}$
+    - \(\begin{bmatrix}0&1\\1&0\end{bmatrix}\)
   - Note: this matrix is its own [[id:1fa53496-0920-4486-8a8f-3cbc26d118ed][Inverse]]
 - To add a multiple of the ith row to the jth row, take the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]] and add k to the (j,i)th entry
   - For example, to add two times of the first row to the second row:
-    - $\begin{bmatrix}1&0\\2&1\end{bmatrix}$
-  - Note: to invert, swap $k$ with $-k$
-* Dimention
-:PROPERTIES:
-:ID:       d23c199d-d127-423a-8c56-48e59b71ed9c
-:END:
+    - \(\begin{bmatrix}1&0\\2&1\end{bmatrix}\)
+  - Note: to invert, swap \(k\) with \(-k\)
 
 * Counting Forms of a [[id:4546b235-26c0-4582-b238-594d24f1360e][RREF]]
 :PROPERTIES:
@@ -462,11 +460,11 @@
 :ID:       770cccac-1c27-432a-ab09-0510d927fd92
 :END:
 - Using [[id:5c656b0b-ab52-4d87-89b7-268c6aa6661c][Properties Equivalent to Invertability]]
-- Find [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrices]] $E_1...E_k$ such that $E_k E_{k-1}...E_1 A=I$
-- $E_k E_{k-1}...E_1 = A^{-1}$
-- To find these matrices, write the $n \times 2n$ matrix $(A | I)$
-- We know that $E_k E_{k-1}...E_1(A|I)=(I|A^{-1})$, so to find the matrices we do [[id:d75d83b9-0a43-4b94-b94e-1321627fa2b8][Gaussian-Jordan Elimination]] on $(A|I)$
-  - If we don't get a matrix of the form $(I|A^{-1})$ as the result, there is no inverse.
+- Find [[id:dee66fdd-85a5-403e-b7e6-65b062c19307][Elementary Matrices]] \(E_1...E_k\) such that \(E_k E_{k-1}...E_1 A=I\)
+- \(E_k E_{k-1}...E_1 = A^{-1}\)
+- To find these matrices, write the \(n \times 2n\) matrix \((A | I)\)
+- We know that \(E_k E_{k-1}...E_1(A|I)=(I|A^{-1})\), so to find the matrices we do [[id:d75d83b9-0a43-4b94-b94e-1321627fa2b8][Gaussian-Jordan Elimination]] on \((A|I)\)
+  - If we don't get a matrix of the form \((I|A^{-1})\) as the result, there is no inverse.
 
 * Singular Matrices
 :PROPERTIES:
@@ -476,7 +474,7 @@
 :PROPERTIES:
 :ID:       7ad24bb1-4688-47e2-a3be-1c4551859e15
 :END:
-- If $A$ is singular, then $AB$ and $BA$ are singular
+- If \(A\) is singular, then \(AB\) and \(BA\) are singular
 
 * Elementary Column Operations
 :PROPERTIES:
@@ -488,13 +486,13 @@
 :PROPERTIES:
 :ID:       f8c95c88-93e0-4d50-8e0c-6ef45ece0511
 :END:
-- A property of a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] $A$ with entries (a_{i,j})
-- Let $M_{ij}$ be the matrix generated by removing the ith row and jth column from $A$
-  - Then we have $det(A) = \begin{cases}a_{1,1}&\text{if } n = 1 \\ a_{1,1}A_{1,1}+a_{1,2}A_{1,2} + ... + a_{1,n}A_{1,n} &\text{if } n > 1\end{cases}$
-    - where $A_{i,j} = (-1)^{i+j}det(M_{i,j})$, known as the (i,j) cofactor of $A$
+- A property of a [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] \(A\) with entries (a_{i,j})
+- Let \(M_{ij}\) be the matrix generated by removing the ith row and jth column from \(A\)
+  - Then we have \(det(A) = \begin{cases}a_{1,1}&\text{if } n = 1 \\ a_{1,1}A_{1,1}+a_{1,2}A_{1,2} + ... + a_{1,n}A_{1,n} &\text{if } n > 1\end{cases}\)
+    - where \(A_{i,j} = (-1)^{i+j}det(M_{i,j})\), known as the (i,j) cofactor of \(A\)
 ** Determinant of a 2x2 matrix
-- $\begin{bmatrix}a&b\\c&d\end{bmatrix}$
-- $ad-bc$
+- \(\begin{bmatrix}a&b\\c&d\end{bmatrix}\)
+- \(ad-bc\)
 ** Geometrical Interpretation
 - [[file:media/determinant-geometry-2d_1.png][Parallelogram]]
 - [[file:media/determinant-geometry-3d_1.png][Parallelepiped]]
@@ -503,15 +501,15 @@
 :PROPERTIES:
 :ID:       a79b27cd-982a-4846-9c5e-257caf4f17e9
 :END:
-- For any $i in 1...n, j in 1...n$,
-  - $det(A) =  a_{i,1}A_{i,1}+a_{i,2}A_{i,2} + ... + a_{i,n}A_{i,n}$
-  - $det(A) = a_{1,i}A_{1,i}+a_{2,i}A_{2,i} + ... + a_{n,j}A_{n,j}$
+- For any \(i in 1...n, j in 1...n\),
+  - \(det(A) =  a_{i,1}A_{i,1}+a_{i,2}A_{i,2} + ... + a_{i,n}A_{i,n}\)
+  - \(det(A) = a_{1,i}A_{1,i}+a_{2,i}A_{2,i} + ... + a_{n,j}A_{n,j}\)
 - In other words, you can use any row or column to find the determinant of a matrix
 ** Determinant of a [[id:c4062e3e-4992-4d7f-8621-984120945600][Transpose of a Matrix]]
 :PROPERTIES:
 :ID:       dfea781a-3f39-4b65-befe-9851ae0c141e
 :END:
- - $det(A) = det(A^T)$
+ - \(det(A) = det(A^T)\)
 ** Determinant of a Triangular Matrix
 :PROPERTIES:
 :ID:       dbd29807-554b-4169-a53d-ac70674f15bc
@@ -528,38 +526,38 @@
 :ID:       33a7d7a7-a693-464d-a0a7-340053c882e9
 :END:
 - Multiplying a row by k multiplies the determinant by k
-  - In this case, E would be something like $\begin{bmatrix}1&0\\0&k\end{bmatrix}$, where $B=EA$
-  - Then, we have $det(E)det(A)=k \times det(A) = det(B) = det(EA)$
+  - In this case, E would be something like \(\begin{bmatrix}1&0\\0&k\end{bmatrix}\), where \(B=EA\)
+  - Then, we have \(det(E)det(A)=k \times det(A) = det(B) = det(EA)\)
 - Swapping row i and row j multiplies the determinant by -1
-  - In this case, E would be something like $\begin{bmatrix}0&1\\1&0\end{bmatrix}$, where $B=EA$
-  - Then, we have $det(E)det(A)=-1 \times det(A) = det(B) = det(EA)$
+  - In this case, E would be something like \(\begin{bmatrix}0&1\\1&0\end{bmatrix}\), where \(B=EA\)
+  - Then, we have \(det(E)det(A)=-1 \times det(A) = det(B) = det(EA)\)
 - Adding k times row j to row i does not change the determinant
-  - In this case, E would be something like $\begin{bmatrix}1&k\\0&1\end{bmatrix}$, where $B=EA$
-  - Then, we have $det(E)det(A)=1 \times det(A) = det(B) = det(EA)$
+  - In this case, E would be something like \(\begin{bmatrix}1&k\\0&1\end{bmatrix}\), where \(B=EA\)
+  - Then, we have \(det(E)det(A)=1 \times det(A) = det(B) = det(EA)\)
 
 ** Finding the Determinant Easily By Hand
 - Use Gaussian Elimination to make the matrix triangular, then use [[id:dbd29807-554b-4169-a53d-ac70674f15bc][Determinant of a Triangular Matrix]] to find the determinant of the [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]] of the matrix
 - Use the above transformations in relation to the determinant to determine the [[id:f8c95c88-93e0-4d50-8e0c-6ef45ece0511][Determinant]] of the original matrix
 * [[id:f8c95c88-93e0-4d50-8e0c-6ef45ece0511][Determinant]] Properties
-- If c is a scalar and A is a n by n square matrix, then $det(cA)=c^n \times det(A)$
+- If c is a scalar and A is a n by n square matrix, then \(det(cA)=c^n \times det(A)\)
   - Simply proven by writing as applying n row operations
-- $det(AB) = det(A) \times det(B)$
+- \(det(AB) = det(A) \times det(B)\)
   - Simply proven when A is invertible, just write it as product of elementary matrices. If A is not, then the determinant is 0
-- $det(A^{-1})=\frac{1}{det(A)}$
+- \(det(A^{-1})=\frac{1}{det(A)}\)
   - Simply proven by writing A as the product of elementary matrices
 * Adjoints
 :PROPERTIES:
 :ID:       cf429507-5ed4-4d38-a3e5-f5cbf0075f2f
 :END:
 - Let A be a square matrix of order n
-- $adj(A)$ is found by replacing all elements i,j with the i,j-cofactor of A, then taking the tranpose
-- $A^{-1}=\frac{1}{det(A)} \times adj(A)$
+- \(adj(A)\) is found by replacing all elements i,j with the i,j-cofactor of A, then taking the tranpose
+- \(A^{-1}=\frac{1}{det(A)} \times adj(A)\)
 * Cramer's Rule
 :PROPERTIES:
 :ID:       90e7cee6-a91a-4c16-89b5-9d88b3f0ab3b
 :END:
-- If $Ax=B$, and $A_i$ is the matrix obtained by replacing the ith column of $A$ by $B$
-- And, If $A$ is invertible, $x=\frac{1}{det(A)}\begin{bmatrix}det(A_1)\\det(A_2)\\det(A_3)\\...\\det(A_n)\end{bmatrix}$
+- If \(Ax=B\), and \(A_i\) is the matrix obtained by replacing the ith column of \(A\) by \(B\)
+- And, If \(A\) is invertible, \(x=\frac{1}{det(A)}\begin{bmatrix}det(A_1)\\det(A_2)\\det(A_3)\\...\\det(A_n)\end{bmatrix}\)
 * Vectors
 :PROPERTIES:
 :ID:       33bef66c-f30e-461c-92c0-45d75d742445
@@ -582,7 +580,7 @@
 :ID:       dc6fb874-3fa2-4f2a-86f5-108546757cff
 :END:
 - A vector with N components
-- $(u_1, u_2, ..., u_N)$, where u_k are all real (at least for MA2001)
+- \((u_1, u_2, ..., u_N)\), where u_k are all real (at least for MA2001)
 - Can be represented either as a 1 by n matrix as a "row vector" or a n by 1 matrix as a "column vector"
   - Should not be mixed within the same context
 ** Euclidean N-Space
@@ -591,37 +589,37 @@
 :END:
 - The set of all [[id:dc6fb874-3fa2-4f2a-86f5-108546757cff][N-Vectors]] with real number coordinates for some N
 ** Vector Sets
-- Subsets are inplicitly denoted as $S={\text{form} | \text{conditions}}$, for example $S={(0, a, b, a) | a \in {3,4}, b \in {4,5}}$
+- Subsets are inplicitly denoted as \(S={\text{form} | \text{conditions}}\), for example \(S={(0, a, b, a) | a \in {3,4}, b \in {4,5}}\)
 - Can also be explicitly denoted like similarly to the general solutions to [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear System]]
-- Finite sets have a cardinality aka how many are in the set, denoted by $|S|$
+- Finite sets have a cardinality aka how many are in the set, denoted by \(|S|\)
 * Linear Combinations
 :PROPERTIES:
 :ID:       1e829ed7-c312-4549-95de-3a4b11156f87
 :END:
-- Given a set of k [[id:33bef66c-f30e-461c-92c0-45d75d742445][Vectors]], having k constants $c_1, c_2, ..., c_k$ gives you the linear combination $c_1 v_1 + c_2 v_2 + ... + c_k v_k$
+- Given a set of k [[id:33bef66c-f30e-461c-92c0-45d75d742445][Vectors]], having k constants \(c_1, c_2, ..., c_k\) gives you the linear combination \(c_1 v_1 + c_2 v_2 + ... + c_k v_k\)
 - Related to [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear Systems]]
 * Linear Spans
 :PROPERTIES:
 :ID:       6fb2cd00-5a7a-48c6-baa8-89cc39579c6a
 :END:
 - Given a set of k [[id:33bef66c-f30e-461c-92c0-45d75d742445][Vectors]], the linear span is the set of all [[id:1e829ed7-c312-4549-95de-3a4b11156f87][Linear Combinations]] of those vectors is the linear span of those vectors
-- The span takes up the whole space ($span(S) = \mathbb{R}^n$) iff the equation $c_1u_1 + c_2u_2 + ... + c_ku_k = v$ has a solution for any v
-- In other words if $A = \begin{bmatrix}u_1 & u_2 & u_3 & \dots & u_k\end{bmatrix}$:
+- The span takes up the whole space (\(span(S) = \mathbb{R}^n\)) iff the equation \(c_1u_1 + c_2u_2 + ... + c_ku_k = v\) has a solution for any v
+- In other words if \(A = \begin{bmatrix}u_1 & u_2 & u_3 & \dots & u_k\end{bmatrix}\):
   - If the [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]] of A has no zero rows, then the linear span takes up the whole space
   - If the REF of A has at least one zero row, then the system is not always consistent, and thus the span does not take up the whole space.
-- Let $S$ be a set of k vectors
-  - If $k<n$, then $span(S) \neq \mathbb{R}^n$
+- Let \(S\) be a set of k vectors
+  - If \(k<n\), then \(span(S) \neq \mathbb{R}^n\)
 - Properties
-  - $0 \in span(S)$
-  - Span is closed under linear combinations (For any $v_1, v_2, ..., v_r \in span(S)$, $c_1v_1 + c_2v_2 + ... + c_rv_r \in span(S)$)
-  - $span(S_1) \subseteq span(S_2)$ iff each element in $S_1$ satisfies $u_i \in span(S_2)$, a.k.a. all $u_i$ is a linear combination of $v_1, v_2, ... v_l$
-    - $S_1 = \{u_1, u_2, ..., u_k\}$, $S_2 = \{v_1, v_2, ..., v_l\}$
+  - \(0 \in span(S)\)
+  - Span is closed under linear combinations (For any \(v_1, v_2, ..., v_r \in span(S)\), \(c_1v_1 + c_2v_2 + ... + c_rv_r \in span(S)\))
+  - \(span(S_1) \subseteq span(S_2)\) iff each element in \(S_1\) satisfies \(u_i \in span(S_2)\), a.k.a. all \(u_i\) is a linear combination of \(v_1, v_2, ... v_l\)
+    - \(S_1 = \{u_1, u_2, ..., u_k\}\), \(S_2 = \{v_1, v_2, ..., v_l\}\)
 ** Redundant Vector
 :PROPERTIES:
 :ID:       c23ade51-65bc-4de5-89ed-d628f2e2e773
 :END:
-- Let $S = \{u_1, u_2, ..., u_k\}$
-- If $u_k$ is a linear combination of $\{u_1, u_2, ..., u_{k-1}\}$, then $span(\{u_1, u_2, ..., u_k\}) = span(\{u_1, u_2, ..., u_{k-1}\})$
+- Let \(S = \{u_1, u_2, ..., u_k\}\)
+- If \(u_k\) is a linear combination of \(\{u_1, u_2, ..., u_{k-1}\}\), then \(span(\{u_1, u_2, ..., u_k\}) = span(\{u_1, u_2, ..., u_{k-1}\})\)
 ** Geometrical Interpretations
 :PROPERTIES:
 :ID:       714e83f9-5fd7-44f8-9a5a-0d04a2d61aa0
@@ -640,24 +638,24 @@
 :ID:       6144f960-7456-44e7-ae72-68a444e73cf4
 :END:
 - In n-dimensions
-- If we have $x, u_1, u_2, ..., u_r \in \mathbb{R}^n$
-- The set $Q= \{x+w | w \in span(\{u_1, u_2, ..., u_r\})\}$ is a k-plane in $\mathbb{R}^n$, where k is the dimension of the span
+- If we have \(x, u_1, u_2, ..., u_r \in \mathbb{R}^n\)
+- The set \(Q= \{x+w | w \in span(\{u_1, u_2, ..., u_r\})\}\) is a k-plane in \(\mathbb{R}^n\), where k is the dimension of the span
 * Subspaces
 :PROPERTIES:
 :ID:       b91e4b67-de10-40c3-bea8-b950d195156e
 :END:
-- From [[id:6fb2cd00-5a7a-48c6-baa8-89cc39579c6a][Linear Spans]], we know that the linear span of, for example, a plane in a 3D space can act the same as the $\mathbb{R}^2$ space
-- More rigidly, a subset $V \subset \mathbb{R}^n$ is a subspace of $\mathbb{R}^n$ if there exist $S=\{u_1, u_2, ..., u_k \in \mathbb{R}^n\}$ such that $V = span(S)$
-  - In this case we say $V$ is a subspace spanned by $S$
-- Alternatively: a non empty set $V$ is a subspace iff for all $u, v \in V$, $c, d \in \mathbb{R}$ $cu + dv \in V$
+- From [[id:6fb2cd00-5a7a-48c6-baa8-89cc39579c6a][Linear Spans]], we know that the linear span of, for example, a plane in a 3D space can act the same as the \(\mathbb{R}^2\) space
+- More rigidly, a subset \(V \subset \mathbb{R}^n\) is a subspace of \(\mathbb{R}^n\) if there exist \(S=\{u_1, u_2, ..., u_k \in \mathbb{R}^n\}\) such that \(V = span(S)\)
+  - In this case we say \(V\) is a subspace spanned by \(S\)
+- Alternatively: a non empty set \(V\) is a subspace iff for all \(u, v \in V\), \(c, d \in \mathbb{R}\) \(cu + dv \in V\)
 - Trivial subspaces:
-  - $span(\{0\})$, or the zero subspace.
-  - $\mathbb{R}^n$, which itself is also a subspace ($span(\{(1, 0, ...), (0, 1, ...),..., (0, 0, ..., 1)\}$)
-- Subspaces of $\mathbb{R}^2$
+  - \(span(\{0\})\), or the zero subspace.
+  - \(\mathbb{R}^n\), which itself is also a subspace (\(span(\{(1, 0, ...), (0, 1, ...),..., (0, 0, ..., 1)\}\))
+- Subspaces of \(\mathbb{R}^2\)
   - The origin
   - Any line through the origin
   - The whole space
-- Subspaces of $\mathbb{R}^3$
+- Subspaces of \(\mathbb{R}^3\)
   - The origin
   - Any line through the origin
   - Any plane through the origin
@@ -668,21 +666,97 @@
 :END:
 - To prove a subset is not a subspace, we simply need a counterexample.
 - We can use some of these properties:
-  - $0 \in V$
-  - For any $v_1, v_2, ..., v_r \in V$, and any $c_1, c_2, ..., c_r \in \mathbb{R}$, $c_1v_1 + c_2v_2 + ... + c_rv_r \in V$
+  - \(0 \in V\)
+  - For any \(v_1, v_2, ..., v_r \in V\), and any \(c_1, c_2, ..., c_r \in \mathbb{R}\), \(c_1v_1 + c_2v_2 + ... + c_rv_r \in V\)
 - Use the alternate definition of subspace
 ** Solution Spaces
 :PROPERTIES:
 :ID:       c99030a7-f2fe-408d-ae2b-2fae64b1c1df
 :END:
- - The [[id:6d6c3bfc-2b01-4012-b255-d155b17fdc04][Solution Set]] of a [[id:98073aba-eb13-435c-b020-535c499f2767][Homogenous Linear System]] in $n$ variables is a subspace of $\mathbb{R}^n$
+ - The [[id:6d6c3bfc-2b01-4012-b255-d155b17fdc04][Solution Set]] of a [[id:98073aba-eb13-435c-b020-535c499f2767][Homogenous Linear System]] in \(n\) variables is a subspace of \(\mathbb{R}^n\)
+** Subspace of a Subspace
+:PROPERTIES:
+:ID:       e5770fe4-53cc-4f1c-81e1-411a01a2898f
+:END:
+- If we have a subspace \(V\) of \(\mathbb{R}^n\), then a set \(W\) is a subspace of \(V\) if it s a subspace of \(\mathbb{R}^n\) and \(W \subseteq V\)
 * Linear Independence
 :PROPERTIES:
 :ID:       b11750a1-3628-44c3-bf17-bedc80748f5e
 :END:
-- Let $S = \{u_1, u_2, ..., u_k\} \in \mathbb{R}^n$
-- Consider the equation $c_1u_1+c_2u_2+...+c_ku_k = 0$ with c as variables (this is a [[id:98073aba-eb13-435c-b020-535c499f2767][Homogenous Linear System]])
-- Iff the trivial solution is the only solution, $S$ is said to be linearly independent
-- Otherwise, $S$ can be said to be linearly dependent
-- Alternatively, we have $S$ is linearly independent iff no vector in $S$ is a linear combination of the other vectors in $S$
-- A [[id:6fb2cd00-5a7a-48c6-baa8-89cc39579c6a][Linear Span]] of $S$ has no redundant vectors iff $S$ is linearly independent
+- Let \(S = \{u_1, u_2, ..., u_k\} \in \mathbb{R}^n\)
+- Consider the equation \(c_1u_1+c_2u_2+...+c_ku_k = 0\) with c as variables (this is a [[id:98073aba-eb13-435c-b020-535c499f2767][Homogenous Linear System]])
+- Iff the trivial solution is the only solution, \(S\) is said to be linearly independent
+  - By this definition, a set of \(n+1\) or more vectors in \(n-dimensional\) space must be linearly dependent
+- Otherwise, \(S\) can be said to be linearly dependent
+- Alternatively, we have \(S\) is linearly independent iff no vector in \(S\) is a linear combination of the other vectors in \(S\)
+- A [[id:6fb2cd00-5a7a-48c6-baa8-89cc39579c6a][Linear Span]] of \(S\) has no redundant vectors iff \(S\) is linearly independent
+- Given a set of linearly independent vectors, adding a vector that is not contained in the span of that original set will maintain the independence of that set.
+
+* Vector Space
+:PROPERTIES:
+:ID:       b3caafea-8006-4974-b41a-13c2917d32c9
+:ROAM_ALIASES: Basis
+:END:
+- A set that is either \(\mathbb{R}^n\) or a [[id:b91e4b67-de10-40c3-bea8-b950d195156e][Subspace]] of it.
+* Bases
+:PROPERTIES:
+:ID:       f061a0cd-618a-4339-8982-7e1c425463a9
+:END:
+- Let \(V\) be a [[id:b3caafea-8006-4974-b41a-13c2917d32c9][Vector Space]], and let \(S\) be a subset of \(V\).
+- \(S\) is a basis of \(V\) iff
+  - \(S\) is linearly independent
+  - \(S\) spans \(V\), i.e. \(span(S) = V\)
+- By this definition, \(S\) is the smallest set that can span \(V\)
+- For convenience, the empty set is the basis of the zero space.
+- For all other spaces, every vector space has infinitely many bases.
+** Using Bases as Coordinate Systems
+:PROPERTIES:
+:ID:       f6435027-149e-42ef-b351-39340571954f
+:END:
+- Given a vector \(v \in V\), there exists unique \(c_1, c_2, ..., c_k\) such that \(v=c_1u_1 + c_2u_2 + ... + c_ku_k\) if \(S=\{u_1, u_2, ..., u_k\}\) is a base of \(V\)
+- We can say that \(c_1, c_2, ..., c_k\) are the coordinates of \(v\) relative to \(S\)
+- Note: the order of vectors in the basis matters, so S is actually an ordered set of vectors.
+- Notation:
+  - \((v)_s=\begin{pmatrix}c_1 & c_2 & c_3 & ... & c_k\end{pmatrix}\)
+  - \([v]_s=\begin{pmatrix}c_1 \\ c_2 \\ c_3 \\ \vdots \\ c_k\end{pmatrix}\)
+- Properties:
+  - For any \(u, v\): \(u = v\) iff \((u)_s = (v)_s\)
+  - For any \(v_1, v_2, ..., v_k\) and \(c_1, c_2, ..., c_k\): \((c_1v_1 + c_2v_2 + ... + c_kv_k)_s = c_1(v_1)_s + c_2(v_2)_s + ... + c_k(v_k)_s\)
+  - Given a basis \(S\) of cardinality k:
+    - Given a set of vectors in \(V\), they are linearly independent iff their coordinates in \(S\) are linearly independent
+    - The span of that set is equal to \(V\) iff the span of their coordinates in \(S\) is equal to \(\mathbb{R}^k\)
+** Standard Basis
+:PROPERTIES:
+:ID:       a05c5eec-5069-4633-ada8-181efca0c408
+:END:
+- The standard basis for \(\mathbb{R}^n\) is \(E={e_1, e_2, e_3, ..., e_n}\) where \(e_1=(1, 0, 0, ...), e_2=(0, 1, 0, ...), e_3=(0,0,1,..), ...\)
+** Dimension
+:PROPERTIES:
+:ID:       5ba9a192-afee-4100-9f47-f6a4f81b57de
+:END:
+- For a [[id:b91e4b67-de10-40c3-bea8-b950d195156e][Subspace]] with a basis with cardinality k:
+  - Any subset with more than k vectors are linearly dependent
+  - All bases have cardinality k
+  - Any subset with less than k vectors cannot span the subspace.
+- The dimension of a vector \(V\), \(dim(V)\), is equal to the cardinality of a base of \(V\).
+  - The dimension of the zero space is 0.
+- For solution spaces:
+  - Write the solution \(x = t_1u_1 + t_2u_2 + t_3u_3 + ... + t_ku_k\), where \(t_i\) are parameters and \(u_i\) are vectors.
+  - Then, $u_1, ..., u_k$ is a basis of the solution space.
+  - Thus the dimension of the solution space is equal to $k$.
+- If you know the dimension of \(V\) is \(k\), the following are equivalent:
+  - S is a basis for \(V\)
+  - S is linearly independent and \(|S| = k\)
+  - S spans \(V\) and \(|S|=k\)
+- If \(W\) is a subspace of \(V\), then \(dim(W) \leq dim(V)\)
+-
+* Transition Matrices
+:PROPERTIES:
+:ID:       afa55c4d-3f3e-4b23-84f8-29bc57319011
+:END:
+ - Let two sets \(S = \{u_1, u_2, ..., u_k\}\) and \(T=\{v_1, v_2, ..., v_k\}\) be [[id:f061a0cd-618a-4339-8982-7e1c425463a9][Bases]] of \(V\)
+ - \(u_i\) can be written as a linear combination of \(T\)
+ - Given a vector \(W\), how to go from \([W]_S\) to \([W]_T\)
+   - \([W]_T=\begin{bmatrix}[u_1]_T & [u_2]_T & ... & [u_k]_T\end{bmatrix}[W]_S\)
+   - Let \(P = \begin{bmatrix}[u_1]_T & [u_2]_T & ... & [u_k]_T\end{bmatrix}\) then, \([W]_T=P[W]_S\)
+   - P is called the transition matrix from \(S\) to \(T\)

@@ -71,7 +71,7 @@
 :END:
 - Limited by bandwidth of the connection
 - "How long do I have to wait before can I send the next bit?"
-- $\frac{\text{bits per time}}{\text{number of bits}}$
+- \(\frac{\text{bits per time}}{\text{number of bits}}\)
 
 *** Propagation Delay
 :PROPERTIES:
@@ -79,7 +79,7 @@
 :END:
 - Limited by the speed of the signal along the connection.
 - "How long does it take for the data to go from point A to point B"?
-- $\frac{\text{length of connection}}{\text{speed of data through connection}}$
+- \(\frac{\text{length of connection}}{\text{speed of data through connection}}\)
 
 * Network Protocols
 :PROPERTIES:
@@ -237,7 +237,7 @@
 - Non-persistant HTTP connection
   - Each object needs 2 [[id:be2e19da-7142-44a9-8707-6e6f3412d46f][RTTs]]
   - Time taken to send data is based on [[id:86A82389-CC39-4780-8D82-E05918A03EFF][Packet Delay]]
-  - Timing of message = $2 \times \text{RTT} + \text{HTTP Header Time} + \text{Data Time}$
+  - Timing of message = \(2 \times \text{RTT} + \text{HTTP Header Time} + \text{Data Time}\)
   - Note that speed is often given in bits per second, while size is given in bytes.
 
 ** HTTP 1.1
@@ -251,7 +251,7 @@
     - This occurs when the client knows that it needs multiple resources to be fetched.
   - If there is time where the computer does not know what it needs to be fetching, it will need to idle until it knows.
   - Time taken to send data is based on [[id:86A82389-CC39-4780-8D82-E05918A03EFF][Packet Delay]]
-  - Timing across all messages = $\text{RTT} \times (\text{Number of Objects} + 1) + \text{Data Time} + \text{Idle Time}$
+  - Timing across all messages = \(\text{RTT} \times (\text{Number of Objects} + 1) + \text{Data Time} + \text{Idle Time}\)
   - Note that the speed is often given in bits per second, while size is given in bytes.
 * IP
 :PROPERTIES:
@@ -260,7 +260,19 @@
 - [[id:5d0b0590-fd98-4db1-89f1-f8f38bd11bb7][Network Layer]] service of the internet
 - Runs within routers between the sender and receiver hosts
   - Routers will read the IP header to determine where to send the packet
--
+- IP header, which is added on to every datagram, is 20 bytes for IPV4
+  - [[file:media/ip-header_1.png][Diagram]]
+- IPV6:
+  - [[file:media/ipv6-header_1.png][Diagram]]
+** Fragmentation
+:PROPERTIES:
+:ID:       5f3f8977-96ff-4c27-84d1-9bbe9fa3e859
+:END:
+- Different network have a different Max Transfer Unit, the maximum amount of data a [[id:491f607a-a390-4694-8544-1fce9a3a7d86][Data Link Layer]]-level frame can carry
+- IP datagrams that are too large may be fragmented by routers
+- Destination will reassemble the packet
+- Note that this occurs independantly of the transport layer protocols; the network layer has no knowledge of the structure of TCP or UDP.
+- [[file:media/fragment_1.png][Fragment]]
 * [[id:c66bc940-0321-468b-86c1-21ae30542ab4][IP]] Address
 :PROPERTIES:
 :ID:       11fd492e-05ef-4acd-818c-60fdcc28ae46
@@ -576,7 +588,6 @@
 :END:
 - AKA CIDR
 - The method of assigning IP addresses with a subnet prefix and a host ID
-*
 
 * [[id:11fd492e-05ef-4acd-818c-60fdcc28ae46][IP Address]] Prefix Matching
 :PROPERTIES:
@@ -584,3 +595,75 @@
 :END:
 - Routers can request for all packets with a prefix to be routed to them after [[id:160b1d3b-04d0-4162-b7be-501077aacb5b][IP Address Allocation]]
 - This is done based on the longest matching prefix, so if someone requests for 192.0.0.0/8, and someone else requests for 192.168.0.0/16, then packets with IP 192.168.1.1 will get routed to the second.
+
+* Routing
+:PROPERTIES:
+:ID:       c2fa8019-df2a-4988-bcc1-51b2fa3ec40b
+:END:
+** Intra-AS routing
+:PROPERTIES:
+:ID:       4573522c-2b99-4582-b67b-69af2dae2e6b
+:ROAM_ALIASES: RIP
+:END:
+- Routes between nodes which are part of the same [[id:c3b243ad-3fd8-4d6c-8d86-652e4bd44dce][AS]]
+- If each link has a cost associated with it, the problem of intra-AS routing becomes a min cost path problem
+  - Cost generally inversely related to bandwidth, or could be just constant
+*** Link State
+:PROPERTIES:
+:ID:       07c0fa9e-5a7f-4673-8219-f74865046896
+:END:
+ - Each router periodically shares link cost values with the whole network
+ - All routers have complete knowledge of all costs in the network
+ - Uses dijkstra's algorithm to compute the best path for a packet
+*** Distance Vector
+:PROPERTIES:
+:ID:       7caaf9c5-3359-4900-bc29-f636eefb87ef
+:END:
+- Router knows physically connected neighbors and will share link costs to them
+- Routers will exchange "local views" with its neighbors and update its own local view based on its neighbors "local views"
+  - The local view is a set of currently known shortest distances from all routers to all other routers.
+  - Local views will be updated using the [[id:68aa9ceb-91e4-43be-adaf-1e0f98fe96d3][Bellman-Ford Equation]]
+  - [[file:media/local-view_1.png][Local View]]
+*** Routing Information Protocol
+- AKA RIP
+- A [[id:4573522c-2b99-4582-b67b-69af2dae2e6b][Intra-AS routing]] protocol which implements the [[id:7caaf9c5-3359-4900-bc29-f636eefb87ef][Distance Vector]] algorithm.
+- Uses hop count as the cost metric (i.e. each link has cost 1), which means that it ignores network congestion
+- Routing table is sent every 30 seconds over UDP port 520
+- "Self-repair", meaning that if no updates have been received from a neighbor after 3 minutes, that neighbor is assumed to be failed and removed
+
+* Autonomous System
+:PROPERTIES:
+:ID:       c3b243ad-3fd8-4d6c-8d86-652e4bd44dce
+:ROAM_ALIASES: AS
+:END:
+- An ISP / other organization which owns its routers and links
+- Has a clearly defined routing policy which is applied to the whole network
+
+* Bellman-Ford Equation
+:PROPERTIES:
+:ID:       68aa9ceb-91e4-43be-adaf-1e0f98fe96d3
+:END:
+- \(d_x(y)=min_v\{c(x,v)+d_v(y)\}\) across all neighbors v of x
+  - Where \(d_x(y)\) is the minimum distance from x to y
+  - and \(c(x,v)\) is the cost of the link between x and v
+
+* Network Address Translation
+:PROPERTIES:
+:ID:       6e7e0310-2256-401e-ac6f-14f15017875d
+:END:
+- We utilize private IPs behind a network in order to not run out of IPV4 addresses as fast
+- However, private IPs cannot be used for communcation outside the network, so how do computers with a private IP send and receive messages?
+- All datagrams crossing the public-private network threshold must be relabeled by the router
+- The NAT router must:
+  - Replace (source IP, port #) of every outgoing datagram with (NAT IP, new port #)
+  - Remember in a NAT Translation table, the mapping between (source IP, port #) to (NAT IP, new port #)
+  - Replace the (NAT IP, new port #) of every incoming datagram with (source IP, port #)
+- [[file:media/nat_1.png][NAT]]
+
+* ICMP
+:PROPERTIES:
+:ID:       13e7cc23-0551-45dd-a248-e3b532930058
+:END:
+- ICMP is a message carried an a header that happens after the [[id:c66bc940-0321-468b-86c1-21ae30542ab4][IP]] header
+- It defines a few different codes for functions of network functionality
+- [[file:media/icmp_1.png][Diagram]]

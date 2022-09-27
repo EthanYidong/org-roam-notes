@@ -22,8 +22,8 @@
 - How do you know how much space to allocate?
   - Compiler checks which variables you want to store
 - Endianness
-  - Let a value $A=0xdeadbeef$
-  - Let's say we want to store this in the memory space: $0x100, 0x101, 0x102, 0x103$
+  - Let a value \(A=0xdeadbeef\)
+  - Let's say we want to store this in the memory space: \(0x100, 0x101, 0x102, 0x103\)
   - Little Endian:
     - [[id:0a64e439-8706-4401-ab6a-71577970d7aa][MSB]] is stored in the lowest address
 |  Addr |  Val |
@@ -697,7 +697,7 @@
     - Select tasks with smallest CPU time
     - May not be known, sometimes musst be guessed at
       - Common approach is exponential average
-        - $P_{n+1}=wA_n +(1-w)P_n$
+        - \(P_{n+1}=wA_n +(1-w)P_n\)
         - Where P = prediction, A = actual, and w is how we weight the actual vs the prediction
     - Good for minimizing average wait time
     - May starve long jobs if shorter jobs are consistently being added
@@ -716,7 +716,7 @@
     - All tasks are stored in a FIFO queue
     - When each task blocks, yields, or completes, we evict it from the CPU
     - The task is moved to the back of the queue if it is not completed
-    - Guarantees each tasks can get some CPU time every $q(n-1)$ units, where q is the [[id:1fd3da26-d080-477b-b2bd-da4a0c914a09][Time Quantum]] and n is the number of tasks
+    - Guarantees each tasks can get some CPU time every \(q(n-1)\) units, where q is the [[id:1fd3da26-d080-477b-b2bd-da4a0c914a09][Time Quantum]] and n is the number of tasks
     - [[id:b3ef1808-f8f2-4f6b-89a3-c9dfb5046182][ITI]] and [[id:1fd3da26-d080-477b-b2bd-da4a0c914a09][Time Quantum]] must be carefully chosen
   - Priority Scheduling
     - Some tasks are more important than others
@@ -875,7 +875,7 @@
   - Registers
     - Includes PC
   - "Stack"
-    - Under the hood, it just modifies the $fp and $sp headers
+    - Under the hood, it just modifies the \(fp and \)sp headers
 - Threads are more lightweight
 - Questions:
   - What happens when system calls are made in parallel?
@@ -997,7 +997,7 @@
 - Stores an integer
 - Defines Two Operations (Atomic!)
   - Wait
-    - While the value of S is $S \leq 0$, block/sleep
+    - While the value of S is \(S \leq 0\), block/sleep
     - Decrement S (upon wake up if blocked, otherwise as normal)
     - AKA P() or Down()
   - Signal
@@ -1007,13 +1007,13 @@
     - AKA V() or Up()
 - [[file:media/semaphore_1.png][Diagram]]
 - Properties:
-  - Given initial value of S is $S_{\text{initial}} \geq 0$
-  - $S_{\text{current}}=S_{\text{initial}}+numSignal(S)-numWait(S)$
+  - Given initial value of S is \(S_{\text{initial}} \geq 0\)
+  - \(S_{\text{current}}=S_{\text{initial}}+numSignal(S)-numWait(S)\)
     - where numSignal is number of signal operations completed and
     - numWait is the number of wait operations completed
     - Requires each process to call signal after every wait
 - Types
-  - General semaphore, takes any integer $S \geq 0$
+  - General semaphore, takes any integer \(S \geq 0\)
   - Binary semaphore, takes values 0 or 1
     - It has the same power as a general semaphore, that is, a general semaphore can be implemented given a semaphore.
 - Solves all known synchronization problems

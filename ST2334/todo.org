@@ -13,6 +13,7 @@
 ** DONE Watch Lecture 4 <2022-08-30 Tue>
 ** DONE Watch Lecture 5 <2022-09-06 Tue>
 ** DONE Watch Lecture 6 <2022-09-13 Tue>
+** TODO Watch Lecture 7 <2022-10-04 Tue>
 
 * Lecture Quiz
 ** DONE Lecture Quiz 2 <2022-08-16 Tue>
@@ -20,9 +21,11 @@
 ** DONE Lecture Quiz 4 <2022-08-30 Tue>
 ** DONE Lecture Quiz 5 <2022-09-06 Tue>
 ** DONE Lecture Quiz 6 <2022-09-13 Tue>
+** TODO Lecture Quiz 7 <2022-10-04 Tue>
 
 * Tutorial
 ** DONE Tutorial Preparation 1 <2022-08-24 Wed>
 ** DONE Tutorial Preparation 2 <2022-08-31 Wed>
 ** DONE Tutorial Preparation 3 <2022-09-07 Wed>
 ** DONE Tutorial Preparation 4 <2022-09-14 Wed>
+** TODO Tutorial Preparation 5 <2022-10-05 Wed>

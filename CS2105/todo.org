@@ -14,14 +14,17 @@
 ** DONE Watch Lecture 4 <2022-08-29 Mon>
 ** DONE Watch Lecture 5 <2022-09-05 Mon>
 ** DONE Watch Lecture 6 <2022-09-12 Mon>
+** DONE Watch Lecture 7 <2022-09-26 Mon>
 
 * Assignments
 
 ** DONE Assignment 0 <2022-08-26 Fri>
 ** DONE Assignment 1 <2022-09-18 Sun>
+** TODO Assignment 2 <2022-10-21 Fri>
 
 * Tutorial
 ** DONE Tutorial Preparation 1 <2022-08-26 Fri>
 ** DONE Tutorial Preparation 2 <2022-09-02 Fri>
 ** DONE Tutorial Preparation 3 <2022-09-09 Fri>
 ** DONE Tutorial Preparation 4 <2022-09-16 Fri>
+** DONE Tutorial Preparation 5 <2022-09-30 Fri>

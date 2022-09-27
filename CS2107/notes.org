@@ -250,9 +250,9 @@
   - Each key is a permutation of the 27 letters in the alphabet
   - Naive method: 1 byte per letter = 8 * 27 = 216
   - Smarter method: 5 bits per letter = 5 * 27 = 135
-  - Theoretical lower bound: $\log_2(27!) \approx 94$
-    - $2^{94} = 1.9E28$
-    - $27! = 1.0E28$
+  - Theoretical lower bound: \(\log_2(27!) \approx 94\)
+    - \(2^{94} = 1.9E28\)
+    - \(27! = 1.0E28\)
 - Not secure under [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]] or under [[id:50B37D8A-18F7-49B5-B0D5-917D42BA7F02][Ciphertext Only]] attacks.
 ** Permutation Cipher
 :PROPERTIES:
@@ -296,7 +296,7 @@
 :PROPERTIES:
 :ID:       0864648d-4915-4973-9b93-0f513ee5e5d6
 :END:
-- $Pr(X = x | Y = y) = Pr(X = x)$ given any distribution X, for all x and y
+- \(Pr(X = x | Y = y) = Pr(X = x)\) given any distribution X, for all x and y
 - "The probability that the plaintext is any given value is equal to the probability that the plaintext is that value given the ciphertext"
 - "No knowledge is gained by knowing the ciphertext"
 
@@ -333,7 +333,7 @@
 :PROPERTIES:
 :ID:       2cff7ab5-1b5f-4195-bf3c-3f576551a604
 :END:
-- If under an attack model a system $S_1$ prevents more attacks than $S_2$, then $S_2$ is more secure than $S_1$, specifically *with respect to the [[id:b30c808d-acea-428a-9564-6fb356072eb6][Attack Model]]*
+- If under an attack model a system \(S_1\) prevents more attacks than \(S_2\), then \(S_2\) is more secure than \(S_1\), specifically *with respect to the [[id:b30c808d-acea-428a-9564-6fb356072eb6][Attack Model]]*
 - The goal is to prevent attacks under the strongest capability and the weakest goals
 - Modern ciphers aim for [[id:0864648d-4915-4973-9b93-0f513ee5e5d6][Perfect Secrecy]] under Chosen Plaintext ([[id:626045a3-13e4-43d8-8b2d-724b0e40fb6d][Encryption Security Models]])
 * Block Ciphers
@@ -415,13 +415,13 @@
 :ID:       13695deb-3d7e-40cc-8625-59c18476e61f
 :END:
 - All ciphers are vulnerable to exhaustive search (except OTP)
-- If the key length is 56 bits, there are $2^{56}$ possible keys
+- If the key length is 56 bits, there are \(2^{56}\) possible keys
 - The time for an exhaustive search is thus:
-  - $2^{56}$ worst case
-  - $2^{55}$ average
+  - \(2^{56}\) worst case
+  - \(2^{55}\) average
 - Schemes can be stronger w.r.t exhaustive search based on how many keys must be searched to break the cipher
 - Some schemes have more efficient search schemes
-  - For example, in 2048-bit RSA, only about $2^{112}$ searches are required
+  - For example, in 2048-bit RSA, only about \(2^{112}\) searches are required
   - Thus we can say that 2048-bit RSA has the key strength of 112 bits
 
 * Modes-of-Operation
@@ -475,11 +475,11 @@
 - But, is the strength really equivalent to 112 bits?
 - Meet-in-the-Middle is a [[id:51C901FF-09EA-40C6-AE8E-107F33D1D66D][Known Plaintext]] attack
 - The problem: Given c and m, find the two keys used for 2DES encryption
-  - From the plaintext m, run encryption for all possible keys $k_1$
-  - Similarly, from the ciphertext c, run decryption for all possible keys $k_2$
+  - From the plaintext m, run encryption for all possible keys \(k_1\)
+  - Similarly, from the ciphertext c, run decryption for all possible keys \(k_2\)
   - If a value occurs as the output of the encryption of m and as the output of the decryption of c, then the keys used in that pair is the key set used
-  - This reduces the [[id:13695deb-3d7e-40cc-8625-59c18476e61f][Exhaustive Search]] timing from $2^{112}$ to $2^{57}$
-    - In general, the search time for applying this attack will be just $2^{k + 1}$ assuming the encyrption is applied twice.
+  - This reduces the [[id:13695deb-3d7e-40cc-8625-59c18476e61f][Exhaustive Search]] timing from \(2^{112}\) to \(2^{57}\)
+    - In general, the search time for applying this attack will be just \(2^{k + 1}\) assuming the encyrption is applied twice.
 * 2DES
 :PROPERTIES:
 :ID:       0826056f-f8ab-48d8-b4a3-4d62b40119a4
@@ -529,8 +529,8 @@
 :ID:       1bbca30f-1ab3-42b7-8b58-c6a47168d989
 :ROAM_REFS: https://en.wikipedia.org/wiki/PKCS_7
 :END:
-- If the block size is $n$ bytes, but the last block only has $m$ values, then we need $p=n-m$ padding bytes
-- Each padding byte will be set to $p$
+- If the block size is \(n\) bytes, but the last block only has \(m\) values, then we need \(p=n-m\) padding bytes
+- Each padding byte will be set to \(p\)
 
 * [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptography]] Pitfalls
 :PROPERTIES:
@@ -713,7 +713,7 @@
 :ID:       1b1ffa4f-135b-41e8-8584-bc5ee549d316
 :END:
 - Measurement of randomness or unpredictability
-- Let a set P contain N unique passwords. If a password is chosen randomly and uniformly from the set P, then the entropy of that password is $\log_2(N)$ bits
+- Let a set P contain N unique passwords. If a password is chosen randomly and uniformly from the set P, then the entropy of that password is \(\log_2(N)\) bits
 - If the password is not chosen uniformly, then the entropy will be lower.
 - [[id:3f75bf07-bf2b-4f70-819c-938598fd43d2][Passwords]] are reccomended to have around 128 bits of entropy to be secure against offline attacks
 * ATM Attacks
@@ -829,8 +829,8 @@
   - Implies: the private key should not be easy/practically impossible to derive from the public key
 - Why PKE?
   - Suppose we have n people who want to communicate with each other
-  - With pairwise [[id:7765D5BC-0C92-4AC3-BFA6-822A5517070A][Symmetric Cryptosystem]] schemes, we need $\frac{(n)(n-1)}{2}$ keys total
-  - With a single broadcast channel using PKE, we only need $n$ keys.
+  - With pairwise [[id:7765D5BC-0C92-4AC3-BFA6-822A5517070A][Symmetric Cryptosystem]] schemes, we need \(\frac{(n)(n-1)}{2}\) keys total
+  - With a single broadcast channel using PKE, we only need \(n\) keys.
 - Popular PKE Schemes:
   - [[id:036994b9-0dff-4b8e-adea-283df9012d31][RSA]](key size ~2048 bits)
     - Rivest, Shamir, Adleman
@@ -848,29 +848,29 @@
  - The data will be represented as integers, and the algorithms are operations on the integers
  - The integer's binary representation is the "actual" data we are sending
  - How it works:
-   - Two large primes $p$ and $q$ are selected
-   - Calculate $n = pq$
-   - Choose an exponent $e$ s.t. $gcd(e, \phi (n)) = 1$
-     - We also know $\phi (n) = (p-1)(q-1)$ because $n$ is the product of two primes.
-     - $\phi (n)$ is the totient function, the number of values less than $n$ which is relatively prime to $n$
-   - Determing $d$ such that $de \equiv 1 (\mod \phi (n))$ (i.e. $d$ is the modular inverse of $e$ mod $\phi (n)$)
-   - Our public key is $(n, e)$, and our private key is $(n, d)$
-     - $p$ and $q$ may be discarded for security, since they are no longer required
-   - To encrypt a plaintext $m$, we calculate the ciphertext $c=m^e (\mod n)$
-   - To decrypt a ciphertext $c$, we calculate the plaintext $m=c^d (\mod n)$
+   - Two large primes \(p\) and \(q\) are selected
+   - Calculate \(n = pq\)
+   - Choose an exponent \(e\) s.t. \(gcd(e, \phi (n)) = 1\)
+     - We also know \(\phi (n) = (p-1)(q-1)\) because \(n\) is the product of two primes.
+     - \(\phi (n)\) is the totient function, the number of values less than \(n\) which is relatively prime to \(n\)
+   - Determing \(d\) such that \(de \equiv 1 (\mod \phi (n))\) (i.e. \(d\) is the modular inverse of \(e\) mod \(\phi (n)\))
+   - Our public key is \((n, e)\), and our private key is \((n, d)\)
+     - \(p\) and \(q\) may be discarded for security, since they are no longer required
+   - To encrypt a plaintext \(m\), we calculate the ciphertext \(c=m^e (\mod n)\)
+   - To decrypt a ciphertext \(c\), we calculate the plaintext \(m=c^d (\mod n)\)
  - Ok but like how:
-   - $d$ can be calculated easily using the Extended Euclidean Algorithm
-     - This allows us to solve $x$ and $y$ when $ax+by=gcd(a,b)$
-     - We let $a = e, b= \phi (n), x=d$. This means $gcd(a, b)=1$ by definition
-     - This gives us the equation $ed + \phi (n) y = 1$, which is identical to the original equation
+   - \(d\) can be calculated easily using the Extended Euclidean Algorithm
+     - This allows us to solve \(x\) and \(y\) when \(ax+by=gcd(a,b)\)
+     - We let \(a = e, b= \phi (n), x=d\). This means \(gcd(a, b)=1\) by definition
+     - This gives us the equation \(ed + \phi (n) y = 1\), which is identical to the original equation
      - [[file:media/extended-euclidian-algorithm_1.png][Example]]
-   - $m^e$ and $c^d$ can be easily found by doing successive squaring, logarithmic time
+   - \(m^e\) and \(c^d\) can be easily found by doing successive squaring, logarithmic time
  - RSA can be cracked by either factoring n or finding d some other way, which may be easier
    - Smaller n has been shown to be too weak as computers get more powerful
    - Quantum computers can run factorization in polynomial time, which will break RSA once they get practical enough
      - Post-quantum algorithms are now being developed, such as lattice-based cryptography or multivariabe cryptography
  - Real world RSA uses padding
-   - We have an issue with "base" RSA where $E(m_1) * E(m_2) = E(m_1 * m_2)$
+   - We have an issue with "base" RSA where \(E(m_1) * E(m_2) = E(m_1 * m_2)\)
    - Usually an IV is used
    - Also, a padding such as PKCS#1 is used
  - Pitfall: using RSA as a symmetric key setting
@@ -884,15 +884,15 @@
 - Non-[[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptographic]] hash functions designed for efficiency rather than the security requirements are not to be used in a crypto setting
 - [[id:b30c808d-acea-428a-9564-6fb356072eb6][Security Models]]
   - Security Requirements:
-    - Efficiency: calculating $h(m)$ is easy
-    - Pre-image resistance: calculating $h^{-1}(m)$ is hard
-    - Collision resistance: finding $m_1 and m_2$ such tht $h(m_1) = h(m_2)$ is hard
+    - Efficiency: calculating \(h(m)\) is easy
+    - Pre-image resistance: calculating \(h^{-1}(m)\) is hard
+    - Collision resistance: finding \(m_1 and m_2\) such tht \(h(m_1) = h(m_2)\) is hard
       - Implies pre-image resistance
 - Examples
   - SHA-1
     - Succeeds the withdrawn SHA-0 by NIST
     - Considered broken, but still commonly used
-      - A collision was theoretically possible to find in $2^{63}$ time
+      - A collision was theoretically possible to find in \(2^{63}\) time
       - Google applied it in practice: [[http://shattered.io][Shattered]]
     - Now supersceded by SHA-256 or SHA-3
   - MD5
@@ -941,10 +941,10 @@
 :ID:       436330df-4367-4ba9-b42c-c33281a5c4b9
 :END:
 - Birthday Attack works by finding two different sets of data which results in the same hash value.
-  - $h(m_1)=h(m_2)$ when $m_1 \neq m_2$
+  - \(h(m_1)=h(m_2)\) when \(m_1 \neq m_2\)
 - Birthday paradox: a surprisingly few number of people are required to have a good chance of having a duplicate birthday
-- If we have M messages, each paired with a random value chosen from ${v_1, v_2, v_3, ..., v_T}$, then if $M > 1.17 T^{0.5}$ there is a probability of more than 0.5 that there exists a pair of messages with the same value.
-  - In general, the chance that a probability occurs = $1-e^{\frac{-M^2}{2T}}$
+- If we have M messages, each paired with a random value chosen from \({v_1, v_2, v_3, ..., v_T}\), then if \(M > 1.17 T^{0.5}\) there is a probability of more than 0.5 that there exists a pair of messages with the same value.
+  - In general, the chance that a probability occurs = \(1-e^{\frac{-M^2}{2T}}\)
 - Thus, the approximate work factor is the square root of the digest length
 * [[id:ba7c1150-8c97-4862-87db-edf38efaa278][Public Key]] Distribution
 :PROPERTIES:
