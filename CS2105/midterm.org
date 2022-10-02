@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       62f570c5-f97f-4713-971c-bdc3e0150d8d
+:END:
+#+title: CS2105 Midterm Notes
+
+- links :: [[id:192A0605-67DE-4277-9FEF-5C16C81937F8][CS2105]]
+
+RTFP
+
+* Pitfalls
+- READ IF IT'S BYTES OR BITS Uppercase B = Bytes, lowercase b = bits
+- DHCP uses UDP
+- Port numbers refer to processes, not hosts
+- Port number + IP = socket
+- SOCK_STREAM=TCP, SOCK_DGRAM=UDP
+* Terms
+- MSS (Maximum Segment Size) - The maximum data length of a TCP packet (not including headers)
+- MTU (Maximum Transfer Unit) - The maximum data length of a Data Link-level frame can carry
+* TCP
+- TCP has one timer
+*

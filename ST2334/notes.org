@@ -358,3 +358,94 @@
 - \(f(y|x)=\frac{f(x, y)}{f(x)}\)
 - This is the probability distribution of \(Y\) for some given value \(x\)
 - \(f\) is a probability function and thus follows the properties of [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Distributions]]
+* Special Distributions
+:PROPERTIES:
+:ID:       5b9dc76e-1144-4d31-8e32-41395e082eb8
+:END:
+** Discrete Uniform Distribution
+:PROPERTIES:
+:ID:       60c19a91-b5f0-4074-ab3e-b58211481c9a
+:END:
+- If a [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variable]] X takes values \(x_1, x_2, ..., x_k\) with equal probability \(\frac{1}{k}\), then X follows a discrete uniform distribution
+- The [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Density Function]] is given by \(f(x)=\frac{1}{k}\) for \(x= x_1, x_2, ..., x_k\) and 0 otherwise
+- We need k to be finite for this definition to work.
+- Properties:
+  - \(E(X) = \frac{1}{k} \sum_{i=1}^k x_i\)
+  - \(V(x) = \frac{1}{k} \sum_{i=1}^k (x_i^2) - E(X)^2\)
+** Bernoulli Trial
+:PROPERTIES:
+:ID:       eb8c19c4-3d36-4b42-8769-ed0ba1022a6a
+:END:
+- A Bernoulli Trial is a [[id:66f7bb17-6edb-46ee-a6b7-0f26e5712a09][Statistical Experiment]] with only two possible outcomes
+- We call them 1 "success" and "0" failure
+** Bernoulli Random Variable
+:PROPERTIES:
+:ID:       eaf882ff-2c9a-424a-a54f-a2d7072c2402
+:END:
+- A Bernoulli Random Variable is a [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variable]] X where X = the outcome of a [[id:eb8c19c4-3d36-4b42-8769-ed0ba1022a6a][Bernoulli Trial]].
+- Let \(p\) be the probability of success
+- The [[id:ef1c9700-1ee3-44d4-86bd-890b5cd912b9][Probability Density Function]] is given by \(\begin{cases}p & x = 1 \\ (1-p) & x = 0\end{cases}\), and 0 otherwise
+- Also equal to \(p^x(1-p)^{1-x}\) for \(x=0,1\)
+- Can be donated as \(X \sim \text{Bernoulli}(p)\)
+- Properties:
+  - \(E(X) = p\)
+  - \(V(X) = p(1-p)\)
+** Bernoulli Process
+:PROPERTIES:
+:ID:       ca32470f-3844-47bd-bd2d-dc4c0e5ccf84
+:END:
+- A sequence formed by performing many identical and independent [[id:eb8c19c4-3d36-4b42-8769-ed0ba1022a6a][Bernoulli Trials]]
+- Denoted by \(X_1, X_2, X_3, ...\)
+** Binomial Distribution
+:PROPERTIES:
+:ID:       5a71c997-228a-4e59-a2fb-6ca86007d36f
+:END:
+- A binomial [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variable]] counts the number of successes in \(n\) trials in a [[id:ca32470f-3844-47bd-bd2d-dc4c0e5ccf84][Bernoulli Process]] with probability \(p\) of success
+- We say X has a binomial distribution and denote \(X \sim B(n,p)\)
+- Properties:
+  - \(P(X=x) = {n \choose x} p^x (1-p)^{n-x}\)
+  - \(E(X) = np\)
+  - \(V(X) = np(1-p)\)
+** Negative Binomial Distribution
+:PROPERTIES:
+:ID:       e921bb31-0f2f-406b-81e5-4fa6b7424574
+:END:
+- A binomial [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variable]] counts the number of trials needed to get \(k\) successes in a [[id:ca32470f-3844-47bd-bd2d-dc4c0e5ccf84][Bernoulli Process]] with probability \(p\) of success
+- We say X has a negative binomial distribution \(X \sim NB(k,p\)
+- Properties:
+  - \(P(X=x) = {{x-1} \choose {k-1}}p^k(1-p)^{x-k}\)
+  - \(E(X) = \frac{k}{p}\)
+  - \(V(X) = \frac{(1-p)k}{p^2}\)
+** Geometric Distribution
+:PROPERTIES:
+:ID:       2b95e4a0-f28c-4bff-84e4-7cf59de0b5f4
+:END:
+- A geometric [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variable]] is a special case of the [[id:e921bb31-0f2f-406b-81e5-4fa6b7424574][Negative Binomial Distribution]] which counts the number of trials needed to get 1 success in a [[id:ca32470f-3844-47bd-bd2d-dc4c0e5ccf84][Bernoulli Process]] with probability \(p\) of success
+- Properties:
+  - \(P(X=x) = (1-p)^{x-1}p\)
+  - \(E(X) = \frac{1}{p}\)
+  - \(V(X) = \frac{1-p}{p^2}\)
+** Poisson Distribution
+:PROPERTIES:
+:ID:       934104ef-8fc3-4fe7-9afb-4139517e2a55
+:END:
+- A Poisson [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variable]] is the number of times an event occurs in a set period of continuous time
+  - This period is defined such that, given a rate parameter \(\alpha\)
+    - The expected number of occurances in an interval of length \(T\) is \(\alpha T\)
+    - There are no simultaneous occurances
+    - The number of occurances in disjoint time intervals are independent
+- We denote \(X \sim \text{Poisson}(\lambda)\), where \(\lambda\) is the expected number of occurences during that set period of time.
+  - Also, \(X \sim \text{Poisson} (\alpha T)\)
+- Properties:
+  - \(P(X=k) = \frac{e^{-\lambda}\lambda^{k}}{k!}\)
+  - \(E(X) = \lambda\)
+  - \(V(X) = \lambda\)
+*** Poisson Approximation of [[id:5a71c997-228a-4e59-a2fb-6ca86007d36f][Binomial Distribution]]
+:PROPERTIES:
+:ID:       83c48189-3581-4e80-bc89-2471150bd61c
+:END:
+- Let \(X \sim B(n,p)\)
+- If \(n \rightarrow \infty\) and \(p \rightarrow 0\) in such a way that \(\lambda = np\)
+- Then, we approximate \(X \sim \text{Poisson}(np)\)
+- \(\lim_{p \to 0; n \to \infty} P(X=x) = \frac{e^{-np}(np)^x}{x!}\)
+- This is a good approximation when \(n \geq 20\) and \(p \leq 0.05\) or if \(n \geq 100\) and \(np \leq 10\)

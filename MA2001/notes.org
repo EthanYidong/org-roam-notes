@@ -421,6 +421,7 @@
   - \(det(A) \neq 0\)
   - The rows of \(A\) form a [[id:b3caafea-8006-4974-b41a-13c2917d32c9][Basis]] for \(\mathbb{R}^n\)
   - The columns of \(A\) form a [[id:b3caafea-8006-4974-b41a-13c2917d32c9][Basis]] for \(\mathbb{R}^n\)
+  - \(A\) is full-rank
 
 * Elementary Matrices
 :PROPERTIES:
@@ -674,6 +675,7 @@
 :ID:       c99030a7-f2fe-408d-ae2b-2fae64b1c1df
 :END:
  - The [[id:6d6c3bfc-2b01-4012-b255-d155b17fdc04][Solution Set]] of a [[id:98073aba-eb13-435c-b020-535c499f2767][Homogenous Linear System]] in \(n\) variables is a subspace of \(\mathbb{R}^n\)
+ - The [[id:5ba9a192-afee-4100-9f47-f6a4f81b57de][Dimension]] of that space will be equivalent to the number of non-pivot columns, AKA the number of arbitrary parameters
 ** Subspace of a Subspace
 :PROPERTIES:
 :ID:       e5770fe4-53cc-4f1c-81e1-411a01a2898f
@@ -760,3 +762,70 @@
    - \([W]_T=\begin{bmatrix}[u_1]_T & [u_2]_T & ... & [u_k]_T\end{bmatrix}[W]_S\)
    - Let \(P = \begin{bmatrix}[u_1]_T & [u_2]_T & ... & [u_k]_T\end{bmatrix}\) then, \([W]_T=P[W]_S\)
    - P is called the transition matrix from \(S\) to \(T\)
+   - Properties:
+     - \(P\) is invertible
+     - \(P^{-1}\) is the transition matrix from \(T\) to \(S\)
+* Vector Spaces Associated with Matrices
+:PROPERTIES:
+:ID:       1a30541d-aaf1-41c4-9d1f-edee848bd15e
+:END:
+** Row Spaces
+:PROPERTIES:
+:ID:       a8143ca8-980f-4ea3-9ed7-41f67b339390
+:END:
+- Let \(A\) be an m by n matrix \(\begin{bmatrix}r_1 \\ \vdots \\ r_m \end{bmatrix}\)
+- The Row Space of \(A\) is the subspace of of \(\mathbb{R}^n\) spanned by the rows of \(A\)
+- [[id:03fd9b35-48e8-42da-a4bf-bb6942228e03][Row Equivalent]] matrices have the same row space
+  - [[id:bf26f901-fa17-4c98-b8bf-8d54d5a8f01d][Elementary Row Operations]] preserve the row space
+  - The non-zero rows in the [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]] of \(A\) are linearly independent and therefore form the basis of the row space of \(A\)
+** Column Spaces
+:PROPERTIES:
+:ID:       2e88699a-cfb2-48a0-965f-1ad484989a4c
+:END:
+- Let \(A\) me an m by n matrix \(\begin{bmatrix}c_1 & ... & c_n\end{bmatrix}\)
+- The Column Space of \(A\) is the subspace of \(\mathbb{R}^m\) spanned by the columns of \(A\)
+- [[id:03fd9b35-48e8-42da-a4bf-bb6942228e03][Row Equivalent]] matrices may not have the same row space
+  - However, if we have two row equivalent matrices \(S\) and \(T\), the set of columns in \(A\) given by the column numbers \(c_1, c_2, ..., c_k\) are linearly independent iff the columns in \(B\) given by the column numbers \(c_1, c_2, ..., c_k\) are linearly independent
+  - [[file:media/column-vectors_1.png][Diagram]]
+  - A result of this is that the basis for the column space of \(A\) can be found by taking the columns corresponding to the pivot columns in the [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]] of \(A\)
+** Linear Systems
+:PROPERTIES:
+:ID:       31cdb48d-e5a5-4e09-b926-0075a1e2c7ce
+:END:
+- The column space of \(A\) (m by n) is \(\{Au | u \in \mathbb{R}^n\}\)
+- \(Ax=b\) is consistent iff b is in the column space of \(A\)
+- In other words, solutions to \(Ax=b\) are finding ways to write \(b\) as a linear combination of the columns of \(A\)
+* Rank of a [[id:d7a14523-8aca-462b-96d7-96f8c198e3e9][Matrix]]
+:PROPERTIES:
+:ID:       ff7ecda7-522c-49e8-9479-7880299efb03
+:END:
+- The [[id:a8143ca8-980f-4ea3-9ed7-41f67b339390][Row Spaces]] and [[id:2e88699a-cfb2-48a0-965f-1ad484989a4c][Column Spaces]] of a matrix have the same [[id:5ba9a192-afee-4100-9f47-f6a4f81b57de][Dimension]] (even though they may be subspaces of a different real space)
+  - This is just a result of the number of pivot columns being equal to the number of non-zero rows
+  - The [[id:2e30e6b2-9251-4c46-996d-f73cc7a14329][Pivot Columns]] form a basis for the column space
+  - The non-zero rows form a basis for the row space
+- The rank of a matrix is the dimension of the row space, equal to the dimension of the column space.
+- Denoted by \(rank(A)\)
+- Properties:
+  - \(rank(0)=0\) and \(rank(I_n)=n\)
+  - For a m by n matrix, \(rank(A) \leq min(m,n)\)
+    - A matrix with \(rank(A)=min(m,n)\) is said to be full rank.
+    - A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] is only full rank iff it is [[id:5c656b0b-ab52-4d87-89b7-268c6aa6661c][Invertible]]
+  - \(rank(A) = rank(A^T)\)
+  - A [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear System]] \(Ax=b\) is [[id:b2f4051d-ee59-40dc-a561-4ea4f14fb79f][Consistant]] iff \(A\) and \((A|b)\) have the same rank
+  - \(rank(AB) \leq min(rank(A), rank(B))\)
+
+* Nullspaces
+:PROPERTIES:
+:ID:       e8099a6c-6a63-4a1e-a196-bd60568b8c9b
+:END:
+- Let A be a m by n matrix
+- The solution space of the [[id:98073aba-eb13-435c-b020-535c499f2767][Homogenous Linear System]] \(Ax=0\) is known as the nullspace of \(A\)
+- The [[id:5ba9a192-afee-4100-9f47-f6a4f81b57de][Dimension]] of the null space is called the nullity of \(A\), denoted as \(nullity(A)\)
+- Since the null space is a subspace of \(\mathbb{R}^n\), we have \(nullity(A) \leq n\)
+- By convension, vectors in nullspaces and solutions to linear systems will be written as column vectors.
+- Nullity is equal to the number of non-pivot columns in the [[id:b0ddc803-3424-4cd1-b60e-4311c41a6098][REF]] (the number of arbitrary parameters)
+  - \(rank(A) + nullity(A)\) is equal to the number of columns in \(A\)
+- Implication on [[id:4de0b32f-feb4-42e9-8bca-194ed2408758][Linear Systems]]
+  - If we have a solution \(x=v\) to the system \(Ax=b\)
+  - Then, the solution set of the system is given by \(\{u+v|u \in \text{nullspace of A}\}\)
+  - [[file:media/differential_1.png][Related]]

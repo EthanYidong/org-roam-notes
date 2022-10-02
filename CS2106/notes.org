@@ -1075,3 +1075,131 @@
 - Limited Eater Solution
   - Leave an empty seat
   - By PHP there is at least one person who can eat
+* Memory Management
+:PROPERTIES:
+:ID:       69beabef-f618-4755-91aa-18f4dae1359c
+:END:
+- [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] wants to
+  - Allocate memory for new [[id:f77c8ce6-2418-40ea-9cf2-0759fe185dfb][Processes]]
+  - Manage memory space for processes
+  - Protect memory space of processes from each other
+  - Provide memory related system calls to processes
+  - Manage memory space for internal use
+** Physical Address
+:PROPERTIES:
+:ID:       b7583c52-f40d-4f08-a274-5a3b764ffd49
+:END:
+- Addresses referring to bytes in physical [[id:b7aa1fcd-4bc1-4cb2-aa78-121f452bb11a][Memory Hardware]]
+** Logical Address
+:PROPERTIES:
+:ID:       ada5e17f-72ee-4e61-8eef-435db9805cba
+:END:
+- How a process views the memory space
+- Logical address is generally not equal to the physical address
+- Each process is granted its own logical memory space
+  - That way, the process cannot even name the logical address that would correspond to another process's [[id:b7583c52-f40d-4f08-a274-5a3b764ffd49][Physical Address]]
+- After compiling, multiple output programs can be combined into one by a linker, which will rearrange the memory such that the resultant program still starts at 0
+- Before running, the loader will randomize the address space before loading the program
+** Memory Hardware
+:PROPERTIES:
+:ID:       b7aa1fcd-4bc1-4cb2-aa78-121f452bb11a
+:END:
+- RAM
+- Essentially an array of bytes
+- Each byte has an index, known as the [[id:b7583c52-f40d-4f08-a274-5a3b764ffd49][Physical Address]]
+- It is a "contiguous memory region", meaning that it refers to an interval of consecutive addresses, each address can be used.
+** Memory Hierarchy
+:PROPERTIES:
+:ID:       8922a543-7084-4b43-b081-afd9cb1a461d
+:END:
+- From fastest to slowest, smallest to largest, most expensive to cheapest:
+  1. Registers
+  2. Cache
+  3. [[id:b7aa1fcd-4bc1-4cb2-aa78-121f452bb11a][Memory Hardware]]
+  4. Hard Disks
+  5. Offline Storage
+** Memory Usage
+:PROPERTIES:
+:ID:       73e4f238-986d-43f5-a8a1-35cd16587e18
+:END:
+- Memory allocated by the [[id:D289CD47-38F4-481F-BED1-FEAF25C4D709][OS]] per process
+- Two types of data:
+  - Transient data, valid for limited duration like a function call, such as local vars
+  - Persistent data, valid for the entire duration like a global variable
+- Possible for data to outlive process using files
+** Memory Abstraction
+:PROPERTIES:
+:ID:       e885be59-61c0-40d5-9249-74105ac5462c
+:END:
+- Without memory abstraction:
+  - The address in the program corresponds directly to the [[id:b7583c52-f40d-4f08-a274-5a3b764ffd49][Physical Address]]
+    - Simple, but this causes conflicts between conflicts that cannot be resolved since these issues must be addressed at compile time
+    - Makes it hard to protect your memory space
+  - No conversion or mapping required
+  - Address is fixed during compile time
+- First attempt: Address Relocation
+  - All programs still assume starting at location 0
+  - When loading the process into memory, update the memory references by some offset determined by the OS
+    - Causes slow loading time
+    - Must have some mechanism to distinguish between regular values and memory addresses
+- Second attempt: Base and limit registers
+  - Set a base register corresponding to the base address for memory access
+  - Set a limit register corresponding to the first address not allocated to that process
+  - [[file:media/base-limit_1.png][Diagram]]
+  - Memory access a bit slower:
+    - Must set Actual = Base + Addr, check that Actual < Limit
+- Use [[id:ada5e17f-72ee-4e61-8eef-435db9805cba][Logical Address]]
+** Contiguous Memory Management
+:PROPERTIES:
+:ID:       faaa6bff-952d-45fd-b367-1f314cf72a08
+:END:
+- Assumptions:
+  - Each process is granted a contiguous memory region
+  - Our [[id:b7aa1fcd-4bc1-4cb2-aa78-121f452bb11a][Memory Hardware]] has space to contain the complete memory space of multiple processes.
+- To support multitasking:
+  - Multiple processes in memory at once
+- When the memory is full
+  - Move blocked processes to secondary storage (hard disk)
+- Two schemes of allocating partitions
+  - Fixed size
+    - Physical memory space is split up into a fixed number of partitions
+    - A process runs on one of the partitions
+    - [[file:media/fixed-partition_1.png][Diagram]]
+    - Easy to manage, fast to allocate
+    - Partition sizing must be able to accomodate the largest process
+    - Wastes space for processes smaller than the partition size
+      - Known as "internal fragmentation", because the empty space is within the space allocated to a process
+  - Variable size
+    - Partition is created based on process size
+    - OS dynamically allocates and frees partitions
+    - Free memory space known as holes, with a lot of process creation we get a lot of smaller holes
+      - Known as "external fragmentation", because the empty space is outside the space allocated to the process
+      - OS will do compaction to combine the smaller holes into larger, more useful holes
+        - Generally time consuming and not run frequently
+    - More flexible and removes internal fragmementation
+    - More informaiton needs to be recorded by OS, takes more time to locate the appropriate memory region
+    - Allocation:
+      - OS maintains a list of partitions and holes, generally stored using linked list
+        - [[file:media/dynamic-allocation_1.png][Diagram 1]]
+        - [[file:media/dynamic-allocation_2.png][Diagram 2]]
+      - For a process with size N, algorithm wants to locate space of size M such that M > N
+      - Possible strategies:
+        - First-Fit: pick the first hole with M > N
+        - Best-Fit: pick the smallest hole with M > N
+        - Worst-Fit: pick the largest hole
+      - After allocating, the hole is split into partition of size N and a hole of size M - N
+    - On free:
+      - Merge the freed partition with adjacent holes
+  - Variable size: buddy system
+    - Allow some amount of internal fragmentation
+    - When allocating memory for a process, a free block is split into half repeatedly to meet request
+    - The two halves form "buddy blocks"
+    - When a pair of "buddy blocks" are free, they can recombine into a larger block.
+    - [[file:media/buddy-block_1.png][Diagram]]
+    - Implementation
+      - [[file:media/buddy-system_1.png][Diagram 1]]
+      - [[file:media/buddy-system_2.png][Diagram 2]]
+      - [[file:media/buddy-system_3.png][Diagram 3]]
+      - [[file:media/buddy-system_4.png][Diagram 4]]
+      - [[file:media/buddy-system_5.png][Diagram 5]]
+      - [[file:media/buddy-system_6.png][Diagram 6]]

@@ -1072,3 +1072,92 @@
 - CAs go rogue: allows for man-in-the-middle attacks to occur by CAs which generate spoofed certificates
 - Null byte attack: The URL looks the same, but there is a null byte in the URL which has a different, valid certificate, but the user cannot tell
 - Similarly, typosquatting attacks may use similar looking URLs to trick users into visiting a spoofed site
+* Strong Authentication
+:PROPERTIES:
+:ID:       de143960-9b2d-4548-bc99-d59421652338
+:END:
+** Challenge-Response Authentication
+:PROPERTIES:
+:ID:       4acf93f1-00f7-40e9-b8ae-442012c6d94c
+:END:
+- [[id:7765D5BC-0C92-4AC3-BFA6-822A5517070A][SKC]] based:
+  - Bob encrypts a random message with the secret key k
+  - Alice, if she knows the secret key, can recover the message and send it back to Bob.
+  - Thus, Bob knows that Alice knows the secret, but the secret was never sent directly.
+  - M must be different for each request.
+  - This protocol only validates Alice.
+- [[id:ba7c1150-8c97-4862-87db-edf38efaa278][PKC]] based:
+  - Bob sends a random number to send to Alice
+  - Alice signs the random number using her private key
+  - Bob checks the signature against Alice's public key.
+  - This protocol only validates Alice.
+  - More information should be included in the signed message.
+- Authentication alone is not sufficient though, since once the authentication occurs [[id:C6BD6271-3B92-4538-9398-FCCA53B7A1B5][Mallory]] can take over as Alice.
+  - Thus, the authentication process needs to result in a session key(s) which will be used for future communication
+  - This process is known as authenticated [[id:34c2a8d8-8af9-45bd-8e56-0cead8198839][Key Exchange]]
+** Key Exchange
+:PROPERTIES:
+:ID:       34c2a8d8-8af9-45bd-8e56-0cead8198839
+:END:
+- [[file:media/key-exchange_1.png][Key Exchange]]
+- Unauthenticated
+  - Alice and Bob want to derive a common key while preventing [[id:28DAED70-FF28-43A9-AABE-A1FC13D0A639][Eve]] from figuring out the key.
+  - Method 1: using [[id:ba7c1150-8c97-4862-87db-edf38efaa278][PKC]]
+    - [[file:media/key-exchange-pkc_1.png][Diagram]]
+  - Method 2: using Diffie-Hellman
+    - [[file:media/key-exchange-dh_1.png][Diagram]]
+  - However, this method is insecure to an attacker with spoofing capabilities, since that attacker can impersonate Alice to Bob, and impersonate Bob to Alice.
+    - [[file:media/key-exchange-mallory_1.png][Diagram]]
+- Authenticated
+  - Use Diffie-Hellman, with [[id:ba7c1150-8c97-4862-87db-edf38efaa278][PKC]]
+    - [[file:media/key-exchanged-authenticated_1.png][Diagram]]
+    - This is called "unilateral" authentication, where only one party is authenticating itself to the other.
+      - In this case, only one party needs to know the other's public key
+      - In the case of mutual authenticated key exchange, both parties needs to know the other's public key.
+  - After exchanging one key, all needed session keys can be generated using a Key Derivation Function like HKDF.
+** Secure Communication Channel
+:PROPERTIES:
+:ID:       815013f5-1eab-4dc0-b4ee-ec8c8ead2385
+:END:
+- Problem: we want to communicate securely over a medium subjected to sniffing and spoofing.
+- A "secure channel" establishes a method to communicated between two programs in a way that maintains confidentiality, integrity, and authenticity.
+  - [[id:42696A4B-0DFA-435B-858E-D061FEB2CCA0][Confidentiality]]: use Encryption
+  - [[id:1FE1E862-1BEC-409A-93BB-7CBF73FACB14][Integrity]]: use [[id:b534f6fc-0a19-4899-b0cd-d690668fdce5][MAC]] or [[id:f6d86fcf-3694-4ae1-999d-d3a087484b83][Digital Signature]]
+  - [[id:ba3c205b-306c-4bb8-9803-5e0c9c1460f6][Authenticity]]: use MAC or Digital Signature.
+- Example: Alice wants to visit bob.com.
+  - [[file:media/secret-channel_1.png][Diagram]]
+  - We need sequence number to prevent reordering attacks.
+  - Step one: Authenticated [[id:34c2a8d8-8af9-45bd-8e56-0cead8198839][Key Exchange]]
+  - Step two: Secure communication
+    - For example, encrypt using key, and send MAC using another key, known as encrypt-then-MAC
+* HTTPS
+:PROPERTIES:
+:ID:       0edce589-a78d-48cc-834f-ea1bdcd4f3aa
+:END:
+- HTTP over [[id:0f2997e1-86b0-413b-8435-a221c5786207][TLS]] or HTTP over [[id:131a9663-bd3a-437f-8ad6-6f2b2869a811][SSL]]
+* SSL
+:PROPERTIES:
+:ID:       131a9663-bd3a-437f-8ad6-6f2b2869a811
+:END:
+- [[id:815013f5-1eab-4dc0-b4ee-ec8c8ead2385][Secure Communication Channel]]
+- Predecessor to [[id:0f2997e1-86b0-413b-8435-a221c5786207][TLS]]
+- [[file:media/ssl_1.png][Diagram]]
+* TLS
+:PROPERTIES:
+:ID:       0f2997e1-86b0-413b-8435-a221c5786207
+:END:
+- [[id:815013f5-1eab-4dc0-b4ee-ec8c8ead2385][Secure Communication Channel]] protocol
+- Successor to [[id:131a9663-bd3a-437f-8ad6-6f2b2869a811][SSL]]
+- Process
+  - Well-defined format
+  - First, figure out what type of ciphers to use (Diffie Hellman, RSA, etc.)
+  - Second, conduct authenticated [[id:34c2a8d8-8af9-45bd-8e56-0cead8198839][Key Exchange]]
+    - Ensure that the keys are the same
+  - Establish symmetric key based secure communication
+  - Renegotiate if needed
+- [[file:media/tls_1.png][Diagram]]
+* Nonce
+:PROPERTIES:
+:ID:       69c6c12e-71d7-417a-9185-5e6ed0aa0f34
+:END:
+- A value used only once.

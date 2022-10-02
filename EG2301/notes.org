@@ -125,7 +125,8 @@
   - Capital leasing
   - Service revenue
   - Add insights and what does it means
-  - If your actual competetor is manpower, then analyze companies that *could* do what you're doing
+  - If your actual competitor is manpower, then analyze companies that *could* do what you're doing
+  - Customers should be people
 
 * Tria
 :PROPERTIES:
@@ -146,7 +147,7 @@
   - Sustainability push, change from styrofoam to paper
   - Requirement was practical usage (keep soup properly contained)
   - Engineered better paper based materials
-  - Both price point and function were competetive with styrofoam
+  - Both price point and function were competitive with styrofoam
 - "In & Out" case study
   - A convertable packaging which works for dine in and take-out
   - Saves dish washing and management complexity
@@ -313,7 +314,7 @@
   - Growth rates
   - Impact analysis from trends
   - 5 force field
-  - Competetive analysis
+  - Competitive analysis
   -
 - But first...
   - Set boundaries:
@@ -387,7 +388,7 @@
 :ID:       bee9eb85-d35a-4fd4-bd2c-701c3714ac66
 :END:
 - The final product after applying all the other tools of Industry Analysis
-- Position competetors along three factors to chart out everything in the industry
+- Position competitors along three factors to chart out everything in the industry
 - [[file:media/competition-perceptual-diagram_1.png][Competition Perceptual Diagram]]
 
 * Library Research
@@ -579,3 +580,86 @@
 :ID:       4a2ceb28-a9ce-4405-adae-173e1c7ee0e6
 :END:
 - Costs of running regularly, such as ingredients or consumables which are used up constantly
+
+* Buyer Types
+:PROPERTIES:
+:ID:       6a97fe7c-afb6-4d9e-8c38-a532aa3fb83b
+:END:
+** Strategic Buyer
+- Who decides to buy something
+** Economic Buyer
+- Who pays for it
+** Technical Buyer
+- Who implements the product
+** End User
+- Who is using the product
+
+* Revenue
+:PROPERTIES:
+:ID:       90251742-55b7-40f6-8e63-baa8c8340d63
+:END:
+* Pricing
+:PROPERTIES:
+:ID:       dd2908f7-dc64-4afe-8842-a76165ac423f
+:END:
+** Demand-Based Pricing
+:PROPERTIES:
+:ID:       7c202c31-80b6-4a6b-b9db-19d41abb5d4e
+:END:
+- Price that can fluctuate based on demand
+- Most popular when a business has fixed inventory at the same pricing
+- For example, airline tickets, hotels, ridesharing
+** Pricing Strategy
+:PROPERTIES:
+:ID:       0a39d6df-3013-4319-9fad-a76ce0a39af2
+:END:
+- Objectives:
+  - Profitability
+  - Competitive offense/deterrence/response
+  - Market penetration
+  - Economic factors
+  - Regulatory factors
+  - Branding/Market Positioning
+  - Change buyers' behavior
+- Case Study
+  - 2005
+  - Fitness club in china
+  - Price war between them and competitors
+  - Idea was to become the monopoly
+  - Location-based business
+  - Nearby clubs dropped price below profit level to force the weakest player out of business
+    - Starve competitors
+  - Rebranded, raised price
+  - "Blue ocean strategy"
+    - Differenciate from competitors while dropping costs
+- Common strategies
+  - Cost plus pricing
+    - Pricing = cost + desired profit
+    - Simple, consistent returns
+    - May not be competitive, lacks the incentive to operate efficiently
+  - Penetration pricing
+    - Special low price at first attract customers to try a new product
+    - Low entry costs
+    - Can double as marketing, and leads to accelerated early adoption
+    - Encourages consumers to discontinue with your services once the special pricing expires
+  - Value-based pricing
+    - Pricing = how much the customer will pay
+    - Very dependent on brand image, companies with brands perceived as valuable will gain more profits
+  - Competition pricing
+    - Product pricing is based around competitor pricing
+    - Decide whether or not to price less than, equal to, or slightly more than competitors
+  - Skimming pricing
+    - Enter the market at high prices, then lower as competitors enter
+  - Product line pricing
+    - Having different models with variations, and pricing the different models to reach different subsegments
+    - Gives more choices for little cost
+  - Psychological pricing
+    - Nudge consumers towards making certain purchase decisions by manipulating the price structure
+  - Premium pricing
+    - Set the price artificially high to signal higher quality
+    - Improves brand perception
+  - Optional pricing
+    - Sell accessories and addons that are "optional"
+* Midway
+- Skip the 2x2 competetor graph
+- Skip marketing plan

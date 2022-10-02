@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       5a72f773-adee-4663-aaab-5f514549e205
+:END:
+#+title: CS2106 Midterm Notes
+
+- links :: [[id:539C8BDD-D2EA-4131-8F31-F2C3F0BC3799][CS2106]]
+
+* Terminology
+- ITI / Interval of Timer Interrupt: How often the interrupt timer will be run and give control to the OS
+- Time Quantum/Time Slice: The maximum amount of time a process is allowed to be using the CPU before being preempted (multiple of ITI)
+- Average wait time: average of time between task arrival and task completion
+- Responsiveness: average of time interval between task arrival and first CPU allocation for a task
+- Race condition: when the outcome depends on execution order
+
+* Code Questions
+- If forks and exec are present, make sure to figure out whether or not the parent is forking, or whether the child will also fork.
+- Check the structure of if statements to figure out exactly which code will be run by parent and child
+- exec doees not create a new process, only fork does.
+- If exec a invalid program, the process will stay on its current executable
+- When waiting on a child, if the process has no children, the wait will immediately return
+
+* Threading
+- Pure user threading will never be able to exploit multicore processors
+- 1:1 user to kernel threading emulates pure kernel threads
+- SMT allows more than one thread on a single core
+
+* Processes
+- exit() will always make a zombie process even when the parent is waiting for it.
+
+* System Calls
+- System calls are always syncrhonous
+
+* Scheduling
+- I/O blocking is not bound to the scheduler, the OS, syscalls will allow the program to block between time quantums.
+- Round robin is not "responsive" even though it bounds the maximum waiting time.
+- Another MLFQ exploit: fork once every time quantum to reset the timer
+  - Assumption: forked child process gets highest priority and doesn't have the same usage info as parent
+- Batch processing has preemption but I/O will still keep the process in the CPU
+- Priority does not guarantee being able to preempt
+- There is no such thing as "guaranteed" the shortest average waiting time without extra details.
+
+* IPC
+- Shared Memory
+  - Can have permissions (0666) which allow attaching to any process, even by other users
+  - Can outlive the creator
+  - Has its own ID, the memory address is only created upon attaching
