@@ -328,7 +328,7 @@
 :END:
 - Assuming we have [[id:1989137d-e58f-4685-9e4b-b8ac9760b3c2][Joint Probability Mass Function]] f(x,y), then:
   - \(E(g(X,Y)) = \sum_x \sum_y g(x,y) f(x,y)\) for discrete distributions
-  - \(E(g(X,Y)) = \int_{-\intfy}^{\infty} \int_{-\intfy}^{\infty} g(x,y) f(x,y) dy dx\) for continuous distributions
+  - \(E(g(X,Y)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(x,y) f(x,y) dy dx\) for continuous distributions
 ** Covariance for Joint Distributions
 :PROPERTIES:
 :ID:       7cac8039-e815-4565-892f-1cc785e861b6
@@ -449,3 +449,63 @@
 - Then, we approximate \(X \sim \text{Poisson}(np)\)
 - \(\lim_{p \to 0; n \to \infty} P(X=x) = \frac{e^{-np}(np)^x}{x!}\)
 - This is a good approximation when \(n \geq 20\) and \(p \leq 0.05\) or if \(n \geq 100\) and \(np \leq 10\)
+* Special [[id:fe324f54-728a-47e8-8777-1ff360b0457b][Continuous]] Distributions
+:PROPERTIES:
+:ID:       873a174d-6f9e-4326-8b05-71fdf3e19b3e
+:END:
+** Continuous Uniform Distribution
+:PROPERTIES:
+:ID:       8ddc46ba-8c7b-41a2-a87b-99751b037804
+:END:
+- A random variable \(X\) with a constant probability over an interval \((a,b)\)
+- Denoted as \(X \sim U(a,b)\)
+- Properties:
+  - \(f(x) = \frac{1}{b-a}\) for \(x\) between \(a\) and \(b\), and 0 otherwise
+  - \(F(x)=\frac{x-a}{b-a}\) for \(a \leq x \leq b\), 0 for \(a > x\) or 1 otherwise
+  - \(E(x) = \frac{a+b}{2}\)
+  - \(V(X)=\frac{(b-a)^2}{12}\)
+** Exponential Distribution
+:PROPERTIES:
+:ID:       1b06df73-cf5e-4f16-be8f-79fa230ec9d8
+:END:
+- A distribution parametrized by \(\lambda > 0\) such that:
+- Denoted as \(X \sim Exp(\lambda)\)
+- Properties:
+  - \(f(x)=\lambda e^{-\lambda x}\) for \(x \geq 0\), and 0 otherwise
+  - \(F(x)= 1-e^{-\lambda x}\) for \(x > 0\), and 0 otherwise
+  - \(E(X) = \frac{1}{\lambda}\)
+  - \(V(X)=\frac{1}{\lambda^2}\)
+- Can also be seen in the form where \(\mu = \frac{1}{\lambda}\)
+- \(P(X > s + t | X > s) = P(X > t)\)
+  - Conceptually, this means that the exponential distribution has "no memory"
+  - For example, if a bulb's lifetime follows such as distribution, the chance that it lasts for t more seconds after s seconds is the same as sthe chance that a new bulb would last for t seconds
+** Normal Distribution
+:PROPERTIES:
+:ID:       5caa8927-ec1b-4eb4-9989-9eb2ebd70684
+:END:
+- Denoted as \(X \sim N(\mu, \sigma^2)\)
+- Properties:
+  - \(f(x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{(x-\mu)^2}{(2 \sigma^2)}}\)
+  - \(E(X) = \mu\)
+  - \(V(X) = \sigma^2\)
+- Symmetric about \(x = \mu\) and positive across all real numbers
+- Two normal curves with the same \(\sigma^2\) have the same shape but centered at different locations
+- Larger \(\sigma\) flattens the curve
+- If we have \(Z = \frac{X - \mu}{\sigma}\), then \(Z \sim N(0, 1)\)
+  - Using this, \(P(x_1 < X < x_2) = P(z_1 < Z < z_2)\) where \(z_i = \frac{x_i - \mu}{\sigma}\)
+- We use \(\phi\) to denote the pdf and \(\Phi\) to denote the cdf of Z.
+  - \(\Phi(z) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{z} e^{\frac{-t^2}{2}}dt\)
+  - No closed form formula, so we use a table
+- Properties of Z:
+  - \(P(Z \geq 0) = P(Z \geq 0) = 0.5\)
+  - \(\Phi(z) = 1 - \Phi(-z)\)
+  - \(-Z \sim N(0,1)\)
+- When \(n \to \infty\), p remains constant, the normal distribution can be used to approximate the [[id:5a71c997-228a-4e59-a2fb-6ca86007d36f][Binomial Distribution]]
+  - Use when \(np > 5\) and \(n(1-p) > 5\)
+  - Given \(X \sim B(n, p)\), we have \(Z \approx \frac{X - E(X)}{\sqrt{V(X)}}\)
+* Quantile
+:PROPERTIES:
+:ID:       470591ea-e5b6-4980-94b6-5ec5ab1dfad7
+:END:
+- The \(\alpha\)th upper quantile of \(X\) is the number \(x_\alpha\) where \(P(X \geq x_\alpha) = \alpha\)
+- In particular, we denote \(z_\alpha\) as the \(\alpha\)th upper quantile of \(Z \sim N(0,1)\) ([[id:5caa8927-ec1b-4eb4-9989-9eb2ebd70684][Normal Distribution]])

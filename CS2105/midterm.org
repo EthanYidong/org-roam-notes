@@ -16,6 +16,15 @@ RTFP
 * Terms
 - MSS (Maximum Segment Size) - The maximum data length of a TCP packet (not including headers)
 - MTU (Maximum Transfer Unit) - The maximum data length of a Data Link-level frame can carry
+- RTT (Round trip timing) - Essentially the time it takes to send a negligible sized packet to the server and receive a reply
 * TCP
 - TCP has one timer
-*
+- Sequence number = next byte to be sent
+- Sequence number goes up by one for handshake and teardown (SYN and FIN), as if they had a 1 byte payload
+- ACK flag is set in almost all cases except for the first connection when there is nothing to ACKnowledge
+* Checksums
+- UDP:
+  - Split into 16 bit words
+  - Add one by one
+  - Every time you get a carry from the MSB, move it to the LSB position and add it as well
+  - Finally, take one's complement (invert all the bits)

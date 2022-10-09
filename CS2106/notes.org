@@ -1203,3 +1203,106 @@
       - [[file:media/buddy-system_4.png][Diagram 4]]
       - [[file:media/buddy-system_5.png][Diagram 5]]
       - [[file:media/buddy-system_6.png][Diagram 6]]
+
+* Disjoint [[id:69beabef-f618-4755-91aa-18f4dae1359c][Memory Management]]
+:PROPERTIES:
+:ID:       8c551088-5881-427a-b121-6178c8ee713f
+:ROAM_ALIASES: Page
+:END:
+- Needed due to various constraints
+- We remove the assumption that applications need contiguous memory regions
+  - (Still keep the assumption that physical memory is large enough for the whole process)
+- Allocate memory space in disjoint [[id:b7583c52-f40d-4f08-a274-5a3b764ffd49][Physical Address]] locations using a mechanism known as [[id:f9e7c37c-5658-4381-8238-1a4dd3be9a7f][Paging]]
+** Paging
+:PROPERTIES:
+:ID:       f9e7c37c-5658-4381-8238-1a4dd3be9a7f
+:END:
+- [[id:b7583c52-f40d-4f08-a274-5a3b764ffd49][Physical]] memory is split into regions of fixed size, known as physical frames
+- [[id:ada5e17f-72ee-4e61-8eef-435db9805cba][Logical]] memory is split into regions of the same size, known as logical pages
+  - Different size is technically possible but leads to many complications with address translation
+- Each logical page is loaded into any available memory frame, resulting in a continuous logical space mapped onto a potentially disjoint physical memory space
+  - Loaded on a need-to basis, upon access
+- Under such a scheme, we need to keep track of the map between each logical page and its associated physical frame (known as a page table)
+  - [[file:media/disjoint-memory_1.png][Diagram]]
+- Properties
+  - This results in no external fragmentation, since all free frames can be used equally
+  - This still results in internal fragmentation, since the required memory space may not be exactly a multiple of page size
+    - Small page size reduces this problem, but lowers efficiency
+  - Achieves a clear separation of logical and physical address space which provides flexibility with simple address translation
+  - Basic paging scheme can be extended to provide additional features by appending data to the page table
+    - Access-Right bits
+    - Validity bit
+      - Also allows for shrinking page tables
+    - Each table entry can use these control mechanisms to check that memory access is authorized and valid
+  - Page sharing can allow multiple processes to share physical memory frames
+    - Shared code/libraries can take advantage of this by having code that can be utilized by multiple processes
+    - Copy-on-Write lowers the memory overhead forked children such that they do not have to clone the full memory space and the data inside it, only the page table
+      - The frame will only be copied when a process writes to it
+      - [[file:media/copy-on-write-page_1.png][Diagram]]
+      - OS uses flags to detmerine if this case occurs
+- Problems
+  - Pure software solution requires two accesses to memory for each read from memory
+    - One to read the page lookup table, one to access the actual item
+    - Solution: use a [[id:2f9b6ef7-13ee-4307-b9e1-eed014212e21][Translation Look-Aside Buffer]]
+*** Page Address Translation
+:PROPERTIES:
+:ID:       b412830a-a54a-4117-b76a-80957d547510
+:END:
+- The process by which we translate a [[id:ada5e17f-72ee-4e61-8eef-435db9805cba][Logical Address]] to a [[id:b7583c52-f40d-4f08-a274-5a3b764ffd49][Physical Address]]
+- Find which page the logical address is in, and the offset
+- Find the frame the page is mapped to
+- Add the offfset to the frame's base address (frame number times frame size) to get the physical address
+  - This will be sped up if we keep the frame size as powers of 2, which will allow for easy multiplication and division (standard 4K, 4096)
+  - This will be easier if the frame size is equal to the page size
+    - Starting address of a frame and starting address of a page must always have n trailing 0 bits
+  - [[file:media/address-translation_1.png][Diagram]]
+  - [[file:media/address-translation-formula_1.png][Formula]]
+*** Translation Look-Aside Buffer
+:PROPERTIES:
+:ID:       2f9b6ef7-13ee-4307-b9e1-eed014212e21
+:ROAM_ALIASES: TLB
+:END:
+- Implement a special cache in hardware to store a few page table entries, known as the Translation Look-Aside Buffer
+- [[file:media/page-cache_1.png][Diagram]]
+- [[file:media/page-cache-efficiency_1.png][Efficiency]]
+- TLB becomes part of the hardware context of a process
+- Should be flushed upon context switch
+- Inefficient to purposefully refill the cache upon returning, so just leave it empty and let the cache fill itself
+** Segmentation
+:PROPERTIES:
+:ID:       ca257976-6526-475a-b6d0-8c61d026244d
+:END:
+- So far, we treat memory as a single entity
+- However, in typical programs, we have different regions: program code/text, data, heap, stack, library code, etc.
+- These regions have different properties/uses: some may need to grow or shrink, such as the heap
+  - If placed in a contiguous memory space, it is hard to grow or shrink.
+- Solution: place each type of data into its own segment
+  - In x86 systems, each even has its own register, not really used these days
+- Each memory segment has a name
+- Logical memory space is now a collection of segments
+- Memory access is now specified by using segment name and offset
+- Segment sizes can vary, unlike a [[id:8c551088-5881-427a-b121-6178c8ee713f][Page]]
+- Properties
+  - Allows segments to grow or shrink independently
+  - Can be protected and shared independently
+  - May cause external fragmentation
+*** Segment Address Translation
+:PROPERTIES:
+:ID:       3c122185-d935-42d8-8d8c-043a3cd5600e
+:END:
+- Logical addresses defined using Segment ID and Offset
+- Each segment name is represented as a single ID by the compiler
+- The segment ID is used to look up information from the segment table (Base address, limit, permissions, etc.)
+- Physical address calculated as base address + offset
+- [[file:media/segmentation_1.png][Diagram]]
+- [[file:media/segmentation_2.png][Diagram 2]]
+  - This may be implemented in hardware
+** Segmentation with Paging
+:PROPERTIES:
+:ID:       a5f3d3a0-fe66-4ac7-b26a-3cfe8a537788
+:END:
+- Combine both [[id:ca257976-6526-475a-b6d0-8c61d026244d][Segmentation]] and [[id:f9e7c37c-5658-4381-8238-1a4dd3be9a7f][Paging]]
+- Each segment has its own page table, allowing it to grow and shrink in a non-contiguous fashion
+  - Alternatively, some systems only keep one page table and all segment pages refer to that single table
+- [[file:media/segmentation-paging_1.png][Diagram]]
+- [[file:media/segmentation-paging_2.png][Diagram 2]]

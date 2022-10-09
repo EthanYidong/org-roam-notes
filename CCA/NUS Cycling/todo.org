@@ -21,5 +21,7 @@
 ** DONE Bill Members <2022-09-12 Mon>
 * WellNUS
 ** TODO Final Budget
+** DONE Add Vendor <2022-10-04 Tue>
 * HalloWheels
 ** TODO Budget
+**

@@ -1130,6 +1130,23 @@
   - Step one: Authenticated [[id:34c2a8d8-8af9-45bd-8e56-0cead8198839][Key Exchange]]
   - Step two: Secure communication
     - For example, encrypt using key, and send MAC using another key, known as encrypt-then-MAC
+** Authenticated Encryption
+:PROPERTIES:
+:ID:       0c7d5802-795f-4b9b-8baa-67f5664a89f4
+:END:
+- Providing both authenticity and confidentiality
+- Encrypt-and-MAC
+  - [[file:media/encrypt-and-mac_1.png][Diagram]]
+  - Poor MAC may leak information about plaintext
+- MAC-then-Encrypt
+  - [[file:media/mac-then-encrypt_1.png][Diagram]]
+  - Decryption required even if message is corrupted
+- Encrypt-then-MAC
+  - [[file:media/encrypt-then-mac_1.png][Diagram]]
+  - MAC can be checked without decrypting
+- AES-GCM
+  - (Galois counter mode)
+  - [[file:media/aes-gcm.png][Diagram]]
 * HTTPS
 :PROPERTIES:
 :ID:       0edce589-a78d-48cc-834f-ea1bdcd4f3aa
@@ -1161,3 +1178,154 @@
 :ID:       69c6c12e-71d7-417a-9185-5e6ed0aa0f34
 :END:
 - A value used only once.
+* Networking Security
+:PROPERTIES:
+:ID:       790de419-c3ff-4c78-8f23-d82b89726a6b
+:END:
+- We have developed a [[id:815013f5-1eab-4dc0-b4ee-ec8c8ead2385][Secure Communication Channel]], but we're still missing a few issues
+  - Availability (protect against [[id:f2fa5968-ca9a-4530-a0c1-92fc8352482a][DoS]])
+  - Anonymity
+  - Network protocol attacks (e.x. TLS renegotiation attack)
+  - Network access control (e.x. firewalls), monitoring, and management issues
+  - Web security
+** OSI Layers
+:PROPERTIES:
+:ID:       2f7fce9d-6645-47b4-aaed-2694b4bdf962
+:END:
+- See [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+- Layers
+  - Application (Layer 5 or 7)
+    - Sometimes session and presentation are grouped with application
+    - Domain name
+  - Presentation
+  - Session
+  - Transport
+    - Port number
+  - Network
+    - IP address (virtual address)
+  - Data Link
+    - MAC address (physical address)
+      - Not the same as [[id:b534f6fc-0a19-4899-b0cd-d690668fdce5][MAC]]
+  - Physical (Layer 1)
+- For encapsulation, messages are passed down from higher level layers down to lower layers, which may add extra data to the packet
+- On the receiver side, the extra data added to each packet is stripped at each level, and passed back up until it reaches the application layer
+- Devices
+  - Switch
+    - Data Link Level
+  - Router
+    - Network Level
+    - [[file:media/router_1.png][Router]]
+  - Repeater
+    - Physical Level
+  - Hubs
+    - Physical Level
+** Network Security Challenges
+:PROPERTIES:
+:ID:       32c4eb34-2756-4f40-8a6b-f72dcf3ca662
+:END:
+- Data is sent through nodes which are owned by different semi-trusted parties
+- Legacy systems not designed to be secure against malicious MITM attacks where the attacker can sniff, spoof, block, and modify packets
+- Availability cannot be upheld by [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptography]] alone
+- Some components may be compromised, at any level the attacker can access all information from subsequent layers
+- Isolate and control information flow and network access
+** Network and Transport Layers
+- Hosts have 65,536 TCP ports and 65,536 UDP ports
+- Well known ports are allocated from 0 to 1023.
+- A connection between two nodes at the transport layer has two ports sending data to each other
+- Listening ports are ports where data will be sent to an application
+- Closed ports are ports where data will be dropped
+- UDP:
+  - Send single datagrams
+  - Connectionless, unreliable
+- TCP:
+  - Stream data
+  - Reliable data delivery (not the same as secure)
+** Name Resolution
+:PROPERTIES:
+:ID:       6818c383-5414-4cbc-a535-8ac35ef0ace3
+:END:
+- Protocols which translate higher level names to lower level information (domain to IP, IP to MAC)
+*** DNS Attacks
+:PROPERTIES:
+:ID:       6236182a-8c80-4220-98d6-5702527b36e8
+:END:
+- See [[id:a3ae3cdc-5328-402e-8c47-177e942fa4fb][DNS]]
+- Maps domain name to IP
+  - [[file:media/dns_1.png][Diagram]]
+- Unencrypted, which leads to MITM attacks
+- Single point of failure, which leads to [[id:f2fa5968-ca9a-4530-a0c1-92fc8352482a][DoS]] attacks
+*** Address Resolution Protocol
+:PROPERTIES:
+:ID:       6813e0e8-7937-4568-b148-6b2e9ac1a8e4
+:ROAM_ALIASES: ARP
+:END:
+- Maps IP to MAC
+- Broadcast mechanism
+- If an attacker on the local network, they can listen to the broadcast
+-
+** Network Security Tools
+:PROPERTIES:
+:ID:       ac71b86b-408a-4af2-82e9-a581dd4a5aa5
+:END:
+*** Wireshark
+:PROPERTIES:
+:ID:       77e3b912-795e-457d-b870-90ec6b35cf6f
+:END:
+- Sniffs and reports packets received by a certain interface
+- Need to specify good display filters to get good insights into network traffic
+*** Nmap
+:PROPERTIES:
+:ID:       976e8221-6e8b-4d40-b836-4c0e3af9ff1b
+:END:
+- Scans ports for information (programs, versions, OS, etc)
+** Network Security Protocols
+:PROPERTIES:
+:ID:       aaab0eb3-73c7-45fb-ad43-9d1f8d824420
+:END:
+- Works at different layers
+- Some span across multiple layers
+- Need to identify which layer the attacker resides
+- "A security protocol that protects layer k would protect information from that layer and above against an attacker sitting at layer k-1 and below"
+  - In other words, a protocol like TLS (sitting above the transportation layer) would prevent an attacker at the transportation layer and below (down to physical) from sniffing or spoofing messages
+  - Because the protocol sits above the network layer, the IP address can be sniffed
+  - If the attacker is in the browser (application layer), even in the presence of TLS, the attacker can still see and spoof the data.
+    - Interestingly in this case, the attacker *may not* be able to find the MAC address since the browser doesn't need to know
+- Examples
+  - TLS/SSL
+    - Sits on top of transportation layer
+    - Achieves confidentiality and authenticity
+  - WPA2
+    - Provides protection on layer 2 and layer 1, but not all information is protected.
+    - Authentication scheme for WiFi
+  - IPsec
+    - Works at network layer
+    - Protects authenticity of IP addresses, but not confidentiality
+    - Prevents attackers from spoofing the target IP, but can still sniff it
+* Denial of Service Attack
+:PROPERTIES:
+:ID:       f2fa5968-ca9a-4530-a0c1-92fc8352482a
+:ROAM_ALIASES: DoS
+:END:
+- An attack on the availability of a system.
+- Local attack: a user on the system is stopping services or exhausting resources
+  - Easy to mitigate by kicking out the user
+- Remote attack: external attackers are sending a lot of request which will crash or slow down the system.
+  - Harder to mitigate
+- ICMP/Smurf Flood Attack
+  - Send ICMP ping to the server, but spoof the source IP to be the victim's IP address
+  - The router will broadcast a ping message to all the hosts on the network, which will send ping replies to the victim
+  - Now routers are configured to not broadcast such requests
+- HTTP spam
+  - Flood a web server with requests
+  - Generally requires a large amount of attackers, since each attacker can only send a few requests at once
+  - Attackers may use a botnet, which allows them to hijack other people's machines to execute the attack. ([[id:ddf05b8d-e2dd-4d51-82e5-e2622bd1a7fb][DDoS]])
+** Distributed Denial of Service Attack
+:PROPERTIES:
+:ID:       ddf05b8d-e2dd-4d51-82e5-e2622bd1a7fb
+:ROAM_ALIASES: DDoS
+:END:
+- DoS attacks with many different attacker machines
+- Attackers hijack machines to add to a botnet
+- Use a C&C chain to execute attacks using the botnet
+- Example: Mirai attack
+  - Used misconfigured IoT devices to form a botnet

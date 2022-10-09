@@ -661,5 +661,62 @@
   - Optional pricing
     - Sell accessories and addons that are "optional"
 * Midway
-- Skip the 2x2 competetor graph
-- Skip marketing plan
+:PROPERTIES:
+:ID:       08b2e070-f46f-4860-ba64-f20551925e87
+:END:
+- TODO
+  - Skip the 2x2 competetor graph
+  - Skip marketing plan
+- Presentation Notes
+  - Biomass Printing
+    - Page numbers
+    - Sell in context, increase perceived value if you want to sell a brand image like eco-friendliness
+    - Chart should look good, numbers in proper formatting
+    - Competitive Analysis: should help your case, clearly show why your product is better than competitors
+    - "Cheap" clearly as in price
+    - Make claims that are thought through
+    - One key value proposition is better than many
+    - Numbers must come from somewhere
+    - Where does your product fit within your competitors
+  - Drain Cleaner
+    - Include substitutes within competetors
+    - Acknowledge shortcomings first
+    - Market sizing in dollar value
+    - Position accordingly to the best/easiest to sell to
+    - Make things easy for audience to interpret
+  - Aircon but not
+    - Spend a reasonable time on product discussion
+    - Don't have a wall of text
+    - Don't choose shitty colors
+    - Don't anyhow the porter's 5 forces
+    - Don't be product managers, not our job
+      - Focus on the innovation
+      - Focus on the value of your product
+    - Don't read off phone
+    - Diagrams & Figures
+    - Value proposition = customer's needs
+  - Medical carts
+    - General statements like "value add" should be replaced with actual numbers
+    - Pictures of products to highlight features
+  - Active Ageing
+    - Don't fluff
+    - Flow & coherency is important
+    - Diagram must convey something
+  - Childbirth
+    - Don't wall of text
+    - Don't laugh during your presentation
+    - Focus your market, don't pit yourself against GCP
+    - Don't limit yourself to geographical division of target market
+    - Statistics should be set to exactly what you need, not include extra numbers
+  - Us
+    - Value proposition is the why, not the how
+  - All
+    - Must be visually appealing
+    - Words > Must read, otherwise don't put it in
+    - Value proposition must be sharper, more specific
+    - Insights > tool
+    - Quantify
+    - Success factor: "what makes you defensible?"
+    - Products: innovation is the product
+    - Practice x3
+- Feedback

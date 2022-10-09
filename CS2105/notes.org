@@ -117,12 +117,27 @@
 :ID:       491f607a-a390-4694-8544-1fce9a3a7d86
 :END:
 - 2nd layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
+- Provides communcation between adjacent nodes (connected directly over a single link, like a signal or wire)
+- Datagrams from the [[id:5d0b0590-fd98-4db1-89f1-f8f38bd11bb7][Network Layer]] utilize the link layer to transmit
+- Different protocols may be used for different links
+- May provide:
+  - Framing
+    - Encapsulating datagram in a link layer frame
+  - Access control
+    - Ensuring the link is only used by one sender at a time
+  - Error detection
+    - Detect when corruption of data occurs
+  - Error correction
+    - Correct errors without need for retransmission
+  - Reliable delivery
+    - Improve reliability on error-prone links like wireless links
+  - Implemented on the adapter/chips specific to the link type (wifi adapter, ethernet adapter, mobile modem)
 ** Network Layer
 :PROPERTIES:
 :ID:       5d0b0590-fd98-4db1-89f1-f8f38bd11bb7
 :END:
 - 3rd layer of the [[id:e0360e0e-695b-4db0-8bda-f1ab12bd6019][OSI Layers]]
-- Delivers packets from sender to receiver hosts
+- Delivers packets from sender to receiver hosts within a network
 ** Transport Layer
 :PROPERTIES:
 :ID:       dff0f2f7-2b30-48bd-8fb5-220db2076834
@@ -667,3 +682,184 @@
 - ICMP is a message carried an a header that happens after the [[id:c66bc940-0321-468b-86c1-21ae30542ab4][IP]] header
 - It defines a few different codes for functions of network functionality
 - [[file:media/icmp_1.png][Diagram]]
+* Error Detection and Correction
+:PROPERTIES:
+:ID:       51250afe-1710-4b30-a63c-db51478b56e9
+:ROAM_ALIASES: EDC
+:END:
+- Implemented for the [[id:491f607a-a390-4694-8544-1fce9a3a7d86][Data Link Layer]].
+- We have an error-prone link
+- Link layer protocol may include a set of Error Detection and Correction bits
+- The receiver can check the data against the EDC to check the validity of the data; however, the chance of error is still non-zero.
+  - Tradeoff between EDC size and false positives for correctness
+- Types:
+  - Checksum (used in TCP)
+  - Parity Check
+  - CRC (commonly used at link layer)
+- Parity Check, Single bit
+  - In an even parity scheme: add a single bit to the end such that the total number of 1s is even.
+  - Can detect any odd number of single bit errors
+  - Cannot detect an event number of single bit errors
+  - Works well theoretically if errors are independent
+  - However, in the real world errors are often clustered in bursts
+- Parity Check, 2-D
+  - Divide the bits into i rows and j columns
+  - For each row and column, find the bit for the parity
+  - A final parity bit is also computed from the row parity column, which mathematically is the same as the column parity row
+  - The EDC is comprised of the i + j + 1 bits
+  - [[file:media/2d-parity_1.png][Diagram]]
+  - Can detect and correct single bit errors in data
+  - Two bit errors can only be detected
+  - Leads to larger overhead, but does the ability to correct single bit errors make up for it?
+- Cyclic Redundancy Check
+  - Pretend we can work in decimal:
+    - Choose a number of digits r for the EDC, and a generator G with r digits
+    - Create a new data X by appending r 9's digits to D
+      - (\(X=D \times 10^r+(10^r-1)\))
+    - Find the remainder y = X % G
+    - Transmit M = X - y
+    - M is divisible by G
+    - Mathematically, the original data will be preserved by this operation, with a new set of 3 digits tacked on which makes the end product divisible by G
+  - For binary:
+    - G must have r + 1 bits
+    - Calculations are done modulo 2, meaning no carries or borrows will be used, making addition and subtraction equivalent to XOR.
+    - Before dividing, we append r 0's to D
+    - By the properties of modulo 2 arithmetic, the remainder X % G is actually the r bits which we need to append to the data to make it divisible by G
+    - [[file:media/crc-division_1.png][Diagram]]
+      - Note the special type of subtraction done for division
+    - [[file:media/crc-wiki_1.png][Wiki]]
+  - Easy to implement in hardware
+  - Can detect all odd single bit errors
+  - Can detect all burst errors of less than r + 1 bits
+  - Can detect all burst errors of greater than r bits with probability \(1-0.5^r\)
+  - CRC is a "polynomial code"
+* Link Access Control
+- Implemented at the [[id:491f607a-a390-4694-8544-1fce9a3a7d86][Data Link Layer]]
+- Two types of network links
+  - Point-to-Point
+    - Sender and Receiver directly connected by a dedicated link
+    - No need for multiple access control
+    - Implements protocols like Point-to-Point Protocol, or Serial Line Internet Protocol
+  - Broadcast Link
+    - Multiple nodes connected to a shared broadcast chnanel
+    - E.X. Wi-Fi
+    - When a node transmits a frame, the channel broadcasts the frame and every other node receives a copy.
+- Problem: In a broadcast channel, if two or more nodes transmit simultaneously, a receiver may occur if a node receives two or more signals.
+- When, and how long should each host be allowed to transmit?
+- Ideas
+  - Random Access
+    - No coordinations, collisions are possible
+    - Recover from collisions
+  - Taking Turns
+    - Each host takes turn to transmit.
+  - Channel Partitioning
+    - Divide the channel into fixed pieces (by frequency, by time slots, etc.), allocated to hosts for exclusive use
+- Ideally
+  - Given a channel rate of R bps
+  - Collision free
+  - Efficient: When only one node wants to transmit, it can send at rate R
+  - Fairness: When M nodes wants to transmit, they can send at average rate R/M
+  - Decentralized: No need for a special node to coordinate transmissions
+- Additionally, no out-of-bound channel signaling, i.e. all signaling must be done through the same channel itself.
+** Time-Division Multiple Access
+:PROPERTIES:
+:ID:       d833fccc-20f6-4009-a425-a48735ff1873
+:ROAM_ALIASES: TDMA
+:END:
+- Access channel in rounds
+- Each node is allocated a fixed length time slot in each round
+- [[file:media/tdma_1.png][Diagram]]
+- Collision free, fair, and decentralized, but not efficient.
+** Frequency-Division Multiple Access
+:PROPERTIES:
+:ID:       6eb1db19-3bdb-45eb-aea7-8258315f34a4
+:ROAM_ALIASES: FDMA
+:END:
+- Channel is divided into frequency bands
+- Each node is allocated a frequency
+- [[file:media/fdma_1.png][Diagram]]
+** Polling
+:PROPERTIES:
+:ID:       01621050-b0c5-4f97-bb6d-859c4d9b1b7c
+:END:
+- A master node will poll the rest of the nodes in a round robin fashion
+- If the node wants to transmit, it will be allowed to transmit a certain max number of frames
+- If not, the master immediately asks the next node
+- Collision free, efficient, fair, but not decentralized
+  - Only small overhead of polling
+- [[file:media/polling_1.png][Diagram]]
+** Token Passing
+:PROPERTIES:
+:ID:       e569fe76-ce9a-41f0-b3d9-993636c83764
+:END:
+- A special token is passed from one node to the next, sequentially
+- A node only transmits when it has the token
+- It passes the token to the next node if it has nothing left to transmit, or after it has transmitted the maximum allowed
+- Collision free, efficient, fair, and decentralized
+  - Only small overhead of token passing
+  - Fairness relies on proper implementation
+  - Complexity: token loss or node failure can be disruptive
+** Random Access
+:PROPERTIES:
+:ID:       5c55c17f-1eb7-4daf-9eab-e2d95eb6fbc8
+:END:
+- Node transmits whenever it has data to send
+- If collisions detected, attempt to recover
+*** Slotted ALOHA
+:PROPERTIES:
+:ID:       13568fe6-9fbe-4cd5-b09c-94ec761bb342
+:END:
+- All frames have equal length
+- Divide time slots into equal length equal to the time taken to transmit one node
+- Transmit only at the start of time slots
+- If no collision is detected, success
+- If collision detected, for each subsequent slot, retransmit with a set probability p
+- Efficient-ish, fair, decentralized, but not collision-free
+  - Slots are wasted by collision and being empty when there is data to be transmitted
+  - 37% usage with multiple nodes
+- [[file:media/slotted-aloha_1.png][Diagram]]
+*** Pure ALOHA
+:PROPERTIES:
+:ID:       e3cab473-c606-4ca4-a75c-aa56f91bb9ee
+:ROAM_ALIASES: "Unslotted ALOHA"
+:END:
+- Same as [[id:13568fe6-9fbe-4cd5-b09c-94ec761bb342][Slotted ALOHA]] but without time slots or synchronization
+- Transmit whenever you have data
+- If no collision, success
+- If collision, wait one frame's trasmission time and retransmit with probability p
+- Chance of collision has increased
+- Less efficient-ish, fair, decentralized, but not collision-free
+  - 18% usage with multiple nodes
+- [[file:media/pure-aloha_1.png][Diagram]]
+*** Carrier Sense Multiple Access
+:PROPERTIES:
+:ID:       dc6aaa9f-653f-444b-9b04-15efa7063af8
+:ROAM_ALIASES: CSMA
+:END:
+- Weakness of [[id:e3cab473-c606-4ca4-a75c-aa56f91bb9ee][ALOHA]]: a node's decision to transmit is made independently of the activity of other nodes
+- Idea: sense if the link is idle, if it is busy then defer transmission
+- Collisions still occur: propagation delay may mislead a node into thinking the link is idle
+- Efficient, fair, and decentralized, but not collision-free
+- [[file:media/csma_1.png][Diagram]]
+
+*** CSMA/Collision-Detection
+:PROPERTIES:
+:ID:       24bd1461-3b29-407a-b5fb-b8d802df6b64
+:ROAM_ALIASES: CSMA/CD
+:END:
+- Weakness of [[id:e3cab473-c606-4ca4-a75c-aa56f91bb9ee][ALOHA]] and [[id:dc6aaa9f-653f-444b-9b04-15efa7063af8][CSMA]]: A node does not stop transmitting after collision detected
+- Idea:
+  - If link is idle: send
+  - If link is busy: defer transmission
+  - If collision is detected: abort transmission, and retransmit after a random delay
+- [[file:media/csma-cd_1.png][Diagram]]
+- In ALOHA, the chance of collision doesn't really decrease for the subsequent time slots
+- Adapt retransmission to the current load
+- Apply a binary exponential backoff
+  - After first collision, chooose a delay K from 0 or 1, and wait for K time units
+  - After second collision, choose a delay K from 0, 1, 2, 3, and wait for K time units
+  - After n collisions, choose the delay K from 0 to \(2^{n} -1\)
+  - More collisions means the node assumes higher load and will adjust the delay accordingly
+- If frame size is too low relative to propagation delay, then collisions may not be detected by the sender:
+  - [[file:media/small-frame-size_1.png][Small Frame Size]]
+- Efficient, fair, and decentralized, but not collision-free

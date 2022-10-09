@@ -829,3 +829,22 @@
   - If we have a solution \(x=v\) to the system \(Ax=b\)
   - Then, the solution set of the system is given by \(\{u+v|u \in \text{nullspace of A}\}\)
   - [[file:media/differential_1.png][Related]]
+
+* Orthogonality
+:PROPERTIES:
+:ID:       da0cec81-2f89-4f95-990d-1146a0f9b1bf
+:END:
+* Length of Vectors
+:PROPERTIES:
+:ID:       e43d3f89-f22a-4326-b6c6-7996e22444a7
+:END:
+- In 2 dimensions, the vector \(u=(u_1, u_2)\) has length \(||u|| = \sqrt{u_1^2+u_2^2}\)
+- The norm / euclidean norm of \(u\) is \(\frac{u}{||u||}\)
+- This extends to an arbitrary number of dimensions: \(v=(v_1, v_2, ..., v_k)\) has length \(||v||=\sqrt{v_1^2+v_2^2+...+v_k^2}\)
+* Distance and Angles Between Vectors
+:PROPERTIES:
+:ID:       f2728d2e-3632-492b-91fb-bb9b232b8480
+:END:
+- Regarding vectors in 2 and 3 dimensions:
+- The distance between two vectors \(d(u,v) = ||u - v||\)
+- The cosine rule of trig states that \(||u-v||^2=||u||^2+||v||^2-2||u||||v|| cos(\theta)\)
