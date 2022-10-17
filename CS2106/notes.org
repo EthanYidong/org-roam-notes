@@ -9,6 +9,7 @@
 :PROPERTIES:
 :ID:       e1a1f936-5cb0-4093-a7da-5a375d9a8655
 :END:
+- KiB = 1024, KB = 1000
 - Isn't the OS an overhead? Wouldn't it be better to do without?
   - It is an overhead but it is worth it in almost all cases, sometimes it can actually save on some resources
   - In some MCUs there is no OS because the computer only has one job
@@ -1306,3 +1307,161 @@
   - Alternatively, some systems only keep one page table and all segment pages refer to that single table
 - [[file:media/segmentation-paging_1.png][Diagram]]
 - [[file:media/segmentation-paging_2.png][Diagram 2]]
+
+* Virtual Memory
+:PROPERTIES:
+:ID:       3dc19324-195a-4d9d-aff1-2a7a54258689
+:END:
+- Now we can store memory in non-contiguous regions, but we still have the assumption that our physical memory can satisfy all the demand
+- What happens if this assumption fails? How can we operate when our logical memory is larger than physical memory?
+- Two different logical memory locations may point to the same physical memory location
+- Solution: use our secondary storage, which is much larger and cheaper, to back up our physical memory
+  - Some of our pages will be stored within the secondary storage
+  - When the page is needed, the data will be loaded into physical memory
+- We need some mechanism to tell whether or not a page is currently "memory resident", i.e. whether it is loaded in the physical memory
+- When a process wants to access a non-memory resident page, a page fault will be triggered
+- The OS must handle the page fault to load the page into memory
+  - [[file:media/virtual-memory_1.png][Process]]
+  - [[file:media/virtual-memory_2.png][Diagram]]
+- Another reason why we need sufficiently large page sizes: reduce the number of page faults, which have significant overhead
+** Thrashing
+:PROPERTIES:
+:ID:       82e329e3-fafd-40a9-9f24-951ba60a9f66
+:END:
+- Secondary access time >> physical memory access time
+  - If page faults occur during most memory accesses, then many non-memory resident pages need to be loaded
+  - Known as thrashing
+- "How likely is a page to be used once being loaded?"
+- Locality principles:
+  - Most programs will access memory within a small region of code and data very frequently
+  - Temporal locality: memory addresses accessed will be likely to be accessed again
+    - Amortize the loading cost across many access instances
+  - Spacial locality: memory addresses close to one accessed are likely to be referenced
+    - Access to nearby addresses will not cause page fault
+- Of course, some programs can be specifically designed or poorly designed to do such a thing
+** Page Table Structure
+:PROPERTIES:
+:ID:       63559cfd-e93b-405a-bf24-241fa083411d
+:END:
+- How to structure page table for efficiency?
+- Large memory space leads to larger page tables
+- Large page table leads to:
+  - Higher access overhead
+  - Fragmentation (page table may span multiple pages)
+- Direct Paging:
+  - With \(2^p\) pages in logical memory space, our page table needs:
+    - \(p\) bits per entry to specify a unique page
+    - \(2^p\) entries, each containing the corresponding physical frame and additional information bits
+- Two-level Paging:
+  - Process may not utilize the full physical memory space, so a full page table is a waste
+  - Split the direct page table into smaller page tables
+  - Each has a page table "directory number"
+  - Each smaller page table has size equivalent to one page
+  - If we have \(2^M\) smaller page tables, then we need \(M\) bits to identify a unique page table
+  - Then, each smaller page table has \(2^{P-M}\) entries, and needs \(P-M\) bits to identify a unique entry
+  - In total, we still have \(P\) bits to uniquely define one entry within the 2-level paging
+  - Some page table numbers do not have assigned smaller page table, which saves memory
+  - Only memory in regions that are needed will have assigned page tables
+    - Accessing memory outside these regions lead to segfaults
+  - Therefore, we need one page directory and n page tables, where n is the number of regions that we need to allocate.
+  - [[file:media/2-level-paging_1.png][Diagram]]
+- In Intel CPUS, we actually use 4-level page tables:
+  - Same idea as going from one to two levels
+  - Note: addresses in the entries are PHYSICAL (duh)
+  - Each table has size 4KiB (1 page)
+  - Each entry is 64 bits long
+- Inverted page table
+  - Normally, page table stored per process
+  - It is difficult to find which frames are used and by which process
+  - Wasted entries: out of M tables, only N entries are valid
+  - Instead, we store a single mapping between a frame number to a <pid, page#> tuple (note that the direction is inverted, i.e. we go from physical to virtual instead of virtual to physical)
+  - Advantages:
+    - save space, only one table for all processes
+    - easier frame management
+  - Disadvantages:
+    - Slow lookup of addresses
+  - [[file:media/inverted_1.png][Diagram]]
+** Page Replacement Algorithms
+:PROPERTIES:
+:ID:       67038e75-fb34-4916-b801-2aa1561ceb9d
+:END:
+- How to decide which pages get kicked out of memory?
+- When we encounter a page fault when no frames are available, one must be evicted to make space for a new one to be loaded
+- Before eviction:
+  - If it is clean (no edits), no need to write back
+  - If it is dirth (edited), then we need to copy back to storage
+- Memory access time:
+  - \(T_{access} = (1-p)T_{mem} + pT_{page fault}\)
+  - Where \(p\) is the probability of page fault
+  - Since the page fault timing is much larger than the memory access time, a good algorithm should minimize the chance of page fault
+- Algorithms:
+  - Optimal
+    - Always chooses the best option
+    - Replace the page that will not be used for the longest period of time
+    - Guarantees the lowest number of page faults
+    - Impossible in practice, since it requires extra information about the future
+    - Used to compare with other algorithms
+  - FIFO
+    - Replace the oldest page
+    - OS maintain a queue of resident pages, and the front of the queue is evicted when replacement is required
+    - Simple to implement with no hardware support needed
+    - Problems:
+      - As the number of frames increases, there are situations where FIFO performs worse (more page faults)
+      - Such a situation is known as Belady's Anomaly
+      - This is due to FIFO not exploiting temporal locality
+  - Least Recently Used
+    - Replace the page used least recently
+    - Exploit temporal locality by assuming recently used pages will be used soon after
+    - Emulates optimal solution by assuming that pages not recently accessed will probably not be accessed for a long time
+    - Does not suffer from Belady's Anomaly
+    - However, implementation is hard: we need to keep track of "last access time" which is impossible without hardware support
+      - Especially hard to order the page accesses
+      - Method 1: use a counter
+        - Counter increments for each access
+        - Save the count to the page table entry
+        - We need to search through a lot of pages to locate the least recently used
+        - May overflow!
+      - Method 2: "stack"/deque/list
+        - Maintain a stack of page numbers
+        - If page X is used, remove from stack and place on top
+        - Replace the page on the bottom of the stack
+        - Faster to locate the least recently used
+        - However, the "stack" is not very efficient to remove from the middle, especially hard to implement within hardware
+  - Second chance page replacement (CLOCK)
+    - Modified FIFO
+    - Each page table entry now includes an "Accessed" referenced bit
+    - The oldest FIFO page is selected
+      - If the reference bit is 0, replace that page
+      - If the reference bit is 1, set it to 0 and move it to the back of the queue (load time is set to be newly loaded), then try the next FIFO page
+    - Degenerates to FIFO when all reference bits are the same (all 0 or all 1)
+    - Implemented using a circular queue
+** Frame Allocation Policies
+:PROPERTIES:
+:ID:       258abbd0-2ba7-4c13-b72b-cafce2b621b4
+:END:
+- How to distribute physical memory frames among the processes?
+- If we have \(N\) frames and \(M\) processes
+- Equal Allocation:
+  - Each process gets \(N/M\) frames
+- Proportional Allocation:
+  - Each process has a size \(\text{size}_p\), totaled to \(\text{size}_{tot}\) among all processes
+  - Each process is allocated \(N \text{size}_p / \text{size}_{tot}\)
+- Local replacement:
+  - Victim pages chosen amongst pages of the process that causes the page fault
+  - Frames remain constant, leading to stable performance
+  - If a process doesn't have enough allocated frames, then performance is hindered
+- Global replacement:
+  - Victim can be from any process
+  - Dynamic adjustment between processes
+  - Processes can hog frames
+  - Frames can differ between runs
+- If we have insufficient physical frames:
+  - Heavy I/O with disk is needed
+  - If global replacement, [[id:82e329e3-fafd-40a9-9f24-951ba60a9f66][Thrashing]] processes will steal frames from other processes, causing cascading Thrashing
+  - If local replacment, Thrashing is localized, but that process will use up disk bandwidth
+- Working Set Model
+  - In a certain "locality", a process will have a certain set of pages that in needs
+  - Few page faults will be triggered once those pages are loaded, until the process moves to an new locality
+  - Define a working set window \(\delta\)
+  - Define \(W(t, \delta)\) where \(W(t, \delta)\) is the number of active pages in the interval from time \(t - \delta\) to \(t\)
+  - Try to allocate enough frames for \(W(t, \delta)\)

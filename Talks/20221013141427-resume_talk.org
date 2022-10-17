@@ -1,0 +1,71 @@
+:PROPERTIES:
+:ID:       358b95aa-452d-44c4-9ff7-86500ec3b004
+:END:
+#+title: Resume Talk
+
+* Finding Opportunities
+:PROPERTIES:
+:ID:       b50b1be0-e4ce-4e32-82e3-2e984657b4fb
+:END:
+- Know yourself
+  - Decision matrix
+- Know the market
+  - How to stand out
+  - What kind of skills, personailities, and interests make you deirable
+  - What does the organization do, and how?
+- Find the opportunities
+- VIPS
+  - Value
+    - Use myskillsfuture
+  - Interests
+  - Personality
+  - Skills
+- Jobs are mainly found through networking
+- Diversify your search, use many different portals
+
+* Resume
+:PROPERTIES:
+:ID:       6a0f0c9e-3a3f-40b3-b7ed-a31fc62de486
+:END:
+- Record of past experiences and achievements
+- Used to apply to jobs, internships, scholarships
+- A "marketing tool" for yourself
+  - Give a first impression
+  - Value proposition
+  - Demonstrates a focused pattern/history
+- Readers spend around 7-10 seconds on your resume before deciding to read further
+- Structure
+  - Enough whitespace
+  - Less columns
+- Oftentimes resumes are not even seen by humans, preliminary screenings will be done by AI
+  - Are you willing to ___? (relocate, etc.) If you answer no, you get knocked out of the running
+  - Use [[https://jobscan.co][Jobscan]] to get feedback
+  - How to win:
+    - Tailor your resume to the job description
+    - Match keywords in the resume to the description
+    - Both long form and acronym of keywords
+    - Chronological or hybrid (not functional)
+    - Don't use table or columns
+    - Traditional fonts
+    - No headers or footers
+    - Standard heading namings (like "Work Experience")
+    - Use docx
+- Customize resume to the job description
+- Bullet point framework
+  - Competency verb
+    - Skill ("researched", "developed", "published", etc.)
+  - Actions
+    - What did you do?
+  - Result
+    - What were the results (ideally tangible, of not describe the rationale)
+
+* Cover Letter
+:PROPERTIES:
+:ID:       84782baf-2148-45bd-9dc1-90162c11a3c7
+:END:
+- Persuasive 1-page complement to the resume
+- Describe:
+  - Why you want to take the position
+  - Why you are interested in the organization
+  - Why you are a good fit
+- Give a cover letter unless specifically asked not to

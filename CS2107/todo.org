@@ -13,6 +13,7 @@
 ** DONE Tutorial Preparation 4 <2022-09-15 Thu>
 ** DONE Tutorial Preparation 5 <2022-09-29 Thu>
 ** DONE Tutorial Preparation 6 <2022-10-06 Thu>
-** TODO Tutorial Preparation 7 <2022-10-13 Thu>
+** DONE Tutorial Preparation 7 <2022-10-13 Thu>
+** DONE Tutorial Preparation 8 <2022-10-20 Thu>
 * Assignment
 ** DONE Assignment 1 <2022-09-18 Sun>

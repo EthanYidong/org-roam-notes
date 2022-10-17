@@ -1329,3 +1329,230 @@
 - Use a C&C chain to execute attacks using the botnet
 - Example: Mirai attack
   - Used misconfigured IoT devices to form a botnet
+* Firewall
+:PROPERTIES:
+:ID:       3a197c8a-004f-41fa-bc8f-26e84f19520c
+:END:
+- Motivation:
+  - Control the flow of traffic between networks (external vs trusted internal)
+  - [[id:d3070bb4-3258-48dc-b22b-299e17f1978b][Principle of Least Privilege]]
+- Sits at the border between networks
+- Controls what traffic is allowed to enter (ingress filtering) and leave the network (egress filtering)
+** Demilitarized Zone
+:PROPERTIES:
+:ID:       fef6294d-b184-4b12-8c1e-04c001469848
+:ROAM_ALIASES: DMZ
+:END:
+- A small sub-network that exposes external services to the untrusted external Internet
+- Motivates a two-firewall setup, where one firewall protects the DMZ from external traffic, and another firewall protects the internal network from traffic coming from the DMZ.
+** Firewall Rules
+:PROPERTIES:
+:ID:       81c1d716-8a7c-4693-8f44-da7a5c0fcbee
+:END:
+- Generally, firewalls are designed to follow a set of configurable rules
+- Rules are applied in a top-down manner, the first rule to match the packet will be applied
+  - Therefore, the most specific rules are put first, and the least specific rules are put last
+  - The last rule should be a catch-all, where any protocol, source, destination, and port number is denied
+** Firewall Types
+:PROPERTIES:
+:ID:       09893fcf-b7c5-4c68-a183-2d40db726b92
+:END:
+- Traditional packet filters
+  - Inspects packet headers and allows or denies based on data such as IP address and ports
+- Stateful inspection
+  - Maintains a state table of all active connections
+  - Filter packets based on active connection states
+  - Can drop packets based on understanding of the ongoing connections
+- Application proxy
+  - Understand application level logic
+  - Checks application payload to determine if the request is valid
+* Network Security Management
+:PROPERTIES:
+:ID:       3ae640fb-8a1f-4337-b2b3-d4d38533d312
+:END:
+- Continuously monitor and adjust network characteristics
+- Security Operations Center (SOC)
+  - A centralized unit which monitors the systems and deals with security issues
+- Security Information and Event Management (SIEM)
+  - Real time analysis of security alerts
+* Principle of Least Privilege
+:PROPERTIES:
+:ID:       d3070bb4-3258-48dc-b22b-299e17f1978b
+:END:
+- Users should only be allowed to do things that they need to do, both external and internal users
+* Operating System Layering
+:PROPERTIES:
+:ID:       ebb53d30-0ffe-4591-9023-b320bdbabf63
+:END:
+- Security concern regarding access to processes and memory/storage
+- Utilize layering in operating systems
+  - Conceptually, may look something like User process > System services > Kernel > Hardware
+- Layer 0, the most privileged, to Layer k, the least privileged
+- If an attacker gets to Layer 1, we want to prevent them to directly manipulate resources reserved to Layer 0
+  - Hard to prevent privelege escalation in all cases
+- We want to know what layer a security mechanism resides
+  - Malware at lower layers is hard to detect using mechanisms at higher layers
+- We want to accomplish a well-defined security boundary between the layers
+  - This is generally hard to do in the real world
+* Access Control
+:PROPERTIES:
+:ID:       b8235a02-6f36-46cb-9dd5-b8269e5d4a6e
+:END:
+- The goal of access control is to let specific entities access certain resources, and block other entities from doing so.
+- Enforce a restriction of operations on objects by entities (subjects)
+- A reference monitor, or guard, must determine whether or not requested operations should be carried out
+  - Examples:
+    - Student wants to make a luminus forum post?
+    - Student wants to view another student's grades?
+- Vocab:
+  - Principles: the users
+  - Subjects: the entities in the system that operate on behalf of the principle, such as a process
+  - Observe: read
+  - Alter: edit, delete, change
+  - Action: execute
+- Conceptually, every object has an "owner"
+- Two approaches to object access rights:
+  - Discretionary Access Control: The owner gets to decide the rights
+  - Mandatory Access Control: The system designer decides the rights, which are applied globally
+- Access control matrix
+  - Systemwide table which specifies whcih principle can read, write, and execute each object
+  - However, the space requirement grows with each extra principle and object
+- Access control list
+  - Each object has its list of access rights attached
+  to it as a list ("object centric")
+  - Drawback: hard to go the other direction: can't easily answer the question "what can <principle> do within this system?"
+  - Too large
+- Capabilities
+  - Each subject is given a list of capabilities ("subject centric")
+  - Drawback: hard to go the other direction: can't easily answer the question "who can do <operation> withing this system?"
+  - Too large
+- Simplification:
+  - Both ACL and Capabilities are too large as we get more subjects and objects, so how do we simplify them?
+  - System is much too fine grained
+  - Use Groupings: [[id:f2a45357-68ac-4d96-9812-8a8008c83052][ACL in Unix]]
+** ACL in Unix
+:PROPERTIES:
+:ID:       f2a45357-68ac-4d96-9812-8a8008c83052
+:END:
+- ACL specifies rights for:
+  - user: the owner
+  - group: the owner's groups
+  - others: everyone else
+** Privilege-based ACL
+:PROPERTIES:
+:ID:       4c21bd6d-c72e-4c05-b73e-cf78a274533c
+:END:
+- Subjects are granted certain priveleges (e.x. admin, user, superadmin, etc.)
+- Each privilege/role comes with the ability to carry out a certain set of procedures
+- Privileges should be assigned following the [[id:d3070bb4-3258-48dc-b22b-299e17f1978b][Principle of Least Privilege]]
+** Protection Rings
+:PROPERTIES:
+:ID:       1ee5ed9f-8c1d-4a0a-9a4e-1d581d0307eb
+:END:
+- Subjects and objects are assigned numbers, where smaller numbers indicate more importance
+- Objects with higher numbers cannot access objects with smaller ring numbers
+  - In such a case, privilege must be escalated to do so
+- Linux uses 2 rings: superuser and normal
+  - Superuser: access any file
+  - User: limited access based on [[id:f2a45357-68ac-4d96-9812-8a8008c83052][ACL]] rules
+* UNIX Access Control
+:PROPERTIES:
+:ID:       4ed4709f-c1b2-4db3-9bd7-f7b499488011
+:END:
+** UNIX Objects
+:PROPERTIES:
+:ID:       c25886ef-b808-4a31-b9ae-0ccc93fe82d7
+:END:
+- "Everything is a file"
+- I/O objects, such as stdin, are all files under /std/dev
+- Thus, permissions are also applied accordingly
+- File system:
+  - Permission string looks like:
+    - "-" for file or "d" for directory
+    - "rwxrwxrwx", if the character is there the subject has access to read, write, or execute, if not then they do not. The first three letters pertain to the user, the second three are the group, and the last three are others
+    - "s" may replace "x" in the user position representing setuid enabled (implies executability)
+    - "s" may replace "x" in the group position represnting setgid enabled (implies executability)
+  - ls also includes file size and modification date
+  - Each file has a user and group
+  - Changed using chmod
+    - "-R": recursive, applies to all files in dir
+    - "-f": force continuing after errors
+    - "-v": verbose
+    - "+": add permissions
+    - "-": remove permissions
+    - "=": set permissions
+    - "u": user
+    - "g": group
+    - "o": others
+    - "a": all
+    - Example: chmod a+x file gives execute permission to everyone
+    - Octal mode:
+      - 3 digits of a 3 bit number corresponing to the rwx bits
+      - 1 additional optional leading digit for the special permissions
+      - Order: user, group, other
+      - 777 means all permissions for everyone
+  - Other special permissions:
+    - setuid
+    - setgid
+    - sticky
+- Permission checking:
+  - Only applies to non-superusers
+  - If the user is the owner, use the owner permission bits
+  - Otherwise, if the user is in the group, use the group permission bits
+  - Otherwise, use the other permission bits
+** UNIX Subjects/Principles
+:PROPERTIES:
+:ID:       ea062689-4969-46ee-9789-a4752d9de4d2
+:END:
+- Users:
+  - Unique login name
+  - Unique ID
+  - At least one group
+  - Entry in /etc/passwd has the name as well as the user's first group
+  - Other groups for the user in /etc/group
+- Groups:
+  - Unique group name
+  - Unique ID
+- UIDs and GIDs are used to determine permisssions for each file
+- Superuser:
+  - UID 0, Group 0
+  - Usually named root
+- /etc/passwd:
+  - Must be world readable since non-root processes need access
+  - Previously the password hash was stored there, leading to offline password attacks by non-priveleged users
+  - Eventually, password hash moved to /etc/shadow, which does not need to be world readable
+- /etc/shadow:
+  - Entries have format: <name>$<hash method ID>$<salt>$<hashed password>
+- Processes:
+  - Each process spawned by forking from parent process
+  - Process are associated to a user, and have a PID
+** Privilege Elevation
+:PROPERTIES:
+:ID:       5ab4c809-bfff-4c61-a978-535f912ed3b4
+:END:
+- Motivations:
+  - Some resources are gated to only the superuser, for example, using ports 0-1023 or changing password
+  - Non-root users need to do some of these operations
+  - However, we can't give them superuser privilege just to do so under the [[id:d3070bb4-3258-48dc-b22b-299e17f1978b][Principle of Least Privilege]]
+- Solution:
+  - Allow low priveleged users to execute some high privelege executables which can selectively access certain objects in a specified way (for example, passwd to only allow you to change your own password)
+- Pitfalls:
+  - The high privelege executables must be secured, and only allow certain types of operations.
+  - Otherwise, low privelege users can uitlize such an executable to conduct a [[id:93f67ad4-cad3-48e0-86d0-4e2c16adaec3][Privelege Escalation Attack]]
+- How:
+  - Use the setuid permission for the executable
+  - The privelege of the executable is set to the privelege of the owner of the executable
+    - For example, if the executable is owned by root, the setuid bit is flipped to 1, and a non-root user executes it, the executable will be run with root privelege
+    - If, instead, the executable was owned by bob, then the executable will be run with bob's priveleges
+  - OS will still check the "real UID" along with the "effective UID"
+    - real UID is who actually executed the file
+    - effective UID is who's permissions the file is running with, i.e. who is treated as the subject of the process
+    - If setuid = true, then real UID = executor, effective UID = file owner
+    - If setuid = false, then real UID = effective UID = executor
+  - Note: checks will still be made to ensure that the user can execute in the first place. If the user doesn't have execute permissions (for example, 700), then the user still won't be able to execute the file, even if setuid is true
+  - Note: bash will revert the effective UID to the real UID, so calling code by '/bin/bash ...' or calling a setuid script with a bash shebang will result in privelege reverting to the real uid.
+* Privelege Escalation Attack
+:PROPERTIES:
+:ID:       93f67ad4-cad3-48e0-86d0-4e2c16adaec3
+:END:
+- When a user gains permissions by utilizing incorrectly designed or incorrectly set-up access control mechanisms

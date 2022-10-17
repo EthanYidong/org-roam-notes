@@ -422,6 +422,7 @@
   - The rows of \(A\) form a [[id:b3caafea-8006-4974-b41a-13c2917d32c9][Basis]] for \(\mathbb{R}^n\)
   - The columns of \(A\) form a [[id:b3caafea-8006-4974-b41a-13c2917d32c9][Basis]] for \(\mathbb{R}^n\)
   - \(A\) is full-rank
+  - 0 is not an [[id:9098094c-3584-417f-bece-3218f546e590][Eigenvalue]] of \(A\)
 
 * Elementary Matrices
 :PROPERTIES:
@@ -833,18 +834,164 @@
 * Orthogonality
 :PROPERTIES:
 :ID:       da0cec81-2f89-4f95-990d-1146a0f9b1bf
+:ROAM_ALIASES: Orthogonal
 :END:
+- Two vectors \(u and v\) are called orthogonal if \(u \cdot v = 0\)
+  - Implies that the angle between them is \(\frac{\pi}{2}\)
+- A set of vectors in \(\mathbb{R}^n\) is called an orthogonal set if every pair of distinct vectors in \(S\) are orthogonal
+  - Such a set that is also a basis of a vector space is an orthogonal basis
+- The set is orthonormal if it is orthogonal and every vector is a unit vector, i.e. of length 1
+  - Such a set that is also a basis of a vector space is an orthonormal basis
+- Properties:
+  - An orthogonal set of nonzero vectors is linearly independent
+** Orthogonal Bases
+:PROPERTIES:
+:ID:       abdbe67d-ce90-4dab-8bae-ce9f1770de5a
+:END:
+ - If a set \(S = \{u_1, u_2, ..., u_k\}\) which is an orthogonal basis for a vector space \(V\)
+ - Then, for any \(w \in V\), we have \(w = \frac{w \cdot u_1}{u_1 \cdot u_1}u_1 + ... + \frac{w \cdot u_k}{u_k \cdot u_k}u_k\)
+ - If \(S\) is in fact an orthonormal basis for \(V\), then \(w=(w \cdot u_1)u_1 + ... + (w \cdot u_k)u_k\)
+** Orthogonal to a Vector Space
+:PROPERTIES:
+:ID:       f06b7d74-72cd-4e77-94f9-a2decdc71903
+:END:
+- A vector \(u \in \mathbb{R}^n\) is orthogonal to a vector space \(V\) if \(u\) is orthogonal to all vectors in \(V\)
+- If \(V = \{v_1, v_2, ..., v_k\}\) then \(u\) is orthogonal to \(V\) iff
+  \(u \cdot v_i = 0\) for all i.
+* Projection
+:PROPERTIES:
+:ID:       741e22cd-b761-4d94-b74b-b1fdfbff9a4a
+:END:
+- Every \(u \in \mathbb{R}^n\) can be written uniquely as \(u = n + p\) where \(p \in V\) and \(n\) is [[id:f06b7d74-72cd-4e77-94f9-a2decdc71903][Orthogonal]] to \(V\)
+  - \(p\) is called the projection of \(u\) onto \(V\)
+- We can find the projection of \(w\) in a subspace with [[id:abdbe67d-ce90-4dab-8bae-ce9f1770de5a][Orthogonal Basis]] \(\{u_1, u_2, ..., u_k\}\): \(\frac{w \cdot u_1}{u_1 \cdot u_1}u_1 + ... + \frac{w \cdot u_k}{u_k \cdot u_k}u_k\)
+- Similarly, if \(\{u_1, u_2, ..., u_k\}\) is an Orthonormal Basis:
+  \((w \cdot v_1)v_1 + ... +(w \cdot v_k)v_k\)
+** Converting a [[id:b3caafea-8006-4974-b41a-13c2917d32c9][Basis]] to a [[id:abdbe67d-ce90-4dab-8bae-ce9f1770de5a][Orthogonal Basis]]
+:PROPERTIES:
+:ID:       9f028eca-19a7-404b-8ae2-64318aacd4eb
+:ROAM_ALIASES: "Grant-Schmidt Process"
+:END:
+- Given the basis \(\{u_1, u_2\}\), find the projection \(p\) of \(u_2\) onto \(span(u_1)\)
+- Thus, we get the orthogonal basis \(\{u_1, u_2 - p\}\)
+- This process can be extended to more dimensions by recursing (from 3 dimensions you take out one vector first, apply this process to achieve a orthogonal basis for the remaining two, then add back in the last vector the same way we added in u_2)
+- Grant-Schmidt Process:
+  - Let \(v_1 = u_1\)
+  - \(v_2 = u_2 - \frac{u_2 \cdot v_1}{v_1 \cdot v_1}v_1\)
+  - \(v_3 = u_3 - \frac{u_3 \cdot v_1}{v_1 \cdot v_1}v_1 - \frac{u_3 \cdot v_2}{v_2 \cdot v_2} v_2\)
+  - And so on...
+  - Then, \(\{v_1, ..., v_k\}\) is an orthogonal basis for the vector space where \(\{u_1, ..., u_k\}\) is a basis.
+- To extend to an orthonormal basis, simply normalize each vector (divide by length)
 * Length of Vectors
 :PROPERTIES:
 :ID:       e43d3f89-f22a-4326-b6c6-7996e22444a7
 :END:
-- In 2 dimensions, the vector \(u=(u_1, u_2)\) has length \(||u|| = \sqrt{u_1^2+u_2^2}\)
-- The norm / euclidean norm of \(u\) is \(\frac{u}{||u||}\)
+- In 2 dimensions, the vector \(u=(u_1, u_2)\) has length/norm/euclidean norm \(||u|| = \sqrt{u_1^2+u_2^2}\)
 - This extends to an arbitrary number of dimensions: \(v=(v_1, v_2, ..., v_k)\) has length \(||v||=\sqrt{v_1^2+v_2^2+...+v_k^2}\)
 * Distance and Angles Between Vectors
 :PROPERTIES:
 :ID:       f2728d2e-3632-492b-91fb-bb9b232b8480
 :END:
 - Regarding vectors in 2 and 3 dimensions:
-- The distance between two vectors \(d(u,v) = ||u - v||\)
-- The cosine rule of trig states that \(||u-v||^2=||u||^2+||v||^2-2||u||||v|| cos(\theta)\)
+  - The distance between two vectors \(d(u,v) = ||u - v||\)
+  - The cosine rule of trig states that \(||u-v||^2=||u||^2+||v||^2-2||u||||v|| cos(\theta)\)
+    - When solving for angle, take the principal value, between \(0,\pi\)
+- For vectors in more dimensions:
+  - Same formulas apply
+* Dot Product
+:PROPERTIES:
+:ID:       3a15c525-094e-4241-bbe0-3b3007c43009
+:END:
+- The dot product of \(u = (u_1, u_2, ..., u_n)\) and \(v = (v_1, v_2, ..., v_n)\), expressed as \(u \cdot v\), is defined as \(u_1v_1 + u_2v_2 + ... + u_nv_n\)
+- We get \(||u|| = \sqrt{u \cdot u}\)
+- Distance between u and v is \(||u-v|| = \sqrt{(u-v) \cdot (u-v)}\)
+- Angle between u and v is \(cos^{-1}(\frac{u \cdot v}{||u|| ||v||})\)
+- If we express u and v as row vectors, then \(u \cdot v = uv^{T}\)
+- If column, then \(u \cdot v = u^{T}v\)
+- Properties:
+  - \(u \cdot v = v \cdot u\)
+  - \((u+v) \cdot w = u \cdot w + v \cdot w\)
+  - \(||cu|| = |c|||u||\)
+  - \((cu) \cdot v = u \cdot (cv) = c(u \cdot v)\)
+  - \(u \cdot u \geq 0\)
+    - \(u \cdot u = 0\) iff \(u = 0\)
+* Approximations
+:PROPERTIES:
+:ID:       dd085513-d24b-48c3-b722-7a23d2488cf5
+:END:
+- Given a subspace V and a vector u with its projection p onto V, the distance between \(u\) and any other vector in \(V\) is greater than or equal to the distance between \(u\) and \(p\)
+- Given a linear system representing the results of an experiment (for example, calculating the orbits of planets), it will generally be inconsistent due to errors in measurements
+- If we want to minimize the sum of squares of errors, this can actually be written as minimizing the norm of the difference \(b - Ax\)
+  - In other words, a vector \(u\) is the least-square solution of \(Ax=b\) if \(||b-Au|| \leq ||b-Av||\) for all \(v \in \mathbb{R}^n\)
+- \(Au\) is the projection of \(b\) onto the column space of \(A\)
+  - After finding \(Au\), you can simply solve for \(u\)
+- Without projecting:
+  - \(u\) is the least-squared solution iff \(u\) must is a solution to \(A^TAx=A^Tb\)
+* Orthogonal Matrix
+:PROPERTIES:
+:ID:       65196b2f-c31a-4ae6-a61c-c862f205c5ce
+:END:
+- The following are equivalent:
+  - \(P\) is an orthogonal matrix
+  - \(P\) is a [[id:afa55c4d-3f3e-4b23-84f8-29bc57319011][Transition Matrix]] between two [[id:abdbe67d-ce90-4dab-8bae-ce9f1770de5a][Orthonormal Bases]]
+  - The columns of \(P\) form another orthonormal basis
+  - The rows of \(P\) form another orthonormal basis
+  - The inverse of \(P\) is \(P^T\)
+    - Can check that \(PP^T=I\)
+- An example:
+  - The rotation matrix \(\begin{bmatrix}cos(\theta)&-sin(\theta)\\sin(\theta)&cos(\theta)\end{bmatrix}\)
+* Diagonalization
+:PROPERTIES:
+:ID:       52d4826f-7ab6-4de2-be9f-b76b12f2be46
+:END:
+- To find \(A^n\) as \(n \to \infty\)
+- Find a [[id:60269c0a-1614-4f10-bb35-6831c702d103][Diagonal Matrix]] \(D\) and another matrix \(P\) such that \(PDP^{-1}=A\)
+- Then, \(A^n = PD^nP^{-1}\)
+  - \(D^{n}\) is easy to compute because it is diagonal
+  - This makes the limit easy to compute
+- How do you find \(P\) and \(D\)? When is it possible?
+- A [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] \(A\) is diagonalizable if there exists an invertible matrix \(P\) such that \(P^{-1}AP\) is a diagonal matrix
+  - We say that \(P\) diagonalizes \(A\)
+- For \(A\) of order n, \(A\) is diagonalizable iff \(A\) has \(n\) linearly independent [[id:9098094c-3584-417f-bece-3218f546e590][Eigenvectors]]
+- How to diagonalize a matrix:
+  - Find all distinct [[id:9098094c-3584-417f-bece-3218f546e590][Eigenvalues]]
+  - For each \(\lambda_i\), find the basis \(S_{\lambda_i}\) of the [[id:dfe13ffb-fd35-4c05-8e8e-687490e85d24][Eigenspace]] \(E_{\lambda_i}\)
+    - Not all of them may be real, in which case the algorithm works but some entries may be complex
+  - Take \(S = S_{\lambda_1} \cup S_{\lambda_2} \cup ... \cup S_{\lambda_k}\)
+    - \(S\) is guaranteed to be linearly independent
+  - If \(S\) has less than \(n\) elements, then \(A\) is not diagonalizable.
+  - If \(S\) has exactly \(n\) elements, then \(A\) is diagonalizable.
+    - Let \(S = \{u_1, u_2, ..., u_n\}\)
+    - Then \(P=\begin{bmatrix}u_1 & u_2 & ... & u_n\end{bmatrix}\) diagonalizes \(A\)
+* Eigenvectors
+:PROPERTIES:
+:ID:       9098094c-3584-417f-bece-3218f546e590
+:ROAM_ALIASES: Eigenvalues
+:END:
+- A nonzero column vector is an eigenvector of a n by n [[id:390d4ad5-a285-441e-a435-b613c1ad4190][Square Matrix]] \(A\) if \(Au = \lambda u\) for some scalar \(\lambda\)
+  - "As far as multiplying to u is concerned, A acts as if it was a [[id:60269c0a-1614-4f10-bb35-6831c702d103][Diagonal Matrix]]"
+- The scalar \(\lambda\) is an eigenvalue of \(A\), and \(u\) is the eigenvector associated with the eigenvalue \(\lambda\)
+- The following are equivalent:
+  - \(\lambda\) is an eigenvalue of \(A\)
+  - \(Au = \lambda u\) for some nonzero column vector \(u\)
+  - \(\lambda I - A)u=0\) for some nonzero column vector \(u\)
+  - The linear system \((\lambda I - A)x = 0\) has non-trivial solutions
+  - \(det(\lambda I - A) = 0\)
+    - If expanded, we get a polynomial of degree \(n\)
+- For a [[id:c26f10dd-0798-45eb-be5f-837e5aad51bd][Triangular Matrix]], the eigenvalues are simply the values on the diagonal.
+  - Note: Row operations do not preserve eigenvalues, so we cannot manipulate the matrix into REF to abuse this fact.
+** Characteristic Equation and Polynomial
+:PROPERTIES:
+:ID:       532a0f4b-b4b6-47b3-a8d5-6bd18d44effd
+:END:
+- The equation \(det(\lambda I - A) = 0\) is the characteristic equation of \(A\)
+- The polynomial \(det(\lambda I - A)\) is the characteristic polynomial of \(A\)
+* Eigenspaces
+:PROPERTIES:
+:ID:       dfe13ffb-fd35-4c05-8e8e-687490e85d24
+:END:
+- An eigenspace is the collection of all \(u\) such that \(Au = \lambda u\)
+- In other words, it is the [[id:c99030a7-f2fe-408d-ae2b-2fae64b1c1df][Solution Space]] of the linear system \((\lambda I - A)x = 0\)
+- This is denoted as \(E_\lambda(A)\)
+- All vectors in the eigenspace are [[id:9098094c-3584-417f-bece-3218f546e590][Eigenvectors]] except for the trivial solution / zero vector
+- The dimension of the eigenspace is at most the power of the factor leading to the corresponding eigenvalue as a solution within the [[id:532a0f4b-b4b6-47b3-a8d5-6bd18d44effd][Characteristic Equation]]

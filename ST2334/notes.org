@@ -509,3 +509,100 @@
 :END:
 - The \(\alpha\)th upper quantile of \(X\) is the number \(x_\alpha\) where \(P(X \geq x_\alpha) = \alpha\)
 - In particular, we denote \(z_\alpha\) as the \(\alpha\)th upper quantile of \(Z \sim N(0,1)\) ([[id:5caa8927-ec1b-4eb4-9989-9eb2ebd70684][Normal Distribution]])
+
+* Sampling
+:PROPERTIES:
+:ID:       d2a95892-8364-4cf7-98bd-0212d5892133
+:END:
+- Statistical inference is the process of making claims about a population given data from a sample
+** Population
+:PROPERTIES:
+:ID:       35a4e4f1-4045-4aa0-a04e-8105310040ad
+:END:
+- The population is is the totality of all possible outcomes of a statistical experiment or survey
+- Could be finite or infinite
+  - Finite: "the monthly income of Singaporeans"
+    - Some large finite populations are assumed to be infinite for practical purposes
+  - Infinite: "the continuous air pressure in Singapore"
+** Random Sample
+:PROPERTIES:
+:ID:       53296da7-9b2f-491e-a014-0430bbcc4343
+:END:
+- We want to take a sample of the population which represents the population as a whole
+- One method is to take a simple random sample
+  - Choosing n members out of a population such that each member has the same probability of being selected
+    - * unsure if applies to this module, but usually also implies that each member's selection is independent from all other member's
+  - Tends to yield a sample which resembles the population
+  - For an infinite population:
+    - Let \(X_1, X_2, X_3..., X_n\) be independent random variables with the same distribution as \(X\).
+    - Then, \(X_1, ... X_n\) is a random sample of size n from a probability with distribution \(f_X(x)\)
+    - The joint probability function \(f_{X_1, ..., X_N}(x_1, x_2, ..., x_n) = f_{X_1}(x_1) \times ... \times f_{X_n}(x_n)\)
+** Statistic
+:PROPERTIES:
+:ID:       be899b9e-95a7-49f7-a25b-e62bb7b9eb01
+:END:
+- A function computed using a [[id:53296da7-9b2f-491e-a014-0430bbcc4343][Random Sample]] of n observations is called a statistic
+- For example, the sample mean, \(\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i\) is a statistic
+- The realization of a statistic is the value obtained after plugging in observed values.
+- Other examples:
+  - Sample variance: \(S^2=\frac{1}{n-1} \sum_{i=1}^{n}(X_i-\bar{X})^2\)
+- Variables are also [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]], so we may also consider its probability distribution, also known as the [[id:6357e52c-0688-4e89-8431-266349386a6c][Sampling Distribution]]
+** Sampling Distribution
+:PROPERTIES:
+:ID:       6357e52c-0688-4e89-8431-266349386a6c
+:END:
+- Standard Error: The standard deviation of a sampling distribution. Commonly used on the sampling mean, denoted as \(\sigma_{\bar{X}}\), the "standarad error of" \(\bar{X}\)
+  - Describes how \(\bar{X}\) varies from sample to sample
+- Theorems:
+  - For a random sample of an infinite population with mean \(\mu_X\) and variance \(\sigma_X^2\), the sampling distribution of the sample mean has mean \(\mu_X\) and variance \(\frac{\sigma_X^2}{n}\)
+  - Given n independent random variables with the same mean and variance, \(P(|\bar{X}-\mu|>\epsilon) \to 0\) as \(n \to \infty\)
+    - In other words, the probability that the difference between the sample mean and the population mean is larger than some threshold approaches 0 as the sample size gets larger
+  - Central limit theorem: \(\bar{X}\) is approximately normal
+    - Formally, \(\frac{\bar{X}-\mu}{\sigma / \sqrt{n}} \to Z \sim N(0, 1)\). In other words, \(\bar{X} \sim N(\mu, \sigma^2/n)\)
+    - If the population is normal to begin with, this holds even for small \(n\)
+    - If the population is symmetric, normality may start to appear at around 15 or 20 samples
+    - If the population is moderately skewed, normality may appear at around 30 to 50 samples
+    - For extremely skewed data such as financial data where many entries are 0, some are very small, some are very large, normality may not appear even at 1000 samples
+** Chi-Squared Distribution
+:PROPERTIES:
+:ID:       67a9990e-4e8a-4702-8a3b-f28b079a7cbf
+:END:
+- Let \(Z\) be a normal random variable. A random variable with the same distribution as \(Z^2\) is called a \(\chi^2\) random variable with one degree of freedom.
+- If we have \(Z_1, Z_2, ..., Z_n\), all normal random variables, then a random variable with the same distribution as \(Z_1^2+ ... + Z_n^2\) is called a \(\chi^2\) random variable with \(n\) degrees of freedom
+- Denote this as \(\chi^2(n)\)
+- Properties:
+  - If \(Y \sim \chi^2(n)\): \(E(Y)=n\) and \(var(Y)=2n\)
+  - For large \(n\), \(\chi^2(n)\) is approximately \(N(n, 2n)\) by the central limit theorem
+  - If \(Y_1 and Y_2\) are \(\chi^2\) random variables with \(n\) and \(m\) degrees of freedom respectively, then \(Y_1 + Y_2\) is a \(\chi^2\) random variable with \(m+n\) degrees of freedom
+  - \(\chi^2\) distribution is a family of curves defined by \(n\), all with a long right tail.
+- Define \(\chi^2(n, \alpha)\) such that \(P(Y > \chi^2(n, \alpha)) = \alpha\)
+- Consider the random variable \(\frac{(n-1)S^2}{\sigma^2}\) when \(X_i \sim N(\mu, \sigma^2)\) for all \(i\)
+  - This distribution has a [[id:67a9990e-4e8a-4702-8a3b-f28b079a7cbf][Chi-Squared Distribution]] with \(n-1\) degrees of freedom.
+** T-Distribution
+:PROPERTIES:
+:ID:       bd7fb354-8e9f-4a20-bbef-0bcf57cdf45c
+:END:
+- Suppose \(Z \sim N(0,1)\) and \(U \sim \chi^2(n)\)
+- Then, the random variable \(T = \frac{Z}{\sqrt{U/n}}\) is a T-distribution with n degrees of freedom
+- Denoted as \(t(n)\)
+- Properties:
+  - As \(n \to \infty\), the T-distribution approaches the normal distribution \(Z\).
+    - For \(n \geq 30\), we can replace \(t(n)\) by \(N(0,1)\)
+  - \(E(T) = 0\), \(var(T)=\frac{n}{n-2}\) when \(n > 2\)
+  - The graph is symmetric about the vertical axis and looks almost normal
+- Define \(t_{n;\alpha}\) such that for \(T \sim t(n)\), \(P(T > t_{n;\alpha}) = \alpha\)
+- Consider the random variable \(\frac{X - \mu}{S/\sqrt{n}}\).
+  - This distribution follows a t-distribution with \(n-1\) degrees of freedom.
+** F-Distribution
+:PROPERTIES:
+:ID:       c64ebbd0-6fbe-41ea-85cc-2e95d7c40348
+:END:
+- Suppose \(U \sim \chi^2(m)\) and \(V \sim \chi^2(n)\)
+- Then, the random variable \(F = \frac{U/m}{V/n}\) is an F-distribution with \((m,n)\) degrees of freedom.
+- Denoted as \(F(m,n)\)
+- Properties:
+  - \(E(X)=\frac{n}{n-2}\)
+  - \(var(X) = \frac{2n^2(m+n-2)}{m(n-2)^2(n-4)}\)
+  - \(\frac{1}{F(m,n)} \sim F(n,m)\)
+- Define \(F(m,n;\alpha)\) such that for \(F \sim F(m,n)\), \(P(F > F(m,n;\alpha) = \alpha\)
+  - \(\frac{1}{F(m,n;1-\alpha)} = F(n,m;\alpha)\)

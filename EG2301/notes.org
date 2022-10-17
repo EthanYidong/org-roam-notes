@@ -586,9 +586,9 @@
 :ID:       6a97fe7c-afb6-4d9e-8c38-a532aa3fb83b
 :END:
 ** Strategic Buyer
-- Who decides to buy something
+- Who decides to buy something to gain an advantage
 ** Economic Buyer
-- Who pays for it
+- Who pays for it (CFO)
 ** Technical Buyer
 - Who implements the product
 ** End User
@@ -720,3 +720,102 @@
     - Products: innovation is the product
     - Practice x3
 - Feedback
+* Beach Head
+:PROPERTIES:
+:ID:       287385ea-0f5f-4474-9f37-097b14170ea7
+:END:
+- How do organizations compete in the marketplace?
+  - Operational Excellence
+  - Customer Intimacy
+  - Product Leadership
+- How does a new entrant compete?
+  - Pretty much only product leadership, since the other options need time to develop
+- Case study: Segway
+  - Created by famous inventor Dean Karmen
+  - 10 years of development
+  - Wanted to replace automobile with the segway
+  - Rave reviews from investors - $176 million invested
+  - Originally wanted to target masses + environmentally conscious
+  - Sold only 50,000 units 9 years after launch
+    - Priced above entry level cars
+    - No charging infrastructure
+    - Ignored regulations
+  - Moral of the story: cannot start by targeting a wide amount of consumers, especially for an advanced product
+- Other cases:
+  - Google wave
+- How to market to the early adopters (beach head market):
+  - Comes from the D-Day invasion, where retaking of western continental Europe began from Normandy
+  - "How do you carve out a small part of the market from the incumbents?"
+    - Choose an underdefended market
+    - Quickly and purposefuly take over this niche
+    - Leverage into adjacent markets to expand the customer base
+    - Utilize the [[id:12f78d9c-a266-45bd-b418-99cffbad4829][BUTA]] framework
+- Can be extended beyond customer segement to product focus and use case
+  - Product focus:
+    - Amazon chose books to sell first
+  - Use case:
+    - Oatly chose to sell to coffeeshops first
+- Should not be:
+  - The first person who approaches you
+  - A general demographic
+** Diffusion of Innovation
+:PROPERTIES:
+:ID:       53b1fcfe-534a-4371-bb4e-85f72075a748
+:END:
+- Theory that the timeline of adoption of new innovations mostly follow a normal distribution with respect to risk adversion of the population
+- Example: hybrid/GMO corn in Iowa
+  - There was a value proposition of higher crop yield
+  - However, farmers were reluctant to change their processes to adopt the new types of GMO crops
+  - The first adopters were generally more willing to adapt and try
+- Our job is to identify who the early adopters will be
+  - Very hard to generalize based on demographics
+  - Depends heavily on category of product
+- "Crossing the chasm"
+  - Some products die in the chasm, i.e. they never make it to the early majority adopters
+- Case Study: Bicycles
+  - They didn't become a preferred tool for transportation until it had a chain drive. All previous iterations were only used by a few early adopters, which eventually led to the iteration that allowed crossing of the chasm
+** Budget, Urgent, Top, Access
+:PROPERTIES:
+:ID:       12f78d9c-a266-45bd-b418-99cffbad4829
+:ROAM_ALIASES: BUTA
+:END:
+- Ask:
+  - Does your customer have the Budget to buy?
+  - Does your economic buyer have a very compelling and Urgent reason to buy?
+  - Do you offer a viable whole-product solution and rank as one of the Top providers against competition?
+  - Do you have Access to this beach head customer segment?
+** RAMP
+:PROPERTIES:
+:ID:       7db82c2d-a920-4c52-82a0-cf8a384554f4
+:END:
+- Out of an idea beachhead market, you need:
+  - Revenue/resources
+  - A path towards the next customer target
+  - Market reference/credibility
+  - Product testing
+- This helps you move on to your next groups
+* Job to be Done
+:PROPERTIES:
+:ID:       eb1abf64-a68c-4c28-b332-0243f9451ebe
+:END:
+- People buy quarter inch drill bits not because they want the drill bits, but they want the holes
+- The value of the product is the value of the job it does
+- What does the customer use the product to do?
+  - Reason for the purchase
+  - Understand who the competitors are
+- Job is stable over time
+- Job is solution agnostic
+- Job is functional with an emotional component
+- Deeply understanding the job makes marketing much easier
+- Case study: Hyundai Assurance Program
+  - During a recession, Hyundai promised buyers that they could always return the car
+  - Market share jumped to 4% from less than 1%
+  - JTBD: a way to commute to work
+    - Customers were unsure if they needed such a product since they could easily lose their jobs
+- Why do people buy your product?
+* Competitive Positioning
+:PROPERTIES:
+:ID:       4f9e33ff-337b-4f84-87a3-44d0da5cab55
+:END:
+- How does your company compare to its competitors?
+- Mindset change: move away from features towards factors related to the [[id:eb1abf64-a68c-4c28-b332-0243f9451ebe][Job to be Done]] and the [[id:6a97fe7c-afb6-4d9e-8c38-a532aa3fb83b][Buyer Types]] to form a "why does each person involved want to use this"?

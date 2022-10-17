@@ -734,6 +734,9 @@
   - Can detect all burst errors of greater than r bits with probability \(1-0.5^r\)
   - CRC is a "polynomial code"
 * Link Access Control
+:PROPERTIES:
+:ID:       7d01f5b2-39cb-40c5-822b-b5ac643f220b
+:END:
 - Implemented at the [[id:491f607a-a390-4694-8544-1fce9a3a7d86][Data Link Layer]]
 - Two types of network links
   - Point-to-Point
@@ -863,3 +866,107 @@
 - If frame size is too low relative to propagation delay, then collisions may not be detected by the sender:
   - [[file:media/small-frame-size_1.png][Small Frame Size]]
 - Efficient, fair, and decentralized, but not collision-free
+* MAC Address
+:PROPERTIES:
+:ID:       7160475c-965e-49a9-b7ac-503d332f7685
+:END:
+- AKA Physical address
+- Used to indicate which hardware is intended to receive a certain frame within a broadcast medium
+- If the frame is labeled with your MAC address, the frame is accepted, otherwise it is ignored
+- Typically 48 bits and set within the ROM (read only memory) of the network hardware
+  - Sometimes can be software settable
+- Allocating is managed by IEEE, which uses the first three bytes to identify the vendor
+- FF:FF:FF:FF:FF:FF is the broadcast MAC address
+* Local Area Network
+:PROPERTIES:
+:ID:       4b275b75-30fc-452a-9134-2c4f5ce5fee4
+:ROAM_ALIASES: LAN
+:END:
+- A computer network whcih exists within a restricted geographical area
+- Utilizes technologies:
+  - IBM Token Ring (IEEE 802.5)
+  - Ethernet (IEEE 802.3)
+  - Wi-Fi (IEEE 802.11)
+* Ethernet
+:PROPERTIES:
+:ID:       d273e252-048d-43d5-a495-67e40377f589
+:END:
+- The dominant [[id:4b275b75-30fc-452a-9134-2c4f5ce5fee4][LAN]] wired technology
+- Made up of many different standards which each handle different speeds and different physical layers (wire, fiber optics)
+- [[file:media/ethernet_1.png][Diagram]]
+  - "Data" will generally be an IP/network layer frame
+  - Max size (MTU): 1500 bytes
+  - Minimum size: 46 bytes (used to ensure that collision will be detected)
+  - Type indicates a higher layer protocol (not only [[id:c66bc940-0321-468b-86c1-21ae30542ab4][IP]], but also others such as ARP, AppleTalk, etc.)
+  - Preamble is 7 bytes containing the pattern 10101010 (AA, "wake up"), then 1 byte of 10101011 (AB, "start of frame")
+    - Synchronizes receiver and sender clock rates
+- Reliability:
+  - The receiver will not use ACK/NAK packets to the sender, so data in the dropped frames will be left dropped in the higher layers will only get recovered if a higher level [[id:074a6a63-d7ce-4112-972f-58fa072d2a0e][RDT]] is used such as [[id:458a323f-763b-458e-9ce8-7b7fb008a473][TCP]]
+- [[id:7d01f5b2-39cb-40c5-822b-b5ac643f220b][Link Access Control]]:
+  - Uses [[id:24bd1461-3b29-407a-b5fb-b8d802df6b64][CSMA/CD]] with binary backoff
+** Physical Topology
+:PROPERTIES:
+:ID:       0d608820-1a9a-4c1b-989f-e1638b55f57a
+:END:
+- How do we connect multiple Ethernet devices?
+- Devices:
+  - Hub: cheap but slow
+    - Lives on the physical layer and just blindly sends electrical signals between everything connected to it
+  - Switch: expensive but fast
+    - See [[id:40ea0457-df89-43a9-b4f9-0a62b793bd5d][Switch]]
+- Topology is a description of how devices are connected to each other:
+  - Bus Topology:
+    - Very popular leading to the mid 90s
+    - All nodes connect to a single, common bus
+    - All frames get sent to all nodes along the bus
+    - Collisions are very likely
+    - The cable becomes the single point of failure, and if it is very long then fixing and troubleshooting is hard.
+    - Not good for large networks, but ok for small networks
+  - Star Topology with Hub:
+    - All nodes connect to a hub
+    - Hub amplifies and transmits bits received to all connected devices
+    - Cheap and easy to maintain
+    - Much easier to troubleshoot and fix (if one device broken, then its link is probably broken, if many devices broken, then likely it's the hub)
+  - Star Topology with Switch:
+    - Popular since the early 2000's
+    - All nodes connect to a switch
+    - Switch acts as a traffic controller to eliminate collisions
+    -
+** Switch
+:PROPERTIES:
+:ID:       40ea0457-df89-43a9-b4f9-0a62b793bd5d
+:END:
+- Lives on the data link layer meaning that it interprets the bits as an ethernet frame
+- Buffers received frames and sends them later to avoid collisions
+- Selectively forwards frames to its destination
+  - This allows simultaneous sending of packets from A to B and C to D
+- Nodes are unaware of the switch
+- No configuration needed, can be directly swapped with a hub to increase network performance
+- Switches can be connected in hierarchy - requires them to have their own routing protocol
+- Self learning:
+  - Switch maintains a routing table
+    - Includes a TTL to clear old entries
+    - TTL will be refreshed upon receiving new packets from the same source
+    - Duplicate entries are allowed
+    - If a machine is moved, incoming packets will be lost until the moved machine sends a frame
+  - When receiving a frame from a certain interface, the sender of that frame is recorded in the table as being connected through that interface
+- Routing
+  - If the destination [[id:b534f6fc-0a19-4899-b0cd-d690668fdce5][MAC]] is contained within the table, then send to that specific interface
+  - Otherwise, we have to send to all interfaces other than the sender's interface because we do not know on which interface that device is connected
+  - [[file:media/switch_1.png][Routing]]
+  - Special cases for when the switch knows that the packet already exists within certain interfaces - will not resend
+** Address Resolution Protocol
+:PROPERTIES:
+:ID:       af9bdbfd-8d1d-4315-ba77-8e741f407189
+:END:
+- The mechanism by which we determine the corresponding [[id:b534f6fc-0a19-4899-b0cd-d690668fdce5][MAC]] address of a host with a certain IP address
+  - "I want to send a frame to the IP address ___, what should I set the destination MAC to?"
+- Each device will store an ARP table similar to a DNS table, which allows the device to lookup an IP address to find a corresponding MAC address
+- Local (same subnet):
+  - If the device is not contained within the ARP table, then the sender will broadcast an ARP query packet (to FF:FF:FF:FF:FF:FF) with the receiver's IP address, then the receiver will reply with an ARP frame (thus the sender can determine B's MAC using the sender's MAC address)
+    - A will then store the MAC within its ARP cache table
+  - [[file:media/arp-local_1.png][Diagram]]
+- Different subnet:
+  - The destination MAC will instead be that of the router's (which may also need to be looked up using ARP)
+  - Then, the responsibility of routing is handed off to the router
+  - [[file:media/arp-across_1.png][Diagram]]
