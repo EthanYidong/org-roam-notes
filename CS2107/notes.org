@@ -908,7 +908,7 @@
 * Keyed-Hash
 :PROPERTIES:
 :ID:       b534f6fc-0a19-4899-b0cd-d690668fdce5
-:ROAM_ALIASES: MAC
+:ROAM_ALIASES: "Message Authentication Code" MAC
 :END:
 - Also known as MAC
 - A Hash function which also takes in a key
@@ -1551,8 +1551,100 @@
     - If setuid = false, then real UID = effective UID = executor
   - Note: checks will still be made to ensure that the user can execute in the first place. If the user doesn't have execute permissions (for example, 700), then the user still won't be able to execute the file, even if setuid is true
   - Note: bash will revert the effective UID to the real UID, so calling code by '/bin/bash ...' or calling a setuid script with a bash shebang will result in privelege reverting to the real uid.
+  - Note: UNIX also has a saved UID which allows the suid binary to drop their privileges temporarily
+  - Possible vulnerability: by setting the $PATH variable, the attacker can modify which executable is run. When using sudo, this may lead to the attacker getting superuser access
 * Privelege Escalation Attack
 :PROPERTIES:
 :ID:       93f67ad4-cad3-48e0-86d0-4e2c16adaec3
 :END:
 - When a user gains permissions by utilizing incorrectly designed or incorrectly set-up access control mechanisms
+
+* Software Security
+:PROPERTIES:
+:ID:       418040c8-d0fd-4d5e-a97a-8a0b5242db36
+:END:
+- Program must be correct, efficient, and *secure*
+- Program behavior may extend behond its intended functionality, leading to potential vulnerabilities
+- Attackers can deviate from intended functionality by providing unanticipated inputs
+- Issues include
+  - Buffer Overflow
+  - SQL injection
+  - Integer overflow
+- Features are often prioritized over security, human mistakes are prevalent in large codebases
+* Von Neumann Computer Architecture
+:PROPERTIES:
+:ID:       15b866f0-16df-4359-ae40-e96f387ced65
+:END:
+- Code and data have no clear separation
+- Leads to security issues where input data may be treated as code
+- CPU has a register called a program counter which contains the address of currently executing instruction
+  - PC increments as the program executes, but may also jump
+  - Direct jump: replace PC with a constant value
+  - Indirect jump: set PC with a dynamic value from memory or another register
+* Call Stack
+:PROPERTIES:
+:ID:       6fdaf272-4d6c-4e50-abd5-ed54e71ba00b
+:END:
+- See [[id:22f8b191-cc90-4c01-b9f5-10f78d597b42][Stack]]
+- Each function has its own "stack frame" within memory which is created upon calling and freed upon returning.
+- The stack frame may grow or shrink in size throughout the function's life
+- If recursion occurs, multiple stack frames will be created
+- Things like local variables and arguments are stored in the stack, as well as control flow information (return address, previous frame pointer, etc.)
+- Stack grows "upward", from high to low memory addresses (by convention)
+* Process Execution Integrity
+:PROPERTIES:
+:ID:       09b7647f-f00f-4f6a-8284-f9b90d8f3a66
+:END:
+- Process execution integrity is compromised when an attacker is able to modify which instructions are executed by the program.
+- Because the return address is stored on the stack, being able to compromise memory integrity allows an attacker to compromise execution integrity as well
+- Attacks are generally hard, especially if the attacker is interacting with the system remotely.
+- Attackers have to craft special inputs which exploit vulnerabilities such as [[id:09b24b67-2387-4139-a6fc-b928b4ddbb69][Buffer Overflow]] in order to surgically edit the memory to compromise the system.
+- Potential attacks:
+  - Override existing instructions
+  - Override existing data: edit memory locations storing information which will be use by a jump, either by editing the direct jump data or the indirect jump stored address
+* Integer Overflow
+:PROPERTIES:
+:ID:       3fa713b7-f006-4cf8-a078-731d4793bb3f
+:END:
+- Integers store a finite range of integers based on the number of bytes allocated per integer
+- If an arithmetic operation results in a value outside that range, then this results in an overflow
+  - Generally will truncate the leading bits that do not fit, which models modular arithmetic behavior
+* Buffer Overflow
+:PROPERTIES:
+:ID:       09b24b67-2387-4139-a6fc-b928b4ddbb69
+:END:
+- C and C++ do not include runtime bounds checks on data access
+- Pointer arithmetic is allowed
+- This can lead to writing to locations creating unintended behavior
+- By writing data beyond the boundaries of a buffer, we get a buffer overflow
+- Other issues such as buffer overread occur when data beyond the boundaries of the buffer is used and presented
+- Notorious operations:
+  - strcpy: String copy
+    - Strings in C are null-terminated, meaning that their length is determined by the first null byte after the pointer
+    - Copying larger strings into smaller buffers may overwrite data outside of the buffer
+    - Replace with strncopy, which allows specifying a maximum limit
+- Possible attacks:
+  - Stack smashing (edit return addresses)
+  - Edit function pointers
+  - Edit virtual function table (heap overflow)
+  - Grab important data (passwords, sensitive information)
+** Stack Smashing
+:PROPERTIES:
+:ID:       e3327449-d615-4226-914f-d613151492cf
+:END:
+- An attack which compromises the [[id:09b7647f-f00f-4f6a-8284-f9b90d8f3a66][Process Execution Integrity]] of a process by utilizing a buffer overflow
+- Edits the return address in order to control where the function will return to
+- Well designed attacks can accomplish things like arbitrary code execution
+  - Set return address to the location which sends you to a shellcode
+  - Not easy to find this address, but can be guessed
+    - By using the nop sled technique (placing no-op commands before the shellcode), the attacker has some leeway with their guess
+- If returning to a random, most likely invalid address, the process will most likely segfault and terminate
+
+* Undocumented Access Points
+:PROPERTIES:
+:ID:       0818b9d9-53b7-471d-921d-59cfffb2c7fe
+:END:
+- For debugging purposes, programmers will implement methods to jump to points in the program which will assist with debugging by printing variables or go to debugging mode
+- If not removed, it could remain as backdoors into the production code
+- Also known as easter eggs
+- Some are left in on purpose, for fun, publicity, but could also be maliciously created by unhappy programmers

@@ -970,3 +970,115 @@
   - The destination MAC will instead be that of the router's (which may also need to be looked up using ARP)
   - Then, the responsibility of routing is handed off to the router
   - [[file:media/arp-across_1.png][Diagram]]
+* Network Security
+:PROPERTIES:
+:ID:       175d487e-e936-491c-8844-9553f053f7c5
+:END:
+- In this module, we have Alice and Bob, as well as Trudy (intruder) who can eavesdrop, delete, or add mesesages (like [[id:C6BD6271-3B92-4538-9398-FCCA53B7A1B5][Mallory]])
+- How do Alice and Bob communicate securely with the presence of Trudy?
+- IRL: Alice may want to communicate with a bank or e-commerce site "Bob" without anybody stealing her payment details
+- What does security mean?
+  - [[id:42696A4B-0DFA-435B-858E-D061FEB2CCA0][Confidentiality]]
+    - Only the intended receiver should be able to read the message
+  - [[id:ba3c205b-306c-4bb8-9803-5e0c9c1460f6][Authenticity]]
+    - The sender and receiver should know for sure that the other party is who they think it is
+  - [[id:1FE1E862-1BEC-409A-93BB-7CBF73FACB14][Integrity]]
+    - The sender and receiver should know for sure whether or not the message is unaltered
+  - Access and [[id:932259C5-7559-4B50-9133-5B00E0002256][Availability]]
+    - The sender and receiver should be able to communicate at all times
+- Use [[id:287CF85B-BF15-47AE-9C6C-B203F1FDF3DE][Cryptography]]
+  - Encryption is a function \(E(m, k_1)\) which takes a plaintext message and a key which produces a ciphertext
+  - Decryption is a function \(D(c, k_2)\) which takes a ciphertext and produces the original plaintext message
+  - \(D(E(m,k_1), k_2) = m\)
+- If \(k_1 = k_2\), then we call such a scheme a [[id:7765D5BC-0C92-4AC3-BFA6-822A5517070A][Symmetric Cryptosystem]]
+  - How do Alice and Bob agree on the key?
+  - Could be face to face, but ideally over a network we need some other method to securely exchange keys
+  - Example: Caesar Cipher
+    - Each letter is shifted k positions in the alphabet, wrapped around at the end
+    - 25 possible keys
+  - Example: Monoalphabetic cipher
+    - Each letter is mapped to another letter via a random permutation of the alphabet
+    - \(26! -1\) possible keys
+    - Broken with statistical analysis by making assumptions regarding the frequency of letters
+  - Example: Polyalphabetic cipher
+    - Use multiple permutations of the alphabet
+    - Use them in some cycling pattern
+    - Still possible to analyze, especially if the pattern is known
+  - Block ciphers
+    - Each set of data is split into size-K blocks
+    - Develop some one-to-one mapping between each possible plaintext block and each possible ciphertext block
+      - Very hard to share a whole table, need some better way to generate
+    - \(2^K !\) total possible keys conceptually, in practice it is less
+      - Example: DES
+      - Example: AES
+- Drawback of Symmetric Cryptosystems: a key must be pre-agreed upon
+  - What if we don't want to share a key at first?
+- So, we use two different keys for encryption and decryption ([[id:7A154837-3682-4C60-BC05-A284FC06290E][Asymmetric Cryptosystem]])
+  - Sender uses a receiver's "public key" (which can be freely shared) to encrypt data
+  - Receiver uses their "private key" (which only they know) to decrypt that ciphertext
+  - The private key must be impossible to derive given the public key
+  - Example: [[id:036994b9-0dff-4b8e-adea-283df9012d31][RSA]]
+    - Choose large (1024 bit) primes \(p, q\)
+    - Compute \(n = p \times q\)
+    - Compute \(z = \phi(n) = (p - 1)(q - 1)\)
+    - Choose \(e\) which is relatively prime to \(z\), generally just choose a prime number
+    - Choose \(d\) such that \(ed \equiv 1 \mod z\)
+    - \(n, e\) is the public key, \(n, d\) is the private key
+    - To encrypt: compute \(c = m^e \mod n\)
+    - To decrypt: compute \(m = c^d \mod n\)
+    - We can also reverse the way we use this, i.e. encrypt using the private key and decrypt using the public key
+    - Problem: exponentiation is relatively expensive
+    - Solution: use RSA to established a shared symmetrical key
+      - Sender chooses a key, then sends to the receiver using RSA
+      - Both sender and receiver now have the key
+- Now, how to establish message integrity?
+  - Checksums are designed for random errors, not maliciously crafted attacks
+  - Use cryptographic [[id:e80b6bfc-5b6a-4c2e-ae03-a513f6bef6b5][Hash]] functions:
+    - A hash function is a function \(H(m)\) which takes a message and produces a fixed size output
+    - A cryptographic hash function is a hash function where it is impossible to find distinct \(x, y\) where \(H(x) = H(y)\)
+      - Small change in input will make a significant difference in output
+    - Transmit message and the hash. Done?
+    - Nope, attacker can generate their own hashes
+  - So, use a [[id:b534f6fc-0a19-4899-b0cd-d690668fdce5][Message Authentication Code]]
+    - Instead of sending \(m, H(m)\) we send \(m, H(s + m)\) where s is a secret key known only to the receiver
+    - Now, attackers can no longer generate valid hashes for a different message \(m'\)
+- Finally, how to establish authenticity?
+  - Use [[id:f6d86fcf-3694-4ae1-999d-d3a087484b83][Digital Signatures]]
+    - A signature must be verifyable by Alice who can check that the signature and message were generated by Bob
+    - A signature must be unforgable meaning that only Bob can generate a signature for a message
+    - Sign a message by encrypting it with a private key, producing the signature \(s\)
+    - Alice can verify by decrypting the signature, to verify that it is equal to the original message
+    - Only Bob can generate that signature because only Bob has his private key
+    - RSA is expensive, how do we make cheaper digital signatures?
+    - Instead, hash the message before encrypting
+    - By properties of cryptographic hashes, Alice can just verify that by decrypting the signature, she gets the same value she would get by hashing the message
+  - Problem: how do you validate the authenticity of a public key?
+    - Use a [[id:e9a3e661-4685-4381-b082-21cf94b4699b][Certificate Authority]]
+      - Public database of everyone's public key?
+        - Bad idea, single point of failure
+        - High traffic on the database
+        - We also need to know the public key of the CA in the first place...
+      - CA public keys are preinstalled on machines and are "universal knowledge"
+        - "Trusted Root CAs"
+        - CAs will issue certificates that essentially say "this person has __ as their public key"
+        - That certificate is signed by the CA, which can be verified by people who already know the public key of the CA prior to the exchange
+* Firewalls
+:PROPERTIES:
+:ID:       fdb9fb22-cc48-4eab-a86f-c43d83b8d827
+:END:
+- Provides separation between a part of an organization's internal network from the larger internet
+  - Provides access restriction which allows filtering of packets entering that part of the network
+- Help mitigate DoS attacks by filtering out malicious requests
+- Helps prevent modification or access of internal data
+- Allows people authorized to use the resource to access them
+- Types:
+  - Stateless packet filter
+    - "Gateway to the internet"
+    - Observes each packet independently of each other, applies rules to that packet
+    - May check source IPs, destination IPs, port numbers, ICMP packet type, TCP SYN/ACK etc. and decide whether or not to let that packet through to the internal network
+    - Single point of failure, bottleneck
+    - IP spoofing can defeat the IP filtering
+    - Trade betweeen security and accessability
+  - Stateful packet filter
+  - Application gateway
+  -

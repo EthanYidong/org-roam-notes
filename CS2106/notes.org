@@ -1465,3 +1465,170 @@
   - Define a working set window \(\delta\)
   - Define \(W(t, \delta)\) where \(W(t, \delta)\) is the number of active pages in the interval from time \(t - \delta\) to \(t\)
   - Try to allocate enough frames for \(W(t, \delta)\)
+
+* File System
+:PROPERTIES:
+:ID:       a12b99d4-5b12-422e-9441-15b96e242799
+:END:
+- Physical memory is volitile and not preserved across power cycles
+- Direct access to storage medium is not portable, and differs between hardware setups
+- File system provides an abstraction over permanent storage mediums
+  - Provides resource management
+  - Provides resource protection
+  - Provides resource sharing
+- General Criteria
+  - Self-Contained: from the storage medium, you should be able to utilize the file system without any external data / information
+  - Persistent: data stored lives beyond the OS
+  - Efficient: fast access, minimum overhead of file storage and access, with good management of free space (high utilization)
+
+** Files
+:PROPERTIES:
+:ID:       9f24ece2-42dd-4d26-9cf8-6c24c6b3b658
+:END:
+- A logical unit of information created by processes
+- Smallest unit of storage under the file system abstraction
+- File Abstract Data Type:
+  - A set of common data and operations implemented in different ways
+  - Data
+    - Array of bytes
+      - Each byte can be uniquely indexed as an offset from the beginning
+    - Fixed length records
+      - Group bytes to become records
+      - Each record can be indexed as an offset from the beginning: Offset = size * (N-1) for the Nth record
+      - Records can be deleted and appended
+    - Variable length records
+      - Group bytes to become flexible length records
+      - Hard to locate specific records
+  - Metadata: additional information associated with the file (file attributes)
+    - Name (human readable name for the file)
+      - Operating system specific, some rules apply and some don't
+      - Generally in the format <name>.<extension>, where <extension> indicates what kind of file it is
+    - Identifier (internal id for the file)
+    - Type (text, image, executable, etc.)
+      - Windows generally relies on the extension
+      - Linux can utilize the magic bytes of the file (a few bytes prepended to a file to indicate its type)
+      - Some ASCII files directly store its own data, since its data can be interpreted standalone
+      - Other files called "binary files" need some special handling
+    - Size (how many blocks it takes up)
+    - Protection (who can read, write, execute the file)
+      - See [[id:4ed4709f-c1b2-4db3-9bd7-f7b499488011][UNIX Access Control]]
+      - In UNIX, we also have the access control list which allows precise permissions for specific users
+    - Time, date, and owner (who made the file, and when was it created/updated?)
+    - Table of content (where to access the file's data)
+  - Operations:
+    - Operations are generally implemented as [[id:583386a9-eb89-491c-9de6-11cf052817da][Syscalls]]
+      - OS maintains information regarding files
+      - For example, upon opening a file, the OS will keep track of a file descriptor (ID used by the computer), which is used to make syscalls referencing that file
+    - Create
+      - Create a new file with empty data
+    - Open
+      - Open an existing file to perform future operations
+      - ~open()~
+    - Read
+      - Read data from the file, generally starting at your current location
+      - ~read()~
+    - Write
+      - Write data to the file, generally starting at your current location
+      - ~write()~
+    - Repositioning
+      - Change your current location
+      - AKA Seeking
+      - ~lseek()~
+    - Truncate
+      - Delete data from specified position to the end of file
+    - Other
+      - Closing: ~close()~ to clean up the file descriptors
+- Special files:
+  - Some OSs (namely UNIX), have files not specifically tied to the storage medium
+    - For example, /dev/null is a "file" which discards all input
+- Access methods:
+  - Sequential access
+    - Read the bytes of the file in order
+    - To get to a byte, you have to read in all previous bytes
+    - Cannot skip, can rewind
+    - Example: cassette tapes
+  - Random access:
+    - Read bytes in an arbitrary position of the file
+    - Read in any order
+    - Either clearly specify an offset from the file, or seek to an offset then read in sequence
+    - Both UNIX and Windows utilize seek
+  - Direct access:
+    - Used for files with fixed-length records
+    - Random access to any arbitrary records
+    - Useful when a lot of records present
+- Information stored by OS:
+  - File descriptor
+    - The ID used by the OS to identify the file
+    - In UNIX, is specific to the process
+  - Disk location
+    - Where the data of the file exists
+  - Open count
+    - How many processes are using the file
+  - Common approach: 3 tables
+    - Per-process table
+      - Stored along with the PCB table
+      - Each entry points to the file in the System-wide table
+    - System-wide table
+      - Keeps track of all files open on the system
+        - Read/write offset
+        - Reference count: how many processes have this files opened
+      - Each entry points to the file in the System-wide V-node table
+    - System-wide Virtual Node table
+      - Contains information about the physical location of the file
+        - Function pointers to the operations to operate on that file
+        - I-node which tells you where the file is located on disk
+    - [[file:media/file-table_1.png][File Table]]
+  - Special Files:
+    - 0: stdin
+    - 1: stdout
+    - 2: stderr
+- File sharing:
+  - If two files open the same file separately from each other: two entries will be made into the system-wide table. This lets us have two separate offsets
+    - [[file:media/file-separate_1.png][Separate]]
+  - If two file are sharing the same entry in the system-wide table: only one entry, the offset is shared, meaning that reads and writes will affect the other process
+    - This may occur when forking on a process with an open file
+    - [[file:media/file-together_1.png][Together]]
+** Directories
+:PROPERTIES:
+:ID:       7644e630-5611-4bbd-8962-ab34ebd68d9d
+:ROAM_ALIASES: Folders
+:END:
+- AKA Folders
+- From the OS's perspective, is also a [[id:9f24ece2-42dd-4d26-9cf8-6c24c6b3b658][File]]
+- Provides logical grouping of files
+- Helps the system keep track of files
+  - The directory is also a file which contains information about its children
+- Directory Structure:
+  - Single-Level
+    - Only one directory which contains all files
+    - Unique name constraint on files
+    - Example: Media CDs
+    - [[file:media/file-single-level_1.png][Diagram]]
+  - Tree-Structure
+    - Directories can have sub-directories
+    - Files can have the same name as long as they are in different directories
+    - [[file:media/file-tree_1.png][Diagram]]
+    - Absolute path: path which names all directories starting at the root to get to the file
+    - Relative path: path relative to the current working directory
+  - Directed Acyclic Graph
+    - Allow aliasing of files, but not directories
+    - Files can exist as children of multiple different directories
+    - [[file:media/file-dag_1.png][Diagram]]
+    - In UNIX:
+      - Hard links, not allowed for directories
+      - Multiple directories keep separate pointers which point to the file F in disk
+        - Also need to keep reference count
+      - Low overhead, only additional pointers are needed
+      - ~ln~ command
+  - General Graph
+    - Both files and directories can be aliased
+    - Cycles are allowed
+    - May cause infinite looping, and becomes hard to determine when a file should be deleted
+    - In UNIX:
+      - Symbolic link ("soft link"), directories are allowed
+      - Creates a special link file, which contains the path name of the target
+      - To read from the link file, the path name will be used to resolve to the target file
+      - Simple deletion, if the symbolic link is deleted, nothing needed, if the target file is deleted, then we are left with a dangling, invalid link
+      - Larger overhead, needs to create new files which take up more disk space
+      - ~ln -s~ command
+      - The file will have a special "l" flag in the type position when inspecting

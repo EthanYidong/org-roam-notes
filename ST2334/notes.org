@@ -547,6 +547,7 @@
 - Other examples:
   - Sample variance: \(S^2=\frac{1}{n-1} \sum_{i=1}^{n}(X_i-\bar{X})^2\)
 - Variables are also [[id:d5961102-6352-4a14-957a-1928b891b7e3][Random Variables]], so we may also consider its probability distribution, also known as the [[id:6357e52c-0688-4e89-8431-266349386a6c][Sampling Distribution]]
+- Statistics must be computable using the sample, and not use any unknown variables such as the true population mean
 ** Sampling Distribution
 :PROPERTIES:
 :ID:       6357e52c-0688-4e89-8431-266349386a6c
@@ -606,3 +607,81 @@
   - \(\frac{1}{F(m,n)} \sim F(n,m)\)
 - Define \(F(m,n;\alpha)\) such that for \(F \sim F(m,n)\), \(P(F > F(m,n;\alpha) = \alpha\)
   - \(\frac{1}{F(m,n;1-\alpha)} = F(n,m;\alpha)\)
+
+* Statistical Inference
+:PROPERTIES:
+:ID:       096a2980-194a-4872-b44e-93bdbd7e732a
+:END:
+- We want to infer or estimate the population parameters given Sampling [[id:be899b9e-95a7-49f7-a25b-e62bb7b9eb01][Statistic]]
+- We use the sampling distribution to gather information about the population parameters
+- We will use large = greater than or equal to 30, small = less than 30.
+** Point Estimate
+:PROPERTIES:
+:ID:       3a5525e5-90a1-476b-967e-0b86c4a84da2
+:END:
+- Guess a single value for the population parameter
+- Use an estimator:
+  - An estimator is a rule which tells us how to calculate an estimate based on information in a sample
+- For example: "Estimate the average for the population by the average for the sample", estimate that \(\mu = \bar{X}\)
+  - This is an "unbiased estimator", meaning that \(E(\bar{X}) = \mu\). "On average", the estimator is right
+  - Assuming we can apply the central limit theorem
+  - \(P(| \bar{X} - \mu | \leq z_{\alpha / 2} \times \frac{\sigma}{\sqrt{n}}) = 1 - \alpha\) where \(P(Z > z_{\alpha})=\alpha\)
+  - "With probability \(1-\alpha\), the error \(|\bar{X} - \mu |\) is less than \(E = z_{\alpha/2} \times \frac{\sigma}{\sqrt{n}}\)"
+  - We call this quanity \(E\) the maximum error of estimate
+  - Given a fixed \(\alpha\) and a maximum \(E\), we can find the minimum \(n\) that produces this relationship
+  - [[file:media/estimator_1.png][Estimators]]
+*** Unbiased Estimator
+:PROPERTIES:
+:ID:       37e236a9-17ab-4e6d-ae58-17f3a5029b92
+:END:
+- If \(\hat{\Theta}\) is an estimator of \(\theta\):
+- \(\hat{\Theta}\) is an unbiased estimator of \(\theta\) if \(E(\hat{\Theta})=\theta\)
+** Interval Estimate
+:PROPERTIES:
+:ID:       98754c05-6c5e-45ba-9acd-bfead8ee34f9
+:END:
+- Guess a range for the population parameter
+- We want to find an interval \((a,b)\) such that \(P(a < \mu < b) = 1 -\alpha \). In that case, we call \((a, b)\) the \(1- \alpha\) confidence interval.
+- For Case I: if \(\sigma\) is known and the data is normal
+  - We know \(P(-z_{\alpha/2} \leq \frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \leq z_{\alpha/2}) = 1-\alpha\)
+  - So, by rearranging, we get \(P(\bar{x}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}) = 1-\alpha\)
+  - This gives us a confidence inverval for estimating \(\mu\)
+  - This can also be written as \(\bar{X} \pm E\)
+- [[file:media/confidence-interval_1.png][Chart]]
+- "If we repeat this procedure of sampling repeatedly, \(1-\alpha\) of the times, our confidence interval will contain the true parameter"
+
+* Comparing Populations
+:PROPERTIES:
+:ID:       f077aca2-5c90-4c2a-9027-0f4193d68885
+:END:
+- Sometimes, we want to compare two populations given a sample of each of them
+- This occurs when we want to compare outcomes of two possible treatments
+  - Independent samples: randomly choose subjects for each treatment
+    - Both samples are independent from each other, as are the individuals within each sample
+  - Matched pair samples: pair the subjects (possible by some factor) and randomize between which subject in each pair gets which treatment
+    - The observations within a pair are dependent on each other
+    - However, observation between pairs are independent
+- We want to conduct [[id:096a2980-194a-4872-b44e-93bdbd7e732a][Statistical Inference]] on \(\mu_1 - \mu_2\), the averages from two different samples
+  - Assume:
+    - Unequal but known variances
+    - Two samples are independent
+    - Both samples are large or normal
+  - \(E(\bar{X} - \bar{Y}) = \mu_1 - \mu_2 = \delta\)
+  - Because the two samples are independent, \(var(\bar{X}-\bar{Y}) = \frac{\sigma^2_1}{n_1} + \frac{\sigma^2_2}{n_2}\)
+  - Therefore, since the sample distribution is close to normal, we can approximate \(\frac{(\bar{X}-\bar{Y})-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}} \approx N(0,1)\)
+  - We can therefore construct our confidence interval as describe in [[id:98754c05-6c5e-45ba-9acd-bfead8ee34f9][Interval Estimate]]
+- What if variances are unknown?
+  - We instead use the sample variances to approximate the population variances
+- What if the variances are unknown but equal?
+  - We now assume that both samples are small, but the population is normally distributed
+  - First, used the "pooled estimator" to estimate \(\sigma^2\) by using results from both samples
+  - \(S_p^2 = \frac{(n_1-1)S^2_1+(n_2-1)S^2_2}{n_1+n_2-2}\)
+  - Then, the random variable \(\frac{(\bar{X} - \bar{Y})-(\mu_1-\mu_2)}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\) follows a [[id:bd7fb354-8e9f-4a20-bbef-0bcf57cdf45c][T-Distribution]] with \(n_1 + n_2 -2\) degrees of freedom
+  - For large samples, we simply replace the t critical values with z critical values
+- How about paired data?
+  - We have \(n\) pairs \((X_i, Y_i)\)
+    - \(X_i\) and \(Y_i\) are dependent
+    - \((X_i, Y_i)\) and \((X_j, Y_j)\) are independent if \(i \neq j\)
+    - We define \(D_i = X_i - Y_i\), and want to estimate \(\mu_D = \mu_1 - \mu_2\)
+  - Now, we have one single random sample of \(D_i\)
+  - Thus, we simply apply the techniques for single samples ([[id:98754c05-6c5e-45ba-9acd-bfead8ee34f9][Interval Estimate]])

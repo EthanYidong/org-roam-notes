@@ -127,6 +127,12 @@
   - Add insights and what does it means
   - If your actual competitor is manpower, then analyze companies that *could* do what you're doing
   - Customers should be people
+- Beach Head:
+  - Put in a whole grid for customer analysis
+  - Detailed analysis of features
+  - Attributes
+  - Benefits
+  - JTBD can be categorized to functional, emotional, social needs
 
 * Tria
 :PROPERTIES:
@@ -819,3 +825,50 @@
 :END:
 - How does your company compare to its competitors?
 - Mindset change: move away from features towards factors related to the [[id:eb1abf64-a68c-4c28-b332-0243f9451ebe][Job to be Done]] and the [[id:6a97fe7c-afb6-4d9e-8c38-a532aa3fb83b][Buyer Types]] to form a "why does each person involved want to use this"?
+* Diffusion
+:PROPERTIES:
+:ID:       2cbcee55-604e-4a3a-af33-fb8bc6eac770
+:END:
+- Diffusion is how an innovation is communicated through different channels within members of a social system
+- Reduction of risk/uncertainty
+- Involves social change
+- Planned or spontaneous
+- Four elements
+  1. Innovation
+  2. Communication channel
+  3. Time
+  4. Social System
+* ACCORD Framework
+:PROPERTIES:
+:ID:       08e90cc3-ca5f-458b-a63b-c62c3d1afe6b
+:END:
+- 6 factors to determine the rate of adoption
+  - Advantage
+    - "How much better is it?"
+  - Compatibility
+    - "How well does it work in the cultural, physical context of now?"
+  - Complexity
+    - "How easy is it to use?"
+  - Observability
+    - "How obvious is its use to other people?"
+  - Risk
+    - "How bad is it if it doesn't work out?"
+  - Divisiblity
+    - "How small can we start?"
+* Go-To-Market Approach
+:PROPERTIES:
+:ID:       72d4154d-7f3d-43ca-83ee-37766032de37
+:END:
+- How do you move through the innovation decision process?
+  - Customers decide to adopt or reject
+  - Persuide customers to make the purchase
+- Communication channels
+  - Email
+  - Website
+  - Phone
+- Steps
+  1. Knowledge
+  2. Persuasion
+  3. Decision
+  4. Implementation
+  5. Confirmation

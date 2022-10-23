@@ -963,6 +963,24 @@
   - If \(S\) has exactly \(n\) elements, then \(A\) is diagonalizable.
     - Let \(S = \{u_1, u_2, ..., u_n\}\)
     - Then \(P=\begin{bmatrix}u_1 & u_2 & ... & u_n\end{bmatrix}\) diagonalizes \(A\)
+- If \(A^{-1}\) exists, then \(A^{-1}=PD^{-1}P^{-1}\)
+- Non-integer powers also make sense in this context.
+  - For example, the square root can be found by setting values to the square root of all elements in \(D\)
+** Orthogonal Diagonalization
+:PROPERTIES:
+:ID:       428fb559-ab7e-40e8-a0da-54c637944e47
+:END:
+- What if we want \(P\) to be orthogonal?
+- For symmetrical matrices:
+- First, find eigenvalues and \(S_\lambda\) (basis for [[id:dfe13ffb-fd35-4c05-8e8e-687490e85d24][Eigenspaces]]) values as normal
+  - You're guaranteed to get the maximum dimension for the eigenspaces
+  - You're also guaranteed to have only real [[id:9098094c-3584-417f-bece-3218f546e590][Eigenvalues]]
+- Use the Gram-Schmidt process to find the corresponding orthonormal bases \(T_\lambda\)
+  - We know that the resultant combination \(T\) of all the orthonormal bases is itself orthonormal if the matrix is symmetrical
+- Then, we get an orthogonal matrix which diagonalizes \(A\)
+- An orthogonally diagonalizable if there exists an orthogonal matrix \(P\) such that \(P^{T}AP=P^{-1}AP\) is diagonal
+  - This is equivalent to \(A\) being symmetrical
+  - i.e. \(A\) is orthogonally diagonalizable iff \(A\) is symmetric
 * Eigenvectors
 :PROPERTIES:
 :ID:       9098094c-3584-417f-bece-3218f546e590
@@ -995,3 +1013,45 @@
 - This is denoted as \(E_\lambda(A)\)
 - All vectors in the eigenspace are [[id:9098094c-3584-417f-bece-3218f546e590][Eigenvectors]] except for the trivial solution / zero vector
 - The dimension of the eigenspace is at most the power of the factor leading to the corresponding eigenvalue as a solution within the [[id:532a0f4b-b4b6-47b3-a8d5-6bd18d44effd][Characteristic Equation]]
+* Quadratic Forms
+:PROPERTIES:
+:ID:       eab4e415-8c83-41c8-b92b-7487d4cf5810
+:END:
+- An expression \(Q\) which can be expressed as the sum of terms of degree two from variables \(x_1, x_2, ..., x_n\)
+- Let the coefficients of the term with \(x_i x_j\) be \(q_{ij}\)
+- Then, define the matrix \(A= \begin{cases}q_{ii}&i=j\\ \frac{1}{2} q_{ij} & i < j \\ \frac{1}{2} q_{ji} & j < i\end{cases}\)
+- Also, let \(X = \begin{bmatrix}x_1 \\ x_2 \\ ... \\ x_n \end{bmatrix}\)
+- Then, \(Q = X^T A X\)
+- A quadratic form can be thought of as a mapping of \(\mathbb{R}^n to \mathbb{R}\)
+- We can apply [[id:428fb559-ab7e-40e8-a0da-54c637944e47][Orthogonal Diagonalization]] to \(A\) to simplify the quadratic form
+  - Define a new set of variables \(y_1, ..., y_n\) such that \(y = P^Tx = P^{-1}x\)
+  - Then \(Q(x)=Q(Py)\)
+  - This operation is essentially "Translate to a different set of coordinates"
+  - This eliminates cross terms
+- This trick allows us to standardize forms of conic sections
+  - For example, the standard form of an ellipse: \(\frac{x^2}{\alpha^2} + \frac{y^2}{\beta^2} = 1\)
+  - Standard form of hyperbolas: \(\frac{x^2}{\alpha^2}-\frac{y^2}{\beta^2} = \pm 1\)
+* Linear Transformation
+:PROPERTIES:
+:ID:       480f67a4-8c5c-48a0-9614-5221265951c7
+:END:
+- Essentially just a matrix
+- A mapping \(T: \mathbb{R}^n \to \mathbb{R}^m\) where
+- \( T(\begin{bmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{bmatrix})=\begin{bmatrix}a_{11}x_1+a_{12}x_2+...+a_{1n}x_n \\ ... \\ a_{m1}x_1 + ... + a_{mn}x_n \end{bmatrix}\)
+- If \(n=m\), then \(T\) is also known as a linear operator on \(\mathbb{R}^n\)
+- We can rewrite this as \(T(X) = \begin{bmatrix}a_{11} & a_{12} & ... & a_{1n} \\ \vdots \\ a_{m1} & a_{m2} & ... & a_{mn}\end{bmatrix}X\)
+  - That matrix is called the standard matrix for \(T\)
+- The identity mapping is a linear transformation where the input is equal to the output
+  - The standard matrix of the identity mapping is just the [[id:ec6a800b-bfc4-4498-9158-1a209cf0e2c5][Identity Matrix]]
+- The zero mapping is a linear transformation where the output is always 0
+  - The standard mapping of the zero mapping is just the [[id:d65d98af-766e-4be4-8c44-7b054a7848a7][Zero Matrix]]
+- Alternative more advanced definition which works on general vector spaces:
+  - Let \(V,W\) be vector spaces
+  - A mapping \(T: V \to W\) is a linear transformation iff
+  - \(T(cu + dv) = c(T(u)) + d(T(v))\) for all \(u, v \in V\) and \(c, d \in \mathbb{R}\)
+  - If we set \(V = \mathbb{R}^n\) and \(W = \mathbb{R}^m\) then this is equivalent to our simplified definition
+    - We can use this property to prove that something is a linear transformation
+- Properties:
+  - \(T(0) = 0\)
+  - For \(u_1, ..., u_k \in \mathbb{R}^n\) and \(c_1, ..., c_k \in \mathbb{R}\), \(T(c_1u_1 + ... + c_ku_k) = c_1T(u_1) + ... + c_kT(u_k)\)
+- Let \(\{u_1, ..., u_n\}\) be a basis for \(\mathbb{R}^n\). T is uniquely determined by what it does to \(u_1, ..., u_n\)
