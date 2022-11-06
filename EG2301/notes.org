@@ -133,6 +133,13 @@
   - Attributes
   - Benefits
   - JTBD can be categorized to functional, emotional, social needs
+- ACCORD:
+  - Mention the specific changes meant to improve the factors that are lacking
+- FAQ:
+  - More questions
+    - How do I buy it?
+    - Damage & return policies
+    - Basis customers for customers
 
 * Tria
 :PROPERTIES:
@@ -855,6 +862,8 @@
     - "How bad is it if it doesn't work out?"
   - Divisiblity
     - "How small can we start?"
+- Tells us "how do we improve the rate of adoption of our product?"
+  - Use it to make informed changes
 * Go-To-Market Approach
 :PROPERTIES:
 :ID:       72d4154d-7f3d-43ca-83ee-37766032de37
@@ -872,3 +881,114 @@
   3. Decision
   4. Implementation
   5. Confirmation
+* Individual Assignment
+:PROPERTIES:
+:ID:       f2584e5e-b93d-40d4-9445-7da229aad237
+:END:
+- Pick a framework
+  - Use it on a case that fits
+  - History
+  - What happened
+  - Why
+  - What should you do
+  - Secondary data
+- Could be failure or success
+  - A+ if you solve the problem
+- Reflection
+  - What you expected to learn
+  - What you learned
+  - What surprised you
+  - What you would change
+  - Insights about the class
+* Quantitative Validation
+:PROPERTIES:
+:ID:       edc7d317-5095-4a68-8258-5e292d10cf01
+:END:
+- Validation that comes in the form of numbers
+- Covers issues present in qualitative interviews/validation
+  - False positives may arise from social pressure in F2F
+  - Null hypothesis testing
+    - Prove the statement "There is no market for my product" wrong
+    - Time consuming and irritating
+  - Alternative hypothesis
+    - Prove the statement "There is a market for my product" correct
+- We need an objective counterpart to qualitative interviews
+- Large scale analytics
+- Precursor and informs your [[id:72d4154d-7f3d-43ca-83ee-37766032de37][Go-To-Market Approach]]
+- How do customers want to use your product?
+
+* Landing Page
+:PROPERTIES:
+:ID:       00659228-d2b8-4f33-a801-2071974bf1c4
+:END:
+- Part of a process of [[id:edc7d317-5095-4a68-8258-5e292d10cf01][Quantitative Validation]]
+- Like "fishing"
+- "Microsite"/landing page invented in 2007 by Dropbox founder
+  - Collect emails addresses of interested people
+  - Used to validate the claim "there is a market for cloud-based storage"
+- Elements of a good landing page
+  - Headline
+    - Simple
+  - Benefit statements
+  - Call to Action
+  - "Hero Shot"
+    - Media, video, prototype, demos
+- BBC:
+  - Brief
+  - Bold
+  - Clear
+- Landing Page Test
+  - Get clicks from blogs, SEO, and your own publicity both online and offline
+  - Use data analytics to interpret the results
+    - Beta email list
+    - Test price range
+    - Opinion polls
+
+* Customer Funnels
+:PROPERTIES:
+:ID:       5be09e7c-8498-4e9d-b141-8f2057ff40fa
+:END:
+- Where is each person in the process to becoming a customer?
+- AARRR: used for digital mediums
+  - Awareness
+  - Activation
+  - Retention
+  - Referral
+  - Rev
+
+* Pitching
+:PROPERTIES:
+:ID:       47acecc1-0fe2-48e2-8a73-4e08adf57709
+:END:
+- NABC
+  - Need
+    - What does the customer and market need?
+  - Approach
+    - Internal processes, outlooks on accomplish a goal
+    - How do you address that need?
+  - Benefits
+    - Value for the stakeholders?
+  - Competition
+    - How are you better than others?
+- Tell a story
+  - Attention
+  - Imprints
+  - Trust
+- Don't concentrate on approach only
+- Specific and quantitative
+  - "Educated guess"
+- Close (what do you want?)
+- Iterate
+- Hook
+  - Hope hook
+  - Fear hook
+- Need market size
+- + 2 slides reflection
+- Note
+  - Audience
+  - Structure
+  - Visual Appeal (gill sans?)
+    - Guy Kawasaki's font size
+  - Delivery
+  - Colour language
+- KISS

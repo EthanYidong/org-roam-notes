@@ -1055,3 +1055,48 @@
   - \(T(0) = 0\)
   - For \(u_1, ..., u_k \in \mathbb{R}^n\) and \(c_1, ..., c_k \in \mathbb{R}\), \(T(c_1u_1 + ... + c_ku_k) = c_1T(u_1) + ... + c_kT(u_k)\)
 - Let \(\{u_1, ..., u_n\}\) be a basis for \(\mathbb{R}^n\). T is uniquely determined by what it does to \(u_1, ..., u_n\)
+** Finding Standard Matrices
+:PROPERTIES:
+:ID:       bc75c99d-77db-4e65-9df7-5cf910447cc0
+:END:
+- Given a linear transformation \(T\), we want to find its standard matrix
+- Apply \(T\) to the standard basis \(\{e_1, e_2, ..., e_k\}\)
+- Then, the standard matrix \(A\) is \(\begin{bmatrix}T(e_1) & T(e_2) & ... & T(e_k)\end{bmatrix}\)
+- If we cannot directly compute \(T\) but are given samples of \(T\) applied to some vectors, then we can use the values given to find \(T\) by writing the standard basis vectors as a linear combination of the given vectors (since transformations respect linear combinations)
+  - For a linear transformation \(\mathbb{R}^n \to \mathbb{R}^m\) you would need examples which form a basis for \(\mathbb{R}^n\)
+  - Alternatively, we can write  the standard matrix as \(\begin{bmatrix}T(u_1)&T(u_2)&...&T(u_n)\end{bmatrix}\begin{bmatrix}u_1&u_2&...&u_n\end{bmatrix}^{-1}\)
+** Compositions of Transformations
+:PROPERTIES:
+:ID:       e21996a6-b72e-41c1-aec5-ac391aa3024a
+:END:
+- Let \(S: \mathbb{R}^n \to \mathbb{R}^m\) and \(T: \mathbb{R}^m \to \mathbb{R}^k\)
+- Then, \((T \circ S)(u) = T(S(u))\)
+- "The composition of T with S"
+- \(T \circ S\) is a linear transformation if \(S, T\) are linear transformations. If \(A, B\) are the standard matrices of \(S, T\) then \(BA\) is the standard matrix for \(T \circ S\)
+** Ranges
+:PROPERTIES:
+:ID:       2ee4c4e7-85f3-44b6-9549-df3a82c4f09a
+:END:
+- Range is the set of possible outputs of a linear transformation
+- Denoted by \(R(T)\)
+- Equal to the [[id:2e88699a-cfb2-48a0-965f-1ad484989a4c][Column Space]] of the standard matrix.
+- Given any basis for \(\mathbb{R}^n\) \(\{u_1, u_2, ..., u_n\}\)
+  - \(R(T) = span(\{T(u_1), T(u_2), ..., T(u_n)\})\)
+** Kernels
+:PROPERTIES:
+:ID:       f4306ee6-9bf3-48b0-a103-b474810b6a99
+:END:
+- Kernel is the set of possible inputs of a linear transformation which result in 0
+- Denoted by \(Ker(T)\)
+- Equal to the [[id:e8099a6c-6a63-4a1e-a196-bd60568b8c9b][Nullspace]] of the standard matrix.
+** Geometric Interpretations
+:PROPERTIES:
+:ID:       21c1f96d-239f-4865-8161-043ecba3423d
+:END:
+- Scaling
+  - \(\begin{bmatrix}\lambda_1 &0\\0&\lambda_2\end{bmatrix}\)
+  - \(\lambda_1\) scale along x-axis, \(\lambda_2\) scale along y-axis
+  - If \(\lambda_1 = \lambda_2\):
+    - If \(\lambda > 1\), called a dilation
+    - If \(\lambda < 1\), called a contraction
+  - [[file:media/diag-transformation_1.png][Diagonal Transformaion]]

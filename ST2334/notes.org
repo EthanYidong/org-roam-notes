@@ -6,6 +6,12 @@
 
 - links :: [[id:ec7952bd-2932-43a3-98de-69f151c97505][ST2334]]
 
+* Finals
+:PROPERTIES:
+:ID:       770fe2b1-9edc-46a4-868a-8842c9b38f36
+:END:
+- Make sure you know if a number is variance (squared) or standard deviation (not squared)
+- Make surey you know if a number pertains to a sample or the population
 * Statistical Experiment
 :PROPERTIES:
 :ID:       66f7bb17-6edb-46ee-a6b7-0f26e5712a09
@@ -278,7 +284,7 @@
 :PROPERTIES:
 :ID:       ab8cb1c3-a402-4c15-9317-b327447a3d5a
 :END:
-- Denoted as \(\sigma_X^2=V(X)=E(X-\mu_X)^2\),
+- Denoted as \(\sigma_X^2=V(X)=E((X-\mu_X)^2)\),
 - Properties:
   - \(V(X) \geq 0\)
   - \(V(X) = 0\) iff \(P(X=E(X)) = 1\), i.e. \(X\) is constant
@@ -503,6 +509,8 @@
 - When \(n \to \infty\), p remains constant, the normal distribution can be used to approximate the [[id:5a71c997-228a-4e59-a2fb-6ca86007d36f][Binomial Distribution]]
   - Use when \(np > 5\) and \(n(1-p) > 5\)
   - Given \(X \sim B(n, p)\), we have \(Z \approx \frac{X - E(X)}{\sqrt{V(X)}}\)
+  - We will add or subtract 0.5 to expand the bounds to correct for boundaries
+    - The boundaries of the binomial probability should be contained within the boundaries for the normal probability with a margin of 0.5
 * Quantile
 :PROPERTIES:
 :ID:       470591ea-e5b6-4980-94b6-5ec5ab1dfad7
@@ -556,6 +564,7 @@
   - Describes how \(\bar{X}\) varies from sample to sample
 - Theorems:
   - For a random sample of an infinite population with mean \(\mu_X\) and variance \(\sigma_X^2\), the sampling distribution of the sample mean has mean \(\mu_X\) and variance \(\frac{\sigma_X^2}{n}\)
+    - (May not be true) if not all the same distribution, variance of sample mena is equal to the sum of all variances divided by n squared.
   - Given n independent random variables with the same mean and variance, \(P(|\bar{X}-\mu|>\epsilon) \to 0\) as \(n \to \infty\)
     - In other words, the probability that the difference between the sample mean and the population mean is larger than some threshold approaches 0 as the sample size gets larger
   - Central limit theorem: \(\bar{X}\) is approximately normal
@@ -685,3 +694,55 @@
     - We define \(D_i = X_i - Y_i\), and want to estimate \(\mu_D = \mu_1 - \mu_2\)
   - Now, we have one single random sample of \(D_i\)
   - Thus, we simply apply the techniques for single samples ([[id:98754c05-6c5e-45ba-9acd-bfead8ee34f9][Interval Estimate]])
+* Hypothesis Test
+:PROPERTIES:
+:ID:       7d301971-41c2-4df9-bc9a-3e4cb3a37e4d
+:END:
+- Tests to use statistics to validate a claim about the population
+- A hypothesis test is composed of a null hypothesis and an alternative hypothesis.
+- All statements used are claims about the population.
+- We ask the question, "given this sample data, is the null hypothesis likely to be true?"
+  - If it is unlikely, then we can reject the null hypothesis
+- We use the sampling distribution assuming that the null hypothesis is true to evaluate the probability of obtaining such a result from a sample.
+- Conducting a hypothesis test
+  1. Set the null and alternative hypothesis
+  2. Set a significance level
+  3. Identify the test statistic, distribution, and rejection criteria
+  4. Observe the test statistic based on the data
+  5. Form a conclusion
+     - Either reject the null
+     - Or fail to reject the null (no such thing as accepting the null)
+- Errors:
+  - Rejecting null when it is true is Type I
+  - Not rejecting null when it is false is Type II
+- The level of significance is equal to the chance of a Type I error
+  - Denoted as \(\alpha\)
+- The power of the test is \(1-\beta\)
+  - Where \(\beta\) is the chance of a Type II error.
+- Significance level usually set to be 0.05 or 0.01
+- The p-value is the probability of obtaining a test statistic at least as extreme than the observed sample given that the null hypothesis is true.
+  - More extreme takes the alternative into consideration, could be two or one-tailed
+** Hypothesis Test on Z-Statistics
+:PROPERTIES:
+:ID:       23eea6fe-6d49-41cb-aa35-11421d58f14e
+:END:
+- If the Z-statistic is applicable, we can conduct a test
+- We use the mean from the null hypothesis to construct the Z value of the sample mean
+- We can reject Z when \(|Z| > z_{\alpha /2}\).
+  - \(P(|Z| > z_{\alpha /2}) = \alpha\)
+** Hypothesis Test on T-Statistics
+:PROPERTIES:
+:ID:       88e3c0d6-60e9-415b-8acb-a28238f7ae3b
+:END:
+- If the T-statistic is applicable, we conduct a test on it instead.
+- The process is similar to the [[id:23eea6fe-6d49-41cb-aa35-11421d58f14e][Hypothesis Test on Z-Statistics]]
+- Construct confidence interval
+- See if the null mean falls inside it
+** Hypothesis Test on Multiple Samples
+:PROPERTIES:
+:ID:       93e4cfc8-24f1-4c77-aba5-f771e4049201
+:END:
+- If we want to test the difference in means
+- Use the same processes in [[id:f077aca2-5c90-4c2a-9027-0f4193d68885][Comparing Populations]] to determine the test statistics
+- For paired data:
+  - Apply the same method in [[id:f077aca2-5c90-4c2a-9027-0f4193d68885][Comparing Populations]], derive a single variable by subtracting the paired data, then use the appropriate statistic

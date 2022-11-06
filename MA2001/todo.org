@@ -20,6 +20,7 @@
 ** DONE Watch Lecture 9 <2022-10-11 Tue>
 ** DONE Watch Lecture 10 <2022-10-18 Tue>
 ** DONE Watch Lecture 11 <2022-10-25 Tue>
+** DONE Watch Lecture 12 <2022-11-01 Tue>
 
 * Lecture Quiz
 
@@ -33,7 +34,8 @@
 ** DONE Lecture Quiz 8 <2022-10-07 Fri>
 ** DONE Lecture Quiz 9 <2022-10-14 Fri>
 ** DONE Lecture Quiz 10 <2022-10-21 Fri>
-** TODO Lecture Quiz 11 <2022-10-28 Fri>
+** DONE Lecture Quiz 11 <2022-10-28 Fri>
+** DONE Lecture Quiz 12 <2022-11-04 Fri>
 
 * Tutorial
 ** DONE Tutorial Preparation 1 <2022-08-26 Fri>
@@ -45,8 +47,13 @@
 ** DONE Tutorial Preparation 7 <2022-10-14 Fri>
 ** DONE Tutorial Preparation 8 <2022-10-21 Fri>
 ** DONE Tutorial Preparation 9 <2022-10-28 Fri>
+** DONE Tutorial Preparation 10 <2022-11-04 Fri>
 
 * Homework
 ** DONE Homework 1 <2022-09-09 Fri>
 ** DONE Homework 2 <2022-09-30 Fri>
 ** DONE Homework 3 <2022-10-21 Fri>
+** DONE Homework 4 <2022-11-04 Fri>
+
+* Lab
+** STRT Lab Assignment <2022-11-11 Fri>

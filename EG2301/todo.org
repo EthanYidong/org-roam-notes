@@ -19,3 +19,8 @@
 ** DONE Market Analysis <2022-09-06 Tue>
 ** DONE Business Model of Compeditors <2022-09-13 Tue>
 - Only the right side of the canvas
+
+* Final Submission
+** STRT Individual Assignment <2022-11-11 Fri>
+** STRT Final Submission <2022-11-08 Tue>
+** TODO Pitch <2022-11-08 Tue>

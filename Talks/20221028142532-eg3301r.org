@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       ccc2bcb5-6145-40be-96e0-b5d0fea08491
+:END:
+#+title: EG3301R Briefing
+
+* EG3301R Overview
+:PROPERTIES:
+:ID:       98dc58bb-7773-4314-8a44-efc441f3c383
+:END:
+- What will we do in EG3301R?
+- Ideas to Proof-of-Concept
+- Learn the process
+  - Systematic design process
+  - Translate product ideas onto PoC
+  - Hands-on prototyping
+** Class Structure
+:PROPERTIES:
+:ID:       b7a438d4-b469-43a9-8ca1-1b500ecabccc
+:END:
+- 3 Hour lecture classes (Wed 6pm-9pm)
+  - Learn the process
+  - Learn the methods
+  - Taught by general module coordinators
+- 3 Hour studio sessions (Wed 10am-1pm or 2pm-5pm)
+  - [[file:media/idp/theme-timing_1.png][Timings]]
+  - Learn specific information to the projects
+  - Taught by project supervisors
+
+* Project Topics
+:PROPERTIES:
+:ID:       526993b3-8512-4322-9368-6fa6fb2df15c
+:END:
+- [[file:media/idp/topics_1.png][Topics]]
+- 10 topics across 5 themes, as well as competition projects
+- Competition projects can have different studio timings
+- Can also self-propose, but should be in line with the topics
+- Rank 5 of your top choices
+  - Choose by 18th November

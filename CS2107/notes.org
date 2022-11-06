@@ -1262,7 +1262,7 @@
 - Maps IP to MAC
 - Broadcast mechanism
 - If an attacker on the local network, they can listen to the broadcast
--
+- See [[id:af9bdbfd-8d1d-4315-ba77-8e741f407189][Address Resolution Protocol]]
 ** Network Security Tools
 :PROPERTIES:
 :ID:       ac71b86b-408a-4af2-82e9-a581dd4a5aa5
@@ -1648,3 +1648,301 @@
 - If not removed, it could remain as backdoors into the production code
 - Also known as easter eggs
 - Some are left in on purpose, for fun, publicity, but could also be maliciously created by unhappy programmers
+* Data Representation
+:PROPERTIES:
+:ID:       7fe555fa-2615-4418-8152-3b1732984185
+:END:
+- Inconsistencies in representation may lead to vulnerabilities
+- Strings are important data types:
+  - Variable length
+  - How to represent them?
+  - UTF-8 or arbitrary bytes?
+  - Null bytes?
+  - In C:
+    - String length is not explicitly stored anywhere
+    - The null byte (\0) will indicate the end of a string
+    - However, not all systems use null termination, other languages may just store the string length
+    - This leads to a NULL-byte injection vulnerability
+- Do not trust user input
+- Standardize the data representation immediately
+- Underlying system access control mechanisms: i.e. your web server user should only have access to the necessary files
+** NULL-Byte Injection
+:PROPERTIES:
+:ID:       e2c91c4c-0fe9-48ff-86a2-bb815cf0608f
+:END:
+- C systems will terminate a string at the null byte, however some systems will allow null bytes inside of strings.
+- Someone with a certificate for bob\0attacker. If someone is pointed towards bob\0attacker, but the browser uses null termination to display the name, then the user could be tricked into thinking they are talking to bob instead of bob\0attacker
+- [[file:media/null-byte-injection_1.png][Diagram]]
+** ASCII Encoding
+:PROPERTIES:
+:ID:       6a1101a5-799a-4089-bae7-578a1c24f0e3
+:END:
+- 128 characters encoded by 7 bits
+  - EASCII adds more characters using the remaining bit to make a byte
+** UTF-8 Encoding
+:PROPERTIES:
+:ID:       ccd3f9cd-3ce2-4983-9162-cce44425caf4
+:END:
+- [[id:6a1101a5-799a-4089-bae7-578a1c24f0e3][ASCII Encoding]] is too small
+- Extend to Unicode: UTF-8 gives 1,112,064 valid code points
+- Variable length: 1-4 bytes
+- Frequently used characters use less bytes
+- The first 128 characters are equivalent to ASCII
+- [[file:media/unicode_1.png][Unicode]]
+- Referred to as U+____, where ____ is the hexadecimal digits of the character
+- Byte representation of a UTF-8 character should be unique, however some systems accept multiple "variants"
+  - [[file:media/unicode-variant_1.png][Variants]]
+* Defensive and Preventative Measures
+:PROPERTIES:
+:ID:       dafa0ec4-d77c-4658-b45f-be16c7720009
+:END:
+- Measures we can use to prevent the attacks listed above
+- Some adopted by OS, some adopted by programmers, etc.
+- Derived by examining the requirements of each type of attack and implementing measures which will prevent requirements from being met
+** Safe Functions
+:PROPERTIES:
+:ID:       1bf795bf-a951-4f80-94a2-6afbfd77252c
+:END:
+- Use functions that allow prevention of known issues
+- Buffer Overflow:
+  - We have a situation where there is no control of how many bytes are read/written to memory
+  - Use safe functions: ~strncpy~ lets the programmer set the maximum length
+** Input Validation
+:PROPERTIES:
+:ID:       2087020b-be7f-41b8-92b2-c9fefda5a62e
+:END:
+- Filter on the provided inputs
+- Reject requests that do not match the required inputs
+- Hard to do complete filtering
+- Whitelisting:
+  - Entries on what requests are allowed, can be done using regex
+  - May block some legitimate inputs
+- Blacklisting:
+  - Entries on what requests should be denied
+  - May allow some malicious inputs
+** Bounds Checking
+:PROPERTIES:
+:ID:       f1fb7657-0702-41b6-82ac-80a4fa6d1d97
+:END:
+- Check index/pointer when accessing/writing to arrays
+- In some languages, this is done automatically and will throw errors
+- In others, like C, this must be handled by the programmer
+  - Lowers performance
+** Type Safety
+:PROPERTIES:
+:ID:       aed9b84e-8d15-4c06-82a8-e7f3c4f509b0
+:END:
+- Some (most) languages have the concept of "types" which label raw data with features such as "properties" or "methods"
+- Some languages enforce types at runtime, others enforce at compile time
+- Essentially forces you to know what type of data is being stored at a certain location, and uses that knowledge to restrict what you can do with a set of data
+** Program Analysis
+:PROPERTIES:
+:ID:       47b582c3-d933-496b-83f5-540c25eabe81
+:END:
+- Ferris Crab my beloved
+- Check your program
+- Manually: time consuming
+- Automatically:
+  - For example, taint analysis
+    - Untrusted data (coming from outside) are labeled as source
+    - Critical functions are labeled as sinks
+    - Analyze when data passed to a sink is affected by a source
+    - If so, then verify that the proper validation has been done
+** Canaries
+:PROPERTIES:
+:ID:       9561cff2-23b6-4474-bf8a-5b61e6fb3984
+:END:
+- Canaries:
+  - Secret values stored at certain memory addresses at runtime
+  - If these secret values are modified, halt
+  - Can detect buffer overflow or stack overflow
+  - Must be secret to prevent attackers from overwriting with the same value
+  - In gcc, disabled by ~no-stack-protector~
+** Address Space Layout Randomization
+:PROPERTIES:
+:ID:       77d1bb8e-b75c-455e-9a03-bbe7cd741832
+:END:
+- Memory address randomization:
+  - The attacker wants to jump to a certain memory address which contains code that they want to run (maybe injected shellcode)
+  - If that address is non-deterministic, then the attacker is forced to guess, lowering the chances of a successful attack.
+  - ASLR randomizes addresses of key data areas such as the base of the stack, and the location of libraries
+  - In linux, disabled by ~kernel.randomize_va_space=0~ in sysctl
+** Code Testing
+:PROPERTIES:
+:ID:       fa98f6ac-a38a-479c-89b4-27ffce04495d
+:END:
+- White-box
+  - Attacker has access to source code
+- Black-box
+  - Attacker has no access to source code
+- Grey-box
+  - Combine the two
+  - Attacker has the executable, maybe reverse-engineered or decompiled
+- Fuzzing
+  - Send randomized inputs and test the behavior of the application
+** Principle of Least Privilege
+:PROPERTIES:
+:ID:       63245316-1ab3-4f24-8b7a-ba604021d667
+:END:
+- See [[id:d3070bb4-3258-48dc-b22b-299e17f1978b][Principle of Least Privilege]]
+** Patching
+:PROPERTIES:
+:ID:       f76607ab-3ec2-4e75-ae27-a9c3ba6a40fd
+:END:
+- Software vendors will push out fixes for vulnerabilities, often before technical information is widely known
+  - Thus, very few attackers will be able to exploit vulnerabilities before the patch is pushed out
+- Attackers can use the patch to figure out how the exploit unpatched versions
+- Patches must be applied in a timely manner; however, on critical systems, this may lead to instability or unexpected behavior
+  - Testing proceesses for new versions are needed
+  - System administrators may use alternative methods to mitigate the threat, usually at cost to availability
+* Web Security
+:PROPERTIES:
+:ID:       13bababb-7d50-47af-b1b1-b50136f3fdfa
+:END:
+** HTTP Page Access
+:PROPERTIES:
+:ID:       1cdfea79-4ca6-4a93-8810-bc4cf13fd12c
+:END:
+- User client requests a URL from an HTTP server
+- The server sends the data back (HTML file, images, etc.)
+  - Data may include headers, which are key value pairs
+- Browser displays the requested resource
+- HTML pages have many components stored separately, separate requests will be made for each linked file
+- URLS may also contain parameters which are also key value pairs encoded directly into the URL
+- [[file:media/http-request-response_1.png][Request and Response]]
+** JavaScript
+:PROPERTIES:
+:ID:       fa60f280-2653-413c-9e1d-319bb048ea96
+:END:
+- Used in HTML pages to make the page dynamic
+- Malicious JavaScript can read, and modify content of the page it is on
+** PHP
+:PROPERTIES:
+:ID:       49068463-3a88-4c15-806d-67c08bc51fd8
+:END:
+- Runs server-side
+- Used to gatekeep the database and process user requests in an authenticated manner
+- [[file:media/lamp_1.png][LAMP]]
+- Dynamic language which can be run by an server like Apache
+** Browsers
+:PROPERTIES:
+:ID:       2a5c2d48-e2ca-40b3-a905-c31c377bd519
+:END:
+- Browsers are normal applications and can access the same permissions as a normal user application
+- However, browsers need to load dynamic content and run dynamic code, which means proper isolation is necessary
+- Multiple domains, websites, and servers are also going to be accessed simultaneously, so access isolation among them is needed as well
+- May also support plugins/extensions
+** Web Threat Models
+:PROPERTIES:
+:ID:       70daea6c-43b5-4b58-b9fa-7b1beea87a0c
+:END:
+- Website User
+  - Just another user of a web app
+- Web attacker
+  - Owns a domain, server, and SSL certificate
+  - Can create / spoof sites (with a different domain) and entice visitors
+  - Very easy to gain this power as any attacker
+- MitM: IP Layer
+  - Attacker can view IP level packets being sent
+- Passive attacker
+  - Can eavesdrop on traffic but cannot manipulate or spoof
+- Active attacker
+  - Can actively spoof and manipulate IP level packets but cannot create valid certificates for websites they do not control
+** Heartbleed Attack
+:PROPERTIES:
+:ID:       975b5e21-5ba1-4aa7-ae22-4580f2ba33c7
+:END:
+- But in the OpenSSL cryptography library
+- Attack occured due to improper input validation which led to buffer over-read, where the server returned more data then it should have allowed
+- Took advantage of the heartbeat protocol which allowed the client to determine if the server is still alive
+- The overread buffer may include passwords, session cookies, etc.
+- [[file:media/heartbleed_1.png][Heartbleed]]
+** Visual-Based Attacks
+:PROPERTIES:
+:ID:       6275bc1c-dbb0-4b06-9a0d-8791ec96146c
+:END:
+- Browser displays URL to the user
+  - Scheme
+  - Authority
+  - Path
+  - Query
+  - Fragment
+- Authority is the only part which identifies who you're talking to.
+- Browser UI will help user differentiate between the Authority and the rest of the URL
+- If an attacker controls a similar URL, then they can attempt to spoof the real site
+  - Hostname-Path boundary confusion: using characters like "7" which looks like a slash can lead users to believe that the Authority section ends there.
+  - Address bar spoofing: in ye olde days, some browsers let websites draw popups anywhere, which led to some attackers drawing a custom address bar over the real address bar
+** Cookies and Same-Origin Policy
+:PROPERTIES:
+:ID:       ef7f59de-fae7-40b1-8c5b-8016d1c1e948
+:END:
+- Browsers must determine which cookies are "in-scope" when making a request to a server
+  - Browser checks origin, as well as scheme and protocol in some cases
+- Cookie Types
+  - Lifetime
+    - Session: deleted when browsing session ends
+    - Persistent: deleted on a certain date or age
+  - Accessibility:
+    - Secure: can only be trasmitted over HTTPS, which will also cauase scheme and protocol checks
+    - Http-only: cannot be accessed by client-side APIs like JavaScript
+- Session-ID authentication
+  - Session-ID is sent to browser to store as a cookie
+  - Subsequent access to the server will have the session-ID included as a cookie
+- "In-scope" cookies are limited by origin:
+  - Origin includes protocol, hostname, and port number
+  - [[file:media/same-origin-policy_1.png][Same Origin Policy]]
+** Cross-Site-Scripting Attacks
+:PROPERTIES:
+:ID:       5b8028fd-11e7-45a2-a868-a9f4eed087cb
+:ROAM_ALIASES: XSS
+:END:
+- An attack which allows attackers to inject code into a website
+- Types
+  - Reflected (non-persistent)
+  - Stored (persistent)
+- Scripts are present in the text of an HTML document
+- If the website has some mechanism of inserting arbitrary text into a webpage without filtering, XSS is possible
+- Exploits users's trust that the server sent this content
+- Could lead to theft of cookies, submission of form on behalf of user, etc.
+- [[file:media/reflected-xss_1.png][Reflected XSS]]
+  - If the server performs HTML encoding (for example, replacing < with &lt;), then this attack will not work
+  - The attacker will generate a URL which will lead to a webpage includes an injected script
+  - A victim who navigates to that URL will see that webpage with the injected script
+- [[file:media/stored-xss_1.png][Stored XSS]]
+  - Script is stored on the server
+  - For example, contained within a forum post
+  - Rendered automatically, no need to point victims to the specific URL
+- To prevent: need proper control, filtering, sanitizing input, etc.
+** Cross-Site Request Forgery
+:PROPERTIES:
+:ID:       8a9b7bb0-1a01-4dcc-b0fe-ac109c943795
+:ROAM_ALIASES: CSRF
+:END:
+- If the attacker can get a victim to navigate to a URL which causes an action ("transfer money to this account") on the server, then this is a CSRF attack
+- The browser, when navigating to that URL, will include the user's session ID cookie, making it seem like they issued the request
+  - Even without navigating to that URL, if the browser wants to, say, get an image with that URL, then it will still send the cookies along with the request
+- Exploits server's trust that the user made this request
+- To prevent: anti-CSRF token which is dynamic, user-specific, and verifyable by the server
+  - The attacker cannot know it in advance
+  - May be included in the query string
+  - May also be a hidden input for a POST form
+** SQL Injection
+:PROPERTIES:
+:ID:       36499049-7212-49c0-81b6-48b7b8fc33fc
+:END:
+- A class of vulnerabilities of server-side scripting languages, most commonly occuring with SQL
+- Occurs when the server inserts unsanitized data from the user into a SQL query/script to be run on the server
+- [[file:media/sqli_1.png][SQLi]]
+  - This is known as a tautology technique, which makes conditional statements always true
+  - This will allow bypassing of authentication or dumping of database
+- Other technique: batched/multiple statements
+  - If we have a query like ~idk'; DROP table client --~ then this will run the first query as planned, but also with the malicious piggybacked query ~DROP table client~, resulting in a DOS attack
+- To prevent such attacks, programmers can use prepared statements, using '?' as a placeholder for SQL bind parameters
+** Other Attacks
+:PROPERTIES:
+:ID:       e5b803e7-9771-4017-8755-050d738ab699
+:END:
+- Clickjacking
+- Click fraud
+- Drive-by download
+- Web bug

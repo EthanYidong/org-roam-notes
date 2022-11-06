@@ -1082,3 +1082,163 @@
   - Stateful packet filter
   - Application gateway
   -
+* Multimedia
+:PROPERTIES:
+:ID:       2f6fb48f-f168-46f1-94e6-a8a21ecd7748
+:END:
+- Application Types
+  - Streaming stored media: audio, video
+    - Streaming means that playout can begin before the full download is completed
+    - Stored means that the data can be buffered, as in the full data is available on the server from the start
+  - Conversational: voice, video
+    - Interactive two-way media streams
+    - Cannot tolerate higher delays
+  - Live streaming: audio, video
+    - One-way media streams
+    - Longer delays can be ok because no two-way interaction
+    - Typically accomplished through CDNs
+** Video
+:PROPERTIES:
+:ID:       725de4d1-31c0-4a73-9e28-788cb8f47238
+:END:
+- Sequence of digital images at a constant frames per second
+- Digital images are stored as pixel arrays
+- Videos have high bit rate: amount of data for x length of media
+- To reduce data usage, use compression
+  - Spatial coding: compression within image
+    - Images usually have regions with similar colors
+  - Temporal coding: from one image to the next
+    - Sequential images are usually similar
+- Setting bit rate:
+  - Constant bit rate
+    - Consistent
+    - Not responsive to the complexity of the video
+    - Too low and the complex segments will be over-compressed
+    - Too high and you use too many resources
+  - Variable bit rate
+    - Change bit rate as the amount of spatial and temporal coding changes
+    - Good for on-demand video which can be pre-processed
+** Audio
+:PROPERTIES:
+:ID:       b38a749f-9fd4-4aad-83fb-c02b1bd8de3d
+:END:
+- A collection of analog samples
+- Sampled at a constant rate i.e. "how often do you measure the audio signal"
+* Stored Streaming
+:PROPERTIES:
+:ID:       137503c2-ca7e-4597-8149-af5a3c09eac4
+:END:
+- How do we stream stored video?
+- Client will begin playout while the server continues to send data
+- We need to maintain the original timing/speed, but network delays are variable and unknown
+- Client may also want to jump through the video
+- Packets may be lost
+- [[file:media/stored-streaming_1.png][Diagram]]
+- Client keeps a buffer of frames
+- Playout starts after \(t_p\) units of time after the buffer starts filling
+- For average fill rate \(\bar{x}\) and playout rate \(r\)
+  - If \(\bar{x} < r\) then the buffer will eventually deplete
+  - If \(\bar{x} > r\) then the buffer will never deplete assuming that it is large enough to absorb the variability in \(x\)
+- Protocol: use UDP
+  - Server sends at appropriate rate for client
+    - send rate = encoding rate = constant
+  - Push-based streaming (server pushes data to client)
+  - No congestion control, so no rate control restrictions
+  - Short playout delay to remove jitter
+  - Error recovery left to application level protocol
+  - Encapsulate chunks in RTP (Real time protocol)
+  - Control messages (play, pause) maintained separately using RTSP (real time streaming protocol)
+  - Needs separate media control server, leading to higher complexity
+- Protocol: use HTTP
+  - Stream file over HTTP GET
+  - Pull-based streaming (client makes requests)
+  - Use max rate of TCP
+  - Advantages
+    - Most firewalls let HTTP across easily
+    - Infrastructure already tuned for HTTP
+  - Disadvantages
+    - TCP congestion control + retransmission causes fluctuations in fill rate
+    - [[file:media/streaming-tcp_1.png][Diagram]]
+* Voice over IP
+:PROPERTIES:
+:ID:       76557b0c-9b2b-47da-9b2c-16c0e67bea2d
+:ROAM_ALIASES: VoIP
+:END:
+- Required to maintain low end-to-end delay
+  - Includes application level delays on top of network delays
+- Problem: IP is best-effort with no guarantees on delay or against packet loss
+- Assumptions:
+  - Speakers generally have alternating talk periods, and many silent periods
+  - Thus, we can generate packets only when we talk
+- Need to account for
+  - Network lost: datagrams lost due to congestion
+    - Generally use UDP instead to avoid this
+  - Delay loss: datagrams lost because they receive too late for playout
+- Loss tolerance: We can tolarate around 1-10%
+- Delay tolerance: Usually around 400ms
+- [[file:media/voip-delay_1.png][Diagram]]
+- Fixed playout delay
+  - Each chunk is played a fixed \(q\) time units after the chunk was generated
+  - Each chunk is timestamped, a chunk with timestamp \(t\) will pe played at time \(t + q\)
+    - If arrived late, lost
+  - No perfect value for \(q\), will either get packet loss or waste a lot of time
+- Adaptive playout delay
+  - Attempt to lower the playout delay, while maintaining a low loss rate
+  - Estimate the network delay and adjust the playout delay for each talk spurt
+  - Use silent periods as buffers which can be grown or shrunk as needed
+  - [[file:media/voip-adaptive-delay_1.png][Diagram]]
+  - [[file:media/voip-adaptive-delay_2.jpg][Formula]]
+- Recovery
+  - Simple FEC
+    - Group chunks into groups of n
+    - Send n+1 chunks, an extra one being the XOR of the rest
+    - Can recover at most one lost chunk
+    - Increases bandwidth needed
+    - Increases playout delay (receiver waits for one more chunk)
+  - Piggyback Lower Quality
+    - Send a low quality audio stream along with the high quality audio
+      - Attach a low quality version of chunk n-1 with chunk n
+    - Receiver can conceal non-consecutive losses
+  - Interleaving
+    - Divide chunks into smaller units
+    - Mix the small units out of order, each packet has multiple small units
+    - When a packet is lost, only a small amount of each chunk is lost
+    - No redundency, but increases playout delay
+    - [[file:media/voip-recovery_1.png][Recovery]]
+* Dynamic Adaptive Streaming over HTTP
+:PROPERTIES:
+:ID:       db8df387-ca45-4012-b0e8-8eba6f032d9d
+:ROAM_ALIASES: DASH
+:END:
+- AKA DASH
+- Drawbacks of VoD HTTP Streaming
+  - Large client buffer
+  - All clients use the same encoding of video, despite network conditions
+- Using DASH:
+- Server divides video into multiple chunks
+- Each chunk is encoded at different rates
+- A "manifest file" describes which URLs point to which encoding
+- Client measures its server-to-client bandwidth
+- Client will choose the suitable encoding, which may even change mid-playthrough
+- Advantages:
+  - Low additional complexity for server
+  - No firewall problems
+  - Standard caching works
+- Disadvantages:
+  - Cannot work for live video
+* Content Distribution Networks
+:PROPERTIES:
+:ID:       f8ecaee3-929d-44f6-b9a8-791500054086
+:ROAM_ALIASES: CDN
+:END:
+- How do we stream content to many, many simultaneous users?
+- Single server:
+  - Simple, but...
+  - Single point of failure
+  - Network congestion
+  - May be too far from some clients
+- Use a CDN!
+- Multiple, geographically distributed servers which store copies of videos
+- CDN servers are often close to users by being near the ISP ("enter deep")
+- Some are smaller number of large clusters in internet exchange points ("bring home")
+- Servers will provide a manifest which will describe where to find the content on different nodes within the CDN

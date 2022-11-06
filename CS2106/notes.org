@@ -42,7 +42,10 @@
 | 0x101 | 0xbe |
 | 0x102 | 0xad |
 | 0x103 | 0xde |
-
+- Permissions on directories
+  - Read: list files in directory
+  - Write: add or remove files from directory
+  - Execute: change working directory to this
 * Operating System
 :PROPERTIES:
 :ID:       D289CD47-38F4-481F-BED1-FEAF25C4D709
@@ -1365,6 +1368,7 @@
     - Accessing memory outside these regions lead to segfaults
   - Therefore, we need one page directory and n page tables, where n is the number of regions that we need to allocate.
   - [[file:media/2-level-paging_1.png][Diagram]]
+  - NOTE: Second and beyond level pages can actually also be swapped out, meaning we will get two page faults for one memory access
 - In Intel CPUS, we actually use 4-level page tables:
   - Same idea as going from one to two levels
   - Note: addresses in the entries are PHYSICAL (duh)
@@ -1430,6 +1434,7 @@
   - Second chance page replacement (CLOCK)
     - Modified FIFO
     - Each page table entry now includes an "Accessed" referenced bit
+      - Default value upon insertion is 0
     - The oldest FIFO page is selected
       - If the reference bit is 0, replace that page
       - If the reference bit is 1, set it to 0 and move it to the back of the queue (load time is set to be newly loaded), then try the next FIFO page
@@ -1632,3 +1637,351 @@
       - Larger overhead, needs to create new files which take up more disk space
       - ~ln -s~ command
       - The file will have a special "l" flag in the type position when inspecting
+
+* File System Implementation
+:PROPERTIES:
+:ID:       8b81cc13-cf93-4a1a-92a1-d622ca90e19d
+:END:
+ - Disk is structured as a 1-D array of logical blocks
+ - Blocks are mapped to physical disk sectors
+   - Layout is hardware dependent
+ - [[file:media/filesystem-layout_1.png][Diagram]]
+ - How does the OS map files to logical blocks?
+   - For this course, we ignore the hardware implementation of mapping logical blocks to physical sectors
+** Disk Organization
+:PROPERTIES:
+:ID:       3a725cd6-2f32-4bb1-8d2d-fa2eed0ed778
+:END:
+- Logical blocks are grouped into partitions
+- [[file:media/partition_1.png][Diagram]]
+- Each partition can have its own type of filesystem (FAT16, FAT32, NTFS, AFPS)
+*** Master Boot Record
+:PROPERTIES:
+:ID:       ecedcd26-4a02-4a6c-8f3b-db35076d70a2
+:END:
+- A section of a disk which stores data about the partition table
+- Start and end of each partition, plus types
+- Includes a boot code which provides minimal instructions for the computer to run on boot
+*** Partition
+:PROPERTIES:
+:ID:       1611be86-af04-4100-95a5-405d3819e48e
+:END:
+- A collection of logical sectors in a filesystem
+- Includes a boot block which provides information for the computer to load the operating system
+- Details about the partition
+- Directory structure
+  - "How to find a file in a particular directory?"
+- File information
+  - "Where is the file data actually stored?"
+- Finally, the data of the files
+** Implementing [[id:9f24ece2-42dd-4d26-9cf8-6c24c6b3b658][Files]]
+:PROPERTIES:
+:ID:       8c8e4a15-244b-47e7-8a03-d5f252d3708f
+:END:
+- A file is a collection of logical blocks
+  - File size may not be exactly a multiple of block size, which leads to internal fragmentation
+- Good implementation must
+  - Keep track of logical blocks of a file
+  - Efficient access
+  - Efficient usage of disk space
+- Contiguous
+  - Allocate consecutive blocks for a file
+  - Need to keep track of start and size
+  - Advantages:
+    - Fast continuous access (can just read blocks in sequence)
+    - Fast random access/direct access (can just work as an offset of base block number)
+  - Problems:
+    - External fragmentation when files get deleted
+    - May leave small gaps in disk space
+    - File size must be specified in advance
+    - If files get larger, must be completely reallocated
+  - [[file:media/contiguous-files_1.png][Diagram]]
+- Linked List
+  - Each logical block points to the next block in sequence
+  - Now, each block stores the file data as well as a pointer to the next block in the file
+  - Advantages:
+    - Solves external fragmentation
+  - Disadvantages:
+    - Slow random access
+    - Storage overhead
+    - Less reliable, if a pointer is corrupted/incorrect then the file becomes incorrect
+  - [[file:media/files-linked-list_1.png][Diagram]]
+- Linked List with File Allocation Table
+  - The information about blocks allocated to a file is moved to a single table known as the File Allocation Table (FAT)
+  - FAT is loaded into memory at all time
+  - Advantages:
+    - Speeds up random access
+  - Problems:
+    - FAT may be huge for a large disk
+    - Takes up a lot of memory space
+  - [[file:media/files-fat_1.png][Diagram]]
+- Indexed Allocation
+  - Store an index block for each file
+  - An index block represents an array of block addresses of the file
+  - Load the index block only when the file is accessed
+  - Advantages:
+    - Less memory overhead
+  - Problems:
+    - File size is capped by the number of index block entries that can be stored
+    - Storage overhead
+  - [[file:media/files-indexed_1.png][Diagram]]
+  - Variations:
+    - Linked scheme:
+      - Multiple index blocks, linked as a linked list
+      - Problem: now introduces traversal cost through storage access
+        - Although if your files are that big it probably doesn't matter in the first place
+        - Only significant in direct/random access senarios
+    - Multilevel index:
+      - Multiple index blocks, arranged similarly to multi-level paging
+    - Combined:
+      - Combine direct indexing and multi-level indexing
+- Unix Indexed Node
+  - Uses multiple block tables, each with different number of levels of indirection
+  - Small file will only need to use the direct indexing scheme, and as the file grows, more levels of indirection will be employed
+  - [[file:media/files-inode_1.png][Diagram]]
+** Free Space Management
+:PROPERTIES:
+:ID:       eb83482c-571e-49aa-955d-ae03cc55b784
+:END:
+- How do we maintain which blocks are free
+- How do we choose new blocks to allocate for new files or enlarging files?
+- How do we manage the deletion or shrinking of files?
+- Bitmap
+  - Store a bit array, each one represinting the state of its corresponding block
+  - Conventionally, 0 = occupied, 1 = free
+  - Advantages:
+    - Bit manipulation techniques
+  - Problems:
+    - Must be kept in memory for efficiency
+    - Large overhead for large storage mediums
+- Linked List
+  - Store a list of free disk block numbers in a disk block, linked together as a linked list
+  - If each disk block can only store 2 entries, we may have something like: 2, 3 > 4, 5 > 8, 10 > 18
+    - Then, free blocks would be given in the order: 3, 2, 5, 3, 10, 8, 18
+  - Advantages:
+    - Easy to find the first free block
+    - Only the first pointer must be kept in memory, saves memory space
+    - Others can be cached
+  - Disadvantages:
+    - Higher storage overhead
+** Directory Structure
+:PROPERTIES:
+:ID:       75d45842-f7cc-4c2d-9fc4-2e4beb6b9c90
+:END:
+- Give structure to the list of files
+- Map file name to file information
+- Given a full name of a file, the OS must traverse the directories to find the file information for that file
+- Linear List
+  - Keep a file name which is attached to some metadata, plus either the file information or a pointer to it
+  - Advantages:
+    - Simple
+  - Problems:
+    - Requires a linear search
+    - Inefficient for large directories
+      - May use a cache to speed up slightly
+- Hash Table
+  - Instead of a linear list, create a hash table which maps the name to the file metadata
+  - Generally use chained collision resolution
+  - Needs a good hash function
+  - Advantages:
+    - Fast
+  - Problems
+    - Hash table has limited size
+** File Information
+:PROPERTIES:
+:ID:       222be28c-f32c-4c3b-8df7-c309f78ee5ba
+:END:
+- May be stored directly in the directory entry
+- May also have a pointer stored in the directory entry, then the actual data is stored elsewhere on disk
+** File Creation
+:PROPERTIES:
+:ID:       8010ba1e-1a8f-4069-bd5b-77e4c735f794
+:END:
+- Traverse directory structure to find the direct parent
+- Find free blocks in partition
+- Allocate blocks
+- Create file info
+- Update directory with new file info
+- [[file:media/file-creation_1.png][Diagram]]
+** Disk I/O Scheduling
+:PROPERTIES:
+:ID:       e671599b-1167-4818-82dd-c5b08e8161f0
+:END:
+- [[file:media/disk-hardware_1.png][Diagram]]
+- Hard disks have the following access times:
+  - Seek Time (change track using the read/write head)
+    - 2-10ms
+  - Rotational Latency (rotate the desired sector to the head)
+    - 4-12ms
+  - Transfer Time (send data from disk to CPU, or vice versa)
+    - Order of microseconds
+- Total time for read/write:
+  - [Seek Time] + [Rotational Latency] + [Transfer Time]
+- Disk scheduling should:
+  - Minimize overall wait time
+  - Achieved by reducing the seek time
+  - However, must balance the high throughput with fairness (process should not starve just because the seek time would be high)
+- First Come First Serve
+  - Simple, first requests are served first
+  - Advantages:
+    - Simple
+    - Fair, no starvation
+  - Problems:
+    - Could have lower throughput, inefficient seeking order
+- Shortest Seek First
+  - Requests with the shortest required seek are served first
+  - Advantages:
+    - High throughput
+  - Problems:
+    - Could lead to starvation, unfair access
+- SCAN/Elevator
+  - Move bidirectionally, go from innermost to outermost then reverse
+  - Acts similarly to an elevator serving multiple floors
+  - Advantages:
+    - Similar
+    - Relatively high throughput compared to FCFS
+    - Relatively fair compared to SSF (no starvation)
+- Newer Algorithms (SSD)
+- Noop
+  - Similarly use FCFS
+  - Merge adjacent read/write requests
+- Complete fairness queueing
+  - I/O queue maintained per-process
+  - Queues are sorted to reduce disk seeking
+    - Exploits locality
+  - Serve queues in round-robin fashion
+- Deadline
+  - Assign deadlines to I/O requests
+  - Create a sorted queue to reduce disk seeking time
+  - Maintain two FIFO queues for reads and writes
+  - Prioritize reads over writes
+  - If the deadline is reached for the request, service it, otherwise, try to serve request from next queue
+  - If no deadlines, pick from sorted queue
+* File System Case Studies
+:PROPERTIES:
+:ID:       e1fa98c7-c530-4896-9d7a-e0b54b1d9644
+:END:
+- See [[id:8b81cc13-cf93-4a1a-92a1-d622ca90e19d][File System Implementation]]
+:PROPERTIES:
+:ID:       7424ffd1-421e-49a2-b617-af7a152f9f4c
+:END:
+** Microsoft FAT
+:PROPERTIES:
+:ID:       270165dc-04ff-46f1-81d6-4066178481d1
+:END:
+- FAT12, FAT16, FAT32
+- Used in MS-DOS in the 1980s, used for all systems before Windows XP
+- FAT32 still now in use, supported by all major OS, used for portable drives, consoles, cameras, etc.
+- [[file:media/fat_1.png][FAT Layout]]
+- File is assigned to data blocks
+  - Can also be assigned to data block clusters, which are a group of contiguous data blocks
+- Allocation information is stored as a linked list in a File Allocation Table
+  - Table is cached in memory
+- [[file:media/fat-fat_1.png][FAT Entry]]
+  - Entries can be FREE (free block)
+  - The block number of the next block in sequence
+  - EOF (end of file)
+  - BAD (block cannot be used)
+- For FAT<X>, we are able to store \(2^X\) entries, and thus that number of blocks
+  - The \(X\) describes the number of bits in each entry
+  - Because we need to have values to indicate BAD, EOF, and FREE we actually store a bit less than \(2^X\) blocks
+  - Note: For FAT32, we are only allocated 28 bits for numbering blocks, the rest of the bits are reserved
+- Directory entries
+  - Special type of file
+  - Root dir is stored specially
+  - All other dirs are stored in the data blocks
+  - [[file:media/fat-directory-entry_1.png][Diagram]]
+  - Each entry has fixed 32 bytes
+  - Stores name, attributes, creation datetime, first block location, and the file size
+    - Name limited to 8 name + 3 extension characters
+    - First byte of file name may have special meaning (deleted, end of directory, parent directory)
+    - File creation datetime indexed to \(\pm\) 2 seconds, from 1980 to 2107
+    - First block location is 12, 16, or 32 bits based on FAT version
+- File Read
+  - Start at root directory, then traverse to the file
+- File Deletion
+  - Remove directory entry from parent
+    - A bit expensive to truly remove, so just replace the first character in the file name with a special character: "0xE5"
+      - If your file name should actually start with "0xE5", then instead will have the null byte "0x00"
+    - Can be reused down the line
+  - Remove entries in file allocation table
+    - Change all entries to "FREE"
+  - Delete data from data blocks
+    - FAT doesn't actually do anything, so the data still exists there
+- Free Space
+  - Count FREE entries in the FAT
+- Handling larger hard disks as a single partition
+  - Disk Cluster: use a number of contiguous disk blocks as the smallest allocation unit
+    - For a cluster size \(n\) and FAT version \(X\), we can have a partition up to size \(n \times 2^X\)
+    - Larger cluster size means larger usable partition, but leads to higher internal fragmentation
+  - FAT size: more disk blocks can be named
+- Long file names
+  - Use multiple entries to describe a single file
+  - Keep a short 8+3 name for backwards compatability
+  - OS uses the attribute field to indicate that a name is part of a long file name
+  - OS includes a sequence number to describe the sequence of the name
+  - [[file:media/fat-long-file-name_1.png][Diagram]]
+** Linux ext2
+:PROPERTIES:
+:ID:       b40e38fc-bae8-44e1-b1b8-f34e1b15e349
+:END:
+- [[file:media/ext2_1.png][Structure]]
+  - Split into multiple block groups
+  - Block bitmap describes which data blocks are free
+  - I-node table has one entry per file
+  - I-node bitmap describes which I-node entries are free
+  - Group descriptors describes things like the number of data blocks, the number of free blocks, etc for all blocks in the partition
+    - The group descriptor is equal and duplicated across all block groups
+  - Superblock describes the entire file system, the number of data blocks, number of free blocks, etc.
+    - Superblock is equal and duplicated across all block groups
+- [[file:media/ext2-inode_1.png][I-node Structure]]
+  - 128 bytes
+  - Other than the file information, the I-Node contains 15 disk block pointers
+    - 12 are used to directly address
+    - 1 is used as a single indirect
+    - 1 is used as a double indirect
+    - 1 is used as a triple indirect
+  - Fast access for small files, flexibility to handle large files
+- [[file:media/ext2-directory-structure_1.png][Directory Structure]]
+  - Data blocks of a directory contains a linked list of directory entries for files in that directory
+  - Each entry contains:
+    - I-node number for that file
+    - Size of the directory entry (to locate the next entry)
+    - Length of the file/directory in question
+    - Type of the file/directory in question (file or subdirectory or special)
+    - File/directory name
+- [[file:media/ext2-directory-access_1.png][Directory Access]]
+- File deletion
+  - Delete the directory entry
+    - Make the linked list skip over the deleted entry
+  - Delete the disk data in the disk blocks
+    - ext2 marks the bits in the block bitmap to indicate that the blocks are now free
+  - Delete the I-Node entry
+    - Mark the bits in the I-node bitmap to indicate that the I-node is now free
+- [[file:media/ext2-linking_1.png][Linking]]
+* Extra File Topics
+:PROPERTIES:
+:ID:       bbedeb94-e2ea-496d-b89d-ced7041d19f9
+:END:
+- Consistency Check
+  - ~CHKDSK~ in Windows or ~fsck~ in Linux
+  - Checks filesystem for consistency and fixes using redundencies
+- Defragmentation
+  - Files may be scattered across blocks that are far apart
+  - Linux allocation is generally good at preventing this
+  - Windows has tools to defragment
+- Journaling
+  - Keeps additional information to recover from crashes
+  - Log changes before actually committing changes to disk
+- Other systems
+  - Virtual File System (VFS)
+    - OS may have multiple file systems simultaneously
+    - VFS provides an abstraction to access files across multiple file systems without any extra knowledge about the underlying layout
+  - Network File System (NFS)
+    - Do file operations across a network
+  - NTFS
+    - Used in Windows XP onwards
+  - ext3/ext4
+    - More features on top of ext2
+  - HFS+
+    - Hierarchical file system, used by OSX
