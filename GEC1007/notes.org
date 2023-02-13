@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       967e0e06-f8fd-43a0-a81a-3e2f0f04eea0
+:END:
+#+title: GEC1007 Notes
+#+filetags :GEC1007:
+
+- links :: [[id:00ea4ba0-c94a-44c7-a36f-7da887d507dd][GEC1007]]
+
+* Geopolitics in our Lives
+:PROPERTIES:
+:ID:       20b2f72b-a75b-42ca-a3bb-7a94ec7de6b4
+:END:
+- Relationships between nations and states
+- But not always, could also be the relationship between nations and its citizens
+- Nowadays very accessible to our lives: live news feeds with video, pictures, etc. from things like the Ukraine invasion
+- Playing geopolitics: wargaming, video games about war, etc.
+- Examples
+  - Naming conflicts: Sea of Japan vs East Sea
+    - Name usage by BTS was "East Sea", the Korean name
+* Cyprus
+:PROPERTIES:
+:ID:       5c7802d7-b53d-436c-b178-805a37e813aa
+:END:
+- Divided by Greek and Turkey
+- UN has a buffer zone between them
+- Small issue (movement of sandbag by 0.5m) could cause larger conflict between the two parties
+- Some small areas still kept by UK
+* Internally Displaced People
+:PROPERTIES:
+:ID:       da337ea4-dfcf-4bd9-a00a-b626901bfcda
+:ROAM_ALIASES: IDP
+:END:
+- People who are displaced from their homes either by the military or general unsafeness of the area
+- They don't cross the border and try to stay nearby to their home, but still live lives very similar to refugees
+* Geopolitics
+:PROPERTIES:
+:ID:       14d33ccf-4de1-4321-8ce5-d7168352224b
+:END:
+- "Power manifested geographically" - Agnew
+- The discourse about world politics, as it relates to how geography affects state competition and power
+** Practical Geopolitics
+:PROPERTIES:
+:ID:       dab2b1fc-78a9-4d91-bc39-7fc17e0eafce
+:END:
+- Refers to the foreign and domestic policy arenas where political leaders and those in power engage in making "practical" decisions to follow their own "geopolitical code"
+** Formal Geopolitics
+:PROPERTIES:
+:ID:       4f8dce5e-3035-46e9-b70d-a1a757afd944
+:END:
+- Refers to intellectuals who work in institutions or think tanks that have some affect on the political elite
+** Popular Geopolitics
+:PROPERTIES:
+:ID:       724db5ee-7c81-4688-9415-1d98a7d01dcb
+:END:
+- Refers to the geopolitical impact as it relates to media
+- Often presented to the public
+- The vast majority of people have very little first person experience of the world at large; media is what forms our opinions

@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       33be4fa0-c755-4f6f-9a51-70a3f84f7f98
+:END:
+#+title: CS2101 TODO
+#+filetags: :todo:CS2101:
+
+- links :: [[id:4a44a25e-ef42-4d4a-a1b7-5ecd00c74def][CS2101]]
+
+* Class Preparation
+** DONE 2.2 Preparation <2023-01-19 Thu>
+** DONE First Meeting Agenda <2023-01-27 Fri>
+** DONE Prepare for Team Meeting <2023-01-30 Mon>
+
+* Graded Submissions
+** DONE Team Meeting 1 Agenda <2023-02-05 Sun>
+** DONE Team Meeting 1 Reflection <2023-02-05 Sun>

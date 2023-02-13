@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       4a44a25e-ef42-4d4a-a1b7-5ecd00c74def
+:END:
+#+title: CS2101
+#+filetags: :CS2101:
+
+* Class Information
+** OP1 Structure
+- Next session's presenters are doing intensive peer review on the current session
+- Emphasis on persuasion, convincing
+  - Do not regurgitate
+  - Why you need to know this

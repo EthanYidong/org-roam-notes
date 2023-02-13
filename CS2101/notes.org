@@ -1,0 +1,278 @@
+:PROPERTIES:
+:ID:       5bd2c7c6-964a-4a4d-b5b0-ccf93a529a33
+:END:
+#+title: CS2101 Notes
+#+filetags: :CS2101:
+
+- links :: [[id:4a44a25e-ef42-4d4a-a1b7-5ecd00c74def][CS2101]]
+
+* CAP Framework
+:PROPERTIES:
+:ID:       fe05793e-a400-4b9a-b811-b1d26a4e1bae
+:END:
+- Context: What is the environment in which you are communicating?
+- Audience: Who are you communicating to?
+- Purpose: Why are you communcating?
+
+* Competing Values Framework
+:PROPERTIES:
+:ID:       cd173aae-4da3-42ab-9666-a9061cc6768c
+:END:
+- [[file:media/cvf_1.png][Diagram]]
+- 4 competing goals during communication
+
+* Sandwich Method
+:PROPERTIES:
+:ID:       15ef7a3b-c3dc-4f9c-8744-ae48cc098452
+:END:
+- Positive comments
+- Praise for strong points
+- Compliments
+- Criticism
+- Reminder on strong points
+- Thanks, offer support, leave a positive note
+
+* SBI(S)
+:PROPERTIES:
+:ID:       badf1eeb-f85e-4707-b6ab-524234243567
+:END:
+- Situation: describe the context
+- Behavior: describe what the person did
+- Impact: describe the outcome
+- Suggestion: describe what could have been done differently
+
+* PEEL
+:PROPERTIES:
+:ID:       98697982-ef6f-4d23-850b-614d3be05de5
+:END:
+- Point: make your point
+- Evidence: back up your point
+- Explaination: connect the evidence to your point
+- Link: return to the question and answer it with the key points
+
+* Bridging
+:PROPERTIES:
+:ID:       9324115a-23bd-473d-8b0b-67da2a23e1e7
+:END:
+- Trying to "bridge" to a question that is nicer or easier for you
+- Three A's
+  - Acknowledge
+    - Acknowledge the questioner's feelings
+  - Ask
+    - Clarify on the questioner's meaning
+  - Adapt
+    - Adapt the question into neutral terms to answer
+
+* Strategic Presentations
+:PROPERTIES:
+:ID:       edd81160-4d79-4bbe-8623-c90dc3fea308
+:END:
+- Interesting vs convincing?
+** Content
+- Persuade using
+  - Ethos: ethical appeal, trustworthiness
+    - Where is the message from? Is the source trustworthy?
+    - How believable is the message?
+    - Building credibility: usage of strong arguments, statistics, authoritative sources
+    - On the authoritativeness of sources:
+      - Is the source reputable?
+      - Is the author an expert?
+      - Is there a bias?
+    - Avoid inconsistency
+  - Pathos: emotional appeal
+    - Overuse: danger of overgeneralization
+  - Logos: logical appeal
+- Choice depends on audience and context
+- Presentation must contain
+  - Relation to the audience
+  - Persuasive elements
+  - Counterargument and rebuttal
+- 6 principles
+  - Speech is designed for an audience
+  - Promotes identification between audience and topic
+  - Promotes identification between audience and speaker
+  - Ideas and evidence must be reasonable
+  - Organized in a manner that is suitable to the context (audience, topic, occasion)
+  - Speech should be in a clear and reasonable style
+** Organization
+- Transitions:
+  - Linking words (move from one section to the next)
+  - Signposting (telling audience what comes next)
+- Body is a sequence, tells a story
+- (Monroe) Motivated sequence pattern:
+  - Attention
+    - Draw the audience's attention, throughout the presentation using techniques which attract interest
+  - Need
+    - Demonstrate a need, why the audience should listen
+  - Satisfaction
+    - Satisfy the need for the audience
+  - Visualization
+    - Demonstrate the usage of the solution
+  - Action
+    - Give a viable call to action
+** Delivery
+- Verbal cues
+  - Tone
+  - Pace + rhythm
+  - Stress + pause
+  - Intonation
+  - Volume
+  - Pronounciation
+- Non-verbal cues
+  - Eye contact
+  - Expressions
+  - Gestures
+  - Movement
+  - Posture
+  - Clothing + appearance
+- Visual aids
+  - Diagrams, pictures, etc.
+** Q&A
+- Be able to answer questions reasonably
+* Team Development
+:PROPERTIES:
+:ID:       ce1ee9ed-cf0e-4796-880b-b3d78590d121
+:END:
+** Process
+- Forming
+  - Initial team formation
+  - Clarify team roles
+- Storming
+  - First issues crop up
+  - Conflict resolution
+  - Build trust
+  - Learn each other's strengths and weaknesses
+- Norming
+  - Team runs as normal
+  - Members settle into their roles
+- Performing
+  - Team performs
+- Adjourning
+  - Team adjourns
+* Team Meetings
+:PROPERTIES:
+:ID:       1487584c-ad2d-4097-8c62-c9727e916ba2
+:END:
+- Do we even need a meeting?
+  - Do you have a purpose and goal?
+  - Do you need to collaborate with others and not just delegate and inform?
+  - Do you need to collaborate with more than one colleague?
+  - Do your colleagues need to speak with each other?
+  - Do you have the info and supplies you need to hold an effective meeting?
+- Who needs to attend?
+- What are the goals?
+- Create an agenda
+- Create action items
+- Coordinating
+  - Set who, what, when, where
+  - Maintain the meeting structure, agenda, and keep group on track
+- Participating
+  - Prepare
+  - Contribute
+  - Listen
+** Agenda
+:PROPERTIES:
+:ID:       80a4da3f-00c8-419f-b0fd-c32034015707
+:END:
+- Should help participants prepare
+- Provide structure and goals
+** Minutes
+:PROPERTIES:
+:ID:       3876f2f9-b1ba-4054-a09e-ba8eb7188875
+:END:
+- Everyone should take minutes then collate after
+* Google Team Study
+:PROPERTIES:
+:ID:       62c42fd9-5216-430c-88fb-106496c99aff
+:END:
+- Actually, who is on a team doesn't matter
+- What matters:
+  - Equality in conversational turn-taking
+    - Each member speaks roughly the same amount
+  - Ostantatious listening
+    - Show that you are listening
+- Creates psychological safety
+
+* Meeting Tips
+:PROPERTIES:
+:ID:       f8f738d7-c118-4ad9-9956-ab01d8dc2ab6
+:END:
+- Don't share the screen
+- Everyone takes minutes
+
+* Critical Reflections
+:PROPERTIES:
+:ID:       60ac31a5-abe6-49d5-acbe-979de3ed5f72
+:END:
+- "We do not learn from experience, we learn from reflecting on experience."
+- Touch on:
+  - What
+    - What exactly happened?
+  - So What
+    - What insights do you derive from what happened?
+    - Evaluate and judge the objective happenings
+    - Relate insights to course theories
+    - Feelings
+    - Expectations and assumptions: confirmed or refuted
+    - What are the implications?
+  - Now What
+    - Make connections to the future
+    - What would you do in similar situations in the future?
+    - How will you apply?
+    - Consider how your experience might inform future thoughts
+- Connections between what happened, what we learned, and how you can apply it in the future
+** DIEP
+- Describe
+  - What happened?
+  - What did you see, hear, read, do, etc.?
+- Interpret
+  - What have you learned?
+- Evaluate
+  - Evaluate what you have learned from your lens
+  - Be critical: how will what you have learned be used?
+- Plan
+  - Consider how your experience might inform future thoughts or actions
+** Depth
+- Critical: include mention communication principles
+- To fit in 700 words, you need to balance
+  - Choose one experience to expand on
+  -
+- Reporting < Responding < Relating < Reasoning < Reconstructing
+  - High level of abstract thinking to generalize or apply learning
+  - Not about questioning everything, but should show depth of thinking
+  - Relate concepts and reality
+** Signposting
+- To improve organization and flow
+* User Guide
+:PROPERTIES:
+:ID:       82e665ea-c738-46b9-b787-fb7c604ec6ce
+:END:
+- Explain to the user how to interact with the product
+** Reader-Friendliness
+- Content, Organization, and Delivery are all important and must be well balanced
+- Visuals, Explainations, Explainations, must all be sufficient but not excessive
+-
+* OP1 Review
+:PROPERTIES:
+:ID:       00ec3173-2c1d-47d1-b569-01a4b561503d
+:END:
+- Slides too plain
+  - Provide some amount of visual people
+  - If presenting too fast then they need the text on the slides
+- Skit well done and introduces content well
+- Lacking in audience relation (man better not be talking about my part)
+- Enunciate the word "employees" vs employers
+- Hint towards call to action at the beginning and use it to contextualize the presentation
+- A bit too info-focused rather than persuasive
+- Showcase stronger examples
+- Cite sources verbally?
+- Well balanced verbals, volume, pacing
+- Eye contact look up
+- Question marks/rhetorical quesitons
+- Statistics emphasis
+- Coherent organization with previous presenters
+- Need more images
+- Color choice should be reconsidered
+- Good teamwork for Q&A
+- Consider positioning when not speaking
+- Generalize personal examples to apply to the audience, concretize general answers to give context

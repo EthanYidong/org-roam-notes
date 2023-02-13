@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       2efae4c0-82b9-465e-9bca-b7480588ddd0
+:END:
+#+title: CS2102
+#+filetags: :CS2102:
+
+* Class Information
+** Grading
+- Individual Assignments (5%)
+  - 2 Assignments
+- Group Project (30%)
+- Midterm Assessment (20%)
+  - Open book, open laptop (Examplify, allow other apps)
+  - Use psql
+- Final Assessment (40%)
+  - Close book, 2 sided cheatsheet
+- Deadlines "End of Week" = Saturday at 12PM Noon
+** CS2102 Exam
+:PROPERTIES:
+:ID:       bfb1b40d-f3cd-4ec1-aa9b-04c5e22241e4
+:END:

@@ -1139,6 +1139,8 @@
 - For average fill rate \(\bar{x}\) and playout rate \(r\)
   - If \(\bar{x} < r\) then the buffer will eventually deplete
   - If \(\bar{x} > r\) then the buffer will never deplete assuming that it is large enough to absorb the variability in \(x\)
+- Overflow: buffer runs out of space
+- Underflow: buffer becomes empty
 - Protocol: use UDP
   - Server sends at appropriate rate for client
     - send rate = encoding rate = constant
@@ -1147,12 +1149,14 @@
   - Short playout delay to remove jitter
   - Error recovery left to application level protocol
   - Encapsulate chunks in RTP (Real time protocol)
+    - Contains sequence number, time stamp, and encoding information
   - Control messages (play, pause) maintained separately using RTSP (real time streaming protocol)
   - Needs separate media control server, leading to higher complexity
 - Protocol: use HTTP
   - Stream file over HTTP GET
   - Pull-based streaming (client makes requests)
   - Use max rate of TCP
+  - Use byte range header to specify which region of video to get
   - Advantages
     - Most firewalls let HTTP across easily
     - Infrastructure already tuned for HTTP

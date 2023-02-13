@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       9004eb3d-aa70-4a6e-8bfe-6d35589391df
+:END:
+#+title: CS2113 TODO
+#+filetags: :todo:CS2113:
+
+- links :: [[id:1c8c0664-5141-421f-803d-53bb8023214e][CS2113]]
+
+* Coding Exercises
+** DONE Week 3 Coding Exercises <2023-01-25 Wed>
+** DONE Week 4 Coding Exercises <2023-02-01 Wed>
+** DONE Week 5 Coding Exercises <2023-02-08 Wed>
+
+* Individual Project
+** DONE Week 3 Requirements <2023-01-25 Wed>
+** DONE Week 4 Requirements <2023-02-01 Wed>
+** DONE Week 5 Requirements <2023-02-08 Wed>
+
+* Team Project
+** DONE Prelim TP Evaluation <2023-02-08 Wed>

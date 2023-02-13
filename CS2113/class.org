@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       1c8c0664-5141-421f-803d-53bb8023214e
+:END:
+#+title: CS2113
+#+filetags: CS2113
+
+* Class Information

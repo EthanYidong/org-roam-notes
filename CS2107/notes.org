@@ -1942,7 +1942,14 @@
 :PROPERTIES:
 :ID:       e5b803e7-9771-4017-8755-050d738ab699
 :END:
+- links :: [[id:AF7FD862-BF11-4C9A-BBB9-C55902919546][CS2107 Exams]]
 - Clickjacking
+  - When an invisible UI element is overlaid onto the website to get a user to click a button (for example, an invisible iframe)
 - Click fraud
+  - When fraudulently clicking a pay-per-click advertisment to drive up the costs of some company
 - Drive-by download
+  - Authorized: you click a link or button which causes a payload to be downloaded or installed without your full knowledge of what is going on. This type relies on the user making some type of action to initiate the attack
+  - Unauthorized: by simply visiting an otherwise legitimate website that got hijacked by an attacker, the payload gets downloaded and installed
+  - May utilize vulnerable softwares on your computer to accomplish this
 - Web bug
+  - A technique that allows tracking of who has visited your website or opened an email (typically accomplished by getting the user to load some image from your server)

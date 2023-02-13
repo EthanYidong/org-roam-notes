@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       a0dad771-17e2-4345-8566-311875524d0d
+:END:
+#+title: CS3235
+#+filetags: :CS3235:
+
+* Class Information
+** Grading
+- Midterm (40%)
+  - Open book
+- Project (50%)
+  - RUST MY BELOVED
+  - EVOLVE INTO CRAB
+  - Pseudo-blockchain-ish project
+  - Team of 3
+- Participation (10%)
+  - In class questions, tutorials, Canvas discussions
+  - Quality > quantity

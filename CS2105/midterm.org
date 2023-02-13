@@ -28,3 +28,8 @@ RTFP
   - Add one by one
   - Every time you get a carry from the MSB, move it to the LSB position and add it as well
   - Finally, take one's complement (invert all the bits)
+
+* TOADD
+- Unit conversions
+- Speed of light
+- Audio bitrates

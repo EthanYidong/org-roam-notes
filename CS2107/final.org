@@ -1,0 +1,10 @@
+#+title: CS2107 Final Preparation
+
+* Tips
+- [[id:e5b803e7-9771-4017-8755-050d738ab699][Other Attacks]]
+- 15 pages
+
+* Information
+- 20 MCQ 20pt
+- 5 Other 30pt (7, 6, 6, 5, 6)
+- Assignments non examinable

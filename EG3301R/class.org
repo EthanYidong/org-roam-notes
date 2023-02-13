@@ -1,0 +1,64 @@
+:PROPERTIES:
+:ID:       4ba16fbf-47e9-48b8-a2e7-95f7eea8ab1e
+:END:
+
+#+title: EG3301R
+#+filetags: :EG3301R:
+
+* Class Information
+** Grading
+- Semester 1 (50%)
+  - Assignments (15%)
+    - 3 Assignments
+      - Product Solution Proposal: Identify the problem, propose a high-level solution
+      - Customer Needs to Target Specification: Map product features to stakeholder needs
+      - Concept Generation: Identify what functionality the product needs to have, develop two condepts which address those functions
+  - Final Review Quiz (5%)
+  - Participation (10%)
+    - Attendance
+    - Class Participation
+    - Library Session Participation
+  - Project Work (20%)
+- Semester 2 (50%)
+* Pre-Start Meeting
+- Expectations
+  - Passionate about learning
+  - Be challengers
+  - Inquisitive
+  - Teamwork
+  - Commitment
+- Team's Value
+  - Discuss and share expectations and value of each member
+  - Discuss goals
+  - Discuss values
+  - How the team works best
+    - Conflict management
+    - Communication
+    - Relationship
+  - Discuss leadership roles
+  - Choose to share work with supervisors
+- SOP
+  - Every week, everyone discusses challenges and possible solutions
+  - Everyone will present:
+    - What is completed
+    - What is in progress
+    - Next week's plans
+    - Challenges faced and resolution plans
+  - Covered shoes for electronics lab
+  - Full body covering for fabrication lab
+- Team development (Tuckman)
+  - Forming
+  - Storming
+  - Norming
+  - Performing
+  - Adjourning
+- Projects
+  - Non-invasive IoT solution to lower energy bill
+    - Temperature controlled warehouse air conditioning management
+    - Must not modify existing infrastructure
+  - Use the Sesto robotics platoform (magnus light + element) to create applications
+    - Manage transportation of blood components within a hospital setting
+  - Open exploration using either IoT or robitcs platforms
+
+* Class Goals
+- Cross-sharing/fertilization of ideas

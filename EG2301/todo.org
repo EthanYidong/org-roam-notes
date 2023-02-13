@@ -21,6 +21,6 @@
 - Only the right side of the canvas
 
 * Final Submission
-** STRT Individual Assignment <2022-11-11 Fri>
-** STRT Final Submission <2022-11-08 Tue>
-** TODO Pitch <2022-11-08 Tue>
+** DONE Individual Assignment <2022-11-11 Fri>
+** DONE Final Submission <2022-11-08 Tue>
+** DONE Pitch <2022-11-08 Tue>

@@ -1,0 +1,129 @@
+:PROPERTIES:
+:ID:       80f4f316-3479-47b0-a0eb-4d96b0fefb4e
+:END:
+#+title: CS2113 Notes
+#+filetags: CS2113
+
+- links :: [[id:1c8c0664-5141-421f-803d-53bb8023214e][CS2113]]
+
+* Design Notes
+- Properties should be encapsulated by the object it directly pertains to
+  - If the property is global, it should still be associated as a static rather than moved to a parent object
+* Git
+:PROPERTIES:
+:ID:       b70a25f3-971e-46e2-82aa-e742a62fc5cc
+:END:
+** Commands
+- init: Create a new git repository in folder
+- clone: Create a local copy of a remote repository
+- commit: Create a "save point"
+- push: Sync back to remote repository
+- pull: Sync from remote repository
+- checkout: Traverse to a commit
+- diff: Find changes between two commits
+
+* Object Oriented
+:PROPERTIES:
+:ID:       69e5b41a-bc2e-413d-8b90-c70732346875
+:END:
+-
+** Abstraction
+:PROPERTIES:
+:ID:       9de84505-219d-4f2b-890d-0e342c282b6d
+:END:
+- Property of [[id:69e5b41a-bc2e-413d-8b90-c70732346875][Object Oriented]] code
+- Hiding away details to the user/end programmer and only providing a high level concept
+** Encapsulation
+:PROPERTIES:
+:ID:       8297dbcf-5fe5-4f51-a430-09f9979f87f7
+:END:
+- Property of [[id:69e5b41a-bc2e-413d-8b90-c70732346875][Object Oriented]] code
+- Hide away data that should not be directly accessed
+  - Generally involves using the ~private~ keyword in Java
+  - Custom getters and setters can be written to enforce certain properties
+- Couple data and methods
+** Inheritance
+:PROPERTIES:
+:ID:       d9dedc6d-d56f-49ce-a4b2-e55da6ff946d
+:END:
+- Property of [[id:69e5b41a-bc2e-413d-8b90-c70732346875][Object Oriented]] code
+- "Duplicate code" without actually duplicating it
+- Child classes "inherit" behaviors from parent
+*** Substitutability
+- Child classes can be used in place of parent classes
+*** Upcasting
+- Change a child class to a parent class
+*** Downcasting
+- Change a parent class to a child class
+- Will throw error if used incorrectly (~ClassCastException~)
+*** Formalism
+- To show inheritance in a diagram, arrow points from child to parent class
+- To show implementation in a diagram, a dotted arrow points from class to interface
+** Polymorphism
+:PROPERTIES:
+:ID:       9a3d5917-4192-4a73-9716-7832f4ffe876
+:END:
+- Property of [[id:69e5b41a-bc2e-413d-8b90-c70732346875][Object Oriented]] code
+- Runtime will choose the more "specialized" implementation when given a general type
+* API
+:PROPERTIES:
+:ID:       2a37b1e0-11b8-4473-a709-8c08f1a2d419
+:END:
+- A set of publically callable methods
+- A limited way for end programmers to interact with an object or service
+* Tagging
+:PROPERTIES:
+:ID:       d0f3d385-e683-4171-8c2d-773e15c0a94c
+:END:
+- Create tags on commits
+- In sourcetree: right click on the commit
+- Ensure push all tags is checked when pushing
+- Tags can be added post-commit/post-push
+  - Right click on tag and click push to origin
+
+* SLAP
+:PROPERTIES:
+:ID:       7fdb1745-4202-462c-8d41-c5ad128f5c86
+:END:
+- Single Level of Abstraction Principle
+- Each function should do exactly one thing
+
+* Magic Literals
+:PROPERTIES:
+:ID:       bb610eef-e741-447c-a086-89f56f0384f9
+:END:
+- A literal embedded in code with no name or context given
+
+* Static Binding
+:PROPERTIES:
+:ID:       f1ac0d4c-6c45-4c21-998e-f0304b97cb16
+:END:
+- Done at compile time
+
+* Dynamic Binding
+:PROPERTIES:
+:ID:       0ceb1718-0c59-4035-b556-bdcdd5176469
+:END:
+- Done at runtime
+
+* Abstract Class
+:PROPERTIES:
+:ID:       c9fb1814-5a7f-4901-93fd-ecfb0a150920
+:END:
+- Class which cannot be created
+- Does not require implementations of all methods
+
+* Interface
+:PROPERTIES:
+:ID:       30b2698e-111a-4307-91b5-168d463790ad
+:END:
+- Similar to an [[id:c9fb1814-5a7f-4901-93fd-ecfb0a150920][Abstract Class]]
+- Cannot specify data to store, only methods
+- A class can implement multiple interfaces
+
+* Generics
+:PROPERTIES:
+:ID:       9007b85b-3b27-4bc2-b53e-38758f516a52
+:END:
+- Placeholder type for a class
+- Allows a class to take multiple different input types

@@ -19,6 +19,6 @@
 ** DONE Tutorial Preparation 10 <2022-11-03 Thu>
 * Assignment
 ** DONE Assignment 1 <2022-09-18 Sun>
-** STRT Assignment 2 <2022-11-13 Sun>
+** DONE Assignment 2 <2022-11-13 Sun>
 * Project
 ** DONE Project <2022-10-27 Thu>

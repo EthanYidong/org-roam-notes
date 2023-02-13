@@ -1,0 +1,6 @@
+#+title: GEC1007 TODO
+#+filetags: :GEC1007:TODO:
+
+- links :: [[id:00ea4ba0-c94a-44c7-a36f-7da887d507dd][GEC1007]]
+* Readings
+** TODO Week 2 Readings <2023-01-20 Fri>

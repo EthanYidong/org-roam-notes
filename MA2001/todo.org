@@ -56,4 +56,4 @@
 ** DONE Homework 4 <2022-11-04 Fri>
 
 * Lab
-** STRT Lab Assignment <2022-11-11 Fri>
+** DONE Lab Assignment <2022-11-11 Fri>

@@ -1,0 +1,306 @@
+:PROPERTIES:
+:ID:       01d92ffb-ccc9-4111-bde0-03fb42f2f86a
+:END:
+#+title: EG3301R Notes
+#+filetags: :EG3301R:
+
+* Projects
+** Blood Transportation
+:PROPERTIES:
+:ID:       3a1626f2-3014-4e80-8a45-74b96f69a273
+:END:
+*** Problem
+- Blood and related supplies in hospitals must be transported in a timely manner
+- Currently is done by humans, but not enough porters to maintain an acceptably low waiting time
+*** Proposed Idea
+- Implement an "E-porter" system which can automatically collect and deliver blood supplies
+*** Requirements
+- Must be able to navigate through doors and take lifts
+- Must be able to deliver blood under proper conditions (timing, temperature, etc.)
+** Temperature Control
+:PROPERTIES:
+:ID:       2d750772-45c3-45ea-b7d2-a38488c0138f
+:END:
+*** Problem
+- Warehouse (at Pioneer Logistic Hub in Jurong) must be climage controlled
+- Want to reduce power usage on air conditioning
+- Facility is leased so no modifications can be made to the existing hardware; solution must be retrofitted
+*** Proposed Idea
+- IoT solution to control the air conditioners
+*** Requirements
+- No knowledge of individual energy consumption of units
+** Solution 16
+:PROPERTIES:
+:ID:       4643721e-2e4a-439a-bdcf-4adf1cfb095c
+:END:
+*** Problem
+- General issues with controlling water management
+*** Proposed Idea
+- Predictive maintainance
+- Fleet management
+*** Requirements
+- ???
+
+* First Steps
+:PROPERTIES:
+:ID:       568c7617-10fa-4fe3-82b2-a03dc327aa67
+:END:
+- Contact sponsor
+  - Prepare questionnaire
+    - Is there any existing wireless network in the warehouse that our devices can connect to?
+- Organize site visit
+  - Prepare what things to observe
+- Learn how the warehouse operates
+- Research temperature sensing technology
+- Types of controller
+- What kind of wireless technology to use
+
+* Design vs Engineering
+:PROPERTIES:
+:ID:       54c19938-35e5-4f37-a1fc-4637dea99a41
+:END:
+- Designing is the explorative/concepting phase; engineering is the exploitative/implementing phase
+- We like to do engineering but design is crucial for the product
+- Output of design
+  - Not a finished product
+  - Conceptual
+  - New concepts
+- Output of engineering
+  - Ready to build
+  - Working and safe product
+
+* Design Process
+:PROPERTIES:
+:ID:       c993b187-4f6f-49e0-ac0a-e7f260f9fb7c
+:END:
+- Usually described in a stage-gate process
+- The job is split into smaller stages, which are separated by gates to determine when you are "done" with a certain stage
+
+* Stages of an EG3301R Project
+:PROPERTIES:
+:ID:       cb2628d5-af5e-4fe7-bf2a-03cfca49d053
+:END:
+** Define the Problem
+- Figure out what you need to fix
+- Establish design statement and value proposition
+- Research
+- Talk with stakeholders
+- Patent search?
+- Formulate a design statement/strategy
+** Develop a Solution
+- Figure out how you're going to fix it
+- Generate, evaluate, and select feasible concept design
+- Product specifications
+** Prototype the Solution
+- Figure out how shit works
+- Convert selected concept design into prototypes
+- Iterate until you get bored of iterating
+- Document the design
+- Build prototypes
+- Test
+* Empathy
+:PROPERTIES:
+:ID:       a769d3b1-a6f4-4e6e-a797-32ebb894aef7
+:END:
+- Build character profiles
+- Interview
+- Simulate
+- Figure out what the needs of your stakeholders are
+* Stakeholders
+:PROPERTIES:
+:ID:       17693b74-9b43-4cf5-9b59-4c1e3d34cb23
+:END:
+- End users (who actually uses the thing you build)
+- Decision makers (who makes choices of a product/service)
+- Influencers (who has opinions which you have to factor in, like regulators)
+* Identifying Customer Needs
+:PROPERTIES:
+:ID:       44830845-7206-4107-894a-2058b0a95b56
+:END:
+- Gather raw data
+  - Interviews
+  - Focus groups
+  - Observing product in use
+  - Due diligence
+- Interpret the data
+- Organize needs based on priority (primary, secondary, tertiary) and establish the relative importance of the needs
+* Library
+** Scopus
+- General Info
+- Find reviews by filter
+** Engineering Valley
+- Curated for engineering
+- Vocabulary/Thesaurus search
+  - Find the "controlled terms" for a topic
+- Locate reviews by manually searching
+** CRAAP Test
+:PROPERTIES:
+:ID:       ed618e2c-b44e-408c-9b44-1013816147c0
+:END:
+- Current
+- Relevant
+- Authoritative
+- Accurate
+- Purpose (not biased)
+* Product Development Impact Factors
+:PROPERTIES:
+:ID:       115334b2-3131-4149-9a79-e9d24aafe4d6
+:END:
+- Competition
+- Complexity
+- Accountability
+- Changing technology
+* Empathy Map
+:PROPERTIES:
+:ID:       8e311a2a-e17c-45ce-a43f-6d8551758b23
+:END:
+- Empathy Interview
+  - Open ended questions
+  - Elaborated answers
+  - Unstructured conversation
+  - Figure out what the user/stakeholder is thinking
+  - Used to create a persona
+- Mapping
+  - Say
+    - What the user explicity says
+  - Think
+    - (Derived) What the user is imiplicitly thinking
+    - Pains & Gains
+  - Does
+    - What the user explicitly does
+  - Feel
+    - (Derived) Adjectives and explainations about what the user is implicitly feeling
+    - Pains & Gains
+  - In addition:
+    - Who are we trying to empathize with?
+    - What do they need to do?
+    - What do they hear?
+    - What do they see?
+- Can work with 1 user or a group
+* Design Problems
+:PROPERTIES:
+:ID:       38f888a4-f913-41b8-8a58-b17d531c39da
+:END:
+- A problem is an unmet need that, if met, would satisfy the user's purpose
+- A ill-defined problem is what we deal with in engineering where the problem is not strictly defined
+- A wicked problem is a problem where the statement is always changing, oftentimes contradictory or impossible to completely solve
+- Conceptualize a root cause, develop a solution to solve that problem
+** Problem Statement
+:PROPERTIES:
+:ID:       b38b768d-f319-4508-80cd-f8f2669e0a64
+:END:
+- An elaboration on the problem that helps you understand the experience you are trying to transform, or what the space you are trying to enter by building your solution
+- Framework for crafting the best solution
+- 5W's: Who, What, When, Where, Why
+** Value Proposition
+:PROPERTIES:
+:ID:       dd998653-a2c2-4157-9845-2fd2b8ef3ef5
+:END:
+- See [[id:c000ef6f-c766-47d2-ba11-1375ed1b84dd][Value Proposition (circa 2000s)]]
+- A promise of value to be delivered
+- Who and why should someone buy your product?
+- How does your product meet their needs?
+- Benefits
+- Value proposition canvas
+  - Your offering:
+    - Products & services
+      - What exactly are you offering?
+    - Gain creators
+      - How does your product create gains for the customer?
+    - Pain relievers
+      - How does your product relieve pain for the customer?
+  - These 3 connect to...
+    - Gains
+      - Desired outcomes
+    - Pains
+      - Issues customer faces when completing job
+    - Customer jobs
+      - What the customer wants to do
+** Design Strategy
+:PROPERTIES:
+:ID:       1fc7db3f-df5c-45d8-97cc-039a895e8812
+:ROAM_ALIASES: "Design Statement"
+:END:
+- A challenge to the engineer to solve the [[id:38f888a4-f913-41b8-8a58-b17d531c39da][Design Problems]]
+- "The project aims to design..."
+- General plan of action for a design project
+- Clarify objectives
+** McKinsey's 8 Steps
+:PROPERTIES:
+:ID:       35bc73ef-c79c-477a-80aa-754c83bbac39
+:END:
+1. Solve at the first meeting with a hypothesis
+2. Intuition is as importnat as facts
+3. Do your research and don't reinvent the wheel
+4. Tell the story behind the data
+5. Prewire
+6. Start with the conclusion
+7. Hit singles
+8. Respect your time
+* Business
+:PROPERTIES:
+:ID:       1fa8d09f-686c-4ba4-b720-04ac0efe8b7f
+:END:
+- See [[id:71d0000b-2674-4625-98d5-e7ce8405a6a2][Business Model Canvas]]
+- Lean canvas is for new businesses which focuses on problem and solutions
+- Key metrics and key success factors
+
+* Product Planning
+:PROPERTIES:
+:ID:       55a518d7-0e89-45e6-b217-96d6d55ddf74
+:END:
+- Products should always support the broader business strategy
+- Mix fundamentally new products and derivative products
+** Opportunity
+- Opportunity: an idea for a new product which could not have been made before (newly sensed need, newly discovered technology)
+- Opportunity Identification Process
+  1. Establish a charter
+  2. Generate and sense many opportunities
+  3. Screen opportunities
+  4. Develop promising opportunities
+  5. Select exceptional opportunities
+*** Charter
+- Product Charter
+  - Background
+  - Focus
+  - Goals
+  - Guidelines
+- Product Team Charter
+  - Mission Statement
+  - Objectives
+  - Success Metrics
+  - Guiding Principles
+*** Real-Win-Worth-it
+- Is the product real? Is the market real?
+- Can the product win? Can the company win?
+- Is investment worth it today? Does it make strategic sense?
+** Evaluation and Prioritization
+- Competetive strategy: how do you want to be "better"
+  - Technology
+  - Cost
+  - Customer focus
+  - Imitative
+- Market segmentation
+  - Market size
+  - Growth rate
+  - Competetive analysis
+  - Firm's position to enter the market
+** Allocate Resources and Plan
+- Technology readiness
+- Market readiness
+- Competition
+** Complete Pre-Project Planning
+- What market segments
+- What new technologies
+- What budget
+- What financial targets
+
+* Writing Needs Statements
+:PROPERTIES:
+:ID:       76da2076-fc6d-425a-b876-230d184951f7
+:END:
+- What not How
+- Specificity
+- Positive not negative
+- About the product
+- Avoid must, should, needs

@@ -1,0 +1,148 @@
+:PROPERTIES:
+:ID:       eeb5a92c-a2b7-4e90-b510-392ebd8be07b
+:END:
+#+title: CS2102 Notes
+#+filetags: :CS2102:
+
+- links :: [[id:2efae4c0-82b9-465e-9bca-b7480588ddd0][CS2102]]
+
+* Database
+:PROPERTIES:
+:ID:       3f0a6bef-2041-4dfb-8da1-c9fcd01248ff
+:END:
+- Any collection of organized data
+* DBMS
+:PROPERTIES:
+:ID:       a01cac56-4923-4eb7-b63b-638714b257e8
+:END:
+- Provides an abstraction over a [[id:3f0a6bef-2041-4dfb-8da1-c9fcd01248ff][Database]]
+- Should provide:
+  - Efficiency
+  - [[id:65e54e77-8b59-4464-9d29-89a58944f63f][Transactions]]
+  - Data integrity
+  - Recovery
+  - Security
+** 3-Tier Architecture
+:PROPERTIES:
+:ID:       d108f4b3-9c1d-40f7-8b0b-9f659a6d1d91
+:END:
+- [[file:media/3-tier_1.png][Diagram]]
+- Describes how data is represented at 3 levels: physical (how data is stored on disk), logical (how data is logically organized/tables), and external (API/how users interact with it)
+* Transactions
+:PROPERTIES:
+:ID:       65e54e77-8b59-4464-9d29-89a58944f63f
+:END:
+** ACID
+:PROPERTIES:
+:ID:       78cd6fb0-8045-4fb5-8628-0a7af6a18e93
+:END:
+- Acronym to describe desireable properties for how a [[id:a01cac56-4923-4eb7-b63b-638714b257e8][DBMS]] handles transactions
+- Atomicity
+  - Each transaction will either fully succeed or fully fail, it will not execute partially
+- Consistency
+  - Each transaction will yield a correct state after completion
+- Isolation
+  - Each transaction will not be affected by concurrently running transactions
+- Durability
+  - After a transaction is committed, the effects are permanent
+** Transition Graph
+:PROPERTIES:
+:ID:       9d799808-645a-458b-b38f-fd23a88f71c2
+:END:
+- A flow of execution of transactions
+- [[file:media/transaction-graph_1.png][Diagram]]
+** Concurrency Problems
+:PROPERTIES:
+:ID:       46a867c0-5172-4f29-9825-12af99349d39
+:END:
+- [[file:media/concurrency-problems_1.png][Diagram]]
+- Some problems occur when running transactions simultaneously (in parallel)
+- Handled by the [[id:a01cac56-4923-4eb7-b63b-638714b257e8][DBMS]]
+** Serialization
+:PROPERTIES:
+:ID:       cf801200-52e7-4bf0-881f-690fe6bd2ded
+:END:
+- A concurrent set of transaction is serializable if its execution is equivalent (same result) to some serial execution of the same set of transactions
+* Database Models
+:PROPERTIES:
+:ID:       e3bb5e1c-8554-4664-9cea-e06f69b29bc9
+:END:
+** Hierarchical Model
+:PROPERTIES:
+:ID:       512eadef-53c5-4165-88af-4a7827d16517
+:END:
+- Network or tree graph
+** Object-Oriented Model
+:PROPERTIES:
+:ID:       932b938a-5634-4efd-8728-7a3a9cbf1809
+:END:
+- Data and its dependencies are well coupled
+- Object-Relational Model software provides an object-oriented abstraction over a database
+** NoSQL
+:PROPERTIES:
+:ID:       5285d407-8ec8-481a-9fde-b62fe63aeb12
+:END:
+- Databases not using SQL
+** Relational Model
+:PROPERTIES:
+:ID:       50de1383-764f-4aa8-8aa3-6ffd17bc6f64
+:END:
+- Everything is a relation which is conceptually a table
+- Formalize the most common storage techniques
+- Basic concept: specify how tables with rows and columns are related to each other
+- Relational schema: specifies the attributes (columns) and constraints
+* Domain
+:PROPERTIES:
+:ID:       6ab00ef4-90e2-4121-8423-9a8ac3f3f6aa
+:END:
+- A set of atomic values (int, numeric, text, etc.)
+  - Atomic here meaning useless when split
+- Domain of an attribute \(A_i\) is denoted as \(dom(A_i)\)
+- We say that each value \(v\) of attribute \(A_i\) is either \(v \in dom(A_i)\) or \(v\) is NULL
+* Relation
+:PROPERTIES:
+:ID:       ab815a67-8d4d-4743-98d2-5179961dd9bb
+:END:
+- A set of tuples (i.e. a record)
+- Denoted as \(R(A_1, A_2, ..., A_n)\)
+- Each instance is a subset of the cartesian product of the domains of the individual attributes (plus NULL)
+- \(R.A_i\) refers to the attribute \(A_i\) of the relation \(R\)
+- NOTE: the strict definition implies that there are no duplicates, but SQL allows them
+** Relational Database Schema
+:PROPERTIES:
+:ID:       15773e46-1da1-4f2b-8abd-001931e5fd91
+:END:
+- A set of [[id:50de1383-764f-4aa8-8aa3-6ffd17bc6f64][Relational]] schemas and data constraints
+** Relational Database
+:PROPERTIES:
+:ID:       54a568f5-cf91-4977-b8ff-3f4a4d508092
+:END:
+- A collection of tables
+* Data Integrity
+:PROPERTIES:
+:ID:       ad360fdc-0ca4-41d1-a0be-a8c8e628de11
+:END:
+- Upheld by data constraints
+- Describes invalid data
+  - Invalid values (NULL values when values are expected)
+  - Data ranges
+  - Nonexistent foreign IDs
+  - Duplicate IDs
+** Constraints
+:PROPERTIES:
+:ID:       65077920-2b12-43c4-8e23-9b38939422ff
+:END:
+- Structual constraints are independent of applications
+  - Superkey: a subset of attributes that uniquely identifies tuples in a relation
+    - Under the strict definition of [[id:ab815a67-8d4d-4743-98d2-5179961dd9bb][Relation]], all relations have a superkey (since all entries must be unique)
+  - Key: a superkey that is minimal (i.e. no proper subset of the superkey is also a superkey)
+    - Not necessarily the minimum (smallest)
+    - Candidate Keys are the set of all keys for a given relation
+    - Primary Keys are selected candidate keys
+      - Generally NOT NULL
+  - Foreign Key: a subset of attributes (of \(R_1\)) that refer to the primary key of another relation (\(R_2\))
+    - \(R_1\) is the referencing relation
+    - \(R_2\) is the referenced relation
+    - Each foreign key must appear as the primary key in \(R_2\) or contain at least one NULL
+    - Including constraints may allow the database to improve performance in searching by using faster data structures
+- General constraints are application specific, for example, triggers

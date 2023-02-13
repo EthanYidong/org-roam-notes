@@ -3,25 +3,45 @@
 :END:
 #+title: NUS Cycling TODO
 
-* ReCycle
-** DONE Send the subsidy proposal to CH
-** DONE NUSync Submission budget
 * Recruitment
 ** DONE Tell YuXuan to set interview time slots
-** Contact Participants
+** DONE Contact Participants
 * SLF
 ** DONE Set timing for prize collection
 * Room Booking
 ** DONE Send Payment Confirmation <2022-09-02 Fri>
-** TODO Book Room for October Meetings <2022-09-21 Wed>
+** DONE Book Room for October Meetings <2022-09-21 Wed>
+** DONE Book Room for December Meeting <2022-11-24 Thu>
 * Members
 ** DONE Work out the Details
 ** DONE Contact the members
 * Picolove Rental
 ** DONE Bill Members <2022-09-12 Mon>
 * WellNUS
-** TODO Final Budget
+** DONE Final Budget
 ** DONE Add Vendor <2022-10-04 Tue>
 * HalloWheels
-** TODO Budget
-**
+** DONE Budget
+* Tour de Ubin
+** DONE Budget <2022-11-14 Mon>
+** TODO Update NUSync Form: Cancellation <2022-11-25 Fri>
+** DONE Update on Refund  <2023-02-06 Mon>
+* ReCycle
+** DONE Send the subsidy proposal to CH
+** DONE NUSync Submission budget
+** DONE Ask CH About money <2022-11-14 Mon>
+* Administrative
+** DONE Submit RAS Form <2022-11-19 Sat>
+** DONE Update Teams and NUSYNC <2023-01-26 Thu>
+** DONE Create new Groups <2023-01-26 Thu>
+* Recruitment S2
+** DONE Create Recruitment Form <2023-01-17 Tue>
+* Meetings
+** DONE Set Meeting With Advisor <2023-01-14 Sat>
+** TODO Book Meeting Room for W4 Meeting <2023-01-21 Sat>
+* 2023 Valentines Event
+** TODO Settle Valentines Event  <2023-01-19 Thu>
+* Kayak
+** TODO Update on Collab <2023-02-10 Fri>
+* NTU
+** DONE Ask about Bike Ralley <2023-02-09 Thu>
