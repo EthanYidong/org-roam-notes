@@ -12,6 +12,7 @@
 - (Part 1) Symmetric Key Encryption.pptx Page 11: Xs fi sv rsx xs fi, Xlex mw xliuyiwxmsr (missing a space)
 - (Part 1) Symmetric Key Encryption.pptx Page 19: \(K \rightarrow C\) should be a bijection (actually is a surjection)
 - (Part 2) Integrity.pptx Page 11: \(a=0\) (should be 1)
+- 9 - Full Mem Safety.pptx Page 30: Deference (should be dereference)
 * The Wrench
 :PROPERTIES:
 :ID:       75bebc21-eb72-480f-8441-1230a1b31d9c
@@ -19,7 +20,7 @@
 - [[file:media/wrench_1.png][Relevant XKCD]]
 - The goal is to make security a purely physical problem
 
-* Thread Model
+* Threat Model
 :PROPERTIES:
 :ID:       1015608c-9304-487f-90dc-eb57f4aca2da
 :END:
@@ -390,3 +391,378 @@
   - (from me) Browser UI displays information correctly
   - Alice & Bob's secrets are secure
   - Entities are authenticated correctly
+** Secure Channel Weaknesses
+:PROPERTIES:
+:ID:       9e35e273-28f2-4046-bcfd-0103ee3c81c2
+:END:
+- Go outside the threat model
+  - Attack the assumptions
+  - Violate security properties not covered by the model
+*** [[id:406b5c5c-ab3a-499a-b830-60dc4e516894][HTTPS]] Weaknesses
+:PROPERTIES:
+:ID:       bd401730-eef5-4fa3-9886-d7075e395518
+:END:
+- HTTPS is even being used
+  - Attacker could inject downgraded links into an insecure page
+  - Insecure requests to HTTP resources like JavaScript scripts
+    - Even if it's a requests to a more harmless object like image, the browser will attach non "Secure" flagged cookies to the HTTP request allowing attackers to spoof your login session
+  - Secure resources loaded from an insecure page: attacker can replace the URL of secure resources with spoofed ones
+  - Defence Mechanisms
+    - HSTS: HTTP Strict Transport Security
+      - Server lets browser know that it only serves HTTPS content
+      - Browser remembers this and will no longer send HTTP requests to the server no matter what
+      - Some browsers have preloaded lists of HTTPS-only websites
+    - Secure flag cookies
+      - Cookies which will only ever be sent over HTTPS
+      - However, HTTP headers can still set the cookies without HTTPS
+      - JavaScript can also access and modify the cookies
+- User Checks UI Properly
+  - Misleading URL
+    - If the browser URL looks correct but is slightly off then it could be owned by an attacker trying to spoof the website
+  - Clickjacking
+    - Overlay an iFrame of another webpage, lower the opacity or hide it in some other way
+    - When user clicks on visible elements in the webpage, they unknowningly interact with a different website that they may be authorized to
+  - HTTP Content in HTTPS pages
+    - Attackers can replace certain components that are being loaded via HTTP, if they are scripts then they essentially gain full access to the page
+    - Legacy browsers would somewhat indicate that the webpage was not fully secured
+    - Now requests are mostly blocked
+  - Clickthrough
+    - When browser warns users of insecure site certificate, user may choose to click through
+- Certificate Issuers are Uncompromised
+  - Root CAs
+    - Issue certificates after checking ownership of a certain domain (usually via a challenge to edit/add a page to that domain)
+  - Custom CA
+    - Start self-signing certificates
+    - Sometimes installed in client/worker machines
+  - CAs get compromised
+    - Then whoever gets their private key can break HTTPS for any site
+    - How do defend?
+      - Pinning
+        - "Trust on first use"
+        - When the user first visits the site the certificate is remembered, then changes are reported
+        - May end up with a large list
+        - How to deal with valid certificate changes?
+      - Revocation
+        - Some additional infrastructure allows CAs to revoke bad certificates
+        - OCSP maintains a list of invalidated certificates
+        - Using Stapling, websites can prove that their certificates are still known as valid
+        - Takes time to discover rogue certificates
+        - Attacker may just re-request a certificate
+      - Transparancy
+        - Publicly audit all SSL certificates
+        - Create registry of all SSL certificates which users have encountered
+        - Server must be correct and reliable
+        - How to maintain privacy?
+- Side Channel Leakage
+  - Information may get leaked via [[id:2fc854d5-befd-402b-823c-0c57c8deb2aa][Side Channel Attack]], when data gets leaked through some method not designed as the primary communication
+  - In practical world, your program must touch some side channel which attackers can use
+  - Assumptions:
+    - Attacker knows program details
+  - Possible side channels:
+    - Size of data
+    - Timing
+    - Data access patterns
+    - Power
+    - Sound
+    - EM radiation
+- Underlying Crypto Primitives
+  - MD5 is insecure
+  - Provide integrity + authenticity?
+    - MAC can leak data
+    - So Encrypt with MAC is insecure
+    - Encrypting a MAC may allows attacker to edit the MAC in a way that leaks data, depending on the exact schemes chosen
+      - Conduct a [[id:0920a4ca-e492-441e-85d7-b6d7805782c3][Padding Oracle Attack]]
+    - MAC of an Encryption is provably secure
+
+* Memory Safety
+:PROPERTIES:
+:ID:       ba194276-7701-4e38-b54a-b7f4179e3ef4
+:END:
+- C and C++ give maximum control over memory to programmers
+- but they also give maximum control to memory to programmers
+- Developers may make mistakes, and when those mistakes affect the memory of the program bad things may happen
+- Programs written in low-level (especially operating systems) are most vulnerable
+** Spatial Memory Safety
+:PROPERTIES:
+:ID:       fdbec1c2-35a5-4a58-91c8-5f4101f1cd9f
+:END:
+- Buffer Overflows occur when the computer attempts to write beyond the boundaries of a preallocated buffer
+  - This may end up editing memory which was not intended by the programmer
+- Printf/scanf
+  - [[file:media/c-io_1.png][Semantics]]
+  - For security, printf and scanf format strings /should/ be constants or verified by the program in some way
+  - The function uses the format string to determine how many arguments it should expect on the stack
+  - However, if it is affected by user input, we can enter a string like "%08x %08x %08x %08x..." to leak data from the calling stack (%08x prints a number in 8-digit hex)
+    - Note: in x64, the first 5 arguments are passed by register (so we need to throw away the first 4 values)
+- Integer Overflow
+  - When the result of an operation is too large to stored in the specified data type, unspecified behavior is run to handle the overflow
+  - This will lead to unexpected behavior (for example, if you store string length in an integer which is too small, you may get a smaller value than the actual length of the string)
+    - This can lead to buffer overflow attacks
+- Code Injection / Control Hijacking
+  - Often, attackers can buffer overflows to override the saved return address on the stack, allowing them to control which address gets executed after the function returns
+  - In other cases, it may point to user-writable buffers so that the attacker can write their own code to be executed
+    - That code is called shellcode
+    - [[file:media/shellcode_1.png][Shellcode]]
+    - What happens when you don't know the exact address of the buffer?
+    - NOP sled: prepend a lot of NOP instructions (0x90) to the shellcode
+    - That instruction does nothing
+    - Then, as long as any of these instructions is returned to, your inteneded shellcode will be run (you can jump anywhere in the NOP sled)
+    - Requires:
+      - Attack payload can be written in memory
+      - Attack payload can be executed
+      - Control flow can be diverted to payload
+- However, sometimes it is impossible to write to executable locations
+  - So, use existing code in memory
+  - Example: return-to-libc
+    - Set the return address to wherever the function you want to run is (for example, ~execve~)
+    - Use the buffer to pass your desired parameters to the function
+    - [[file:media/return-to-libc_1.png][Example]]
+  - This drops the requirement that your payload must be written by you in executable space
+  - You can extend this further with return-oriented-programming
+*** Heap Overflow
+:PROPERTIES:
+:ID:       2b0270ea-12f7-496a-8bf0-724aebe083f8
+:END:
+- glibc manages memory allocation in C
+- Chunks of memory which are allocated are stored in a linked list
+- Chunks of memory which are unallocated are stored in another linked list
+- [[file:media/heap-ll_1.png][List]]
+- [[file:media/heap-overflow_1.png][Overflow]]
+- We can use this to overwrite function pointers and achieve similar results as the stack overflow overwrite of return pointer
+*** Data-Oriented Attacks
+:PROPERTIES:
+:ID:       6d9a0e85-87a6-4d5f-b648-9ae2ca0f4810
+:END:
+- Oftentimes we do not need to write any control data to conduct an exploit
+- For example, if there is security-critical data stored in memory, we can use buffer overflows to overwrite it and make the program behave unexpectedly
+- Sometimes, overwriting existing data isn't necessary:
+  - Heartbleed bug in OpenSSL
+  - "Heartbeat message", echo the [x] characters [...]
+  - What happens when [x] is set incorrectly?
+  - OpenSSL would overread the data in the buffer and potentially leak some sensitive data
+*** Bad-Casting
+:PROPERTIES:
+:ID:       910fe173-7b5b-4dc9-87cb-01b1263e4c22
+:END:
+- [[file:media/cpp-cast_1.png][Casting]]
+- Contents of a base class is right above the pointer to the instance of the inherited class
+- Upcasting (derived to base) is always safe (if other assumptions hold)
+- However, by downcasting, your new pointer may not point to a valid instance of the expected type
+- [[file:media/downcast_1.png][Downcast]]
+- Can prevent by utilizing dynamic casts
+** Temporal Memory Safety
+:PROPERTIES:
+:ID:       212b62b3-72b3-489a-a26a-350c84be6da9
+:END:
+- [[file:media/scope_1.png][Scope]]
+- Variables have scope and a lifetime (behavior defined by language)
+- Variables can expire, meaning that the memory allocated to them is marked as no longer in use
+  - Variable storage is only guaranteed across the lifetime of the variable
+- In C/C++:
+  - Scope is defined by blocks delimited by curly braces
+  - Lifetime of variables last for the rest of the scope it was defined in
+*** Use-After-Free
+:PROPERTIES:
+:ID:       d75c8970-115d-4a73-844c-9cccc5ead6fc
+:END:
+- When a pointer points to a memory location of a variable, then that variable gets freed, the pointer is now a dangling pointer
+- Attempting to access that memory location (for example, by a dangling pointer), leads to undefined behavior
+*** Double Free
+:PROPERTIES:
+:ID:       42e6c359-0485-44d2-b215-0ecd1227ab5e
+:END:
+- [[file:media/double-free_1.png][Double Free]]
+- What happens when you run free on the same heap allocation twice?
+- The linked list pointers representing the allocation may have already been overwritten with arbitrary data.
+- Then, when attempting to free again, the compiler will used the overwritten pointers to attempt to "join" the linked list
+- This allows for writing arbitrary data to arbitrary locations in memory
+- [[file:media/write-anywhere_1.png][Diagram]]
+** Mitigations
+:PROPERTIES:
+:ID:       f6f7a2c5-0be5-4768-8b96-227fcb9bfd76
+:END:
+- Use safe programming practices
+  - Safe libraries
+  - Use automated bug finding tools
+  - Use safe functions like strncpy over strcpy
+- libsafe: replaces calls to insecure operations like strcpy with validated alternatives
+- Code checking:
+  - Address Sanitizer
+  - ITS4
+  - RATS
+  - Flawfinder
+- Stack canaries
+  - Store random values on function stack frames which are checked before returning from functions
+  - Helps detect corruption of nearby memory addresses
+- Guard pages
+  - Insert pages with no read, write, or execute permissions scattered throughout the memory space
+  - Attacker can only write linearly if using buffer overflows, and thus would trigger a fault if attempting to write to one of these pages
+- Non-executable data (DEP)
+  - Set writable regions like the stack as non-executable (prevents shellcode attacks but not ROP attacks)
+- Address randomization (ASLR)
+  - By randomizing the address space, attackers cannot easily predict locations of important items such as where libc is stored
+** Enforcing Memory Safety
+:PROPERTIES:
+:ID:       67a17e2d-2f68-4e7e-b957-beaa517a3a98
+:END:
+- Create memory pointers via permitted operations (malloc, &)
+- Pointer should only allow access to a specific range of memory (spacial) and only across a valid scope (temporal)
+- All "objects" should be spatially disjoint at all times
+  - Sub-structures allowed
+  - C union-type overlaps of memory
+- How to enforce?
+  - Become crab, use Rust
+  - Compile-time checks or rewrite the binary file
+  - Objects and pointers will be associated with metadata to assist with these checks
+  - Inline Reference Monitors (IRM)
+  - Metadata must also be protected to only be accessed by monitors
+*** Enforcing Spatial Memory Safety
+:PROPERTIES:
+:ID:       7e077120-8bc5-4b14-a644-c2bc4157cb3e
+:END:
+- Each object or pointer knows its memory bounds
+- When pointers access the object, we check that the memory accessed falls in the valid range for that pointer
+- Bounds metadata should be stored where?
+- Keep an indexing table in a protected region of memory (kept without R/W permissions until needed to be used)
+  - Do we associate the bounds with the pointer, or with the object?
+  - Fat pointer: pointer associated with the metadata
+  - Referent objects: object associated with the metadata
+- Referent objects:
+  - When pointers change, check if it is within the bound. If it is, mark as safe. If not, mark as unsafe.
+    - Pointers can become safe again after being marked as unsafe
+  - How to handle overlapping objects?
+    - If we index by memory address then we cannot deal with two objects with the same start but different bounds
+- Fat pointers:
+  - Bounds are tracked on allocation
+  - Bounds are checked on dereference
+  - No need to check pointer arithmetic
+  - Now, pointers that point to the same address can now be distinguished because bounds are assigned on creation based on what type the new pointer is referencing
+  - No need to check type-casts
+  - Also prevents issues from badcasts
+  - [[file:media/fat-pointer-badcast_1.png][Badcasts]]
+- [[file:media/checking-tradeoffs_1.png][Tradeoffs]]
+- Problem: dynamic checking is costly (100%++ overhead)
+*** Static Checking
+:PROPERTIES:
+:ID:       2b52f09f-ec63-45a5-9baf-b03555e8d76c
+:END:
+- Reduce runtime overhead by doing checks at compile time
+- [[file:media/static-check_1.png][Static Checking]]
+- y is statically checkable (as long as a is statically checkable) because it is simply just a + 10 for the whole duration of the code
+- x may be statically checkable depending on what techniques are being used, with enough analysis it is provable that it is valid on the whole range of a to a + 10
+- r is a typecast pointer from some address, so it is hard to check statically
+*** Enforcing Temporal Memory Safety
+:PROPERTIES:
+:ID:       63381f4c-dac9-47da-bec2-ae3e2f91977e
+:END:
+- Must track the creation and destruction of pointers
+- De-allocated memory is not accessed
+- Idea 1: NULLIFY pointers
+  - When pointer is freed, set it to NULL
+  - We can have multiple pointers pointing to the same memory
+- Lock and Key mechanism
+  - Each pointer has a key and a pointer to a lock
+  - Key is freshly generated for each object
+  - Value stored at lock address is equal to key
+  - Pointers created from this pointer inherit the same key and lock values
+  - On dereference, key must equal value stored at lock
+  - On deallocation, lock value is changed
+  - When key is not equal to value stored at lock, we know that the pointer is now invalid
+*** Smart Pointers
+:PROPERTIES:
+:ID:       6e3b504e-e5eb-4699-a32d-2492144eb913
+:END:
+- Smart pointers are wrappers of normal pointers
+- They can allocate and deallocate automatically and keep metadata about the resource
+- In C++: unique_ptr
+  - Only one owner can point to the object at any given time
+  - Provides temporal safety by only having one pointer referring to an object at any given time
+- In C++: shared_ptr
+  - Uses reference counting to support multiple pointers
+  - Resource is freed only when count is zero
+- But, what about concurrency?
+- Rust my beloved
+  - Statically checked borrows
+  - Allow any number of immutable borrows OR one mutable borrow at any given time (enforced by compiler) to provide memory safety even in the presence of concurrency
+** Second Line of Defense
+:PROPERTIES:
+:ID:       d777801b-8266-4779-89cc-c1cd1ad4b087
+:END:
+- Minimize the damage done by memory safety vulnerabilities
+** Reference Monitor
+:PROPERTIES:
+:ID:       5ba90eb1-dcae-4365-ac89-7bbf87df54de
+:END:
+- A piece of code which checks all references to an object
+- Could be in kernel (system call sandboxing) or program space (inline reference monitoring)
+*** Inline Reference Monitor
+:PROPERTIES:
+:ID:       32cd3bb0-4a52-4e89-89ba-f17934f9987c
+:END:
+- Either during compilation or by rewriting the binary: add code to check for referencing
+- Fault Isolation: only allow a module to access pre-determined data/code
+- Problem: Attacker and checker are running at the same privilege level
+  - If the memory accesses are limited to a specific region M, then this mechanism should operate under the assumption that the attacker controls all memory in M
+- [[file:media/naive-sfi_1.png][Naive Implementation]]
+- [[file:media/fast-sfi_1.png][Fast Implementation]]
+- How to prevent jumping directly to the mov instruction?
+  - Use a dedicated register that only gets used for memory dereferencing, named reg1
+  - Every time reg1 is written to before used in the mov command, run the same check/coercion on it, thus enforcing the invariant that reg1 falls on the correct range
+- We must ensure:
+  - IRM instructions exist before all memory accesses
+  - All memory accesses use the dedicated register
+  - The dedicated register is only used in IRM instructions
+- SFI has a small [[id:3828cca8-0804-4242-ad7f-271f35a67b46][TCB]]
+*** System Call Sandboxing
+:PROPERTIES:
+:ID:       30ea9de1-7a1f-4393-b11a-036fa1f3695c
+:END:
+- Exec syscall is used by attackers to gain shells, but it's weird from the computer's point of view to run exec straight after taking input
+- Can we write policies like "No exec system call" or "No exec-after-read system call"?
+- Linux: use seccomp
+  - Only allow limited syscalls: exit, sigreturn, read, write
+  - In most cases, far too limited
+  - seccomp-bpf: configurable policy
+  - Can restrict to certain arguments
+- Upholds the principle of [[id:c6c1722e-cbac-412c-89db-57bd02fcdfda][Least Privilege]]
+- Allow-list (whitelist) vs block-list (blacklist)
+  - Similar to [[id:9eeb8562-355b-429b-9086-a374d2907f01][Firewalls]] setup, whitelist is preferred with deny by default
+  - If you miss something, your program crashes v.s. your program has a vulnerability
+* Systems Programming
+:PROPERTIES:
+:ID:       818bd0d6-d60e-4de4-9d32-2272eea4401c
+:END:
+- CPU keeps an "instruction pointer" register which points to the memory location of the next line of assembly to run (EIP)
+- The CPU also helps you maintain a stack, with the stack pointer pointing to the head of the stack (ESP), and a frame pointer pointing to the base of the current frame's stack (EBP/RBP)
+- Stack grows from high to low memory and stores variables with known sizes
+- Heap grows ferom low to high memory and stores variables with dynamic sizes
+- [[file:media/x86-memory_1.png][Memory]]
+- Intel is "little endian", meaning least significant bytes of multi-byte primitives are in lower addresses (endianness does not affect arrays)
+- See [[id:1e0a4e58-4815-44c6-8872-000dd5c6e8b4][Stack Frame]]
+* Trusted Computing Base
+:PROPERTIES:
+:ID:       3828cca8-0804-4242-ad7f-271f35a67b46
+:ROAM_ALIASES: TCB
+:END:
+- The part of the code you assume is bug-free
+- Principle: we should minimize the TCB
+* Least Privilege
+:PROPERTIES:
+:ID:       c6c1722e-cbac-412c-89db-57bd02fcdfda
+:END:
+- Principle: each component should have the minimal set of capabilities needed to carry out its job
+** Privilege Separation
+:PROPERTIES:
+:ID:       a808a688-344d-4098-92a0-2dc9f5c9b4c8
+:END:
+- Problem: functionality is all bundled together
+- For example, an SSH server is in charge of talking to network users and accessing the filesystem
+- These are two separate functionalities but they are coupled together in the same code
+- If an attacker compromises the network component, they can also now read arbitrary files on the filesystem
+- Separate the processes into network and filesystem
+- Use sandboxing to constrain each process to its minimal set of syscalls/capabilities
+- Case Study: Web Browsers
+  - We have an app that reads arbitrary data from the network and must be able to access the filesystem
+  - Auto-patching
+  - Privilege separation of rendering (HTML, JS, styling) v.s. kernel (filesystem, downloads, cookies, caches)
+  - [[file:media/chrome_1.png][Chrome]]

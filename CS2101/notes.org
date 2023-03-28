@@ -276,3 +276,11 @@
 - Good teamwork for Q&A
 - Consider positioning when not speaking
 - Generalize personal examples to apply to the audience, concretize general answers to give context
+* CA1 Review
+:PROPERTIES:
+:ID:       75903e66-d64d-4953-9602-8d3e941b6de9
+:END:
+- Give more attention to good topics and signposting
+- Talk about other people as well
+- Show learning from the situation itself
+- Tie-ins

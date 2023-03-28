@@ -9,11 +9,16 @@
 * Prereading
 ** DONE Week 2 Prereadings <2023-01-18 Wed>
 
+* Admin
+** TODO Submit RA <2023-04-02 Sun>
+
 * Weekly Tasks
 ** DONE Week 2 Weekly Tasks <2023-01-18 Wed>
 *** DONE Add Questions to Presentation <2023-01-16 Mon>
 ** DONE Week 3 Weekly Tasks <2023-01-25 Wed>
 
 * Assignments
-** TODO Assignment 1 <2023-02-11 Sat>
-** TODO Assignment 2 <2023-02-25 Sat>
+** DONE Assignment 1 <2023-02-11 Sat>
+** DONE Assignment 2 <2023-02-25 Sat>
+** DONE Assignment 3 <2023-03-12 Sun>
+** TODO Interim Report <2023-04-09 Sun>

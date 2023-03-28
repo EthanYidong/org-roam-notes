@@ -1,0 +1,74 @@
+:PROPERTIES:
+:ID:       967319cd-c29c-4cc6-bb87-4a97c1e02af8
+:END:
+#+title: Effective Altruism Notes
+
+* Effective Altruism
+:PROPERTIES:
+:ID:       ee2585a0-5739-46a3-a12e-56b44bf12e42
+:END:
+- Attempts to tackle the question: what is the best way to spend our resources to better the world?
+- Focus on identifying problems in the world and the solutions to them
+- Spending in poor vs richer countries: effectiveness in saving lives?
+- A way to better execute on the values we hold
+- How do we deal with our biases and decide how to best allocate resources in spite of them?
+- "The world is awful. The world is much better. The world could be much better."
+  - Acknowledge that there are still problems in the world
+  - Acknowledge that we have solved a lot of the problems we used to have
+  - Acknowledge that there are solutions to the problems we have today
+
+* Caring at Scale
+:PROPERTIES:
+:ID:       1e4c2a7e-e5a5-4916-a046-44a8030cf1d2
+:END:
+- We are not equipped to care for "billions" of people
+- Our brains simply cannot comprehend such large issues
+- If you "care" enough to donate something
+  - What about your caring stops you from donating more?
+  - Why not donate everything you have?
+  - What happens when the things you "care" about are beyond the scope of your resources?
+- Realize that you cannot possibly use your emotions and caring to choose what the most pressing issues are
+- Everything is your problem - what part of everything do you choose to solve first?
+- Take over the decision making process, consciously "care" about things that need to be cared about
+- Study shows: people cannot comprehend large problems and will not be able to accurately assign values to them
+- Interesting connectin to Rawlsian veil of ignorance
+
+* The Scout Mindset
+:PROPERTIES:
+:ID:       19a1b360-688f-49b7-9370-f8f4d284b77f
+:END:
+- The soldier has a job to do that takes very little input: protect yourself, fight the enemy
+  - The goal is very results based - doing whatever you can to achieve a preset result
+  - Motivated reasoning: we choose specific pieces of information to defend and others to attack
+- The scout, on the other hand, must carefully seek out objective truths about the world - terrain, the enemy's headcount, what weapons they have, etc.
+  - The role is defined by the process - not a specific goal
+  - Good judgement comes from different emotions: curiosity
+  - Doesn't care about being wrong, cares about becoming more right
+- Analogy ties in to a point about privilege: the scout has the privilege to think "clearly", the soldier must fight or die, with no room for questioning themselves
+** The Metaphysical
+- The moment you make a conclusion that you will not change, no matter what justifications you think of to justify that conclusion, that conclusion already has a fixed chance of being correct (in the multiverse)
+- However, if you think of justifications and come up with a conclusion, it stands to reason that the conclusion is tied by some cause and effect based on which universe you are in
+** Biases
+- We can express biases as a mismatch in how you see yourself versus how you see someone in the same position
+- For example, confirmation bias causes to see your own arguments as well justified and well studied, while others' arguments as preferential and flawed
+- Other biases:
+  - Confirmation bias
+  - Selection bias
+  - Illusion of transparency
+  - Hindsight bias
+  - Optimism bias
+- [[https://www.lesswrong.com/posts/ERWeEA8op6s6tYCKy/what-cognitive-biases-feel-like-from-the-inside][Less Wrong]]
+** Effective vs Emotional Altruism
+- "Fuzzies" or emotional/chemical responses for your brain should be a small part of how you express altruism
+  - Example: if you earn a lot of money, why spend an hour on volunteering when you can pay ten people to do ten times the work?
+  - Answer: emotional response is important to keep yourself "altruistic", but will also dampen how effective you are (see [[id:1e4c2a7e-e5a5-4916-a046-44a8030cf1d2][Caring at Scale]])
+- "Utilons" or actual utility/positive change in the world should be where you spend most of your resources
+  - Use math to figure out what is actually the best use of your resources
+
+* Playing God
+:PROPERTIES:
+:ID:       bc445dab-0e8f-4021-811e-df53e547097b
+:END:
+- Our altruism is driven by emotional response
+- Would you save an old person in front of you or a nameless baby across the world?
+- Although it seems privileged, we have to look beyond the issues in front of us to make more informed decisions

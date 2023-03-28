@@ -12,6 +12,7 @@
 ** DONE Send Payment Confirmation <2022-09-02 Fri>
 ** DONE Book Room for October Meetings <2022-09-21 Wed>
 ** DONE Book Room for December Meeting <2022-11-24 Thu>
+** TODO Book Room <2023-03-08 Wed>
 * Members
 ** DONE Work out the Details
 ** DONE Contact the members
@@ -38,10 +39,20 @@
 ** DONE Create Recruitment Form <2023-01-17 Tue>
 * Meetings
 ** DONE Set Meeting With Advisor <2023-01-14 Sat>
-** TODO Book Meeting Room for W4 Meeting <2023-01-21 Sat>
+** DONE Book Meeting Room for W4 Meeting <2023-01-21 Sat>
 * 2023 Valentines Event
-** TODO Settle Valentines Event  <2023-01-19 Thu>
+** DONE Settle Valentines Event  <2023-01-19 Thu>
 * Kayak
-** TODO Update on Collab <2023-02-10 Fri>
+** DONE Update on Collab <2023-02-10 Fri>
 * NTU
 ** DONE Ask about Bike Ralley <2023-02-09 Thu>
+* TeamNUS
+** DONE Ask about Shirts <2023-02-22 Wed>
+** TODO Fill Shirts Form <2023-03-27 Mon>
+* Onboarding
+** TODO Deal with NUSync <2023-02-24 Fri>
+** TODO Deal with Groups <2023-02-24 Fri>
+* SLF
+** TODO Settle SLF <2023-02-26 Sun>
+* USPARKS
+** TODO Let ODAC know about USPARKS <2023-02-26 Sun>

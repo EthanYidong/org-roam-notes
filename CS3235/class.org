@@ -8,6 +8,12 @@
 ** Grading
 - Midterm (40%)
   - Open book
+  - February 28th
+  - Content up to and including week 6
+  - Self-study:
+    - DNSSEC
+    - DANE
+    - SPF / DMARC / DKIM
 - Project (50%)
   - RUST MY BELOVED
   - EVOLVE INTO CRAB

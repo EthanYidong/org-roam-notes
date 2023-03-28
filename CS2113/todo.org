@@ -10,11 +10,15 @@
 ** DONE Week 3 Coding Exercises <2023-01-25 Wed>
 ** DONE Week 4 Coding Exercises <2023-02-01 Wed>
 ** DONE Week 5 Coding Exercises <2023-02-08 Wed>
+** DONE Week 6 Coding Exercises <2023-02-15 Wed>
 
 * Individual Project
 ** DONE Week 3 Requirements <2023-01-25 Wed>
 ** DONE Week 4 Requirements <2023-02-01 Wed>
 ** DONE Week 5 Requirements <2023-02-08 Wed>
+** DONE Week 6 Requirements <2023-02-15 Wed>
 
 * Team Project
 ** DONE Prelim TP Evaluation <2023-02-08 Wed>
+** DONE Draft UG <2023-02-15 Wed>
+** TODO Peer Evaluations <2023-03-17 Fri>
